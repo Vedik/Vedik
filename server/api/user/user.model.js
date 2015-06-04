@@ -15,6 +15,13 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
+
+  createdOn:{type:Date},
+  updatedOn:{type:Date},
+  
+  videos:[{type:Schema.Types.ObjectId, ref:'Video'}],
+
+
   facebook: {},
   twitter: {},
   google: {},

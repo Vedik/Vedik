@@ -1,0 +1,35 @@
+<div ng-controller="DashboardCtrl">
+	<div ng-include="'components/navbar/navbar.html'"></div>
+
+	<header class="hero-unit" id="banner">
+ 		<div class="container">
+    		<h1>Hello {{user.name}}</h1>
+    		<p class="lead">A place to show your talent</p>
+    		<img src="assets/images/yeoman.png" alt="I'm Yeoman">
+  		</div>
+	</header>
+
+<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
+	<div class="col-md-8">
+		<a href="#">
+		<div ng-repeat="slot in slots | limitTo : limit" class="col-md-6">
+			<img src="{{slot.poster}}">
+			<h4>{{slot.vidname}}</h4>
+			<p>{{slot.description}}</p>
+			<p>{{slot.genre}}</p>
+		</div>
+		</a>
+		<a href="#" ng-click="loadMore()">More....</a>
+	</div>
+
+<!--This div for displaying the genres,, u click on one of these, the data in the above div changes accordingly and populates the videos to be displayed that day in that genre   -->
+	<div class="col-md-4">
+		<ul>
+			<li ng-repeat="genre in genres">
+				<a href="#">{{genre}}</a>
+			</li>
+		</ul>
+	</div>
+
+	<!--To be put:: The recent videos uploaded and trending videos divs-->
+</div>
