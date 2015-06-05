@@ -6,9 +6,9 @@ var mongoose = require('mongoose'),
 var VideoSchema = new Schema({
   vidname: String,
   description: String,
-  genres: [{type:Schema.Types.ObjectId, ref:"Genre"}],
+  genres: [{type:String}],// referencing!?
   vidurl:String,
-  poster:String,
+  posterurl:String,
   view_count:Number,// wat abt likes?
   createdOn:{type:Date},
   comments:[{type:Schema.Types.ObjectId, ref:"Comment"}],

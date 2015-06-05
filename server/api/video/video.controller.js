@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Video = require('./video.model');
-
+var User = require('../user/user.model');
 // Get list of videos
 exports.index = function(req, res) {
   Video.find(function (err, videos) {
@@ -22,11 +22,34 @@ exports.show = function(req, res) {
 
 // Creates a new video in the DB.
 exports.create = function(req, res) {
-  Video.create(req.body, function(err, video) {
+  /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
+  });*/
+  var newvideo = new Video({
+    vidname:req.body.vidname,
+    vidurl:req.body.vidurl,
+    genres:[req.body.genres],
+    description:req.body.description,
+    posterurl:req.body.posterurl,
+    uploader:req.body.uploader,
+    view_count:0,
+    createdOn:Date.now()
   });
-};
+  newvideo.save(function (err){
+    if(!err) {
+        User.findOne({_id:newvideo.uploader},function (err, user){
+          if(!err) {
+            user.videos.push(newvideo._id);
+            user.save();
+            console.log("pushed the id");
+          }
+          else console.log("error");
+        });
+    }
+  });
+}
+
 
 // Updates an existing video in the DB.
 exports.update = function(req, res) {

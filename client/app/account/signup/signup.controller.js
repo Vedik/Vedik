@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('SignupCtrl', function ($scope,$state, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -12,11 +12,11 @@ angular.module('myAppApp')
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $state.go('dashboard');
         })
         .catch( function(err) {
           err = err.data;

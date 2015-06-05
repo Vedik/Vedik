@@ -16,8 +16,8 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
 
-  createdOn:{type:Date},
-  updatedOn:{type:Date},
+  createdOn:{type:Date, default:Date.now()},
+  updatedOn:{type:Date, default:Date.now()},
   
   videos:[{type:Schema.Types.ObjectId, ref:'Video'}],
 

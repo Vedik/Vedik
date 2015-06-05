@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('DashboardCtrl', function ($scope, Auth, DashboardService) {
+  .controller('DashboardCtrl', function ($scope,$state, Auth, DashboardService) {
     /*$scope.message = 'Hello';
     $scope.slots = ;
     */
@@ -12,5 +12,9 @@ angular.module('myAppApp')
 
     $scope.loadMore = function () {
     	$scope.limit = $scope.limit+1;
+    }
+
+    $scope.toUploadPortal = function () {
+    	$state.go('uploadPortal');
     }
   });

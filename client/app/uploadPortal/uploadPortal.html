@@ -1,0 +1,30 @@
+<div ng-controller="UploadPortalCtrl">
+	<div ng-include="'components/navbar/navbar.html'"></div>
+	<div class="col-md-12">
+		<form name="form" ng-submit="submit(form)">
+			<div class="form-group">
+				<label>Name of Video</label>
+				<input type="text" class="form-control" ng-model="form.vidname">
+			</div>
+			<div class="form-group">
+				<label>Youtube link to video</label>
+				<input type="text" class="form-control" ng-model="form.vidurl">
+			</div>
+			<div class="form-group">
+				<label>Poster Url</label>
+				<input type="text" class="form-control" ng-model="form.posterurl">
+			</div>
+			<div class="form-group"> <!-- need to put select with multi option selection -->
+				<label>Genres</label>
+				<select ng-model="form.genres" name="genres" class="form-control">
+					<option value="horror">horror</option>
+					<option value="comedy">comedy</option>
+				</select>
+			</div>
+			<div class="form-group"> <!-- Put text area -->
+				<label>Description</label>
+				<input type="text" class="form-control" ng-model="form.description">
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
