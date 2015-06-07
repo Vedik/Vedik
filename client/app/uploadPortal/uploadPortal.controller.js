@@ -10,7 +10,8 @@ angular.module('myAppApp')
     	form.uploader = Auth.getCurrentUser()._id;
     	console.log(form.uploader);
     	UploadPortalService.submitForm(form).then(function (response){
-    		console.log(response);
+    		if(response){ console.log(response); }
+    		else {console.log('no data received'); }
     	});
-    }
-  });
+    };
+});

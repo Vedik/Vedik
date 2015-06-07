@@ -16,10 +16,10 @@
 			</div>
 			<div class="form-group"> <!-- need to put select with multi option selection -->
 				<label>Genres</label>
-				<select ng-model="form.genres" name="genres" class="form-control">
+				<select ng-model="form.genres" multiple="true" class="form-control">
 					<option value="horror">horror</option>
 					<option value="comedy">comedy</option>
-				</select>
+				</select>   <!-- Make it a maximum of three using array size in controller -->
 			</div>
 			<div class="form-group"> <!-- Put text area -->
 				<label>Description</label>
@@ -28,3 +28,5 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
+	<p>{{form.genres}}</p>
+</div>

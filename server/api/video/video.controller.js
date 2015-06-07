@@ -22,6 +22,7 @@ exports.show = function(req, res) {
 
 // Creates a new video in the DB.
 exports.create = function(req, res) {
+  console.log(req.body.genres);
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
@@ -29,25 +30,56 @@ exports.create = function(req, res) {
   var newvideo = new Video({
     vidname:req.body.vidname,
     vidurl:req.body.vidurl,
-    genres:[req.body.genres],
+    genres:req.body.genres,
     description:req.body.description,
     posterurl:req.body.posterurl,
     uploader:req.body.uploader,
     view_count:0,
     createdOn:Date.now()
   });
-  newvideo.save(function (err){
+  /*newvideo.save(function (err){
     if(!err) {
-        User.findOne({_id:newvideo.uploader},function (err, user){
+        User.findOne({_id:newvideo.uploader},function (error, user){
           if(!err) {
-            user.videos.push(newvideo._id);
-            user.save();
+            user.videos.push(newvideo);
+            user.save(function (err1){
+              if(!err) console.log("no error saving user"+user);
+              else console.log(err1);
+            });
             console.log("pushed the id");
+            console.log(user);
           }
           else console.log("error");
         });
     }
-  });
+    else {
+      console.log('i am getting error as '+err);
+    }
+  });*/
+  newvideo.save(function (err){
+    if(err) console.log(err);
+    else {
+      User.findOne({_id:newvideo.uploader}, function (err, user){
+        if(err) {
+          console.log(err);
+        }
+        else {
+          console.log(user + "is the doc");
+          user.videos.push(newvideo);
+          user.save(function (error) {
+            if(error) {
+              console.log(error);
+            }
+            else {
+              console.log('user saved??');
+            }
+          })
+        }
+      })
+    }
+    res.json(newvideo);
+  })
+
 }
 
 

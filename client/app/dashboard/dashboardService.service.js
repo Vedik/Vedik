@@ -7,5 +7,5 @@ angular.module('myAppApp')
 		getSlots:function () {
 			$http.get('/api/videos');
 		}
-	}
+	};
 });

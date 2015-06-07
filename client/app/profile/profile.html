@@ -1,3 +1,30 @@
-<div class="col-md-12">
-This is the profile view.
-</div>
+<div ng-controller="ProfileCtrl">
+	<div ng-include="'components/navbar/navbar.html'"></div>
+
+	<header class="hero-unit" id="banner">
+ 		<div class="container">
+    		<h1>Hello {{user.name}}</h1>
+    		<p class="lead">A place to show your talent</p>
+    		<img src="assets/images/yeoman.png" alt="I'm Yeoman">
+  		</div>
+	</header>
+
+	<div>
+		<p>{{user.name}}</p>
+		<p>{{user.email}}</p>
+		<p>{{user.role}}</p>
+		<p>Account Created on {{user.createdOn | date:'medium'}}</p>
+		<p>Last logged in on {{user.updatedOn | date:'medium'}}</p>
+		<ul>
+			<li ng-repeat="video in user.videos">
+				<a href="#">
+					<img src="{{video.posterurl}}">
+					<p>Name : {{video.vidname}}</p>
+					<p>Description:{{video.description}}</p>
+					<p>Date uploaded : {{video.createdOn | date:'medium'}}</p>
+					<p>Views : {{video.view_count}}</p>
+
+				</a>
+			</li>
+		</ul>
+	</div>

@@ -3,9 +3,10 @@
 angular.module('myAppApp')
   .controller('MainCtrl', function ($scope,$state,Auth, $http, socket) {
     $scope.awesomeThings = [];
-    if(Auth.isLoggedIn())
+    if(Auth.isLoggedIn()) {
       $state.go('dashboard');
-    else $state.go('login');
+    }
+    else { $state.go('login'); }
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
