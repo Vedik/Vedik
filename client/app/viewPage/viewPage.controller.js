@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ViewPageCtrl', function ($scope,$stateParams, User) {
+  .controller('ViewPageCtrl', function ($scope,$location,User) {
     $scope.message = 'Hello';
-    var vidCode = $stateParams.vidCode;
-    console.log(vidCode);
-    $scope.vidCode =vidCode;
+    //var vidCode = $stateParams.vidCode;
+    //console.log(vidCode);
+    //$scope.vidCode =vidCode;
+    //console.log($scope.vidCode);
+    var a = $location.url();
+    var b = a.split('viewPage/');
+    console.log(b[1]);
+    $scope.vidCode = b[1];
     console.log($scope.vidCode);
+
     $scope.user = User.get();
   })
   .directive('myYoutube', function($sce) {

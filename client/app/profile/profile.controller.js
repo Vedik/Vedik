@@ -10,7 +10,8 @@ angular.module('myAppApp')
    	var a = [];
    	a = vidurl.split('watch?v=');
    	console.log(a[1]);
-   	$state.go('viewPage',{'vidCode':a[1]});
+   	//$state.go('viewPage',{'vidCode':a[1]});
+   	$location.url('/viewPage/'+a[1]);
    	
    };
 
