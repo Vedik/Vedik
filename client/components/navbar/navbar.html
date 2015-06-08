@@ -1,29 +1,14 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">my-app</a>
-    </div>
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+<div id="top_logo">
+                <div id="logo"><a href="index.php" id="_logo"><span>Vedik</span></a></div>
+                <div id="search"><input type="text" style="width:300px"></input></div>
+                <div id="nav">
+                        <span class="nav" ng-click="toUploadPortal()"><a href="">Book a day</a></span>
+                        <span class="nav" id="dropdown">
+                            <a href="redirect.php">'.$name.'</a>
+                                <ul class="drop-nav">
+                                    <a href="" class="dark"><li id="nav_li">Settings</li></a>
+                                    <a href="signout.php" class="dark"><li id="nav_li">Sign out</li></a>
+                                </ul>
+                        </span>
+                </div>
+    </div><div id="hidden"></div>

@@ -1,8 +1,71 @@
 <div ng-controller="ViewPageCtrl">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
-	<div class="col-xs-3"></div>
-	<div class="col-xs-6" my-youtube code='vidCode'>
+	<div class="stage" id="video">
+            <iframe width="900" height="506.25" src="https://www.youtube.com/embed/VdafjyFK3ko?autoplay=1" frameborder="0" style="box-sizing:border-box;
+            box-shadow:0px 5px 10px black;" allowfullscreen></iframe>
+            <div class="content" id="title">
+                <span id="video_name">Infinite reasons to smile</span>
+            </div>
+        </div>
+        <div class="stage">
+            <div class="content">
+                <div id="credits" >
+                <table>
+                    <tr>
+                        <td class="crew_cat">Director:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">Story:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">Cinematographer:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Prem Pradeep</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">Music:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Films</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">Dialogs:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">Screenwriter:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">Editor:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                    <tr>
+                        <td class="crew_cat">videography:</td>
+                        <td class="crew_mem"><a href="" class="crew_mem">Prem Pradeep</a></td>
+                        <td class="rating">rating</td>
+                    </tr>
+                </table>
+                </div>
+                <div id="best_part" class="comments">
+                    <h3>Best part<hr></hr></h3>
+                    <?php require "comment.php" ?>
+                </div>
+                <div id="best_part" class="comments">
+                    <h2>Review<hr></hr></h2>
+                </div>
+                <div id="best_part" class="comments">
+                    <h2>Comments<hr></hr></h2>
+                </div>
+            </div>
+        </div>
 		
 	</div>
 </div>

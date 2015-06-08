@@ -1,7 +1,7 @@
 <div ng-controller="DashboardCtrl">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
-	<header class="hero-unit" id="banner">
+<!--	<header class="hero-unit" id="banner">
  		<div class="container">
     		<h1>Hello {{user.name}}</h1>
     		<p class="lead">A place to show your talent</p>
@@ -10,27 +10,29 @@
 	</header>
 	<div class="col-md-12">
 		<button class="btn btn-primary" ng-click="toUploadPortal()">Upload Here</button>
-	</div>
+	</div> -->
 <!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
-	<div class="col-md-8">
-		<a href="#">
-		<div ng-repeat="slot in slots | limitTo : limit" class="col-md-6">
-			<img src="{{slot.poster}}">
-			<h4>{{slot.vidname}}</h4>
-			<p>{{slot.description}}</p>
-			<p>{{slot.genre}}</p>
+	<div id="stage">
+		<div class="col-md-8" id="main_stage">
+			<a href="#">
+			<div ng-repeat="slot in slots | limitTo : limit" class="col-md-6">
+				<img src="{{slot.poster}}">
+				<h4>{{slot.vidname}}</h4>
+				<p>{{slot.description}}</p>
+				<p>{{slot.genre}}</p>
+			</div>
+			</a>
+			<a href="#" ng-click="loadMore()">More....</a>
 		</div>
-		</a>
-		<a href="#" ng-click="loadMore()">More....</a>
-	</div>
 
 <!--This div for displaying the genres,, u click on one of these, the data in the above div changes accordingly and populates the videos to be displayed that day in that genre   -->
-	<div class="col-md-4">
-		<ul>
-			<li ng-repeat="genre in genres">
-				<a href="#">{{genre}}</a>
-			</li>
-		</ul>
+		<div class="col-md-4" id="genres">
+			<ul>
+				<li ng-repeat="genre in genres">
+					<a href="#">{{genre}}</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 	<!-- to be ignored ;) to be implemented later
 	<p>{{user.updatedOn | date:'medium'}}</p>

@@ -2,29 +2,31 @@
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
 	<header class="hero-unit" id="banner">
- 		<div class="container">
-    		<h1>Hello {{user.name}}</h1>
-    		<p class="lead">A place to show your talent</p>
-    		<img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  		</div>
+ 		<div class="stage" id="user_profile">
+            <div id="pro_pic"><img src="Pro_pic/DSC09016.JPG" style="width:300px;height:200px"></img></div>
+            <div id="name">
+                <span><h2>Venkat Teja</h2></span>
+            </div>
+        </div>
+        <div id="infodiv">
+            <span id="info">Director Editor Screenwriter</br></span>
+            <span id="info">9th Feb 1996</span>
+        </div>
 	</header>
+	 <div class="stage" id="user_hist_div1">
+            <div id="user_hist_div2" class="stage">
+	
+				<ul>
+					<li ng-repeat="video in user.videos">
+						<a href="#" ng-click="watchVid(video.vidurl)">
+							<img src="{{video.posterurl}}">
+							<p>Name : {{video.vidname}}</p>
+							<p>Description:{{video.description}}</p>
+							<p>Date uploaded : {{video.createdOn | date:'medium'}}</p>
+							<p>Views : {{video.view_count}}</p>
 
-	<div>
-		<p>{{user.name}}</p>
-		<p>{{user.email}}</p>
-		<p>{{user.role}}</p>
-		<p>Account Created on {{user.createdOn | date:'medium'}}</p>
-		<p>Last logged in on {{user.updatedOn | date:'medium'}}</p>
-		<ul>
-			<li ng-repeat="video in user.videos">
-				<a href="#" ng-click="watchVid(video.vidurl)">
-					<img src="{{video.posterurl}}">
-					<p>Name : {{video.vidname}}</p>
-					<p>Description:{{video.description}}</p>
-					<p>Date uploaded : {{video.createdOn | date:'medium'}}</p>
-					<p>Views : {{video.view_count}}</p>
-
-				</a>
-			</li>
-		</ul>
+						</a>
+					</li>
+				</ul>
+			</div>
 	</div>

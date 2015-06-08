@@ -1,0 +1,19 @@
+.booking 	{
+	margin:20px 100px;
+	background-color: #333;
+}
+#booking_form	{
+	margin:10px auto;
+	
+	padding:20px;
+}
+.booking_nav_div	{
+		height:50px;
+		padding:0px 20px;
+}
+.booking_nav	{
+		border-right: 2px solid black;
+		padding:20px;	
+		margin:0px;
+		float:left;
+}

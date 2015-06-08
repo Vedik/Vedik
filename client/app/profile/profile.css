@@ -1,0 +1,35 @@
+body    {
+                color:white;
+                font-family:"verdana";
+            }
+            #banner {
+                    margin:0px;
+                    text-align:left;
+            }
+            #user_profile   {
+                margin:10px auto;
+                padding:10px 10px;
+            }
+            #pro_pic    {
+                width:320px;
+                float:left;
+            }
+            #info   {
+                color:black;
+                padding:10px;
+                font-weight:bold;
+            }
+            #user_hist_div1  {
+                margin:70px auto;
+            }
+
+            #user_hist_div2   {
+                padding:10px;
+            height:auto;
+            box-sizing:border-box;
+            box-shadow:0px 5px 10px BLACK;
+            overflow:visible;
+
+            float:;
+            width:auto;
+            }

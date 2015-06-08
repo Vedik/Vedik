@@ -1,0 +1,52 @@
+body    {
+                background-color:#e6e6e6;
+                font-family:"verdane"
+            }
+            #video  {
+                margin:0px auto;
+                text-align:center;
+                padding:20px 0px;
+                width:100%;
+            }
+            .content    {
+                 padding:10px 0px;
+                 margin:10px auto;
+            }
+            #title  {
+                margin:0px auto;
+            }
+
+            #video_name {
+                font-size:30px;
+                color:white;
+                width:840;
+                position:relative;
+            }
+            .comments    {
+                color:white;
+                margin:0px 80px;
+            }
+            table   {
+                width:100%;
+                text-align:center;
+            }
+            td.crew_cat {
+                color:white;
+                font-weight:bold;
+                text-align:right;
+                padding:5px 5px;
+             }
+            td.crew_mem {
+                color:white;
+                text-align:left;
+                padding:5px 5px;
+            }
+            td.rating   {
+                color:white;
+                padding:5px 5px;
+                width:500px;
+            }
+            a:link.crew_mem, a:visited.crew_mem   {
+                color:white;
+                font-size:14px;
+            }

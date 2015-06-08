@@ -1,0 +1,27 @@
+ #unknown    {
+            background-color:;
+            height:100px;
+        }
+        #main_stage  {
+            background-color:#333;
+            height:auto;
+            float:left;
+            box-sizing:border-box;
+            box-shadow:0px 5px 10px BLACK;
+            margin:0% auto;
+            max-width:72%;
+            width:auto;
+            padding:10px 10px;
+            overflow:visible;
+            word-wrap: break-word;
+            min-width:442px;
+        }
+        #genres{
+            background-color:#333;
+            box-sizing:border-box;
+            box-shadow:0px 5px 10px BLACK;
+            height:500px;
+            float:left;
+            margin:0% 2%;
+            width:20%;
+        }
