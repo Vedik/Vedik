@@ -79,6 +79,29 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+exports.showUser = function(req, res, next) {
+  var name = req.params.name;
+  /*User.findOne({
+    _id: userId
+  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+    if (err) return next(err);
+    if (!user) return res.json(401);
+    res.json(user);
+  });*/
+  User.findOne({name:name},'-salt -hashedPassword')
+  .populate('videos.video')
+  .exec(function (err, user){
+    if(err) {
+      console.log(err);
+      next(err);
+    }
+    else {
+    console.log(user);
+    res.json(user);
+  }
+  });
+};
+
 /**
  * Get my info
  */
@@ -111,3 +134,20 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+exports.search = function (req, res, next) {
+  var query = req.params.searchQuery;
+  User.find(
+    { "name": { "$regex": query, "$options": "i" } },'name',
+    function(err,docs) {
+      if(!err) {
+        console.log(docs);
+        res.json(docs);
+      }
+      else {
+        console.log(err);
+        res.json([{name:'Error',href:"#"}]);
+      } 
+    } 
+  );
+}

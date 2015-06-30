@@ -1,13 +1,6 @@
 <div ng-controller="ProfileCtrl">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
-	<header class="hero-unit" id="banner">
- 		<div class="container">
-    		<h1>Hello {{user.name}}</h1>
-    		<p class="lead">A place to show your talent</p>
-    		<img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  		</div>
-	</header>
 
 	<div>
 		<p>{{user.name}}</p>
@@ -17,12 +10,12 @@
 		<p>Last logged in on {{user.updatedOn | date:'medium'}}</p>
 		<ul>
 			<li ng-repeat="video in user.videos">
-				<a href="#" ng-click="watchVid(video.vidurl)">
-					<img src="{{video.posterurl}}">
-					<p>Name : {{video.vidname}}</p>
-					<p>Description:{{video.description}}</p>
-					<p>Date uploaded : {{video.createdOn | date:'medium'}}</p>
-					<p>Views : {{video.view_count}}</p>
+				<a href="#" ng-click="watchVid(video.video.vidurl)">
+					<img src="{{video.video.posterurl}}">
+					<p>Name : {{video.video.vidname}}</p>
+					<p>Description:{{video.video.description}}</p>
+					<p>Date uploaded : {{video.video.createdOn | date:'medium'}}</p>
+					<p>Views : {{video.video.view_count}}</p>
 
 				</a>
 			</li>

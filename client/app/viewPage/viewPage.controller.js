@@ -1,19 +1,28 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ViewPageCtrl', function ($scope,$location,User) {
+  .controller('ViewPageCtrl', function ($scope,$location,User, $http) {
     $scope.message = 'Hello';
     //var vidCode = $stateParams.vidCode;
     //console.log(vidCode);
     //$scope.vidCode =vidCode;
     //console.log($scope.vidCode);
+    $scope.user = User.get();
     var a = $location.url();
     var b = a.split('viewPage/');
     console.log(b[1]);
     $scope.vidCode = b[1];
     console.log($scope.vidCode);
-
-    $scope.user = User.get();
+    $scope.rating1 = 5;
+    $http.get('/api/videos')
+  $scope.rateFunction = function(rating) {
+    console.log("Rating selected: " + rating);
+    $http.post('/api/videos/ratings/'+$scope.vidCode,{rating:rating}).success(function (response){
+      console.log(response);
+      $scope.rating1 = rating;
+    })
+  };
+    
   })
   .directive('myYoutube', function($sce) {
   return {

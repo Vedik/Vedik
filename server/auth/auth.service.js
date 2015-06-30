@@ -28,8 +28,9 @@ function isAuthenticated() {
       User.findById(req.user._id, function (err, user) {
         if (err) return next(err);
         if (!user) return res.send(401);
-
+        console.log('req.user exists '+req.user._id);
         req.user = user;
+        console.log('He exists.......'+req.user);
         next();
       });
     });
