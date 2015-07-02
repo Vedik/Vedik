@@ -2,7 +2,10 @@
 /**
  * Bootstrap Fonts
  */
-
+body    {
+    background-color:white ;
+    color:black;
+}
 @font-face {
     font-family: 'Glyphicons Halflings';
     src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');

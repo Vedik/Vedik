@@ -11,28 +11,36 @@
 	<div class="col-md-12">
 		<button class="btn btn-primary" ng-click="toUploadPortal()">Upload Here</button>
 	</div> -->
+<!--This space is to put the stages or something else-->
+	<div id="unknown">
+	</div>
 <!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 	<div id="stage">
-		<div class="col-md-8" id="main_stage">
-			<a href="#">
-			<div ng-repeat="slot in slots | limitTo : limit" class="col-md-6">
-				<img src="{{slot.poster}}">
-				<h4>{{slot.vidname}}</h4>
-				<p>{{slot.description}}</p>
-				<p>{{slot.genre}}</p>
+			<div id="main_stcage" class="col-mdd-12">
+		            <div id="dashbrd_cntnt">
+							<span ng-repeat="video in user.videos" id="thumbs">
+								<a href="#" ng-click="watchVid(video.video.vidurl)">
+									<img src="{{video.posterurl}}" height="140px" style="z-index:-1" id="image" width=220px>
+									<span id="thumb_trnsprnt">
+									</span>
+									<span  id="thumb_cntnt">
+										<p style="font-size:12px;vertical-align:10px"><strong>Infinte reasons to smile {{video.vidname}}</strong></p>
+									</span>	
+								</a>
+							</span>
+					</div>
+
+				<a href="#" ng-click="loadMore()">More....</a>
 			</div>
-			</a>
-			<a href="#" ng-click="loadMore()">More....</a>
-		</div>
 
 <!--This div for displaying the genres,, u click on one of these, the data in the above div changes accordingly and populates the videos to be displayed that day in that genre   -->
-		<div class="col-md-4" id="genres">
+		<!--<div class="col-md-" id="genres">
 			<ul>
 				<li ng-repeat="genre in genres">
 					<a href="#">{{genre}}</a>
 				</li>
 			</ul>
-		</div>
+		</div>-->
 	</div>
 	<!-- to be ignored ;) to be implemented later
 	<p>{{user.updatedOn | date:'medium'}}</p>

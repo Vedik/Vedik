@@ -1,7 +1,3 @@
-body    {
-                background-color:#e6e6e6;
-                font-family:"verdane"
-            }
             #video  {
                 margin:0px auto;
                 text-align:center;
@@ -18,12 +14,10 @@ body    {
 
             #video_name {
                 font-size:30px;
-                color:white;
                 width:840;
                 position:relative;
             }
             .comments    {
-                color:white;
                 margin:0px 80px;
             }
             table   {
@@ -31,22 +25,39 @@ body    {
                 text-align:center;
             }
             td.crew_cat {
-                color:white;
                 font-weight:bold;
                 text-align:right;
                 padding:5px 5px;
              }
             td.crew_mem {
-                color:white;
                 text-align:left;
                 padding:5px 5px;
             }
             td.rating   {
-                color:white;
                 padding:5px 5px;
                 width:500px;
             }
-            a:link.crew_mem, a:visited.crew_mem   {
-                color:white;
+            a:link.crew_mem, a:visited.crew_mem   { 
                 font-size:14px;
             }
+            img#video_play {
+              display: block;
+              height: auto;
+              width: 70%;
+              left:15%;
+              position: relative;
+            }
+            iframe {
+              height: 100%;
+              left: 15%;
+              top:0px;
+              position: absolute;
+              
+              width: 70%;
+              margin:0% auto;
+            }
+            .wrapper {
+                float:none;
+                margin: 0% auto;
+             position: relative;
+            }*/
