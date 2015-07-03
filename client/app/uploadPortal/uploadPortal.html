@@ -1,37 +1,64 @@
 <div ng-controller="UploadPortalCtrl">
 	<div ng-include="'components/navbar/navbar.html'"></div>
-		<div class="booking">
-			<div class="booking_nav_div">
-				<span class="booking_nav">dd</span>
-				<span class="booking_nav">Credits</span>
+
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload">Open Modal</button>
+
+	<div class="booking_body">
+
+		<div id="upload" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+			<!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal">&times;</button>
+					 <h4 class="modal-title">Modal Header</h4>
+        		</div>
+	        		<div class="modal-body">
+					 <ul class="nav nav-tabs">
+					 	 <li class="active"><a data-toggle="tab" href="#upload_form">Home</a></li>
+					    <li><a href="#menu1" data-toggle="tab">Credits</a></li>
+					  </ul>
+
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="upload_form">
+
+								<form name="form" ng-submit="submit(form)">
+									<div class="form-group">
+										<label>Name of Video</label>
+										<input type="text" class="form-control" ng-model="form.vidname">
+									</div>
+									<div class="form-group">
+										<label>Youtube link to video</label>
+										<input type="text" class="form-control" ng-model="form.vidurl">
+									</div>
+									<div class="form-group">
+										<label>Poster Url</label>
+										<input type="text" class="form-control" ng-model="form.posterurl">
+									</div>
+									<div class="form-group"> <!-- need to put select with multi option selection -->
+										<label>Genres</label>
+										<select ng-model="form.genres" multiple="true" class="form-control">
+											<option value="horror">horror</option>
+											<option value="comedy">comedy</option>
+										</select>   <!-- Make it a maximum of three using array size in controller -->
+									</div>
+									<div class="form-group"> <!-- Put text area -->
+										<label>Description</label>
+										<input type="text" class="form-control" ng-model="form.description">
+									</div>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</form>
+					
+						</div>
+						<div id="menu1" class="tab-pane fade">
+					      <h3>Menu 1</h3>
+					      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					    </div>
+					</div>
+					</div>
+				</div>
 			</div>
-			<div class="col-dmd-12" id="booking_form">
-			<form name="form" ng-submit="submit(form)">
-				<div class="form-group">
-					<label>Name of Video</label>
-					<input type="text" class="form-control" ng-model="form.vidname">
-				</div>
-				<div class="form-group">
-					<label>Youtube link to video</label>
-					<input type="text" class="form-control" ng-model="form.vidurl">
-				</div>
-				<div class="form-group">
-					<label>Poster Url</label>
-					<input type="text" class="form-control" ng-model="form.posterurl">
-				</div>
-				<div class="form-group"> <!-- need to put select with multi option selection -->
-					<label>Genres</label>
-					<select ng-model="form.genres" multiple="true" class="form-control">
-						<option value="horror">horror</option>
-						<option value="comedy">comedy</option>
-					</select>   <!-- Make it a maximum of three using array size in controller -->
-				</div>
-				<div class="form-group"> <!-- Put text area -->
-					<label>Description</label>
-					<input type="text" class="form-control" ng-model="form.description">
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
 		</div>
 	</div>
 	<p>{{form.genres}}</p>

@@ -1,8 +1,8 @@
-.booking 	{
-	margin:20px 100px;
-	background-color: #333;
+
+.booking_wrapper	{
+	opacity: 1;
 }
-#booking_form	{
+#upload_form	{
 	margin:10px auto;
 	
 	padding:20px;
@@ -16,4 +16,8 @@
 		padding:20px;	
 		margin:0px;
 		float:left;
+}
+.booking_body	{
+	background-image: url("http://2.bp.blogspot.com/-4E0OGo5Gu-0/T8zW_7IkmvI/AAAAAAAAASE/J1s6aGGBFMs/s1600/2hs-2009-05-a-print.jpg");
+	padding: 20px;
 }

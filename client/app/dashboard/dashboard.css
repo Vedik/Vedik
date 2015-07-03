@@ -22,11 +22,10 @@
         }
         .thumbs {
                 box-sizing:border-box;
-                float:left;
-                position: relative;
-                padding:0px;
-                overflow: hidden;
                 
+                position: ;
+                padding:0px;
+                overflow: hidden;           
                 
         }
         .thumb_trnsprnt {
@@ -37,7 +36,7 @@
             height: 100%;
             background-color:black;
             position: absolute;
-            opacity:0.8;
+            opacity:0.3;
             display:none;
             top:0px;
             left:0px;
@@ -56,7 +55,7 @@
             overflow: hidden;
         }
 
-        .thumbs:hover .thumb_cntnt , .thumbs:hover .thumb_trnsprnt {
+        .thumbs_in:hover .thumb_cntnt , .thumbs_in:hover .thumb_trnsprnt {
             display:block;
         }
         #dashbrd_cntnt  {
@@ -69,12 +68,14 @@
 
         }  
         .thumbs_out {
-           margin:10px;
+           margin:10px 0px;
+           float: left;
         }    
         .thumbs_in  {
             overflow: hidden;
             position: relative;
             text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+            float: left;
         }
         .stagee {
             background-image: url("http://p1.pichost.me/i/14/1366317.jpg");

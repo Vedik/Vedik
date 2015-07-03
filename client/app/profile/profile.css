@@ -14,7 +14,7 @@
                 height: 100%;
                 top:-60px;
                 float:left;
-                position: relative;
+               position: relative;
 
             }
             #info   {
@@ -35,13 +35,13 @@
 
             #user_hist_div2   {
                 padding:10px;
-            height:auto;
-            box-sizing:border-box;
-            box-shadow:0px 5px 10px BLACK;
-            overflow:visible;
-
-            float:;
-            width:auto;
+                margin: 0% auto;                
+                height:auto;
+                box-sizing:content-box;
+                box-shadow:0px 5px 10px BLACK;
+                overflow:visible;
+                float:;
+                width:1000px;
             }
             #user_hist_div2 {
                 text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
@@ -64,10 +64,24 @@
                     float: left;
                 }
                  
-                .grow img:hover {
+                #grow img:hover {
                   width: 510px;
                   height: auto;
             }
             #user_art_info  {
                 float: left;
+            }
+            .dropdown   {
+                float: left;
+            }
+            .dropdown-menu  {
+                
+            }
+            .user_art_info2 {
+                width: 500px;
+                height:218px;
+                background-color: #a4c8db
+            }
+            .ul_thumb {
+                padding: 0px;
             }
