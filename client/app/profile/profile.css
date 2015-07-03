@@ -22,6 +22,13 @@
                 padding:10px;
                 font-weight:bold;
             }
+            #stages {
+                background-color: white;
+                border-bottom: 5px double #0f6f84;
+                height:50px;
+                position: absolute;
+                width: 100%;
+            }
             #user_hist_div1  {
                 margin:70px auto;
             }
@@ -39,4 +46,28 @@
             #user_hist_div2 {
                 text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
                 color:white;
+            }
+            #user_art   {
+                padding:10px;
+            }
+            
+            /*GROW*/
+                .grow img {
+                  height: auto;
+                  width: 500px;
+                 
+                  -webkit-transition: all 1s ease;
+                     -moz-transition: all 1s ease;
+                       -o-transition: all 1s ease;
+                      -ms-transition: all 1s ease;
+                          transition: all 1s ease;
+                    float: left;
+                }
+                 
+                .grow img:hover {
+                  width: 510px;
+                  height: auto;
+            }
+            #user_art_info  {
+                float: left;
             }

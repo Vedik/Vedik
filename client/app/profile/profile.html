@@ -4,6 +4,8 @@
 	<header class="hero-unit" id="banner">
  		<div class="stage" id="user_profile">-->
             <div id="pro_pic"><img src="Pro_pic/DSC09016.JPG" style="width:100%;height:100%;"></img>
+            	<div id="stages">
+				</div>
 	            <div id="user_profile">
 		            <div id="name">
 		                <span><h2>Venkat Teja</h2></span>
@@ -14,21 +16,33 @@
 		            	<span id="info">9th Feb 1996</span>
 		        	</div>
 	        	</div>
+	        	
 	        </div>
 	</header>
-	 <div class="stage" id="user_hist_div1">
-            <div id="user_hist_div2" class="stage">
+	 <div id="user_hist_div1">
+            <div id="user_hist_div2">
 	
 				<ul>
 					<li ng-repeat="video in user.videos">
-						<a href="#" ng-click="watchVid(video.vidurl)">
-							<img src="{{video.posterurl}}">
-							<p>Name : {{video.vidname}}</p>
-							<p>Description:{{video.description}}</p>
-							<p>Date uploaded : {{video.createdOn | date:'medium'}}</p>
-							<p>Views : {{video.view_count}}</p>
+						<span id="user_art" class="thumbs">
+							<div class="thumbs_out">
+								<div class="thumbs_in">
+									<a href="#" ng-click="watchVid(video.vidurl)">
+										<span class="grow pic" id="user_art_pic">
+											<img src="http://photos.imageevent.com/batmanonfilm/thedarkknightimages/imax-feature-screenshot1.jpg">
+										</span>
+										<span class="thumb_trnsprnt">
+										</span>
+										<span id="user_art_info" class="thumb_cntnt">
+											<span>{{video.vidname}}</span>
+											<span>{{video.description}}</span>
+											<span style="bottom:20px;left:10px;position:absolute">Views : {{video.view_count}}</span>
+										</span>
+									</a>
+								</div>
+							</div>		
+						</span>
 
-						</a>
 					</li>
 				</ul>
 			</div>

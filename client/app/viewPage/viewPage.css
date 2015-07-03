@@ -40,24 +40,49 @@
             a:link.crew_mem, a:visited.crew_mem   { 
                 font-size:14px;
             }
-            img#video_play {
+            @media (min-width: 992px) {
+              img#video_play {
+                display: block;
+                height: auto;
+                width: 70%;
+                left:15%;
+                position: relative;
+              }
+              iframe {
+                height: 100%;
+                left: 15%;
+                top:0px;
+                position: absolute;
+                
+                width: 70%;
+                margin:0% auto;
+              }
+              .wrapper {
+                  float:none;
+                  margin: 0% auto;
+               position: relative;
+              }
+            }
+            @media (max-width: 992px) {
+              img#video_play {
               display: block;
               height: auto;
-              width: 70%;
-              left:15%;
+              width: 100%;
+              
               position: relative;
             }
             iframe {
               height: 100%;
-              left: 15%;
+              
               top:0px;
               position: absolute;
-              
-              width: 70%;
+              left:0px;
+              width: 100%;
               margin:0% auto;
             }
             .wrapper {
                 float:none;
                 margin: 0% auto;
              position: relative;
-            }*/
+            }
+            }
