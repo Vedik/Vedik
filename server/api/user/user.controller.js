@@ -115,7 +115,7 @@ exports.me = function(req, res, next) {
     res.json(user);
   });*/
   User.findOne({_id:userId},'-salt -hashedPassword')
-  .populate('videos')
+  .populate('videos.video')
   .exec(function (err, user){
     if(err) {
       console.log(err);

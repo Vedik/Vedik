@@ -4,12 +4,18 @@
 	<div class="stage" id="video">
         <div class="wrapper">
          <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
+<<<<<<< HEAD
             <iframe width="80vw" height="45vw" src="https://www.youtube.com/embed/vvLBXO94EfA?autoplay=1" frameborder="0" style="box-sizing:border-box;
             box-shadow:0px 5px 10px black;" allowfullscreen></iframe>
+=======
+            <div my-youtube code='vidCode'>
+            </div>
+>>>>>>> 27759a69c659785cae51250a355ec7d0b929f6b1
         </div>
         <div class="content" id="title">
-            <span id="video_name">Infinite reasons to smile</span>
+            <span id="video_name">{{video.vidname}}</span>
         </div>
+        <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
     </div>
       <!-- info, comments, reviews etc of video-->
         <div class="stage">
@@ -38,14 +44,32 @@
                  </ul>
 
                  <!--tab content-->
-                 <div class="tab-content">
+                <div class="tab-content">
                     <div id="best_part" class="tab-pane fade in active">
-                    <!--add best part here-->
                         <h3>Best part<hr></hr></h3>
                     </div>
                     <div id="comments" class="tab-pane fade">
-                    <!--add comments part here-->
                         <h2>Comments<hr></hr></h2>
+                        <div>
+                            <div>
+                                <h4>Leave a Comment:</h4>
+                                <form name="myForm" ng-submit="submit()" class="form" novalidate> 
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="3" ng-model="commentData"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div>
+                                <div ng-repeat="comment in video.comments">
+                                    <p>{{comment.comment.commentPutter}}</p>
+                                    <p>{{comment.comment.commentData}}</p>
+                                    <p>{{comment.comment.datePosted}}</p>
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user._id" ng-click="delete(comment._id)">Delete</button>
+                                    <button class="btn btn-default" ng-show="comment.commentPutter===user._id" ng-click="edit(comment._id)">Edit</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="reviews" class="tab-pane fade">
                     <!--add review part here-->

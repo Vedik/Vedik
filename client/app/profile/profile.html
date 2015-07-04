@@ -7,7 +7,7 @@
 				</div>
 	            <div id="user_profile">
 		            <div id="name">
-		                <span><h2>Venkat Teja</h2></span>
+		                <span><h2>{{user.name}}</h2></span>
 		            </div>
 		        
 		        	<div id="infodiv">
@@ -91,16 +91,16 @@
 							
 							<div class="thumbs_out">
 								<div class="thumbs_in" id="grow pic">
-									<a href="#" ng-click="watchVid(video.vidurl)">
+									<a href="#" ng-click="watchVid(video.video.vidurl)">
 										<span class="grow pic" id="user_art_pic">
-											<img src="http://photos.imageevent.com/batmanonfilm/thedarkknightimages/imax-feature-screenshot1.jpg" class="img-thumbnail">
+											<img src="{{video.video.posterurl}}" class="img-thumbnail">
 										</span>
 										<span class="thumb_trnsprnt">
 										</span>
 										<span id="user_art_info" class="thumb_cntnt">
-											<span>{{video.vidname}}</span>
-											<span>{{video.description}}</span>
-											<span style="bottom:20px;left:10px;position:absolute">Views : {{video.view_count}}</span>
+											<span>{{video.video.vidname}}</span>
+											<span>{{video.video.description}}</span>
+											<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
 										</span>										
 									</a>
 								</div>

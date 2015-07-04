@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl', function ($scope,$location, Auth, $state,User) {
+  .controller('ProfileCtrl', function ($scope,$location, Auth, $state,User,$http) {
     $scope.message = 'Hello';
-    if(!Auth.isLoggedIn()){ $state.go('login');}
-
-   $scope.user = User.get();
+    var name = $location.url().split('/profile/')[1];
+    console.log(name);
+    $http.get('/api/users/'+name).success(function (response){
+      $scope.user = response;
+      console.log(response);
+    });
+   console.log($scope.user);
    $scope.watchVid = function (vidurl) {
    	var a = [];
    	a = vidurl.split('watch?v=');
