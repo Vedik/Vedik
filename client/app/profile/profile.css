@@ -77,10 +77,11 @@
             .dropdown-menu  {
                 
             }
-            .user_art_info2 {
+            #user_art_info2 {
                 width: 500px;
                 height:218px;
-                background-color: #a4c8db
+                background-color: white;
+                padding:10px;
             }
             .ul_thumb {
                 padding: 0px;

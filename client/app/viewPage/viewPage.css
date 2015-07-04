@@ -86,3 +86,6 @@
              position: relative;
             }
             }
+            #view_page_tabs {
+              padding:0px 20px; 
+            }

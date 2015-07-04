@@ -6,8 +6,8 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
-  name: String,
-  email: { type: String, lowercase: true },
+  name: {type:String, required:true, unique:true},
+  email: { type: String,required:true,unique:true, lowercase: true },
   role: {
     type: String,
     default: 'user'
@@ -15,11 +15,22 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
+  directorRating:{type:Number,default:0},
+  actorRating:{type:Number,default:0},
+  cinematographyRating:{type:Number,default:0},
+  storyRating:{type:Number,default:0},
+  dialogsRating:{type:Number,default:0},
+  screenplayRating:{type:Number,default:0},
+  editorRating:{type:Number,default:0},
 
   createdOn:{type:Date, default:Date.now()},
   updatedOn:{type:Date, default:Date.now()},
-  
-  videos:[{type:Schema.Types.ObjectId, ref:'Video'}],
+  RatedVids:[
+  {
+    videoId:{type:Schema.Types.ObjectId, ref:'Video'},
+    Rating:Number
+  }],
+  videos:[{video:{type:Schema.Types.ObjectId, ref:'Video'},role:[String]}],
 
 
   facebook: {},

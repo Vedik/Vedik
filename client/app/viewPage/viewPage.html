@@ -4,71 +4,56 @@
 	<div class="stage" id="video">
         <div class="wrapper">
          <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
-            <iframe width="80vw" height="45vw" src="https://www.youtube.com/embed/VdafjyFK3ko?autoplay=1" frameborder="0" style="box-sizing:border-box;
+            <iframe width="80vw" height="45vw" src="https://www.youtube.com/embed/VdafjyFK3ko?autoplay=0" frameborder="0" style="box-sizing:border-box;
             box-shadow:0px 5px 10px black;" allowfullscreen></iframe>
         </div>
-            <div class="content" id="title">
-                <span id="video_name">Infinite reasons to smile</span>
-            </div>
+        <div class="content" id="title">
+            <span id="video_name">Infinite reasons to smile</span>
         </div>
+    </div>
+      <!-- info, comments, reviews etc of video-->
         <div class="stage">
             <div class="content">
+            <!--Crew and cast-->
                 <div id="credits" >
-                <table>
-                    <tr>
-                        <td class="crew_cat">Director:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">Story:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">Cinematographer:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Prem Pradeep</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">Music:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Films</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">Dialogs:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">Screenwriter:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">Editor:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Venkat Teja</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                    <tr>
-                        <td class="crew_cat">videography:</td>
-                        <td class="crew_mem"><a href="" class="crew_mem">Prem Pradeep</a></td>
-                        <td class="rating">rating</td>
-                    </tr>
-                </table>
+                <!--credits start-->
+                
+ 
+  
+                     
+                        
+                      
+                    </div>
+
+                   
+                <!--credits end-->
+
+               
                 </div>
-                <div id="best_part" class="comments">
-                    <h3>Best part<hr></hr></h3>
-                    <?php require "comment.php" ?>
-                </div>
-                <div id="best_part" class="comments">
-                    <h2>Review<hr></hr></h2>
-                </div>
-                <div id="best_part" class="comments">
-                    <h2>Comments<hr></hr></h2>
+                <!--Best part, comments, review-->
+                <ul class="nav nav-tabs" id="view_page_tabs">
+                        <li class="active"><a data-toggle="tab" href="#best_part">Best Part</a></li>
+                        <li><a href="#comments" data-toggle="tab">Comments</a></li>
+                        <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                 </ul>
+
+                 <!--tab content-->
+                 <div class="tab-content">
+                    <div id="best_part" class="tab-pane fade in active">
+                    <!--add best part here-->
+                        <h3>Best part<hr></hr></h3>
+                    </div>
+                    <div id="comments" class="tab-pane fade">
+                    <!--add comments part here-->
+                        <h2>Comments<hr></hr></h2>
+                    </div>
+                    <div id="reviews" class="tab-pane fade">
+                    <!--add review part here-->
+                        <h2>Reviews<hr></hr></h2>
+                    </div>
                 </div>
             </div>
         </div>
 		
-	</div>
+	
 </div>

@@ -22,9 +22,32 @@ exports.show = function(req, res) {
 
 // Creates a new comment in the DB.
 exports.create = function(req, res) {
-  Comment.create(req.body, function(err, comment) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, comment);
+  var id = req.params.id;
+  var comment = new Comment({
+    commentPutter:req.body.name,
+    commentData:req.body.data
+  });
+  comment.save(function (err){
+    if(err){
+      return handleError(res,err);
+    }
+    else {
+      console.log("comment saved! "+comment);
+      Video.findOne({_id:id},function (err, video){
+        if(err){
+          return handleError(res,err);
+        }
+        video.comments.push(comment);
+        video.save(function (err){
+          if(err){
+            return handleError(res,err);
+          }
+          else {
+            console.log(video);
+          }
+        })
+      })
+    }
   });
 };
 
