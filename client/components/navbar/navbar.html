@@ -1,13 +1,22 @@
-<div id="top_logo">
-                <div id="logo"><a href="index.php" id="_logo"><span>Vedik</span></a></div>
-                <div id="search"><input type="text" style="width:300px"></input></div>
-                <div id="nav">
-                        <span class="nav" ng-click="toUploadPortal()"><a href="">Book a day</a></span>
-                        <span class="nav" id="dropdown">
-                            <a href="redirect.php">'.$name.'</a>
-                                <ul class="drop-nav">
-                                    <a href="" class="dark"><li id="nav_li">Settings</li></a>
-                                    <a href="signout.php" class="dark"><li id="nav_li">Sign out</li></a>
+<div id="top_logo" ng-controller="NavbarCtrl">
+    <div id="logo">
+        <a href="/" id="_logo"><span>Vedik</span></a>
+    </div>
+    <div id="search">
+        <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
+          <div ng-show="searchQuery" ng-repeat="obj in objs">
+            <a href="/profile/{{obj.name}}">{{obj.name}}</a>
+          </div>
+    </div>
+    <div id="nav">
+        <span class="nav" ng-click="toUploadPortal()">
+            <a href=""></a>
+        </span>
+        <span class="nav" id="dropdown">
+            <a href="/profile">{{getCurrentUser.name}}</a>
+            <ul class="drop-nav">
+                                    <li id="nav_li"><a href="#" class="dark">Settings</a></li>
+                                    <a href="/signout" class="dark"><li id="nav_li">Sign out</li></a>
                                 </ul>
                         </span>
                 </div>

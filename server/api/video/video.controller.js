@@ -14,10 +14,18 @@ exports.index = function(req, res) {
 
 // Get a single video
 exports.show = function(req, res) {
-  Video.findById(req.params.id, function (err, video) {
-    if(err) { return handleError(res, err); }
-    if(!video) { return res.send(404); }
-    return res.json(video);
+  console.log(req.params.vidCode);
+  Video.findOne({vidurl:'https://www.youtube.com/watch?v='+req.params.vidCode})
+  .populate('comments.comment')
+  .exec(function (err, video){
+    if(err) {
+      console.log('this is error '+err);
+      next(err);
+    }
+    else {
+    console.log(video+'is the real erroor');
+    res.json(video);
+  }
   });
 };
 
@@ -131,7 +139,6 @@ exports.rate = function(req, res, next) {
         else {
           if(!user) {
             docs.vidRating = (docs.vidRating*docs.votes+req.body.rating)/(docs.votes+1);
-            console.log(docs.vidRating);
             docs.votes= docs.votes+1;
             req.user.RatedVids.push({videoId:docs,Rating:req.body.rating});
             user = req.user;

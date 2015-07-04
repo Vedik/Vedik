@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Comment = require('./comment.model');
-
+var Video = require('../video/video.model');
 // Get list of comments
 exports.index = function(req, res) {
   Comment.find(function (err, comments) {
@@ -22,31 +22,32 @@ exports.show = function(req, res) {
 
 // Creates a new comment in the DB.
 exports.create = function(req, res) {
-  var id = req.params.id;
-  var comment = new Comment({
-    commentPutter:req.body.name,
-    commentData:req.body.data
-  });
-  comment.save(function (err){
+  var user = req.user;
+  console.log(req.body);
+  var newComment = new Comment({commentPutter:user,commentData:req.body.commentData,videoId:req.body.videoId});
+  newComment.save(function(err){
     if(err){
-      return handleError(res,err);
+      console.log(err);
     }
     else {
-      console.log("comment saved! "+comment);
-      Video.findOne({_id:id},function (err, video){
+      console.log('dddddddddd     '+newComment+'          ddddddddddddddddddd');
+      Video.findById(newComment.videoId,function (err,doc){
         if(err){
-          return handleError(res,err);
+          console.log('error is '+err);
         }
-        video.comments.push(comment);
-        video.save(function (err){
-          if(err){
-            return handleError(res,err);
-          }
-          else {
-            console.log(video);
-          }
-        })
-      })
+        else {
+          doc.comments.push({comment:newComment});
+          doc.save(function (err){
+            if(err){
+              console.log(err+' will be this');
+            }
+            else {
+              console.log('updated doc is '+doc)
+              res.json(newComment);
+            }
+          });
+        }
+      });
     }
   });
 };
