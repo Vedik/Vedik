@@ -96,7 +96,6 @@ exports.showUser = function(req, res, next) {
       next(err);
     }
     else {
-    console.log(user);
     res.json(user);
   }
   });
@@ -122,7 +121,6 @@ exports.me = function(req, res, next) {
       next(err);
     }
     else {
-    console.log(user);
     res.json(user);
   }
   });
@@ -141,7 +139,6 @@ exports.search = function (req, res, next) {
     { "name": { "$regex": query, "$options": "i" } },'name',
     function(err,docs) {
       if(!err) {
-        console.log(docs);
         res.json(docs);
       }
       else {

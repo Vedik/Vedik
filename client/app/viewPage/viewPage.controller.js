@@ -3,6 +3,7 @@
 angular.module('myAppApp')
   .controller('ViewPageCtrl', function ($scope,$location,User,$http) {
     $scope.message = 'Hello';
+    $scope.toggleVal = false;
     //var vidCode = $stateParams.vidCode;
     //console.log(vidCode);
     //$scope.vidCode =vidCode;
@@ -36,13 +37,16 @@ angular.module('myAppApp')
     }
 
     $scope.delete = function (id){
-      $http.delete('/api/comments/:id').success(function (response){
-        console.log('the document deleted is '+response);
+      $http.delete('/api/comments/'+id).success(function (response){
+        console.log(response);
+        refresh();
       });
     }
-    $scope.edit = function (id){
-      $http.put('/api/comments/:id',{commentData:$scope.commentData}).success(function (response){
+    $scope.edit = function (id,editData){
+      console.log(editData);
+      $http.put('/api/comments/'+id,{commentData:editData}).success(function (response){
         console.log('the edited document is '+response);
+        refresh();
       });
     }
 

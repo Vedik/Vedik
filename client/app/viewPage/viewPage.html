@@ -59,8 +59,12 @@
                                 <div ng-repeat="comment in video.comments">
                                     <span>{{comment.comment.commentPutter}}:::{{comment.comment.commentData}} ::::
                                     {{comment.comment.datePosted | date:'medium'}}
-                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment._id)">Delete</button>
-                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="edit(comment._id)">Edit</button></span>
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)">Delete</button>
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal">Edit</button></span>
+                                    <div class="form-group" ng-show="toggleVal">
+                                        <textarea class="form-control" rows="3" ng-model="editData"></textarea>
+                                        <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

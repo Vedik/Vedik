@@ -16,15 +16,13 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   console.log(req.params.vidCode);
   Video.findOne({vidurl:'https://www.youtube.com/watch?v='+req.params.vidCode})
-  .populate('comments.comment comments.comment.commentPutter')
+  .populate('comments.comment')
   .exec(function (err, video){
     if(err) {
-      console.log('this is error '+err);
-      next(err);
+      return handleError(res, err);
     }
     else {
-    console.log(video+'is the real erroor');
-    res.json(video);
+    return res.json(video);
   }
   });
 };
@@ -66,18 +64,17 @@ exports.create = function(req, res) {
     }
   });*/
   newvideo.save(function (err){
-    if(err) console.log(err);
+    if(err) return handleError(res, err);
     else {
       User.findOne({_id:newvideo.uploader}, function (err, user){
         if(err) {
-          console.log(err);
+          return handleError(res, err);
         }
         else {
-          console.log(user + "is the doc");
           user.videos.push({video:newvideo,role:['actor']});
           user.save(function (error) {
             if(error) {
-              console.log(error);
+              return handleError(res, err);
             }
             else {
               console.log('user saved??');
@@ -86,8 +83,8 @@ exports.create = function(req, res) {
         }
       })
     }
-    res.json(newvideo);
-  })
+    return res.json(200,newvideo);
+  });
 
 }
 
@@ -160,7 +157,6 @@ exports.rate = function(req, res, next) {
               console.log(err);
             }
             else {
-              console.log('updated doc is'+docs);
               res.json({vidRating:docs.vidRating,votes:docs.votes}); //to update votes and vidRatings on putting rating
             }
           });
@@ -169,7 +165,7 @@ exports.rate = function(req, res, next) {
               console.log(err);
             }
             else {
-              console.log(user);
+
             }
           });
         }
@@ -177,7 +173,22 @@ exports.rate = function(req, res, next) {
     }
   });
 };
-
+/*
+exports.deleteComment = function (req,res) {
+  var videoId = req.params.videoId;
+  Video.findById(videoId,function (err,video){
+    console.log(video.comments[0].comment);
+    video.comments.pull({_id:req.params.commentId});
+    video.save(function (err){
+      if(err) {return handleError(res, err);}
+      else {
+        console.log(video.comments);
+        return res.json(video);
+      }
+    })
+  })
+}
+*/
 function handleError(res, err) {
   return res.send(500, err);
 }

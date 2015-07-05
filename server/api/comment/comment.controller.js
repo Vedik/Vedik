@@ -23,27 +23,24 @@ exports.show = function(req, res) {
 // Creates a new comment in the DB.
 exports.create = function(req, res) {
   var user = req.user;
-  console.log(req.user);
   var newComment = new Comment({commentPutter:user.name,commentData:req.body.commentData,videoId:req.body.videoId,datePosted:Date.now(),dateEdited:Date.now()});
   newComment.save(function(err){
     if(err){
-      console.log(err);
+      return handleError(res, err);
     }
     else {
-      console.log('dddddddddd     '+newComment+'          ddddddddddddddddddd');
       Video.findById(newComment.videoId,function (err,doc){
         if(err){
-          console.log('error is '+err);
+          return handleError(res, err);
         }
         else {
           doc.comments.push({comment:newComment});
           doc.save(function (err){
             if(err){
-              console.log(err+' will be this');
+              return handleError(res, err);
             }
             else {
-              console.log('updated doc is '+doc)
-              res.json(newComment);
+              return res.json(newComment);
             }
           });
         }
@@ -72,9 +69,25 @@ exports.destroy = function(req, res) {
   Comment.findById(req.params.id, function (err, comment) {
     if(err) { return handleError(res, err); }
     if(!comment) { return res.send(404); }
+    var videoId = comment.videoId;
+    var commentId = comment._id;
     comment.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+      Video.findOne({_id:videoId},function (err,doc){
+        var i = 0;
+        for(i=0;i<doc.comments.length;i++){
+          if(doc.comments[i].comment.equals(commentId)){
+            doc.comments[i].remove(function (err){
+              if(err){handleError(res,err);}
+              doc.save(function (err){
+                if(err){handleError(res,err);}
+                console.log(doc.comments);
+                return res.json(doc);
+              });
+            });
+          }
+        }
+      });
     });
   });
 };
