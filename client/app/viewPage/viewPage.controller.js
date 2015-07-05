@@ -11,21 +11,28 @@ angular.module('myAppApp')
     var b = a.split('viewPage/');
     b = b[1].split('#');
     console.log(b[0]);
-    $http.get('/api/videos/'+b[0]).success(function (response){
-      console.log(response);
-      $scope.video = response;
-    });
+    var refresh = function (){
+      $http.get('/api/videos/'+b[0]).success(function (response){
+        console.log(response);
+        $scope.video = response;
+      });
+    }
+    refresh();
     $scope.vidCode = b[0];
-    console.log($scope.vidCode);
-
     $scope.user = User.get();
 
     $scope.submit = function (){
-    //validation
-      console.log($scope.commentData);
-      $http.post('/api/comments/',{commentData:$scope.commentData,videoId:$scope.video._id}).success(function (response){
-        console.log(response);
-      });
+      if($scope.commentData===undefined){
+
+      }
+      else {
+        console.log($scope.commentData);
+        $http.post('/api/comments/',{commentData:$scope.commentData,videoId:$scope.video._id}).success(function (response){
+          $scope.commentData='';
+          console.log(response);
+          refresh();
+        });
+      }
     }
   })
   .directive('myYoutube', function($sce) {

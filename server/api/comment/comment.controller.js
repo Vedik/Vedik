@@ -23,8 +23,8 @@ exports.show = function(req, res) {
 // Creates a new comment in the DB.
 exports.create = function(req, res) {
   var user = req.user;
-  console.log(req.body);
-  var newComment = new Comment({commentPutter:user,commentData:req.body.commentData,videoId:req.body.videoId});
+  console.log(req.user);
+  var newComment = new Comment({commentPutter:user.name,commentData:req.body.commentData,videoId:req.body.videoId,datePosted:Date.now(),dateEdited:Date.now()});
   newComment.save(function(err){
     if(err){
       console.log(err);

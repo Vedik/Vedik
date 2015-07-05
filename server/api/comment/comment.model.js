@@ -4,10 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
-  commentPutter:{type:Schema.Types.ObjectId, ref:"User"},
+  commentPutter:String,
   commentData:{type:String,required:true},
-  datePosted:{type:Date,default:Date.now()},
-  dateEdited:{type:Date,default:Date.now()},
+  datePosted:{type:Date},
+  dateEdited:{type:Date},
   videoId:{type:Schema.Types.ObjectId, ref:"Video"}
 });
 

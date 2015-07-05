@@ -16,7 +16,7 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   console.log(req.params.vidCode);
   Video.findOne({vidurl:'https://www.youtube.com/watch?v='+req.params.vidCode})
-  .populate('comments.comment')
+  .populate('comments.comment comments.comment.commentPutter')
   .exec(function (err, video){
     if(err) {
       console.log('this is error '+err);

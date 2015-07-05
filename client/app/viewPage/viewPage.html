@@ -57,11 +57,10 @@
                             </div>
                             <div>
                                 <div ng-repeat="comment in video.comments">
-                                    <p>{{comment.comment.commentPutter}}</p>
-                                    <p>{{comment.comment.commentData}}</p>
-                                    <p>{{comment.comment.datePosted}}</p>
-                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user._id" ng-click="delete(comment._id)">Delete</button>
-                                    <button class="btn btn-default" ng-show="comment.commentPutter===user._id" ng-click="edit(comment._id)">Edit</button>
+                                    <span>{{comment.comment.commentPutter}}:::{{comment.comment.commentData}} ::::
+                                    {{comment.comment.datePosted | date:'medium'}}
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment._id)">Delete</button>
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="edit(comment._id)">Edit</button></span>
                                 </div>
                             </div>
                         </div>
