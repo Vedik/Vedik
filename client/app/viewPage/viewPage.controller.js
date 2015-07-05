@@ -9,12 +9,13 @@ angular.module('myAppApp')
     //console.log($scope.vidCode);
     var a = $location.url();
     var b = a.split('viewPage/');
-    console.log(b[1]);
-    $http.get('/api/videos/'+b[1]).success(function (response){
+    b = b[1].split('#');
+    console.log(b[0]);
+    $http.get('/api/videos/'+b[0]).success(function (response){
       console.log(response);
       $scope.video = response;
     });
-    $scope.vidCode = b[1];
+    $scope.vidCode = b[0];
     console.log($scope.vidCode);
 
     $scope.user = User.get();
