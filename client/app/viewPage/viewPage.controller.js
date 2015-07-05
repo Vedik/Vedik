@@ -34,6 +34,18 @@ angular.module('myAppApp')
         });
       }
     }
+
+    $scope.delete = function (id){
+      $http.delete('/api/comments/:id').success(function (response){
+        console.log('the document deleted is '+response);
+      });
+    }
+    $scope.edit = function (id){
+      $http.put('/api/comments/:id',{commentData:$scope.commentData}).success(function (response){
+        console.log('the edited document is '+response);
+      });
+    }
+
   })
   .directive('myYoutube', function($sce) {
   return {

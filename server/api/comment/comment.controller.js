@@ -54,6 +54,7 @@ exports.create = function(req, res) {
 
 // Updates an existing comment in the DB.
 exports.update = function(req, res) {
+  console.log(req.body);
   if(req.body._id) { delete req.body._id; }
   Comment.findById(req.params.id, function (err, comment) {
     if (err) { return handleError(res, err); }
