@@ -11,7 +11,7 @@ body {
             background-color: 3b3a35;
             }
 #top_logo {
-            background-color:#0f6f84;
+            background-color:rgba(255,255,255,0);
             height:60px;
             width:100%;
             background-size:10px 100%;
@@ -35,6 +35,25 @@ body {
         #search {
             float:right;
             padding:14.5px 50px;
+            position: relative;
+            top:3px;
+            
+        }
+        #search input   {
+            background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 7px 5px;
+            background-repeat: no-repeat;
+            padding: 4px 10px 4px 25px;
+        }
+        #search_res {
+            background: rgba(255,255,255,0.8);
+        }
+        #search_res:hover   {
+            background: #F7EDFF;
+        }
+        #indiv_res  {
+            border:;
+            margin:2px 0px; 
+            padding:5px 10px;
         }
         #nav    {
             background-color:#ffffff;
@@ -96,4 +115,9 @@ a:hover.dark, a:active.dark   {
 li:hover#nav_li, li:active#nav_li{
     background-color:#ffde00;
     color:black;
+}
+.form-control   {
+    width:400px;
+    height:25px;
+    padding:4px 10px;
 }

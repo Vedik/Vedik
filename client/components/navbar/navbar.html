@@ -4,8 +4,10 @@
     </div>
     <div id="search">
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
-          <div ng-show="searchQuery" ng-repeat="obj in objs">
-            <a href="/profile/{{obj.name}}">{{obj.name}}</a>
+          <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
+            <div id="indiv_res">
+                <a href="/profile/{{obj.name}}" >{{obj.name}}</a>
+            </div>
           </div>
     </div>
     <div id="nav">
@@ -13,11 +15,12 @@
             <a href=""></a>
         </span>
         <span class="nav" id="dropdown">
-            <a href="/profile">{{getCurrentUser.name}}</a>
+            <a href="/profile">{{getCurrentUser.name}}guest</a>
             <ul class="drop-nav">
                                     <li id="nav_li"><a href="#" class="dark">Settings</a></li>
                                     <a href="/signout" class="dark"><li id="nav_li">Sign out</li></a>
                                 </ul>
                         </span>
                 </div>
-    </div><div id="hidden"></div>
+   <!-- </div><div id="hidden"></div>
+    removed bcz of transparency of navbar-->

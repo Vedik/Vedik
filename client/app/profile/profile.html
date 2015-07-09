@@ -6,15 +6,15 @@
             	<div id="stages">
 				</div>
 	            <div id="user_profile">
-		            <div id="name">
-		                <span><h2>{{user.name}}</h2></span>
+		            <div id="name" class="profile_style">
+		                <span>{{user.name}}Guest</span>
 		            </div>
 		        
-		        	<div id="infodiv">
+		        	<div id="infodiv" class="profile_style">
 		            	<span id="info">Director Editor Screenwriter</br></span>
-		            	<span id="info">9th Feb 1996</span>
-		            	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload">Upload</button>
+		            	<span id="info">9th Feb 1996</span>		            	
 		        	</div>
+		        	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload">Upload</button>
 	        	</div>
 	        	
 	        </div>
@@ -85,7 +85,7 @@
             <div id="user_hist_div2">
 	
 				<ul class="ul_thumb">
-					<li ng-repeat="video in user.videos">
+					<li ng-repeat="video in user.videos" id="li_thumb">
 						
 						<span id="user_art" class="thumbs">
 							
