@@ -1,4 +1,4 @@
-<div ng-controller="DashboardCtrl">
+<div ng-controller="DashboardCtrl" id="dashboard">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
 <!--	<header class="hero-unit" id="banner">
@@ -13,31 +13,36 @@
 	</div> -->
 <!--This space is to put the stages or something else-->
 	<div class="stagee">
-		<div id="unknown">
+		<div id="unknown" ng-click="val=!val" ng-show="val" >
 		<span style="text-align:center;font-size:20px;margin:0% auto;">Stages</span>
 		</div>
 	<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 		<div id="stage">
-				<div id="main_stage" class="col-mdd-12">
+				<div id="main_stage" class="col-md-9">
 			            <div id="dashbrd_cntnt">
 			            	
-							<span ng-repeat="video in user.videos" class="thumbs">
-								<div class="thumbs_out">
-									<div class="thumbs_in">
+							<div ng-repeat="video in user.videos" class="thumbs">
+								
+								<div id="thumbs_out_dshbrd" class="col-md-3">
+									
+									<div id="thumbs_in_dshbrd" >
 										<a href="#" ng-click="watchVid(video.video.vidurl)">
-											<img src="{{video.video.posterurl}}" height="auto" style="z-index:-1" id="image" width=250px class="img-thumbnail">
+											<img src="{{video.video.posterurl}}" height="auto" style="z-index:-1" id="image" width=100% />
 											<span class="thumb_trnsprnt">
 											</span>
 											<span  class="thumb_cntnt">
-												Infinte reasons to smile {{video.video.vidname}}
+												{{video.video.vidname}}<br>
+												<!--{{video.video.description}}-->
 											</span>	
 										</a>
 									</div>
+									</div>
 								</div>
-							</span>
+								
+							</div>
 						</div>
 
-					<a href="#" ng-click="loadMore()">More....</a>
+				<!--	<a href="#" ng-click="loadMore()">More....</a>-->
 				</div>
 
 	<!--This div for displaying the genres,, u click on one of these, the data in the above div changes accordingly and populates the videos to be displayed that day in that genre   -->

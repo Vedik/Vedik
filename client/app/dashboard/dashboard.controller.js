@@ -9,6 +9,7 @@ angular.module('myAppApp')
     $scope.genres = ['horror','funny']; 
     $scope.limit = 3;
     $scope.user = Auth.getCurrentUser();
+    $scope.val=true;
 
     $scope.loadMore = function () {
     	$scope.limit = $scope.limit+1;
@@ -18,3 +19,9 @@ angular.module('myAppApp')
     	$state.go('uploadPortal');
     };
   });
+
+  $(document).ready(function(){
+    $("#unknown").mouseenter(function(){
+        $(this).hide();
+    });
+});
