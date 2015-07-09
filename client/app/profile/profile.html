@@ -1,128 +1,154 @@
 <div ng-controller="ProfileCtrl">
 	<div ng-include="'components/navbar/navbar.html'"></div>
-<!--
-	user pic and info goes here-->
-            <div id="pro_pic"><img src="Pro_pic/DSC09016.JPG" style="width:100%;height:100%;"></img>
-            	<div id="stages">
-				</div>
-	            <div id="user_profile">
-		            <div id="name">
-		                <span><h2>{{user.name}}</h2></span>
-		            </div>
-		        
-		        	<div id="infodiv">
-		            	<span id="info">Director Editor Screenwriter</br></span>
-		            	<span id="info">9th Feb 1996</span>
-		            	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload">Upload</button>
+
+            <div id="profile">
+            <!--user pic and info goes here-->
+            	<div id="pro_pic">
+           			<img src="Pro_pic/Friendship.jpg" style="width:100%;height:100%;"></img>
+	            	<div id="stages_list">
+					</div>
+
+		            <div id="user_profile">
+			            <div>
+			                <span id="name">{{user.name}}</span>
+			            </div>
+			        
+			        	<div id="infodiv">
+			            	<span id="info">Director Editor Screenwriter</br></span>
+			            	<span id="info">9th Feb 1996</span>
+			            </div>
+
 		        	</div>
+		        	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
 	        	</div>
-	        	
-	        </div>
+	        
+
 	      <!--upload section-->
 	        
 
-	<div class="booking_body">
+				<div class="booking_body">
 
-		<div id="upload" class="modal fade" role="dialog">
-			<div class="modal-dialog">
+					<div id="upload" class="modal fade" role="dialog">
+						<div class="modal-dialog">
 
-			<!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-header">
-					 <button type="button" class="close" data-dismiss="modal">&times;</button>
-					 <h4 class="modal-title">Video Upload</h4>
-        		</div>
-	        		<div class="modal-body">
-					 <ul class="nav nav-tabs">
-					 	 <li class="active"><a data-toggle="tab" href="#upload_form">Home</a></li>
-					    <li><a href="#menu1" data-toggle="tab">Credits</a></li>
-					  </ul>
+						<!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+								 <button type="button" class="close" data-dismiss="modal">&times;</button>
+								 <h4 class="modal-title">Video Upload</h4>
+			        		</div>
+				        		<div class="modal-body">
+								 <ul class="nav nav-tabs">
+								 	 <li class="active"><a data-toggle="tab" href="#upload_form">Home</a></li>
+								    <li><a href="#credits" data-toggle="tab">Credits</a></li>
+								  </ul>
 
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="upload_form">
+								<div class="tab-content">
+									<div class="tab-pane fade in active" id="upload_form" ng-controller="UploadPortalCtrl">
 
-								<form name="form" ng-submit="submit(form)">
-									<div class="form-group">
-										<label>Name of Video</label>
-										<input type="text" class="form-control" ng-model="form.vidname">
+											<form name="form" ng-submit="submit(form)">
+												<div class="form-group">
+													<label>Name of Video</label>
+													<input type="text" class="form-control" ng-model="form.vidname">
+												</div>
+												<div class="form-group">
+													<label>Youtube link to video</label>
+													<input type="text" class="form-control" ng-model="form.vidurl">
+												</div>
+												<div class="form-group">
+													<label>Poster Url</label>
+													<input type="text" class="form-control" ng-model="form.posterurl">
+												</div>
+												<div class="form-group"> <!-- need to put select with multi option selection -->
+													<label>Genres</label>
+													<select ng-model="form.genres" multiple="true" class="form-control">
+														<option value="horror">horror</option>
+														<option value="comedy">comedy</option>
+													</select>   <!-- Make it a maximum of three using array size in controller -->
+												</div>
+												<div class="form-group"> <!-- Put text area -->
+													<label>Description</label>
+													<input type="text" class="form-control" ng-model="form.description">
+												</div>
+												<button type="submit" class="btn btn-primary">Submit</button>
+											</form>
+
+
+
+
+
+								
 									</div>
-									<div class="form-group">
-										<label>Youtube link to video</label>
-										<input type="text" class="form-control" ng-model="form.vidurl">
-									</div>
-									<div class="form-group">
-										<label>Poster Url</label>
-										<input type="text" class="form-control" ng-model="form.posterurl">
-									</div>
-									<div class="form-group"> <!-- need to put select with multi option selection -->
-										<label>Genres</label>
-										<select ng-model="form.genres" multiple="true" class="form-control">
-											<option value="horror">horror</option>
-											<option value="comedy">comedy</option>
-										</select>   <!-- Make it a maximum of three using array size in controller -->
-									</div>
-									<div class="form-group"> <!-- Put text area -->
-										<label>Description</label>
-										<input type="text" class="form-control" ng-model="form.description">
-									</div>
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</form>
-					
+									<div id="credits" class="tab-pane fade">
+								      <h3>Credits</h3>
+								      <p>Add crediting method here</p>
+								    </div>
+								</div>
+								<script>
+								$(document).ready(function(){
+								    $(".nav-tabs a").click(function(){
+								        $(this).tab('show');
+								    });
+								});
+								</script>
+								</div>
+							</div>
 						</div>
-						<div id="menu1" class="tab-pane fade">
-					      <h3>Credits</h3>
-					      <p>Add crediting method here</p>
-					    </div>
-					</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<!--upload section closes-->
-	<!--users content, videos etc-->
-	 <div id="user_hist_div1">
-            <div id="user_hist_div2">
-	
-				<ul class="ul_thumb">
-					<li ng-repeat="video in user.videos">
-						
-						<span id="user_art" class="thumbs">
-							
-							<div class="thumbs_out">
-								<div class="thumbs_in" id="grow pic">
-									<a href="#" ng-click="watchVid(video.video.vidurl)">
-										<span class="grow pic" id="user_art_pic">
-											<img src="{{video.video.posterurl}}" class="img-thumbnail">
-										</span>
-										<span class="thumb_trnsprnt">
-										</span>
-										<span id="user_art_info" class="thumb_cntnt">
-											<span>{{video.video.vidname}}</span>
-											<span>{{video.video.description}}</span>
-											<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-										</span>										
-									</a>
-								</div>
-							</div>	
+				<!--upload section closes-->
+				<!--users content, videos etc-->
+				 <div id="user_hist_div1">
+				 	<div id="empty">
+				 	</div>
+				 	<div id="b" class="thumbs_wrap">
+			            <div id="user_hist_div2" class="thumbs_wrap">
+				
+							<div class="thumbs_wrap">
+								<span ng-repeat="video in user.videos" class="thumbs_wrap">
 									
-										<span id="user_art" class="thumbs">
-							
-							<div class="thumbs_out">
-								<div class="thumbs_in">
-									<div id="user_art_info2" class="img-thumbnail">
-										    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Book
-										    <span class="caret"></span></button>
-										    </div>
-										    
-										</div>
-										</div>
-										</span>
-									
-						</span>
-					</li>
-				</ul>
+									<span id="user_art" class="thumbs_wrap">
+										
+										<div class="thumbs_out" >
+											<div class="thumbs_in" id="grow pic">
+												
+												<a href="#" ng-click="watchVid(video.video.vidurl)" >
+													<span class="grow pic" id="user_art_pic">
+														<img src="{{video.video.posterurl}}"  id="user_poster" >
+													</span>
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>										
+												</a>
+												
+											</div>
+										</div>	
+												
+													<span id="user_art" class="thumbs">
+										
+										<div class="thumbs_out">
+											<div class="thumbs_in">
+												<div id="user_art_info2" class="img-thumbnail">
+													    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Book
+													    <span class="caret"></span></button>
+													    </div>
+													    
+													</div>
+													</div>
+													</span>
+												
+									</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--user content ends here-->
 			</div>
-	</div>
-	<!--user content ends here-->
 </div>

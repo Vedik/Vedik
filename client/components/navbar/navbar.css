@@ -11,8 +11,8 @@ body {
             background-color: 3b3a35;
             }
 #top_logo {
-            background-color:#0f6f84;
-            height:60px;
+            background-color:rgba(0,0,0,0.3);
+            height:55px;
             width:100%;
             background-size:10px 100%;
             box-sizing:border-box;
@@ -22,7 +22,8 @@ body {
             z-index: 1;
         }
         #hidden {
-            height:60px;
+            height:55px;
+            background-color:rgba(255,255,255,0);
         }
         #logo {
             font-size:30px;
@@ -34,15 +35,36 @@ body {
         }
         #search {
             float:right;
-            padding:14.5px 50px;
+            padding:15px 50px;
+            position: relative;
+            
+            
+        }
+        #search input   {
+            background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 7px 5px;
+            background-repeat: no-repeat;
+            padding: 4px 10px 4px 25px;
+        }
+        #search_res {
+            background: rgba(255,255,255,0.8);
+        }
+        #indiv_res:hover   {
+            background: #F7EDFF;
+        }
+        #indiv_res  {
+            border:;
+            margin:2px 0px; 
+            padding:5px 10px;
         }
         #nav    {
-            background-color:#ffffff;
+            background-color:#;
             font-size:15px;
             float:left;
-            padding:0px 30px;
-            top:4px;
+            margin: 0px 45px 0px 0px;
+            padding:15px 5px 15px 50px;
+            border-radius: 0px;
             position: relative;
+            height: 55px;
         }
         ul.drop_nav {
             list-style-type:none;
@@ -59,9 +81,11 @@ body {
         }
         a:link    {
             text-decoration:none;
+            color: white;
         }
         a:hover   {
             padding:15.5px 0px;
+            color: #2a6496;
         }
         a:visited#_logo    {
                 color:white;
@@ -76,6 +100,9 @@ body {
             margin:0px auto;
             width:1000px;
 
+        }
+        .dropdown   {
+            margin:auto;
         }
 .drop-nav {
   position: absolute;
@@ -96,4 +123,22 @@ a:hover.dark, a:active.dark   {
 li:hover#nav_li, li:active#nav_li{
     background-color:#ffde00;
     color:black;
+}
+.form-control   {
+    width:400px;
+    height:25px;
+    padding:4px 10px;
+}
+#caretid    {
+    margin:20px 0px;
+    padding:0px 10px;
+    border:1px solid #266277;
+    border-radius: 6px;
+    background-color: rgba(255,255,255,0.5);
+
+}
+.dropdown-menu  {
+    padding:0px;
+    background: rgba(255,255,255,0.8);
+
 }

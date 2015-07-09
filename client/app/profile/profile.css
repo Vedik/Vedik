@@ -1,3 +1,4 @@
+            
             #banner {
                     margin:0px;
                     text-align:left;
@@ -6,31 +7,97 @@
                 margin:10px auto;
                 padding:10px 10px;
                 position: absolute;
-                top: 60px;
+                top: 20px;
                 left:0px;
+                width: 100%;
             }
-            #pro_pic    {
+            #profile    {
                 width:100%;
                 height: 100%;
                 top:-60px;
                 float:left;
-               position: relative;
+               position: static;
 
             }
-            #info   {
-                color:black;
-                padding:10px;
-                font-weight:bold;
-            }
-            #stages {
-                background-color: white;
-                border-bottom: 5px double #0f6f84;
-                height:50px;
-                position: absolute;
+            #pro_pic    {
+                position: fixed;
                 width: 100%;
             }
+            #infodiv    {
+                
+            }
+            #info   {
+                background-color: rgba(0,0,0,0.3);
+                color:black;
+                margin:10px 0px 10px 0px;
+                padding: 1px;
+                font-weight:bold;
+            }
+            #name   {
+                font-size: 36px;
+                background-color: rgba(0,0,0,0.3);
+                padding: 0px 10px;
+                border-radius: 0px;
+            }
+            #upload_btn     {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: rgba(38,88,132,1);
+                font-size: 14px;
+            }
+            .thumbs_out {
+                margin:10px 0px;
+                float: left;
+                border:1px solid #DDD;
+                background-color: white;
+                border-radius: 4px;
+                padding:5px;
+                position: relative;
+               
+            } 
+            .thumbs_wrap {
+                margin:10px 0px;
+                float: left;
+                border-radius: 4px;
+                padding:5px;
+                position: relative;
+               
+            }   
+            .thumbs_in  {
+                overflow: hidden;
+                position: relative;
+                text-shadow: 1px 1px 2px black, 0 0 25px blue, 1px 1px 5px darkblue;
+                float: left;
+                width: 400px;
+                height:200px;
+
+                
+            }
+            #stages_list {
+                background-color: rgba(255,255,255,0.3);
+                border-bottom: 5px double #0f6f84;
+                height:50px;
+              /*  position: absolute;*/
+                width: 100%;
+            }
+            #empty  {
+                width: 100%;
+                height:700px;
+            }
+            #b  {
+                background-image: url("back/back.jpg");
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
             #user_hist_div1  {
-                margin:70px auto;
+                margin:10px auto;
+                position: static;
+                 
+            }
+            li  {
+                position: relative;
             }
 
             #user_hist_div2   {
@@ -38,10 +105,10 @@
                 margin: 0% auto;                
                 height:auto;
                 box-sizing:content-box;
-                box-shadow:0px 5px 10px BLACK;
-                overflow:visible;
-                float:;
-                width:1000px;
+               
+                float:none;
+                width:840px;
+
             }
             #user_hist_div2 {
                 text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
@@ -49,12 +116,13 @@
             }
             #user_art   {
                 padding:10px;
+                width: 844px;
             }
             
             /*GROW*/
                 .grow img {
-                  height: auto;
-                  width: 500px;
+                  height:auto;
+                  width: 400px;
                  
                   -webkit-transition: all 1s ease;
                      -moz-transition: all 1s ease;
@@ -65,11 +133,36 @@
                 }
                  
                 #grow img:hover {
-                  width: 510px;
-                  height: auto;
+                    top:-10; 
+                  width: 410px;
+                  height: 210px;
+            }
+            #user_poster    {
+                position: ;
+                clip:rect(0px,500px,286px,0px);
             }
             #user_art_info  {
                 float: left;
+                display:block;
+                color:white;
+                width:100%;
+                height:100%;            
+                position: absolute;
+                top:0px;
+                left:0px;
+                word-wrap:break-word;
+                overflow: hidden;
+                padding: 80px 0px;
+            }
+            #a  {
+                 text-align: center;
+                 padding: auto;
+                 font-size: 18px;
+            }
+            #vid_data   {
+
+                margin:  auto;
+                position: relative;
             }
             .dropdown   {
                 float: left;
@@ -79,10 +172,14 @@
             }
             #user_art_info2 {
                 width: 500px;
-                height:218px;
+                height:286px;
                 background-color: white;
                 padding:10px;
             }
             .ul_thumb {
                 padding: 0px;
+                position: relative;
+            }
+            li  {
+                height: auto;
             }

@@ -1,3 +1,7 @@
+            body   {
+              background-image: url("back/back.jpg");
+
+            }
             #video  {
                 margin:0px auto;
                 text-align:center;
@@ -5,17 +9,20 @@
                 width:100%;
             }
             .content    {
-                 padding:10px 0px;
+                 padding:10px 0px 0px 0px;
                  margin:10px auto;
             }
             #title  {
-                margin:0px auto;
+                margin:0px auto;back
             }
 
             #video_name {
                 font-size:30px;
                 width:840;
                 position:relative;
+            }
+            #vid_stuff  {
+              background-color:rgba(255,255,255,0.1);
             }
             .comments    {
                 margin:0px 80px;
@@ -87,5 +94,6 @@
             }
             }
             #view_page_tabs {
-              padding:0px 20px; 
+              padding:0px 20px;
+              border-bottom: 1px solid darkgrey; 
             }
