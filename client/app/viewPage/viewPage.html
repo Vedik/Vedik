@@ -1,7 +1,7 @@
-<div ng-controller="ViewPageCtrl">
+<div ng-controller="ViewPageCtrl" id="viewpage">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
-	<div class="stage" id="video">
+	<div  id="video">
         <div class="wrapper">
          <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
             <div my-youtube code='vidCode'>
@@ -13,7 +13,7 @@
         <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
     </div>
       <!-- info, comments, reviews etc of video-->
-        <div class="stage">
+        <div class="stage" id="vid_stuff">
             <div class="content">
             <!--Crew and cast-->
                 <div id="credits" >
