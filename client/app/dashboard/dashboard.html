@@ -1,5 +1,10 @@
 <div ng-controller="DashboardCtrl" id="dashboard">
+<div class="stagee">
 	<div ng-include="'components/navbar/navbar.html'"></div>
+	<!--stage at the bottom-->
+	<div class="stage_btm_1"></div>
+	<div class="stage_btm_2"></div>
+	<div class="stage_btm_frnt"></div>
 
 <!--	<header class="hero-unit" id="banner">
  		<div class="container">
@@ -12,22 +17,23 @@
 		<button class="btn btn-primary" ng-click="toUploadPortal()">Upload Here</button>
 	</div> -->
 <!--This space is to put the stages or something else-->
-	<div class="stagee">
+	
 		<div id="unknown" ng-click="val=!val" ng-show="val" >
 		<span style="text-align:center;font-size:20px;margin:0% auto;">Stages</span>
 		</div>
 	<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 		<div id="stage">
 				<div id="main_stage" class="col-md-9">
-			            <div id="dashbrd_cntnt">
+			             <div  class="thumbs_wrap" id="dashbrd_cntnt">
+			            	 <div class="container-inner">
 			            	
 							<div ng-repeat="video in user.videos" class="thumbs">
 								
-								<div id="thumbs_out_dshbrd" class="col-md-3">
+								<div class="thumbs_wrap" id="col-mxxd-3">
 									
 									<div id="thumbs_in_dshbrd" >
 										<a href="#" ng-click="watchVid(video.video.vidurl)">
-											<img src="{{video.video.posterurl}}" height="auto" style="z-index:-1" id="image" width=100% />
+											<img src="{{video.video.posterurl}}" height="100%" style="z-index:-1" id="image" width="auto" class="thumbnail"/>
 											<span class="thumb_trnsprnt">
 											</span>
 											<span  class="thumb_cntnt">
@@ -36,8 +42,8 @@
 											</span>	
 										</a>
 									</div>
-									</div>
 								</div>
+							</div>
 								
 							</div>
 						</div>

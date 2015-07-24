@@ -9,6 +9,7 @@ body {
             margin:0px;
             font-family:"verdane";
             background-color: 3b3a35;
+            font-size: 12px;
             }
 #top_logo {
             background-color:rgba(0,0,0,0.3);
@@ -93,10 +94,8 @@ body {
         a:visited#nav   {
             color:black;
         }
-        .stage {
+        #stage_cntnt {
             box-sizing:border-box;
-            box-shadow:0px 5px 10px BLACK;
-            height:auto;
             margin:0px auto;
             width:1000px;
 
