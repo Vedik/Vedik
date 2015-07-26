@@ -1,0 +1,58 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+	
+	<!--Facebook likes JS code-->
+			<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+			<script>
+				$(".scroll_anim").click(function(event){     
+				    
+				    $('html,body').animate({scrollLeft:$(this.hash).offset().left}, 500);
+				});
+			</script>
+
+
+
+	
+	<div class="container-inner">
+		<div id="event_page_info">
+
+	<!--Background Image-->
+
+			<div style="position:absolute;z-index:-1;top:0px;width:100%;height:100%;"><img src="EventImg/saarang.jpg" width="100%" height="100%	">
+			</div>
+
+
+			<div>
+
+				<div class="centric" id="event_page_centric">
+					<div id="event_name">Saarang</div> 
+					<a href="#event_page_cntnt" id="arrow_right" class="scroll_anim">>></a>
+					<button>Register</button>
+					<button>Website</button>
+					<div class="fb-like" data-href="https://www.facebook.com/saavasteam?notif_t=page_new_likes" data-width="0px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+				</div>
+				<div id="event_nav_bar" class="centric">
+					<span>Events</span>
+					<span>About</span>
+					<span>Team</span>
+					<span>Sponsers</span>					
+				</div>
+			</div>
+			
+
+		</div>
+
+		<div id="event_page_cntnt" >
+			<div id="hidden"></div>
+			<a href="#event_page_info" id="arrow_left" class="scroll_anim"><<</a>
+		</div>
+	</div>

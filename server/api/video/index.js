@@ -10,6 +10,7 @@ router.get('/:vidCode', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
+//router.delete('/comments/:videoId/:commentId', controller.deleteComment);
 router.delete('/:id', controller.destroy);
 router.post('/ratings/:vidCode',auth.isAuthenticated(),controller.rate);
 module.exports = router;

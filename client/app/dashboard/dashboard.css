@@ -1,19 +1,86 @@
+            *, *:before, *:after{ 
+                box-sizing: border-box; 
+                -moz-box-sizing: border-box; 
+                -webkit-box-sizing: border-box; 
+            } 
             #dashboard  {
-                background-image: url("Back-img/1366317.jpg");
+      
+                
             }
- #unknown    {
+            .stage_btm_1 { 
+                position: fixed;
+                bottom: 50px; 
+                height: 0px; 
+                width: 100%; 
+                border-bottom: 150px solid;
+                border-bottom-color: rgba(88,80,74,0.9); 
+                border-left: 150px solid transparent; 
+                border-right: 150px solid transparent; 
+            }
+      /*      .stage_btm_2 { 
+                position: fixed;
+                bottom: 50px; 
+                height: 0px; 
+                width: 100%; 
+                border-bottom: 50px solid;
+                border-bottom-color: rgba(0,0,0,1); 
+                border-left: 50px solid transparent; 
+                border-right: 50px solid transparent; 
+                z-index: 1;
+            }*/ 
+            .stage_btm_frnt { 
+                position: fixed;
+                bottom: 0px; 
+                height: 0px; 
+                width: 100%;                 
+                border-bottom: 50px solid;
+                border-color:  #cdc0b3;
+            
+               /* border-left: 40px solid transparent; 
+                border-right: 40px solid transparent; */
+                z-index: 1;
+            }
+            #unknown    {
             background-color:rgba(0,0,0,0.3);
             height:55px;
+            text-align:center;
+            vertical-align: middle;
+            font-size: 25px;
+            color: black    ;
+            padding: 10px;
+
+        }
+        .stagee {
+            position: fixed;
+            height:700px;
+            width: 100%;
+            background: transparent;
+           background-image: url("Back-img/1366317.jpg");
+        }
+        #clubs_list {
+            padding: 10px;
+        }
+
+        #groups_list    {
+            padding: 0px;
+        }
+        #clubs_list_wrap    {
+            background-color: ;
+            float: left;
+            height: 600px;
+            padding: 10px;
+            width: 100%;
+            color: white;
         }
         #main_stage  {
-            background-color:;
+            background-color: rgba(0,0,0,0.2);
             height:auto;
             box-sizing:border-box;
-            margin:0% auto;
-            float:none;
-            padding:40px 10px;
+            margin:10px auto;
+            padding:10px 10px;
             overflow:visible;
             word-wrap: break-word;
+            float: left;
         }
         #genres{
             background-color:#333;
@@ -25,9 +92,10 @@
         }
         .thumbs {
                 box-sizing:border-box;
-                
+            /*    margin:10px 0px;
+                float: left;
+                padding:5px;   */             
                 position:relative;
-                padding:;
                           
                 
         }
@@ -58,22 +126,30 @@
             overflow: hidden;
         }
 
-        .thumbs_in:hover .thumb_cntnt , .thumbs_in:hover .thumb_trnsprnt {
+        .thumbs_in:hover #user_art_info , .thumbs_in:hover .thumb_trnsprnt {
             display:block;
         }
         #thumbs_in_dshbrd:hover .thumb_cntnt , #thumbs_in_dshbrd:hover .thumb_trnsprnt {
             display:block;
         }
         #dashbrd_cntnt  {
-            display: inline;
-            float: none;
             text-align: center;
-            margin: 0px auto;
-            word-wrap:normal;
-            width:1000px;
+            height: 600px;
+            margin:10px auto;
+            float: left;
+            padding:5px; 
+            width: 100%;
+            overflow-y:scroll;
+
+
 
 
         }  
+
+        .container-inner {
+            height:1000px;
+             
+        }
 
         
         #thumbs_out_dshbrd {
@@ -84,15 +160,15 @@
         }  
         
         #thumbs_in_dshbrd  {
-            overflow: hidden;
+
             position: relative;
             text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-            
+            overflow: hidden;
             width: 100%;
             height:100%;
-            border:5px solid white;
+            /*border:5px solid white;
             border-radius: 4px;
-            margin:0px auto;
+            margin:0px 0px;*/
 
             
         }
@@ -100,10 +176,11 @@
 
 
         }
-        .stagee {
-            
-            height:700px;
-        }
-        #a  {
+                #a  {
             padding:10px;
-        }}
+        }
+        #col-mxxd-3 {
+            height: 120px;
+        }
+
+  

@@ -7,14 +7,14 @@
                 margin:10px auto;
                 padding:10px 10px;
                 position: absolute;
-                top: 20px;
+                top: 50px;
                 left:0px;
                 width: 100%;
             }
             #profile    {
                 width:100%;
                 height: 100%;
-                top:-60px;
+                top:0px;
                 float:left;
                position: static;
 
@@ -22,26 +22,32 @@
             #pro_pic    {
                 position: fixed;
                 width: 100%;
+                top:0px;
             }
             #infodiv    {
+                position: static;
+                
                 
             }
             #info   {
                 background-color: rgba(0,0,0,0.3);
-                color:black;
-                margin:10px 0px 10px 0px;
-                padding: 1px;
+                color:white;
+                margin:30px 0px 10px 0px;
+                padding: 10px;
                 font-weight:bold;
+                z-index: 2;
             }
             #name   {
                 font-size: 36px;
                 background-color: rgba(0,0,0,0.3);
                 padding: 0px 10px;
-                border-radius: 0px;
+                border-radius: 4px;
+                color: white;
+
             }
             #upload_btn     {
                 position: absolute;
-                top: 20px;
+                top: 70px;
                 right: 20px;
                 background-color: rgba(38,88,132,1);
                 font-size: 14px;
@@ -59,7 +65,6 @@
             .thumbs_wrap {
                 margin:10px 0px;
                 float: left;
-                border-radius: 4px;
                 padding:5px;
                 position: relative;
                
@@ -85,7 +90,7 @@
                 width: 100%;
                 height:700px;
             }
-            #b  {
+            #art_wrap {
                 background-image: url("back/back.jpg");
                 width: 100%;
                 position: relative;
@@ -115,8 +120,9 @@
                 color:white;
             }
             #user_art   {
-                padding:10px;
+                padding:0px 10px;
                 width: 844px;
+                margin: 0px;
             }
             
             /*GROW*/
@@ -143,7 +149,7 @@
             }
             #user_art_info  {
                 float: left;
-                display:block;
+                display:none;
                 color:white;
                 width:100%;
                 height:100%;            
@@ -172,7 +178,7 @@
             }
             #user_art_info2 {
                 width: 500px;
-                height:286px;
+                height:200px;
                 background-color: white;
                 padding:10px;
             }

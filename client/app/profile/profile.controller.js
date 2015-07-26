@@ -3,10 +3,12 @@
 angular.module('myAppApp')
   .controller('ProfileCtrl', function ($scope,$location, Auth, $state,User,$http) {
     $scope.message = 'Hello';
+    $scope.isLoggedIn = Auth.isLoggedIn;
     var name = $location.url().split('/profile/')[1];
     console.log(name);
     $http.get('/api/users/'+name).success(function (response){
       $scope.user = response;
+
       console.log(response);
     });
    console.log($scope.user);

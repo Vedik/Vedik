@@ -4,7 +4,7 @@
             <div id="profile">
             <!--user pic and info goes here-->
             	<div id="pro_pic">
-           			<img src="Pro_pic/Friendship.jpg" style="width:100%;height:100%;"></img>
+           			<img src="Pro_pic/tamanna.jpg" style="width:100%;height:100%;"></img>
 	            	<div id="stages_list">
 					</div>
 
@@ -19,7 +19,7 @@
 			            </div>
 
 		        	</div>
-		        	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
+		        	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn" ng-show="isLoggedIn"><span class="glyphicon glyphicon-open"></span> Upload</button>
 	        	</div>
 	        
 
@@ -84,13 +84,7 @@
 								      <p>Add crediting method here</p>
 								    </div>
 								</div>
-								<script>
-								$(document).ready(function(){
-								    $(".nav-tabs a").click(function(){
-								        $(this).tab('show');
-								    });
-								});
-								</script>
+							
 								</div>
 							</div>
 						</div>
@@ -101,7 +95,7 @@
 				 <div id="user_hist_div1">
 				 	<div id="empty">
 				 	</div>
-				 	<div id="b" class="thumbs_wrap">
+				 	<div id="art_wrap" class="thumbs_wrap">
 			            <div id="user_hist_div2" class="thumbs_wrap">
 				
 							<div class="thumbs_wrap">
@@ -130,7 +124,7 @@
 											</div>
 										</div>	
 												
-													<span id="user_art" class="thumbs">
+													<span id="user_art" >
 										
 										<div class="thumbs_out">
 											<div class="thumbs_in">
