@@ -15,14 +15,17 @@
     <div id="nav">
        
         <div class="dropdown">
-            <a href="/profile" id="_logo">{{getCurrentUser.name}}Guest</a>            
+            <a href="/profile/{{getCurrentUser().name}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
+            <a href="/login" id="_logo" ng-hide="isLoggedIn()">Guest</a>       
             <span class="dropdown-toggle" id="menu1">
             <span id="caretid">
                 <span class="caret" ></span></span>
             </span>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                     <div id="indiv_res"><a role="menuitem" tabindex="-1" href="#" ><li role="presentation">Settings</li></a></div>
-                                     <div id="indiv_res"><a role="menuitem" tabindex="-1" href="#" ><li role="presentation">Sign out</li></a></div>
+                                     <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#"  ><li role="presentation">Settings</li></a></div>
+                                     <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#" ng-click="logout()" ><li role="presentation">Sign out</li></a></div>
+                                     <div id="indiv_res"  ng-hide="isLoggedIn()"><a role="menuitem" tabindex="-1" href="/login" ><li role="presentation">Login</li></a></div>
+                                     <div id="indiv_res" ng-hide="isLoggedIn()" ><a role="menuitem" tabindex="-1" href="/signup" ><li role="presentation">Signup</li></a></div>
                                 </ul>
          </div>
                 </div>

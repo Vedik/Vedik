@@ -13,7 +13,7 @@ angular.module('myAppApp')
     console.log($scope.user);
     $scope.isLoggedIn = Auth.isLoggedIn;
     console.log($scope.isLoggedIn()+" is isLoggedIn");
-
+    $scope.loggedInUser = User.get();
     $scope.tags=[];
 
 

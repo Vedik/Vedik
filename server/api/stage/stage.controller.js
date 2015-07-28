@@ -13,18 +13,39 @@ exports.index = function(req, res) {
 
 // Get a single stage
 exports.show = function(req, res) {
-  Stage.findById(req.params.id, function (err, stage) {
+  /*Stage.findById(req.params.id, function (err, stage) {
     if(err) { return handleError(res, err); }
     if(!stage) { return res.send(404); }
     return res.json(stage);
-  });
+  });*/
 };
 
 // Creates a new stage in the DB.
 exports.create = function(req, res) {
-  Stage.create(req.body, function(err, stage) {
+  /*Stage.create(req.body, function(err, stage) {
     if(err) { return handleError(res, err); }
     return res.json(201, stage);
+  });*/
+  console.log(req.body);
+  var newStage = new Stage({
+    name:req.body.name,
+    posterUrl:req.body.posterUrl,
+    description:req.body.description,
+    createdOn:Date.now(),
+    subscribed_users:[],
+    groups:[],
+    admins:[],
+    trendingPosts:[],
+    bookedPosts:[]
+  });
+  newStage.save(function (err){
+    if(err){
+      return handleError(res,err);
+    }
+    else {
+      console.log('The stage is saved as \n'+newStage);
+      res.json(newStage);
+    }
   });
 };
 

@@ -5,6 +5,8 @@ var mongoose = require('mongoose'),
 
 var StageSchema = new Schema({
   name:{type:String,unique:true},
+  posterUrl:String,
+  description:String,
   createdOn:{type:Date,default:Date.now()},
   subscribed_users:[{user:{type:Schema.Types.ObjectId, ref:'User'}}],
   groups:[{groupId:{type:Schema.Types.ObjectId, ref:'Group'}}],
