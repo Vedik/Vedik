@@ -3,6 +3,7 @@
 angular.module('myAppApp')
   .controller('ViewPageCtrl', function ($scope,$location,User,$http) {
     $scope.message = 'Hello';
+    $scope.toggleVal = false;
     //var vidCode = $stateParams.vidCode;
     //console.log(vidCode);
     //$scope.vidCode =vidCode;
@@ -11,6 +12,16 @@ angular.module('myAppApp')
     var b = a.split('viewPage/');
     b = b[1].split('#');
     console.log(b[0]);
+
+    var refresh = function (){
+      $http.get('/api/videos/'+b[0]).success(function (response){
+        console.log(response);
+        $scope.video = response;
+      });
+    }
+    refresh();
+    $scope.vidCode = b[0];
+
     $http.get('/api/videos/'+b[0]).success(function (response){
       console.log(response);
       $scope.video = response;
@@ -21,12 +32,33 @@ angular.module('myAppApp')
     $scope.user = User.get();
 
     $scope.submit = function (){
-    //validation
-      console.log($scope.commentData);
-      $http.post('/api/comments/',{commentData:$scope.commentData,videoId:$scope.video._id}).success(function (response){
+      if($scope.commentData===undefined){
+
+      }
+      else {
+        console.log($scope.commentData);
+        $http.post('/api/comments/',{commentData:$scope.commentData,videoId:$scope.video._id}).success(function (response){
+          $scope.commentData='';
+          console.log(response);
+          refresh();
+        });
+      }
+    }
+
+    $scope.delete = function (id){
+      $http.delete('/api/comments/'+id).success(function (response){
         console.log(response);
+        refresh();
       });
     }
+    $scope.edit = function (id,editData){
+      console.log(editData);
+      $http.put('/api/comments/'+id,{commentData:editData}).success(function (response){
+        console.log('the edited document is '+response);
+        refresh();
+      });
+    }
+
   })
   .directive('myYoutube', function($sce) {
   return {

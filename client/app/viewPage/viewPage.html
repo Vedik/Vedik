@@ -1,9 +1,7 @@
 <div ng-controller="ViewPageCtrl" id="viewpage">
-	<div ng-include="'components/navbar/navbar.html'"></div>
-    <div id="hidden"></div>
+    <div ng-include="'components/navbar/navbar.html'"></div>
 
-
-	<div  id="video">
+    <div  id="video">
         <div class="wrapper">
          <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
             <div my-youtube code='vidCode'>
@@ -40,9 +38,8 @@
                         <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
                  </ul>
 
-                 <!--tab contentclass="tab-pane fade in active"-->
+                 <!--tab content-->
                 <div class="tab-content">
-
                     <div id="best_part" class="tab-pane fade">
                         <h3>Best part<hr></hr></h3>
                     </div>
@@ -60,11 +57,14 @@
                             </div>
                             <div>
                                 <div ng-repeat="comment in video.comments">
-                                    <p>{{comment.comment.commentPutter}}</p>
-                                    <p>{{comment.comment.commentData}}</p>
-                                    <p>{{comment.comment.datePosted}}</p>
-                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user._id" ng-click="delete(comment._id)">Delete</button>
-                                    <button class="btn btn-default" ng-show="comment.commentPutter===user._id" ng-click="edit(comment._id)">Edit</button>
+                                    <span>{{comment.comment.commentPutter}}:::{{comment.comment.commentData}} ::::
+                                    {{comment.comment.datePosted | date:'medium'}}
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)">Delete</button>
+                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal">Edit</button></span>
+                                    <div class="form-group" ng-show="toggleVal">
+                                        <textarea class="form-control" rows="3" ng-model="editData"></textarea>
+                                        <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,6 +76,6 @@
                 </div>
             </div>
         </div>
-		
-	
+        
+    
 </div>
