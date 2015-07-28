@@ -11,7 +11,22 @@ angular.module('myAppApp')
 
       console.log(response);
     });
-   console.log($scope.user);
+    console.log($scope.user);
+    $scope.isLoggedIn = Auth.isLoggedIn;
+    console.log($scope.isLoggedIn()+" is isLoggedIn");
+    $scope.loggedInUser = User.get();
+    $scope.tags=[];
+
+
+
+    $scope.getSuggestions = function (query){
+      return $http.get('/api/users/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
+    }
+
+
    $scope.watchVid = function (vidurl) {
    	var a = [];
    	a = vidurl.split('watch?v=');
