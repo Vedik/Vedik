@@ -1,24 +1,23 @@
-<div ng-controller="DashboardCtrl" id="dashboard">
-<div class="stagee">
-
-	<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-controller="DashboardCtrl" id="for_blur">
+<div ng-include="'components/navbar/navbar.html'"></div>
 	<div id="hidden"></div>
 
+<div class="thumbs_wrap" id="dashboard">
+
+	
 	<!--stage at the bottom-->
 
 <!--	<div class="stage_btm_1"></div>
 	<div class="stage_btm_2"></div>
 	<div class="stage_btm_frnt"></div>-->
 
-	<!--This space is to put the stages or something else-->
+	<!--This space is to put the stages or something else
 	
 		<div id="unknown" ng-click="val=!val" ng-show="val" >
 		<span class="centric">
-			<button style="margin:0px 20px;padding:0px 10px">P-P</button>
-			<button style="margin:0px 20px;padding:0px 10px">IITM</button>
-			<button style="margin:0px 20px;padding:0px 10px">My</button>
+			IITM
 		</span>
-		</div>
+		</div>-->
 		
 	<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 		<div id="stage">
@@ -26,32 +25,68 @@
 					<div id="clubs_list_wrap">Clubs</div>
 				</div>
 				<div id="main_stage" class="col-md-8">
-			             <div  class="thumbs_wrap" id="dashbrd_cntnt">
-			            	 <div class="container-inner">
-			            	
-							<div ng-repeat="video in user.videos" class="thumbs">
 								
-								<div class="thumbs_wrap" id="col-mxxd-3">
+			             													
 									
-									<div id="thumbs_in_dshbrd" >
-										<a href="#" ng-click="watchVid(video.video.vidurl)">
-											<img src="{{video.video.posterurl}}" height="100%" style="z-index:-1" id="image" width="auto" class="thumbnail"/>
-											<span class="thumb_trnsprnt">
-											</span>
-											<span  class="thumb_cntnt">
-												{{video.video.vidname}}<br>
-												<!--{{video.video.description}}-->
-											</span>	
-										</a>
+										<div class="" ="img_div thumbs_wrap"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(5px	)'">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+										<span id="img_name">Spinning Ball</span>
+										<span><img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png" id="play">	</span>
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
 									</div>
 								</div>
-							</div>
+											
+									
 								
-							
-						</div>
+									<br>	
+								<div id="img_div thumbs_wrap ">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+										<img src="Pro_pic/tamanna.jpg" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="20px" width="410px" style="opacity:0.5;"></span>
+										<span id="img_name">Gorgeous Tamanna</span>
 
-				<!--	<a href="#" ng-click="loadMore()">More....</a>-->
-				</div>
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
+									</div>
+								</div>
+								<div class="" ="img_div thumbs_wrap"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(40px)'">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+										<span id="img_name">Spinning Ball		</span>
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
+									</div>
+								</div>					
 				<div class="col-md-2" id="groups_list">
 					<div id="clubs_list_wrap">Groups showup if you logged in</div>
 				</div>
@@ -72,4 +107,28 @@
 	testing -->
 
 	<!--To be put:: The recent videos uploaded and trending videos divs-->
+</div>
+</div>
+
+
+<!-- Modal -->
+<div id="img_view" class="modal fade" role="dialog">
+<div class="centric ">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+   
+     
+        
+       
+   
+      <div class="modal-body">
+      	<button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+        <img src="http://wowslider.com/sliders/demo-19/data1/images/sunset.jpg"	>
+      </div>
+      
+    
+
+  </div>
+</div>
 </div>

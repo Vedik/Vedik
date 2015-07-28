@@ -53,4 +53,31 @@
 	position: relative;
 	height: 100%;
 }
+#req_user_info	{
+	list-style-type: none;
+}
+full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+  }
+  #que	{
+  	text-align: left;
+  }
+  #create_event	th{
+  		text-align: right;
+  		width: 40%;
+  		padding: 5px 10px;
+  }
 
+  #create_event	td	{
+  	text-align: left;
+  	padding: 5px 10px;
+  }
+  .datepckr	{
+  	padding: 0px;
+  }

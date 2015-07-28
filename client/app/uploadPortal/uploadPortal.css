@@ -1,23 +1,86 @@
+	.vid_div	{
+		padding: 10px;
+		background-color: rgba(255,255,255,0.2);
+		margin: 0px 0px;
+		height: 200px;	
+		
+	}
+		
+	#vid_details	{
+		color: black;
+		list-style-type: none;
+		padding: 0px 10px;
+		text-shadow:none;
+		overflow: hidden;
+	}
+	#vid_details #name	{
+		font-size: 20px;
+	}
+	#vid_details #description	{
+		font-size: 12px;
+	}
+	#vid_details #uploader	{
+		font-size: 10px;
+	}
+	.img_div_wrap	{
+		padding: 0px;
+		height: 200px;
+		margin: 5px 5px 5px 0px;	}
+	#img_post 	{
+		position: absolute;
+			
+		width: 100%;
+		height: auto;
+		
+	}
+	.img_div	{
+		position: relative;
+		margin: 5px 20px;	
+	}
+	.w2bfade	{
+		display: block;
+		background-image: url("http://www.rottweilerheartsrescue.org/Images/fade2black.png");
+		z-index: 12;
+		opacity: 0;
+	}
+	#img_name	{
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		z-index: 10;
+		font-size: 17px;
+		color: white;
+	}
+	.img_close	{
+		margin: 0px 5px;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		color: white;
+		z-index: 2;
 
-.booking_wrapper	{
-	opacity: 1;
-}
-#upload_form	{
-	margin:10px auto;
-	
-	padding:20px;
-}
-.booking_nav_div	{
-		height:50px;
-		padding:0px 20px;
-}
-.booking_nav	{
-		border-right: 2px solid black;
-		padding:20px;	
-		margin:0px;
-		float:left;
-}
-.booking_body	{
-	background-image: url("http://2.bp.blogspot.com/-4E0OGo5Gu-0/T8zW_7IkmvI/AAAAAAAAASE/J1s6aGGBFMs/s1600/2hs-2009-05-a-print.jpg");
-	padding: 0px;
-}
+	}
+	.img_modal 	{
+		-webkit-filter: blur(0px);
+  		filter: blur(0px);
+	}
+	.img_modal-dialog	{
+		width:auto;
+		position: relative;
+				
+	}
+	.img_modal-body	{
+		padding: 0px;
+	}
+	#up 	{
+		width: 100%;
+	}
+	#play	{
+		width: 10%;
+		height:14%;
+		position: absolute;
+		top: 43%;
+		z-index: 2;
+		margin: 0px auto;
+		left: 45%;
+	 	}

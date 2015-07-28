@@ -37,7 +37,7 @@
                 font-weight:bold;
                 z-index: 2;
             }
-            #name   {
+            #pro_name   {
                 font-size: 36px;
                 background-color: rgba(0,0,0,0.3);
                 padding: 0px 10px;
@@ -63,9 +63,9 @@
                
             } 
             .thumbs_wrap {
-                margin:10px 0px;
+              
                 float: left;
-                padding:5px;
+                
                 position: relative;
                
             }   
@@ -74,8 +74,9 @@
                 position: relative;
                 text-shadow: 1px 1px 2px black, 0 0 25px blue, 1px 1px 5px darkblue;
                 float: left;
-                width: 400px;
-                height:200px;
+                padding: 0px; 
+                height: 180px;  
+                
 
                 
             }
@@ -144,8 +145,7 @@
                   height: 210px;
             }
             #user_poster    {
-                position: ;
-                clip:rect(0px,500px,286px,0px);
+                width: 100%;
             }
             #user_art_info  {
                 float: left;

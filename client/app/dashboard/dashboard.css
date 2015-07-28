@@ -2,11 +2,7 @@
                 box-sizing: border-box; 
                 -moz-box-sizing: border-box; 
                 -webkit-box-sizing: border-box; 
-            } 
-            #dashboard  {
-      
-                
-            }
+            }   
             .stage_btm_1 { 
                 position: fixed;
                 bottom: 50px; 
@@ -50,12 +46,14 @@
             padding: 10px;
 
         }
-        .stagee {
-            position: fixed;
-            height:700px;
+        #dashboard {
+            
+            margin: 0px;
             width: 100%;
             background: transparent;
-           background-image: url("Back-img/1366317.jpg");
+           background-image: url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");
+           background-repeat: repeat-y;
+           padding: 0px;
         }
         #clubs_list {
             padding: 10px;
@@ -73,7 +71,7 @@
             color: white;
         }
         #main_stage  {
-            background-color: rgba(0,0,0,0.2);
+            
             height:auto;
             box-sizing:border-box;
             margin:10px auto;

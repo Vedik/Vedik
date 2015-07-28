@@ -19,7 +19,7 @@ body {
 
 #top_logo {
             background-color:rgba(0,0,0,0.3);
-            height:55px;
+            height:45px;
             width:100%;
             background-size:10px 100%;
             box-sizing:border-box;
@@ -29,12 +29,12 @@ body {
             z-index: 1;
         }
         #hidden {
-            height:55px;
+            height:45px;
             position: relative;
             background-color:#0a4b60;
         }
         #logo {
-            font-size:30px;
+            font-size:25px;
             color:white;
           /*  font-family:'Gill Sans MT';*/
             float:right;
@@ -43,7 +43,7 @@ body {
         }
         #search {
             float:right;
-            padding:15px 50px;
+            padding:10px 50px;
             position: relative;
             
             
@@ -66,13 +66,14 @@ body {
         }
         #nav    {
             background-color:#;
-            font-size:15px;
+            font-size:12px;
             float:left;
             margin: 0px 45px 0px 0px;
             padding:15px 5px 15px 50px;
             border-radius: 0px;
             position: relative;
             height: 55px;
+            letter-spacing: 1.5px;
         }
         ul.drop_nav {
             list-style-type:none;

@@ -1,68 +1,113 @@
-<div ng-controller="UploadPortalCtrl">
-	<div ng-include="'components/navbar/navbar.html'"></div>
-	 <p>This is a paragraph.</p>
-
-<button>Toggle between hide() and show()</button>
-
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload">Open Modal</button>
-
-	<div class="booking_body">
-
-		<div id="upload" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-
-			<!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-header">
-					 <button type="button" class="close" data-dismiss="modal">&times;</button>
-					 <h4 class="modal-title">Modal Header</h4>
-        		</div>
-	        		<div class="modal-body">
-					 <ul class="nav nav-tabs">
-					 	 <li class="active"><a data-toggle="tab" href="#upload_form">Home</a></li>
-					    <li><a href="#menu1" data-toggle="tab">Credits</a></li>
-					  </ul>
-
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="upload_form">
-
-								<form name="form" ng-submit="submit(form)">
-									<div class="form-group">
-										<label>Name of Video</label>
-										<input type="text" class="form-control" ng-model="form.vidname">
+<div id="up" class="thumbs_wrap">									
+									<div class="vid_div thumbs_wrap centric col-md-8">
+											<div class="thumbs_in col-md-6" id="grow pic">
+												
+												<a href="#" ng-click="watchVid(video.video.vidurl)" >
+													<span class="grow pic" id="user_art_pic">
+														<img src="https://i.ytimg.com/vi/pD9oTgJgXEg/mqdefault.jpg"  id="user_poster" >
+													</span>
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>										
+												</a>
+												
+											</div>
+											<div class="thumbs_in">
+												<ul id="vid_details">
+													<li id="name"><img src="assets/images/movie-clapper.png" width="20px" height="20px">  Anushka talking about Baahubali about</li>
+													<li id="description">Description</li>
+													<li id="uploader">by</li>
+												</ul>
+											</div>
 									</div>
-									<div class="form-group">
-										<label>Youtube link to video</label>
-										<input type="text" class="form-control" ng-model="form.vidurl">
+
+									<div class="" ="img_div thumbs_wrap"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(10px)'">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+										<span id="img_name">Spinning Ball</span>
+										<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png" id="play">	
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
 									</div>
-									<div class="form-group">
-										<label>Poster Url</label>
-										<input type="text" class="form-control" ng-model="form.posterurl">
+								</div>
+
+									<br>	
+								<div id="img_div thumbs_wrap ">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+										<img src="Pro_pic/tamanna.jpg" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="20px" width="410px" style="opacity:0.5;"></span>
+										<span id="img_name">Gorgeous Tamanna</span>
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
 									</div>
-									<div class="form-group"> <!-- need to put select with multi option selection -->
-										<label>Genres</label>
-										<select ng-model="form.genres" multiple="true" class="form-control">
-											<option value="horror">horror</option>
-											<option value="comedy">comedy</option>
-										</select>   <!-- Make it a maximum of three using array size in controller -->
+								</div>
+								<div class="" ="img_div thumbs_wrap"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(40px)'">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+										<span id="img_name">Spinning Ball		</span>
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
 									</div>
-									<div class="form-group"> <!-- Put text area -->
-										<label>Description</label>
-										<input type="text" class="form-control" ng-model="form.description">
-									</div>
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</form>
-					
-						</div>
-						<div id="menu1" class="tab-pane fade">
-					      <h3>Menu 1</h3>
-					      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					    </div>
-					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<p>{{form.genres}}</p>
+								</div>		
 </div>
+
+	
+
+<!-- Modal -->
+<div id="img_view" class="modal fade" role="dialog">
+<div class="centric ">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+   
+     
+        
+       
+   
+      <div class="modal-body">
+      	<button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('up').style.filter = 'blur(0px)'">&times;</button>
+        <img src="http://www.gettyimages.com/CMS/Pages/Embed_Frontdoor/StaticContent/hero_travel_482206371.jpg"	>
+      </div>
+      
+    
+
+  </div>
+</div>
+</div>
+
+
