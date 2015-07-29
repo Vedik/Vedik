@@ -1,12 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div >
-	<div >
+	<div>
 		<div id="stage_info" class="col-md-3 thumbnail">
-			<span><h2>Badminton</h2></span>
-			<span><p> _Description</p></span>	
-			<button style="color:black">Followers no.</button>
+			<span><h2>{{stage.name}}</h2></span>
+			<span><p>{{stage.description}}</p></span>	
+			<button ng-hide="isFollowing" style="color:black" ng-click="follow()">Follow</button>
+			<button ng-show="isFollowing" style="color:black" ng-click="unfollow()">Following....</button>
 		</div>
-		<div id="stage_pic" class="col-md-9"><img src="http://badminton-coach.co.uk/wp-content/uploads/2014/09/Badminton-Flick-Serve-ov.jpg" width="100%" height="400px" alt="Badminton ART"></div>
+		<div id="stage_pic" class="col-md-9"><img src="{{stage.posterUrl}}" width="100%" height="400px" alt="Badminton ART"></div>
 	</div>
 	<div>
 		<div id="stage_content">
