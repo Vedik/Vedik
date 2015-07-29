@@ -23,9 +23,37 @@
             }
             #vid_stuff  {
               background-color:rgba(255,255,255,0.1);
+              margin: 0px 12.5555555%;
             }
             .comments    {
-                margin:0px 80px;
+              /*  background-color: rgba(0,0,0,0.1);  */              
+                border-radius: 0px;
+                overflow: hidden;
+            }
+            .commenter  {
+                top:1px;
+                left: 80px;
+                position: absolute;
+                font-size: 14px;
+                text-shadow: 1px 1px 5px black, 0 0 2px blue, 0 0 2px darkblue;
+                color: white;
+                z-index: 12;
+            }
+            #comment_data {
+              padding: 0px 10px;
+            }
+            #comment_time {
+              font-size: 10px;
+              padding: 0px 10px;
+              color: rgba(0,0,0,0.6);
+            }
+            #comments_list li {
+                width: 100%;
+                position: relative;
+                float: left;
+                padding: 3px;
+                list-style-type: none;
+
             }
             table   {
                 width:100%;

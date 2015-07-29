@@ -4,12 +4,15 @@
                     text-align:left;
             }
             #user_profile   {
-                margin:10px auto;
+                margin:0px auto 0px;
                 padding:10px 10px;
                 position: absolute;
-                top: 50px;
-                left:0px;
-                width: 100%;
+                top:10%;
+                left:2%;
+                
+                background-color: rgba(36,123,160,0.7);
+                
+                border-radius: 0px;
             }
             #profile    {
                 width:100%;
@@ -30,7 +33,6 @@
                 
             }
             #info   {
-                background-color: rgba(0,0,0,0.3);
                 color:white;
                 margin:30px 0px 10px 0px;
                 padding: 10px;
@@ -38,19 +40,70 @@
                 z-index: 2;
             }
             #pro_name   {
-                font-size: 36px;
-                background-color: rgba(0,0,0,0.3);
+                font-size: 36px;                
                 padding: 0px 10px;
                 border-radius: 4px;
                 color: white;
 
             }
+            #HOF_div    ul  {
+                padding: 0px;
+            }
+            #HOF_div    {
+                position: absolute;
+                top: 30%;
+                left: 2%;
+            }
+
+            #HOF_div  li    {   
+                background-color: rgba(255,255,255,0.8);
+                padding: 10px;
+                list-style-type: none;
+                width: 150%;
+                border: 1px solid #DDD;
+                color: #337AB7
+            }
+            #HOF_div li:hover   {
+                background-color: #247ba0;
+                color: white;
+                border: 1px solid #247ba0
+            }
+            #HOF_display    {
+                position: absolute;
+                top: 10%;
+                padding: 0px;
+                left: 40%;
+                max-width: 40%;
+                min-width: 40%;
+                max-height: 60%;
+                background-color: rgba(255,255,255,0.8);
+                overflow-y:scroll;
+                font-family:"Times New Roman", Times, serif;
+                text-align: justify;
+                text-justify: inter-word;
+                line-height: 25px;
+                letter-spacing: 2px;
+                font-size: 14px;
+                display: none;
+
+                
+            }
+            #HOF_display span   {
+                padding: 20px; 
+
+            }
             #upload_btn     {
                 position: absolute;
-                top: 70px;
+                top: 10%;
                 right: 20px;
                 background-color: rgba(38,88,132,1);
                 font-size: 14px;
+                border-radius: 0px;
+                border: 0px;
+            }
+            #upload_btn:hover   {
+                background-color: white;
+                color: #247ba0;
             }
             .thumbs_out {
                 margin:10px 0px;
@@ -92,7 +145,7 @@
                 height:700px;
             }
             #art_wrap {
-                background-image: url("back/back.jpg");
+                background-image: url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");
                 width: 100%;
                 position: relative;
                 height: auto;
@@ -144,9 +197,7 @@
                   width: 410px;
                   height: 210px;
             }
-            #user_poster    {
-                width: 100%;
-            }
+            
             #user_art_info  {
                 float: left;
                 display:none;
