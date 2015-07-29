@@ -22,10 +22,19 @@ exports.show = function(req, res) {
 
 // Creates a new event in the DB.
 exports.create = function(req, res) {
-  Event.create(req.body, function(err, event) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, event);
-  });
+  var newevent = new Event({
+    name:req.body.name,
+    start_time:req.body.start_time,
+    end_time:req.body.end_time,
+    fbPageUrl:req.body.fbPageUrl,
+    picUrl:req.body.picUrl,
+    venue:String,
+    attending_users:[],
+    reviews:[],
+    aboutUs:req.body.aboutUs,
+    team:[],
+    sponsers:[]
+  })
 };
 
 // Updates an existing event in the DB.
