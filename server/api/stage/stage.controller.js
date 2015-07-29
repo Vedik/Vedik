@@ -110,16 +110,22 @@ exports.deleteSubscriber = function (req,res){
       return handleError(res,err);
     }
     if(!stage) { return res.send(404); }
-    stage.subscribed_users.pull({user:req.user._id});
-    stage.save(function (err){
-      if(err){
-        return handleError(res,err);
+    var i =0;
+    for(;i<stage.subscribed_users.length;i++){
+      if(stage.subscribed_users[i].user.equals(req.user._id)){
+        stage.subscribed_users[i].remove(function (err){
+          if(err){ return handleError(res,err);}
+          else{
+            stage.save(function (err){
+              if(err){ return handleError(res, err);}
+              else {
+                return res.json({removed : true});
+              }
+            });
+          }
+        })
       }
-      else{
-        console.log(stage);
-        return res.json({removed:true});
-      }
-    });  
+    } 
   });
 };
 
