@@ -9,7 +9,7 @@
                 position: absolute;
                 top:10%;
                 left:2%;
-                
+                z-index: 10;
                 background-color: rgba(36,123,160,0.7);
                 
                 border-radius: 0px;
@@ -68,6 +68,18 @@
                 color: white;
                 border: 1px solid #247ba0
             }
+            .w2b    {
+                background-color: rgba(255,255,255,0.8);
+                padding: 10px;
+                border: 0px;
+
+            }
+            .w2b:hover    {
+                background-color: #247ba0;
+                color: white;
+                border: 1px solid #247ba0;
+                border: 0px;
+            }            
             #HOF_display    {
                 position: absolute;
                 top: 10%;
@@ -91,6 +103,17 @@
             #HOF_display span   {
                 padding: 20px; 
 
+            }
+            .b2w  {
+                background-color: rgba(38,88,132,1);
+                font-size: 14px;
+                border: 0px;
+
+            }
+            .b2w  {
+                background-color: white;
+                color: #247ba0;
+                border: 0px;
             }
             #upload_btn     {
                 position: absolute;

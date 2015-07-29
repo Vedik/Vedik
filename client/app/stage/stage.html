@@ -1,13 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div >
 	<div>
-		<div id="stage_info" class="col-md-3 thumbnail">
+		<div id="stage_info" class="col-md-3">
 			<span><h2>{{stage.name}}</h2></span>
-			<span><p>{{stage.description}}</p></span>	
-			<button ng-hide="isFollowing" style="color:black" ng-click="follow()">Follow</button>
-			<button ng-show="isFollowing" style="color:black" ng-click="unfollow()">Following....</button>
+		<!--	<span><p>{{stage.description}}</p></span>	-->
+			<button ng-hide="isFollowing" style="color:black" ng-click="follow()" id="upload_btn">Follow</button>
+			<button ng-show="isFollowing" style="color:black" ng-click="unfollow()" class="w2b" id="pload_btn">Following....</button>
 		</div>
-		<div id="stage_pic" class="col-md-9"><img src="{{stage.posterUrl}}" width="100%" height="400px" alt="Badminton ART"></div>
+		<div id="stage_pic" class="col-md-12"><img src="{{stage.posterUrl}}" width="100%" height="400px" alt="Badminton ART"></div>
 	</div>
 	<div>
 		<div id="stage_content">
