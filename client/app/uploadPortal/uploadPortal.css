@@ -24,8 +24,10 @@
 	}
 	.img_div_wrap	{
 		padding: 0px;
+
+		box-shadow: 1px 1px 5px grey;
 		height: 200px;
-		margin: 5px 5px 5px 0px;	}
+			}
 	#img_post 	{
 		position: absolute;
 			
@@ -36,7 +38,10 @@
 	}
 	.img_div	{
 		position: relative;
-		margin: 5px 20px;	
+		padding: 10px 5px;
+		
+		/*margin: 30px 0px;*/
+		float: left;
 	}
 	.w2bfade	{
 		display: block;
@@ -100,4 +105,24 @@
 	       
 	}
 
+	#post_view	{
+		 background-color: rgba(36,123,160,0.1);
+		 height: 200px;
+		 float: left;
+		 text-shadow:0px 0px 0px;
+		 padding: 10px;
+		 color: white;
+	}
+	#event_det	{
+		background-color: rgba(230,230,230,1);
+		padding: 10px 10px 30px;
+		box-shadow: 1px 1px 5px grey;
+		font-family: arial;
+		letter-spacing: 1px;
+		font-size: 13px;
 
+	}
+
+	#event_det span {
+		font-size: 25px;
+	}

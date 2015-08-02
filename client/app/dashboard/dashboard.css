@@ -51,24 +51,32 @@
             margin: 0px;
             width: 100%;
             background: transparent;
-           background-image: url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");
-           background-repeat: repeat-y;
+            background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");           
+            background-repeat: repeat-x;
            padding: 0px;
-        }
+           background-repeat: repeat;   
+    }
         #clubs_list {
             padding: 10px;
+            
+
+
         }
 
         #groups_list    {
-            padding: 0px;
+            padding: 10px;
+        
+            right: 0px;
         }
         #clubs_list_wrap    {
-            background-color: ;
+            background-color: rgba(230,230,230,0.1);
+            box-shadow: 0px 0px 3px grey;
             float: left;
             height: 600px;
             padding: 10px;
             width: 100%;
-            color: white;
+         
+            text-align: center;
         }
         #main_stage  {
             
