@@ -9,8 +9,9 @@ body {
             margin:0px;
             /*font-family:"verdane";*/
            letter-spacing: 1.5px;
-            background-image: url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");
+         /*   background-image:  url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");*/
             font-size: 12px;
+            background-color: white;
             }
 .centric    {
     text-align:center;
@@ -32,7 +33,7 @@ body {
         #hidden {
             height:45px;
             position: relative;
-            background-color:#0a4b60;
+            /*background-color:#0a4b60;*/
         }
         #logo {
             font-size:25px;
@@ -50,7 +51,7 @@ body {
             
         }
         #search input   {
-            background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 7px 5px;
+            background:ao white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 7px 5px;
             background-repeat: no-repeat;
             padding: 4px 10px 4px 25px;
         }
@@ -91,7 +92,7 @@ body {
         }
         a:link    {
             text-decoration:none;
-            color: white;
+            color: black;
         }
         #indiv_res a:hover   {
             padding:15.5px 0px;
