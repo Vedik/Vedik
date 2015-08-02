@@ -1,14 +1,14 @@
-<div ng-controller="ProfileCtrl">
+<div ng-controller="ProfileCtrl" id="for_blur">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
             <div id="profile">
             <!--user pic and info goes here-->
             	<div id="pro_pic">
-           			<img src="Pro_pic/tamanna.jpg" style="width:100%;height:100%;"></img>
+           			<img src="Pro_pic/prabhas.jpg" style="width:100%;height:100%;"></img>
 	            	<div id="stages_list">
 					</div>
 
-		            <div id="user_profile">
+		            <div id="user_profile" class="col-md-3">
 			            <div>
 			                <span id="pro_name">{{user.name}}</span>
 			            </div>
@@ -18,6 +18,28 @@
 			            	<span id="info">9th Feb 1996</span>
 			            </div>
 
+		        	</div>
+		        	<div id="HOF_div" onclick="document.getElementById('HOF_display').style.display = 'block'">
+		        		<ul>
+		        			<a href="#about_user" data-toggle="tab"><li>About</li></a>
+		        			<a href="#HOF" data-toggle="tab"><li>Hall of Fame</li></a>
+		        		</ul>
+		        	</div>
+		        	<div id="HOF_display" class="tab-content">
+		        		<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
+
+		        		<span id="about_user" class="tab-pane fade">
+		        			
+		        			<h4>About<hr></hr></h4>
+		        			
+								Prabhas (born Prabhas Raju Uppalapati) is an Indian film actor known for his works exclusively in the Telugu cinema.[1] Prabhas is the nephew of Telugu actor Uppalapati Krishnam Raju.[2] Prabhas made his film debut with the 2002 drama film, Eshwar. His works include box office hits such as Varsham (2004), Chatrapathi (2005), Chakram (2005), Billa (2009), Mr. Perfect (2011), Mirchi (2013) and Baahubali: The Beginning (2015).[3] In 2014 he appeared in the Bollywood film Action Jackson directed by Prabhudeva. He stars in Baahubali: The Beginning (2015), which recorded the highest grossing opening for an Indian film.</br>
+								Prabhas was born to U. Suryanarayana Raju and Siva Kumari. He is the youngest of three children, with an elder brother Pramod Uppalapati and sister Pragathi. He is the nephew of Telugu actor Uppalapati Krishnam Raju.[7]
+								Prabhas was born to U. Suryanarayana Raju and Siva Kumari. He is the youngest of three children, with an elder brother Pramod Uppalapati and sister Pragathi. He is the nephew of Telugu actor Uppalapati Krishnam Raju.[7]
+										        		</span>
+		        		<span id="HOF" class="tab-pane fade">
+		        			<h4>Hall of Fame<hr></hr></h4>
+		        			Actor
+		        		</span>
 		        	</div>
 		        	<button ng-show="user.name==loggedInUser.name" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
 	        	</div>
@@ -107,25 +129,27 @@
 									
 									<span id="user_art" class="thumbs_wrap">
 										
-										<div class="thumbs_out" >
-											<div class="thumbs_in" id="grow pic">
-												
-												<a href="#" ng-click="watchVid(video.video.vidurl)" >
-													<span class="grow pic" id="user_art_pic">
-														<img src="{{video.video.posterurl}}"  id="user_poster" >
-													</span>
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>-->
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>										
-												</a>
-												
-											</div>
+										
+											<div class="" ="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(10px)'">
+												<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
+													<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
+													<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+													<span id="img_name">Spinning Ball</span>
+													<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png" id="play">	
+
+													
+																<span class="thumb_trnsprnt">
+																</span>
+																<span id="user_art_info">
+																	<div id="a">
+																	<span id="vid_data">{{video.video.vidname}}</span>
+																<!--	<div id="vid_data">{{video.video.description}}</div>-->
+																	<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+																	</div>
+																</span>		
+												</div>
+								</div>
+
 										</div>	
 												
 													<span id="user_art" >
@@ -149,4 +173,116 @@
 				</div>
 				<!--user content ends here-->
 			</div>
+</div>
+
+
+<div id="videoview" class="modal img_modal fade" role="dialog">
+<div class="centric">
+  <div class="modal-dialog img_modal-dialog">
+
+    <!-- Modal content-->
+   
+     
+        
+       
+   
+      <div class="modal-body img_modal-body">
+      <button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+
+
+      <div ng-controller="ViewPageCtrl">
+    
+
+    <div  id="video">
+        <div class="wrapper">
+         <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
+            <div my-youtube code='vidCode'>
+            </div>
+        </div>
+        <div class="content" id="title">
+            <span id="video_name">{{video.vidname}}</span>
+        </div>
+        <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
+    </div>
+      <!-- info, comments, reviews etc of video-->
+        <div class="stage col-md-9"  id="vid_stuff">
+            <div class="content">
+            <!--Crew and cast-->
+                <div id="credits" >
+                <!--credits start-->
+                
+ 
+  
+                     
+                        
+                      
+                    </div>
+
+                   
+                <!--credits end-->
+
+               
+                </div>
+                <!--Best part, comments, review-->
+                <ul class="nav nav-tabs" id="view_page_tabs">
+                        <li class="active"><a data-toggle="tab" href="#best_part">Best Part</a></li>
+                        <li><a href="#comments" data-toggle="tab">Comments</a></li>
+                        <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                 </ul>
+
+                 <!--tab content-->
+                <div class="tab-content">
+                    <div id="best_part" class="tab-pane fade in active">
+                        <h3>Best part<hr></hr></h3>
+                    </div>
+                    <div id="comments" class="tab-pane fade">
+                        
+                        <div>
+                            <div>
+                                <h4>Leave a Comment:</h4>
+                                <form name="myForm" ng-submit="submit()" class="form" novalidate> 
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="3" ng-model="commentData"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <ul id="comments_list">
+                                <li ng-repeat="comment in video.comments" >
+                                    
+                                    <div class="thumbs_wrap comments">
+                                    
+                                         <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
+                                        <span class="commenter">{{comment.comment.commentPutter}}</span>
+                                     <!--   <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute"></span>-->
+                                        <span id="comment_data">{{comment.comment.commentData}}</span><br>
+                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
+                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span></span>
+                                        <div class="form-group" ng-show="toggleVal">
+                                            <textarea class="form-control" rows="3" ng-model="editData"></textarea>
+                                            <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="reviews" class="tab-pane fade">
+                    <!--add review part here-->
+                        <h2>Reviews<hr></hr></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+</div>
+
+      </div>
+      
+    
+
+  </div>
+</div>
 </div>

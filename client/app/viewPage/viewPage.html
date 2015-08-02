@@ -1,5 +1,6 @@
 <div ng-controller="ViewPageCtrl" id="viewpage">
     <div ng-include="'components/navbar/navbar.html'"></div>
+    <div id="hidden"></div>
 
     <div  id="video">
         <div class="wrapper">
@@ -13,7 +14,7 @@
         <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
     </div>
       <!-- info, comments, reviews etc of video-->
-        <div class="stage" id="vid_stuff">
+        <div class="stage col-md-9"  id="vid_stuff">
             <div class="content">
             <!--Crew and cast-->
                 <div id="credits" >
@@ -40,11 +41,11 @@
 
                  <!--tab content-->
                 <div class="tab-content">
-                    <div id="best_part" class="tab-pane fade">
+                    <div id="best_part" class="tab-pane fade in active">
                         <h3>Best part<hr></hr></h3>
                     </div>
-                    <div id="comments" class="tab-pane fade in active">
-                        <h2>Comments<hr></hr></h2>
+                    <div id="comments" class="tab-pane fade">
+                        
                         <div>
                             <div>
                                 <h4>Leave a Comment:</h4>
@@ -55,18 +56,25 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                            <div>
-                                <div ng-repeat="comment in video.comments">
-                                    <span>{{comment.comment.commentPutter}}:::{{comment.comment.commentData}} ::::
-                                    {{comment.comment.datePosted | date:'medium'}}
-                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)">Delete</button>
-                                    <button class="btn btn-default" ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal">Edit</button></span>
-                                    <div class="form-group" ng-show="toggleVal">
-                                        <textarea class="form-control" rows="3" ng-model="editData"></textarea>
-                                        <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                            <ul id="comments_list">
+                                <li ng-repeat="comment in video.comments" >
+                                    
+                                    <div class="thumbs_wrap comments">
+                                    
+                                         <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
+                                        <span class="commenter">{{comment.comment.commentPutter}}</span>
+                                     <!--   <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute"></span>-->
+                                        <span id="comment_data">{{comment.comment.commentData}}</span><br>
+                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
+                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span></span>
+                                        <div class="form-group" ng-show="toggleVal">
+                                            <textarea class="form-control" rows="3" ng-model="editData"></textarea>
+                                            <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div id="reviews" class="tab-pane fade">
