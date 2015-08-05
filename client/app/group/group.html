@@ -21,8 +21,8 @@
 
 
 
-	
-	<div class="container-inner">
+	<div class="container-inner_wrap_out">
+	<div class="container-inner thumbs_wrap">
 		<div id="event_page_info">
 
 	<!--Background Image-->
@@ -51,11 +51,35 @@
 
 		</div>
 
-		<div id="event_page_cntnt" >
-			<div id="hidden"></div>
+		<div id="event_page_cntnt">
+			
 			<a href="#event_page_info" id="arrow_left" class="scroll_anim"><<</a>
+					<div id="HOF_div" onclick="document.getElementById('HOF_display').style.display = 'block'">
+		        		<ul>
+		        			<a href="#about_user" data-toggle="tab"><li>About</li></a>
+		        			<a href="#HOF" data-toggle="tab"><li>Hall of Fame</li></a>
+		        		</ul>
+		        	</div>
+		        	<div id="HOF_display" class="tab-content">
+		        		<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
+
+		        		<span id="about_user" class="tab-pane fade">
+		        			
+		        			<h4>About<hr></hr></h4>
+		        			
+								Prabhas (born Prabhas Raju Uppalapati) is an Indian film actor known for his works exclusively in the Telugu cinema.[1] Prabhas is the nephew of Telugu actor Uppalapati Krishnam Raju.[2] Prabhas made his film debut with the 2002 drama film, Eshwar. His works include box office hits such as Varsham (2004), Chatrapathi (2005), Chakram (2005), Billa (2009), Mr. Perfect (2011), Mirchi (2013) and Baahubali: The Beginning (2015).[3] In 2014 he appeared in the Bollywood film Action Jackson directed by Prabhudeva. He stars in Baahubali: The Beginning (2015), which recorded the highest grossing opening for an Indian film.</br>
+								Prabhas was born to U. Suryanarayana Raju and Siva Kumari. He is the youngest of three children, with an elder brother Pramod Uppalapati and sister Pragathi. He is the nephew of Telugu actor Uppalapati Krishnam Raju.[7]
+								Prabhas was born to U. Suryanarayana Raju and Siva Kumari. He is the youngest of three children, with an elder brother Pramod Uppalapati and sister Pragathi. He is the nephew of Telugu actor Uppalapati Krishnam Raju.[7]
+						</span>
+		        		<span id="HOF" class="tab-pane fade">
+		        			<h4>Hall of Fame<hr></hr></h4>
+		        			Actor
+		        		</span>
+		        	</div>
+
 			
 		</div>
+	</div>
 	</div>
 
 

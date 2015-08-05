@@ -10,16 +10,17 @@
     color: white;
 }
 #stage_pic	{
-	padding: 2px;
+	padding: 0px;
 	
 	height: 400px;
 	overflow: hidden;
 }
 #stage_content	{
 	
-	height: 400px;
+	
 	padding: 0px;
-
+	background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");
+	background-repeat: repeat;
 }
 #bkd {
 	 -webkit-transition: all 0.5s ease;
@@ -30,13 +31,19 @@
 }
 #stage_content_wrap	{
 	margin: 5px;
-	box-shadow: 0px 0px 3px grey;
-	background-color: rgba(255,255,255,0.8);
+
+	
 	padding: 10px 30px;		
 }
 .nav-tabs	{
 	background-color: rgba("255,255,255,0.7");
 	color: black;
+	border-bottom: 0px;
+}
+.nav-tabs li	{
+	width: 15%;
+	
+	background-color: grey;
 }
 .tab-content	{
 	padding: 10px;
