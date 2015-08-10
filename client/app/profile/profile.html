@@ -80,7 +80,10 @@
 																</span>		
 												</div>
 								</div>
-
+											<div>
+										    	<input type="text" ng-model="creditDet">
+										    	<button ng-click="submitCredit(creditDet)">Submit Credit</button>
+										    </div>
 										</div>	
 												
 													<span id="user_art" >
@@ -201,13 +204,13 @@
 													<h3>Add your Image here</h3>
 													<form>
 														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Image Name">
+															<input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Image Name">
 														</div>
 														<div class="form-group">
 															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
 														</div>
 														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Image Url">
+															<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
 														</div>
 														<div class="form-group">	
 															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Tag a category">
@@ -215,12 +218,61 @@
 													</form>
 												</div>
 											</div>
-											<div id="credits" class="tab-pane fade">
-										      <h3>Credits</h3>
-										      <p>Add crediting method here</p>
-										    </div>
 										</div>
+										<div id="credits" class="tab-pane fade">
+										    <h3>Credits</h3>
+										    <div class="col-md-6">
+								      			<label>Credit</label>
+								      			<div>
+								      				<tags-input ng-model="credits.directors" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'>
+      													<auto-complete 
+      													source="getSuggestionsForCredits($query)"
+      													min-length='1'
+      													>
+      													</auto-complete>
+    												</tags-input>
+    												<p>Model: {{credits.credit}}</p>
+    											</div>
+								      		</div>
+								      		<div class="col-md-6">
+								      			<label>Directors</label>
+								      			<div>
+								      				<tags-input ng-model="credits.creditNames" display-property="name" add-from-autocomplete-only="true">
+      													<auto-complete 
+      													source="getSuggestionsForNames($query)"
+      													min-length='1'>
+      													</auto-complete>
+    												</tags-input>
+    												<p>Model: {{credits.creditNames}}</p>
+    											</div>
+								      		</div>
+								      		<div ng-repeat="credit in credits">
+								      			<label>{{credit.name}}</label>
+								      			<tags-input ng-model="result.{{credit.name}}" display-property="name" add-from-autocomplete-only="true">
+      												<auto-complete 
+      											source="getSuggestions($query)"
+      											min-length='1'>
+      												</auto-complete>
+    											</tags-input>
+    											<p>{{result}}</p>
+								      		</div>
+								      		<div>
+								      			<label>Editors</label>
+								      			<tags-input ng-model="credits.editors" display-property="name" add-from-autocomplete-only="true">
+      												<auto-complete 
+      													source="getSuggestions($query)"
+      													min-length='1'>
+      												</auto-complete>
+    											</tags-input>
+    											<p>Model: {{credits.editors}}</p>
+								      		</div>
+								      		<div>
+								      			<h2>Add Credits</h2>
+								      		</div>
+								    	</div>
 									</div>
+										
+								</div>
 							
 								</div>
 							</div>
@@ -340,7 +392,7 @@
 
       </div>
       
-    
+
 
   </div>
 </div>

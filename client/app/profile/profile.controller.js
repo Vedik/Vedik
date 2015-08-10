@@ -19,8 +19,15 @@ angular.module('myAppApp')
 
 
 
-    $scope.getSuggestions = function (query){
+    $scope.getSuggestionsForNames = function (query){
       return $http.get('/api/users/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
+    }
+
+    $scope.getSuggestionsForCredits = function (query){
+      return $http.get('/api/creditDets/search/'+query).success(function (response) {
         console.log(response);
         return response;
       });
@@ -34,6 +41,12 @@ angular.module('myAppApp')
    	//$state.go('viewPage',{'vidCode':a[1]});
    	$location.url('/viewPage/'+a[1]);
    	
+   };
+
+   $scope.submitCredit = function (creditDet){
+    $http.post('/api/creditDets',{creditDetail:creditDet}).success(function (response){
+      console.log(response);
+    })
    };
 
   });
