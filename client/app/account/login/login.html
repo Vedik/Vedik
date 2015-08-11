@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div id="hidden"></div>
-<div style="position:absolute;top:-5px;"><img src="assets/images/loginpage.png" width="100%" height="100%"></div>
-<div class="container" id="login">
+<div style="position:absolute;top:-5px;z-index:-1"><img src="assets/images/loginpage3.jpg" width="100%" height="100%"></div>
+<div class="container  glassy" id="login">
   <div class="row">
     <div class="col-sm-12">
       <h1>Login</h1>
@@ -35,10 +35,10 @@
         </div>
 
         <div>
-          <button class="btn btn-inverse btn-lg btn-login" type="submit">
+          <button class="btn btn-inverse btn-lg btn-login b2w" type="submit">
             Login
           </button>
-          <a class="btn btn-default btn-lg btn-register" href="/signup">
+          <a class="btn btn-default btn-lg btn-register b2w" href="/signup">
             Register
           </a>
         </div>
@@ -48,7 +48,7 @@
         <div>
           <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
             <i class="fa fa-facebook"></i> Connect with Facebook
-          </a></br>
+          </a>
           <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
             <i class="fa fa-google-plus"></i> Connect with Google+
           </a>

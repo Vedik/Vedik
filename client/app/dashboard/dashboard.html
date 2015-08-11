@@ -2,7 +2,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 	
 
-<div class="thumbs_wrap" id="dashboard">
+<div class="thumbs_wrap" id="dashboard" >
+	
 	<div id="hidden"></div>
 
 	
@@ -29,7 +30,7 @@
 								
 			             													
 									
-										<div class="img_div thumbs_wrap col-md-6">
+										<div class="img_div thumbs_wrap col-md-12">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="https://iso.500px.com/wp-content/uploads/2014/04/20482.jpg" id="img_post">
 										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
@@ -48,31 +49,21 @@
 									</div>
 								</div>
 
-								<div class="img_div thumbs_wrap col-md-6">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-										<img src="http://ddwqcu8pss-flywheel.netdna-ssl.com/wp-content/uploads/2013/10/shutterstock_129313271.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Gorgeous Tamanna</span>
+								
 
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>-->
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
+
+								<div class="img_div thumbs_wrap col-md-12"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(10px)'">
+									<div class="col-md-6" id="event_det">
+										<a href="#"><span id="event_post_heading">Media Club</span></a><br> We is organising a <a href="#">Photowalk</a> at <a href="#">6:00 am</a>on <a href="#">Sunday 2nd August 2015</a>,<a href="#">Elite Beach</a>
+										<br><br><br>
+										<div>
+											<p><a href="#"> 102</a> People are attending so far</p>
+											<button class="b2w"  id="respond_post"><img src="http://www.clker.com/cliparts/E/1/x/w/P/P/walking-man-black-hi.png" width="7px" height="15px"> Attend</button>
+											<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
+
+										</div> 
 									</div>
-								</div>
-
-
-								<div class="img_div thumbs_wrap col-md-12"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(10px)'">
-									<div class="col-md-12" id="event_det">
-										<a href="#"><span>Media Club</span></a><br> is organising a <a href="#">Photowalk</a> at <a href="#">6:00 am</a>on <a href="#">Sunday 2nd August 2015</a>,<a href="#">Elite Beach</a>
-									</div>
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
 										<img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">
 										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
 										<span id="img_name">Spinning Ball</span>
@@ -89,10 +80,29 @@
 														</div>
 													</span>		
 									</div>
-									<!--<div class="col-md-6 thumbs_wrap thumbs_in" id="post_view">
+								<!--	<div class="col-md-6 thumbs_wrap thumbs_in" id="post_view">
 									dfgfhm,<br>
 									sdfdgf<br>dssfv
 									</div>-->
+								</div>
+
+								<div class="img_div thumbs_wrap col-md-12">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
+										<img src="http://ddwqcu8pss-flywheel.netdna-ssl.com/wp-content/uploads/2013/10/shutterstock_129313271.jpg" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
+										<span id="img_name">Gorgeous Tamanna</span>
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
+									</div>
 								</div>
 
 									<br>	
@@ -114,7 +124,7 @@
 													</span>		
 									</div>
 								</div>
-								<div class="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(40px)'">
+								<div class="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(40px)'">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
 										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
@@ -146,15 +156,8 @@
 				</ul>
 			</div>-->
 		</div>
-	</div>
-	<!-- to be ignored ;) to be implemented later
-	<p>{{user.updatedOn | date:'medium'}}</p>
-	<p>{{user.createdOn | date:'medium'}}</p>
-	testing -->
 
-	<!--To be put:: The recent videos uploaded and trending videos divs-->
-	</div>
-	<form name="form" ng-submit="submit(form)">
+		<form name="form" ng-submit="submit(form)">
 		<div class="form-group">
 			<label>Name of Stage</label>
 			<input type="text" class="form-control" ng-model="form.stagename">
@@ -169,8 +172,19 @@
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
-</div>
 
+	</div>
+	</div>
+	<!-- to be ignored ;) to be implemented later
+	<p>{{user.updatedOn | date:'medium'}}</p>
+	<p>{{user.createdOn | date:'medium'}}</p>
+	testing -->
+
+	<!--To be put:: The recent videos uploaded and trending videos divs-->
+</div>
+	
+
+<!--***********************Image view Modal********************-->
 
 <!-- Modal -->
 <div id="img_view" class="img_modal modal fade" role="dialog">
@@ -185,8 +199,38 @@
    
       <div class="modal-body img_modal-body">
       	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
-        <img src="http://wowslider.com/sliders/demo-19/data1/images/sunset.jpg"	>
-      </div>
+      	<div="wrapper">
+        <img src="http://beautifulyoucoachingacademy.com/wp-content/uploads/2014/01/Beautiful-Day-1024x640.jpg"	id="img_viewed">
+	        <div id="img_viewed_info">
+	       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
+		        <div id="img_name">Name</div>
+		        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
+		        <div id="img_des">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
+	        </div>
+        </div>
+        <div id="img_des_com" class="glassy col-md-8">
+	       	
+			  <ul class="nav nav-tabs">			  	
+			    <li><a data-toggle="tab" href="#img_description">Description</a></li>
+			    <li class="active"><a data-toggle="tab" href="#img_comments">Comments</a></li>
+			  </ul>
+
+			  <div class="tab-content">
+			    
+			    <div id="img_description" class="tab-pane fade">
+			      <h3>Description</h3>
+			      <p>Image description goes here</p>
+			    </div>
+			    <div id="img_comments" class="tab-pane fade in active">
+			      <h3>Comments</h3>
+			      <p>Comments go here</p>
+			    </div>
+			  </div>
+
+
+		</div>
+
+
       
     
 

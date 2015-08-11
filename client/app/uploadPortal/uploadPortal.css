@@ -78,7 +78,7 @@
 	.img_modal-body	{
 		padding: 0px;
 	}
-	.img_modal-body img 	{
+	.img_modal-body #img_viewed	{
 		box-shadow: 0px 20px 50px #000;
 	}
 	#up000;
@@ -120,9 +120,68 @@
 		font-family: arial;
 		letter-spacing: 1px;
 		font-size: 13px;
+		height: 200px;
+		color: grey;
 
 	}
 
-	#event_det span {
+	#event_det div {
+		color: grey;
+		font-size: 10px;
+		position: absolute;
+		bottom: 0px;
+		padding: 5px;
+		width: 100%;
+
+	}
+	#event_post_heading	{
 		font-size: 25px;
 	}
+	#respond_post	{
+		font-size: 10px;
+		margin: 0px 10px 0px 0px;
+		width: 25%;
+		vertical-align: middle;
+
+	}
+	.glassy	{
+		color: rgba(255,255,255,0.7);
+		padding: 10px;
+		background-color: rgba(255,255,255,0.05);	
+
+	}
+	#img_des_com	{
+		margin: 0px 16.67%;
+	}
+	#img_viewed	{
+		display: block;
+        height: auto;
+        width: 70%;
+        left:15%;
+        position: relative;
+	}
+	#img_viewed_info	{
+		height: 100%;
+        left: 15%;
+        top:0px;
+        position: absolute;
+                
+        width: 70%;
+        margin:0% auto;
+	}
+	 #img_shade_bottom   {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+        }
+     #img_des {
+     	bottom: 0px;
+     	left: 0px;
+     	color: white;
+     	width: 100%;
+     	text-overflow:ellipsis;
+     	position: absolute;
+     	padding: 10px;
+     	overflow: hidden;
+     	white-space: nowrap;
+     }
