@@ -22,10 +22,13 @@ exports.show = function(req, res) {
 
 // Creates a new creditDet in the DB.
 exports.create = function(req, res) {
-  CreditDet.create({creditDetail:req.body.creditDetail}, function(err, creditDet) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, creditDet);
-  });
+  var creditDet = new CreditDet({creditDetail:req.body.creditDetail});
+  creditDet.save(function (err){
+    if(err) { return handleError(res, err);}
+    else {
+      return res.json(200,creditDet);
+    }
+  })
 };
 
 // Updates an existing creditDet in the DB.
@@ -53,6 +56,23 @@ exports.destroy = function(req, res) {
     });
   });
 };
+
+exports.searchCredit = function(req, res){
+  var name = req.params.name;
+  console.log(name);
+  CreditDet.find(
+    { "creditDetail": { "$regex": name, "$options": "i" } },'creditDetail',
+    function(err,docs) {
+      if(!err) {
+        res.json(docs);
+      }
+      else {
+        console.log(err);
+        res.json([{creditDetail:'Error',href:"#"}]);
+      } 
+    } 
+  );
+}
 
 function handleError(res, err) {
   return res.send(500, err);

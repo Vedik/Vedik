@@ -20,12 +20,13 @@ angular.module('myAppApp')
 
 
 
-    $scope.getSuggestions = function (query){
+    $scope.getSuggestionsForNames = function (query){
       return $http.get('/api/users/search/'+query).success(function (response) {
         console.log(response);
         return response;
       });
     }
+
 
    $scope.videoSubmit = function (form){
           $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres}).success(function (response){
@@ -34,6 +35,15 @@ angular.module('myAppApp')
         })
    }
 
+    $scope.getSuggestionsForCredits = function (query){
+      return $http.get('/api/creditDets/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
+    }
+
+
+
    $scope.watchVid = function (vidurl) {
    	var a = [];
    	a = vidurl.split('watch?v=');
@@ -41,6 +51,12 @@ angular.module('myAppApp')
    	//$state.go('viewPage',{'vidCode':a[1]});
    	$location.url('/viewPage/'+a[1]);
    	
+   };
+
+   $scope.submitCredit = function (creditDet){
+    $http.post('/api/creditDets',{creditDetail:creditDet}).success(function (response){
+      console.log(response);
+    })
    };
 
   });

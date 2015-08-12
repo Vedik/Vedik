@@ -1,2 +1,2 @@
 1)a directive for thumbnails
-
+2)ratings

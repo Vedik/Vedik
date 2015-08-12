@@ -115,6 +115,9 @@
                 border:0px;
                 background-color: none;
             }
+            input   {
+                color: black;
+            }
             .upld_form  {
                 width: 60%;
                 margin: 30px 20%;
