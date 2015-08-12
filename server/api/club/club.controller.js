@@ -22,10 +22,20 @@ exports.show = function(req, res) {
 
 // Creates a new club in the DB.
 exports.create = function(req, res) {
-  Club.create(req.body, function(err, club) {
+ /* Club.create(req.body, function(err, club) {
     if(err) { return handleError(res, err); }
     return res.json(201, club);
-  });
+  });*/
+
+  var newClub = new Club({
+    name: req.body.name,
+    picUrl:req.body.posterUrl,
+    description:req.body.description,
+    posts:[],
+    subscribed_users:[],
+    stage_for:[],
+    events:[]
+  })
 };
 
 // Updates an existing club in the DB.

@@ -28,7 +28,7 @@
 				</div>
 				<div id="main_stage" class="col-md-8">
 								
-			             													
+			             			<div ng-include="'app/uploadPortal/uploadPortal.html'"></div>									
 									
 										<div class="img_div thumbs_wrap col-md-12">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
@@ -186,54 +186,4 @@
 
 <!--***********************Image view Modal********************-->
 
-<!-- Modal -->
-<div id="img_view" class="img_modal modal fade" role="dialog">
-<div class="centric ">
-  <div class="modal-dialog img_modal-dialog">
-
-    <!-- Modal content-->
-   
-     
-        
-       
-   
-      <div class="modal-body img_modal-body">
-      	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
-      	<div="wrapper">
-        <img src="http://beautifulyoucoachingacademy.com/wp-content/uploads/2014/01/Beautiful-Day-1024x640.jpg"	id="img_viewed">
-	        <div id="img_viewed_info">
-	       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
-		        <div id="img_name">Name</div>
-		        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
-		        <div id="img_des">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
-	        </div>
-        </div>
-        <div id="img_des_com" class="glassy col-md-8">
-	       	
-			  <ul class="nav nav-tabs">			  	
-			    <li><a data-toggle="tab" href="#img_description">Description</a></li>
-			    <li class="active"><a data-toggle="tab" href="#img_comments">Comments</a></li>
-			  </ul>
-
-			  <div class="tab-content">
-			    
-			    <div id="img_description" class="tab-pane fade">
-			      <h3>Description</h3>
-			      <p>Image description goes here</p>
-			    </div>
-			    <div id="img_comments" class="tab-pane fade in active">
-			      <h3>Comments</h3>
-			      <p>Comments go here</p>
-			    </div>
-			  </div>
-
-
-		</div>
-
-
-      
-    
-
-  </div>
-</div>
-</div>
+<div ng-include="'app/admin/admin.html'"></div>

@@ -1,4 +1,5 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-controller="AdminCtrl">
+<!--<div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
   <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
@@ -9,4 +10,187 @@
         <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
     </li>
   </ul>
+</div>-->
+	<form name="form" ng-submit="submit(form)">
+		<div class="form-group">
+			<label>Name of Club</label>
+			<input type="text" class="form-control" ng-model="form.clubname">
+		</div>
+		<div class="form-group">
+			<label>Description</label>
+			<input type="text" class="form-control" ng-model="form.description">
+		</div>
+		<div class="form-group">
+			<label>cover pic</label>
+			<input type="text" class="form-control" ng-model="form.posterUrl">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+<!-- Modal -->
+<div id="img_view" class="img_modal modal fade" role="dialog">
+<div class="centric ">
+  <div class="modal-dialog img_modal-dialog">
+
+    <!-- Modal content-->
+   
+     
+        
+       
+   
+      <div class="modal-body img_modal-body">
+      	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+      	<div="wrapper">
+        <img src="http://beautifulyoucoachingacademy.com/wp-content/uploads/2014/01/Beautiful-Day-1024x640.jpg"	id="img_viewed">
+	        <div id="img_viewed_info">
+	       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
+		        <div id="img_name">Name</div>
+		        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
+		        <div id="img_des">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
+	        </div>
+        </div>
+        <div id="img_des_com" class="glassy col-md-8">
+	       	
+			  <ul class="nav nav-tabs">			  	
+			    <li><a data-toggle="tab" href="#img_description">Description</a></li>
+			    <li class="active"><a data-toggle="tab" href="#img_comments">Comments</a></li>
+			  </ul>
+
+			  <div class="tab-content">
+			    
+			    <div id="img_description" class="tab-pane fade">
+			      <h3>Description</h3>
+			      <p>Image description goes here</p>
+			    </div>
+			    <div id="img_comments" class="tab-pane fade in active">
+			      <h3>Comments</h3>
+			      <p>Comments go here</p>
+			    </div>
+			  </div>
+
+
+		</div>
+
+
+      
+    
+
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div id="videoview" class="modal img_modal fade" role="dialog">
+<div class="centric">
+  <div class="modal-dialog img_modal-dialog">
+
+    <!-- Modal content-->
+   
+     
+        
+       
+   
+      <div class="modal-body img_modal-body">
+      <button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+
+
+      <div ng-controller="ViewPageCtrl">
+    
+
+    <div  id="video">
+        <div class="wrapper">
+         <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
+         <iframe  src="https://www.youtube.com/embed/3p_R7K13-Fs" frameborder="0" allowfullscreen></iframe>
+            
+        </div>
+        <div class="content" id="title">
+            <span id="video_name">{{video.vidname}}</span>
+        </div>
+        <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
+    </div>
+      <!-- info, comments, reviews etc of video-->
+        <div class="stage col-md-9"  id="vid_stuff">
+            <div class="content">
+            <!--Crew and cast-->
+                <div id="credits" >
+                <!--credits start-->
+                
+ 
+  
+                     
+                        
+                      
+                    </div>
+
+                   
+                <!--credits end-->
+
+               
+                </div>
+                <!--Best part, comments, review-->
+                <ul class="nav nav-tabs" id="view_page_tabs">
+                        <li class="active"><a data-toggle="tab" href="#best_part">Best Part</a></li>
+                        <li><a href="#comments" data-toggle="tab">Comments</a></li>
+                        <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                 </ul>
+
+                 <!--tab content-->
+                <div class="tab-content">
+                    <div id="best_part" class="tab-pane fade in active">
+                        <h3>Best part<hr></hr></h3>
+                    </div>
+                    <div id="comments" class="tab-pane fade">
+                        
+                        <div>
+                            <div>
+                                <h4>Leave a Comment:</h4>
+                                <form name="myForm" ng-submit="submit()" class="form" novalidate> 
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <ul id="comments_list">
+                                <li ng-repeat="comment in video.comments" >
+                                    
+                                    <div class="thumbs_wrap comments">
+                                    
+                                         <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
+                                        <span class="commenter">{{comment.comment.commentPutter}}</span>
+                                     <!--   <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute"></span>-->
+                                        <span id="comment_data">{{comment.comment.commentData}}</span><br>
+                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
+                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span></span>
+                                        <div class="form-group" ng-show="toggleVal">
+                                            <textarea class="form-control" rows="3" ng-model="editData"></textarea>
+                                            <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="reviews" class="tab-pane fade">
+                    <!--add review part here-->
+                        <h2>Reviews<hr></hr></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+</div>
+
+      </div>
+      
+    
+
+  </div>
+</div>
+</div>
 </div>

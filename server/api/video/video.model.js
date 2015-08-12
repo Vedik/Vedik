@@ -22,7 +22,7 @@ var VideoSchema = new Schema({
   storyCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],
   cinematographyCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],
   screenplayCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],
-  dialogsCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],
+  dialogsCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}]
 });
 
 module.exports = mongoose.model('Video', VideoSchema);

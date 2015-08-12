@@ -7,7 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:vidCode', controller.show);
-router.post('/', controller.create);
+router.post('/',auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 //router.delete('/comments/:videoId/:commentId', controller.deleteComment);

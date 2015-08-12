@@ -15,6 +15,7 @@ angular.module('myAppApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     console.log($scope.isLoggedIn()+" is isLoggedIn");
     $scope.loggedInUser = User.get();
+    console.log(User.get());
     $scope.tags=[];
 
 
@@ -26,6 +27,12 @@ angular.module('myAppApp')
       });
     }
 
+   $scope.videoSubmit = function (form){
+          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+   }
 
    $scope.watchVid = function (vidurl) {
    	var a = [];

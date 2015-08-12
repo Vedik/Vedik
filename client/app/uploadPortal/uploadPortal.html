@@ -3,40 +3,11 @@
 
 
 
-<div id="up" class="thumbs_wrap col-md-8">									
-									<div class="vid_div thumbs_wrap centric col-md-8">
-											<div class="thumbs_in col-md-6" id="grow pic">
-												
-												<a href="#" ng-click="watchVid(video.video.vidurl)" >
-													<span class="grow pic" id="user_art_pic">
-														<img src="https://i.ytimg.com/vi/pD9oTgJgXEg/mqdefault.jpg"  id="user_poster" >
-													</span>
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>-->
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>							
-												</a>
-												
-											</div>
-											<div class="thumbs_in">
-												<ul id="vid_details">
-													<li id="name"><img src="assets/images/movie-clapper.png" width="20px" height="20px">  Anushka talking about Baahubali about</li>
-													<li id="description">Description</li>
-													<li id="uploader">by</li>
-												</ul>
-											</div>
-									</div>
-
-
-									<div class="img_div thumbs_wrap col-md-6">
+<div id="for_blur" class="thumbs_wrap col-md-12">									
+									<div class="img_div thumbs_wrap col-md-12">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="https://iso.500px.com/wp-content/uploads/2014/04/20482.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="20px" width="410px" style="opacity:0.5;"></span>
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
 										<span id="img_name">Gorgeous Tamanna</span>
 
 										
@@ -50,34 +21,35 @@
 														</div>
 													</span>		
 									</div>
+									<span id="post_time">
+										 <span id="respond_post">
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
+										 </span>
+
+										 12:30 pm 8th August
+									</span>
 								</div>
 
-								<div class="img_div thumbs_wrap col-md-6">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-										<img src="http://ddwqcu8pss-flywheel.netdna-ssl.com/wp-content/uploads/2013/10/shutterstock_129313271.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="20px" width="410px" style="opacity:0.5;"></span>
-										<span id="img_name">Gorgeous Tamanna</span>
+								
 
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>-->
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
+
+								<div class="img_div thumbs_wrap col-md-12"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(10px)'">
+									<div class="col-md-6 text_type_post" id="event_det">
+										<a href="#"><span id="event_post_heading">Media Club</span></a><br> We is organising a <a href="#">Photowalk</a> at <a href="#">6:00 am</a>on <a href="#">Sunday 2nd August 2015</a>,<a href="#">Elite Beach</a>
+										<br><br><br>
+										<div>
+											<p><a href="#"> 102</a> People are attending so far</p>
+											<button class="b2w"  id="respond_post"><img src="http://www.clker.com/cliparts/E/1/x/w/P/P/walking-man-black-hi.png" width="7px" height="15px"> Attend</button>
+											<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
+
+										</div> 
 									</div>
-								</div>
-
-
-								<div class="img_div thumbs_wrap col-md-12"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(10px)'">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
 										<img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
 										<span id="img_name">Spinning Ball</span>
-										<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png" id="play">	
+											
 
 										
 													<span class="thumb_trnsprnt">
@@ -90,17 +62,53 @@
 														</div>
 													</span>		
 									</div>
-									<!--<div class="col-md-6 thumbs_wrap thumbs_in" id="post_view">
+								<!--	<div class="col-md-6 thumbs_wrap thumbs_in" id="post_view">
 									dfgfhm,<br>
 									sdfdgf<br>dssfv
 									</div>-->
+								</div>
+
+
+								<div class="col-md-12">
+									<div class="text_type_post" id="article">
+										<a href="#"><span id="event_post_heading">Article Name</span></a><br> 
+										ContentContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of article
+										<br><br><br>
+										<div>
+											<p>by<a href="#"> Uploader name</a></p>
+											
+											<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
+
+										</div>
+									</div> 
+									<span id="post_time">12:30 pm 8th August</span>
+								</div>
+
+
+								<div class="img_div thumbs_wrap col-md-12">
+									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
+										<img src="http://ddwqcu8pss-flywheel.netdna-ssl.com/wp-content/uploads/2013/10/shutterstock_129313271.jpg" id="img_post">
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
+										<span id="img_name">Gorgeous Tamanna</span>
+
+										
+													<span class="thumb_trnsprnt">
+													</span>
+													<span id="user_art_info">
+														<div id="a">
+														<span id="vid_data">{{video.video.vidname}}</span>
+													<!--	<div id="vid_data">{{video.video.description}}</div>-->
+														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
+														</div>
+													</span>		
+									</div>
 								</div>
 
 									<br>	
 								<div class="img_div thumbs_wrap col-md-6">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="Pro_pic/tamanna.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="20px" width="410px" style="opacity:0.5;"></span>
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
 										<span id="img_name">Gorgeous Tamanna</span>
 
 										
@@ -114,11 +122,19 @@
 														</div>
 													</span>		
 									</div>
+									<span id="post_time">
+										 <span id="respond_post">
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
+										 </span>
+
+										 12:30 pm 8th August
+									</span>
 								</div>
-								<div class="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('up').style.filter = 'blur(40px)'">
+								<div class="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(40px)'">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
+										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
 										<span id="img_name">Spinning Ball		</span>
 
 										
@@ -132,31 +148,13 @@
 														</div>
 													</span>		
 									</div>
-								</div>		
+									<span id="post_time">
+										 <span id="respond_post">
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
+										 </span>
+
+										 12:30 pm 8th August
+									</span>
+								</div>
 </div>
-
-	
-
-<!-- Modal -->
-<div id="img_view" class="modal img_modal fade" role="dialog">
-<div class="centric ">
-  <div class="modal-dialog img_modal-dialog">
-
-    <!-- Modal content-->
-   
-     
-        
-       
-   
-      <div class="modal-body img_modal-body">
-      	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('up').style.filter = 'blur(0px)'">&times;</button>
-        <img src="http://www.gettyimages.com/CMS/Pages/Embed_Frontdoor/StaticContent/hero_travel_482206371.jpg"	>
-      </div>
-      
-    
-
-  </div>
-</div>
-</div>
-
-

@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Video = require('./video.model');
 var User = require('../user/user.model');
 var mongoose = require('mongoose');
+var Post = require('../post/post.model')
 // Get list of videos
 exports.index = function(req, res) {
   Video.find(function (err, videos) {
@@ -40,10 +41,11 @@ exports.create = function(req, res) {
     genres:req.body.genres,
     description:req.body.description,
     posterurl:req.body.posterurl,
-    uploader:req.body.uploader,
+    uploader:req.user._id,
     view_count:0,
     createdOn:Date.now()
   });
+
   /*newvideo.save(function (err){
     if(!err) {
         User.findOne({_id:newvideo.uploader},function (error, user){
@@ -66,27 +68,30 @@ exports.create = function(req, res) {
   newvideo.save(function (err){
     if(err) return handleError(res, err);
     else {
-      User.findOne({_id:newvideo.uploader}, function (err, user){
-        if(err) {
-          return handleError(res, err);
-        }
-        else {
-          user.videos.push({video:newvideo,role:['actor']});
-          user.save(function (error) {
+          req.user.videos.push({video:newvideo,role:['actor']});
+          req.user.save(function (error) {
             if(error) {
               return handleError(res, err);
             }
             else {
               console.log('user saved??');
             }
-          })
+          });
+          var newPost = new Post({
+            videoId: newvideo._id,
+            createdOn:Date.now()
+          });
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else {
+              console.log('post created');
+            }
+          });
+          return res.json(200,newvideo);
         }
-      })
-    }
-    return res.json(200,newvideo);
-  });
-
-}
+    
+    });
+};
 
 
 // Updates an existing video in the DB.

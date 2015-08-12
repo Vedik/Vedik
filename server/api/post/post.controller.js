@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var Post = require('./post.model');
-
 // Get list of posts
 exports.index = function(req, res) {
   Post.find(function (err, posts) {
