@@ -35,6 +35,20 @@ angular.module('myAppApp')
         })
    }
 
+    $scope.imageSubmit = function (form){
+          $http.post('/api/images',{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tages:form.tags}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+   }
+
+    $scope.articleSubmit = function (form){
+          $http.post('/api/articles',{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+   }
+
     $scope.getSuggestionsForCredits = function (query){
       return $http.get('/api/creditDets/search/'+query).success(function (response) {
         console.log(response);

@@ -2,6 +2,9 @@
 
 var _ = require('lodash');
 var Image = require('./image.model');
+var Post = require('../post/post.model');
+var User = require('../user/user.model');
+var Like = require('../like/like.model');
 
 // Get list of images
 exports.index = function(req, res) {
@@ -22,11 +25,59 @@ exports.show = function(req, res) {
 
 // Creates a new image in the DB.
 exports.create = function(req, res) {
-  Image.create(req.body, function(err, image) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, image);
+  
+
+  var newImage = new Image({
+    imgName:req.body.vidName,
+    picUrl:req.body.picUrl,
+    tags:req.body.tags,
+    description:req.body.description,
+    uploader:req.user._id,
+    view_count:0,
+    createdOn:Date.now()
   });
+
+  
+  newImage.save(function (err){
+    if(err) return handleError(res, err);
+    else {
+          req.user.images.push({image:newImage,role:['actor']});
+          req.user.save(function (error) {
+            if(error) {
+              return handleError(res, err);
+            }
+            else {
+              console.log('user saved');
+            }
+          });
+          var newPost = new Post({
+            imageId: newImage._id,
+            type:2,
+            createdOn:Date.now()
+          });
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else {
+              console.log('post created');
+            }
+          });
+
+          var newLike = new Like ({
+            id: newImage._id,
+            like:[],
+          });
+          newLike.save(function (err){
+            if(err) return handleError(res,err);
+            else {
+              console.log('like added');
+            }
+          });
+          return res.json(200,newImage);
+        }
+    
+    });
 };
+
 
 // Updates an existing image in the DB.
 exports.update = function(req, res) {

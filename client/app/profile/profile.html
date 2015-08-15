@@ -145,7 +145,7 @@
 											<!--************Video Upload Form********-->
 												<div id="video_form" class="tab-pane fade" >
 													<h3>Add your Video here</h3>
-													<form name="form" ng-submit="videoSubmit(form)">
+													<form name="form" ng-submit="videoSubmit(form)" ng-model="form">
 														<div class="form-group">
 															
 															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
@@ -182,19 +182,20 @@
 
 												<div id="article_form"  class="tab-pane fade">
 													<h3>Add your Article here</h3>
-													<form>
+													<form name="form" ng-submit="articleSubmit(form)" ng-model="form">
 														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Article Name">
+															<input type="text" class="form-control upld_form" ng-model="form.articleName" placeholder="Article Name">
 														</div>
 														<div class="form-group">
 															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
 														</div>
 														<div class="form-group">	
-															<textarea  class="form-control upld_form" ng-model="form.description" placeholder="Type your Article" ></textarea>
+															<textarea  class="form-control upld_form" ng-model="form.content" placeholder="Type your Article" ></textarea>
 														</div>
 														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Tag a category">
+															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
 														</div>
+															<button type="submit" class="b2w">Submit</button>
 													</form>
 												</div>
 
@@ -202,9 +203,9 @@
 
 												<div id="img_form"  class="tab-pane fade">
 													<h3>Add your Image here</h3>
-													<form>
+													<form name="form" ng-submit="imageSubmit(form)" ng-model="form">
 														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Image Name">
+															<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
 														</div>
 														<div class="form-group">
 															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
@@ -213,8 +214,9 @@
 															<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
 														</div>
 														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Tag a category">
+															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
 														</div>
+															<button type="submit" class="b2w">Submit</button>
 													</form>
 												</div>
 											</div>

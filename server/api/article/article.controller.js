@@ -2,6 +2,9 @@
 
 var _ = require('lodash');
 var Article = require('./article.model');
+var Post = require('../post/post.model');
+var User = require('../user/user.model');
+var Like = require('../like/like.model');
 
 // Get list of articles
 exports.index = function(req, res) {
@@ -22,11 +25,59 @@ exports.show = function(req, res) {
 
 // Creates a new article in the DB.
 exports.create = function(req, res) {
-  Article.create(req.body, function(err, article) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, article);
+  
+
+  var newArticle = new Article({
+    imgName:req.body.imgName,
+    tags:req.body.tags,
+    content:req.body.content,
+    description:req.body.description,
+    uploader:req.user._id,
+    view_count:0,
+    createdOn:Date.now()
   });
+
+  
+  newArticle.save(function (err){
+    if(err) return handleError(res, err);
+    else {
+          req.user.articles.push({article:newArticle,role:['actor']});
+          req.user.save(function (error) {
+            if(error) {
+              return handleError(res, err);
+            }
+            else {
+              console.log('user saved');
+            }
+          });
+          var newPost = new Post({
+            articleId: newArticle._id,
+            type:1,
+            createdOn:Date.now()
+          });
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else {
+              console.log('post created');
+            }
+          });
+
+          var newLike = new Like ({
+            id: newArticle._id,
+            like:[],
+          });
+          newLike.save(function (err){
+            if(err) return handleError(res,err);
+            else {
+              console.log('like added');
+            }
+          });
+          return res.json(200,newArticle);
+        }
+    
+    });
 };
+
 
 // Updates an existing article in the DB.
 exports.update = function(req, res) {
