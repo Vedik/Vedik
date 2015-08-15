@@ -5,13 +5,36 @@ angular.module('myAppApp')
     $scope.message = 'Hello';
     $scope.submitted = false;
 
-    console.log('a');
+  
     $http.get('/api/posts/').success(function (response){
-        console.log('response');
+        console.log(response);
         $scope.posts = response;
+
+
+        
+        var i;
+        for(i=0;i<$scope.posts.length;i++)
+        {
+            if($scope.posts[i].type==1)
+            {
+                /*var id=$scope.posts.articleId._id;
+                $http.get('/api/likes/'+id).success(function (response){
+                    $scope.posts[i].liking=response.liked;
+                    console.log($scope.posts[i].liking);
+                    console.log('abcd');
+                });*/
+                console.log('abcd');
+            
+            }
+        }
+        
         
     });
-
+    $scope.postId = function(postId){
+        console.log('df');
+        console.log(postId);
+    }
+    
     /*
     $scope.submit = function (form){
     	$scope.submitted = true;

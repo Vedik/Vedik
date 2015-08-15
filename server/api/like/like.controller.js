@@ -76,10 +76,29 @@ exports.index = function(req, res) {
 
 // Get a single like
 exports.show = function(req, res) {
-  Like.findById(req.params.id, function (err, like) {
+  Like.findone(id:req.params.id, function (err, like) {
     if(err) { return handleError(res, err); }
     if(!like) { return res.status(404).send('Not Found'); }
-    return res.json(like);
+
+    var liked=false;
+    if(like.like.length==0)
+    {
+      liked=false
+    }
+    else
+    {
+      for(var i=0;i<like.like.length;i++)
+      {
+        if(like.like[i].equals(req.user._id))
+        {
+          liked=true;
+          break;
+        }
+      }
+      return liked;
+    }
+    
+
   });
 };
 

@@ -25,10 +25,10 @@ exports.show = function(req, res) {
 
 // Creates a new image in the DB.
 exports.create = function(req, res) {
-  
+  console.log(req.body.imgName);
 
   var newImage = new Image({
-    imgName:req.body.vidName,
+    imgName:req.body.imgName,
     picUrl:req.body.picUrl,
     tags:req.body.tags,
     description:req.body.description,

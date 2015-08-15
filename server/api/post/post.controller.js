@@ -8,11 +8,14 @@ exports.index = function(req, res) {
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('videoId')
+  .populate('articleId videoId imageId')
+  
   .exec(function (err, posts){
       if (err) return handleError(err);
+     
+      console.log('er2');
       console.log(posts);
-      res.json(posts);
+      return res.json(posts);
   })
 };
 

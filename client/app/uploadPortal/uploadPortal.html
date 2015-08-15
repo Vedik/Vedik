@@ -4,10 +4,12 @@
 <div ng-controller="UploadPortalCtrl">
 	<ul>
 	<li ng-repeat="posts in posts">
-		{{posts.type}}dfg
+		<span>{{posts.type}} {{posts.imageId.imgName}} </span>
+		
 	</li>
 	</ul>
 
+<div ng-include
 
 <div id="for_blur" class="thumbs_wrap col-md-12">									
 									<div class="img_div thumbs_wrap col-md-12">
@@ -83,7 +85,7 @@
 										<div>
 											<p>by<a href="#"> Uploader name</a></p>
 											
-											<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
+											<span id="respond_post"><a href="#" ng-init="postId=posts.articleId._id"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
 
 										</div>
 									</div> 

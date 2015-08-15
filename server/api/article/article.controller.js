@@ -28,7 +28,7 @@ exports.create = function(req, res) {
   
 
   var newArticle = new Article({
-    imgName:req.body.imgName,
+    articleName:req.body.articleName,
     tags:req.body.tags,
     content:req.body.content,
     description:req.body.description,
