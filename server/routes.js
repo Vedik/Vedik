@@ -15,6 +15,7 @@ module.exports = function(app) {
   app.use('/api/events', require('./api/event'));
   app.use('/api/posts', require('./api/post'));
   app.use('/api/clubs', require('./api/club'));
+  app.use('/api/likes', require('./api/like'));
   app.use('/api/stages', require('./api/stage'));
   app.use('/api/creditDets', require('./api/creditDet'));
   app.use('/api/credits', require('./api/credit'));

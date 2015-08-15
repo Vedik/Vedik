@@ -17,13 +17,71 @@ angular.module('myAppApp')
         {
             if($scope.posts[i].type==1)
             {
-                /*var id=$scope.posts.articleId._id;
-                $http.get('/api/likes/'+id).success(function (response){
-                    $scope.posts[i].liking=response.liked;
-                    console.log($scope.posts[i].liking);
+                
+                var postId=$scope.posts[i].articleId._id;
+                var liked
+                
+                $http.get('/api/likes/'+postId).success(function (response){
+                        console.log('sdf');
+                        if(response==false)
+                        {
+                            liked=false;
+                        }
+                        else
+                        {
+                            liked=true;
+                        }
+                    
+                    console.log("liked = %s",liked);
                     console.log('abcd');
-                });*/
-                console.log('abcd');
+                });
+                
+            
+            }
+             else if($scope.posts[i].type==2)
+            {
+                
+                var postId=$scope.posts[i].imageId._id;
+                var liked
+                
+                $http.get('/api/likes/'+postId).success(function (response){
+                        console.log('sdf');
+                        if(response==false)
+                        {
+                            liked=false;
+                        }
+                        else
+                        {
+                            liked=true;
+                        }
+                    
+                    console.log("liked = %s",liked);
+                    console.log('abcd');
+                });
+                
+            
+            }
+             else //type=3
+            {
+                
+                var postId=$scope.posts[i].videoId._id;
+                var liked
+                
+                $http.get('/api/likes/'+postId).success(function (response){
+                        console.log('sdf');
+                        if(response==false)
+                        {
+                            liked=false;
+                        }
+                        else
+                        {
+                            liked=true;
+                        }
+                    
+                    console.log("liked = %s",liked);
+                    console.log('abcd');
+                });
+                
             
             }
         }

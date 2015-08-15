@@ -24,7 +24,7 @@ exports.like = function (req,res){
   });
 };
 exports.unlike = function (req,res){
-  Like.findOne({id:req.params.postId},funzsa`..ction (err,like){
+  Like.findOne({id:req.params.postId},function (err,like){
     if(err){
       return handleError(res,err);
     }
@@ -76,14 +76,20 @@ exports.index = function(req, res) {
 
 // Get a single like
 exports.show = function(req, res) {
-  Like.findone(id:req.params.id, function (err, like) {
+  console.log(req.params.postId);
+  
+  Like.findOne({id:req.params.postId}, function (err, like) {
+
+    
     if(err) { return handleError(res, err); }
-    if(!like) { return res.status(404).send('Not Found'); }
+   if(!like) { return res.status(404).send('Not Found'); }
 
     var liked=false;
+
     if(like.like.length==0)
     {
-      liked=false
+      liked=false;
+      
     }
     else
     {
@@ -95,8 +101,12 @@ exports.show = function(req, res) {
           break;
         }
       }
-      return liked;
+      
+
     }
+
+      console.log(liked);
+      return res.json(liked);
     
 
   });
