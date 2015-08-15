@@ -5,6 +5,7 @@ var Video = require('./video.model');
 var User = require('../user/user.model');
 var mongoose = require('mongoose');
 var Post = require('../post/post.model')
+var Like = require('../like/like.model')
 // Get list of videos
 exports.index = function(req, res) {
   Video.find(function (err, videos) {
@@ -79,12 +80,24 @@ exports.create = function(req, res) {
           });
           var newPost = new Post({
             videoId: newvideo._id,
+            type:3,
             createdOn:Date.now()
           });
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else {
               console.log('post created');
+            }
+          });
+
+          var newLike = new Like ({
+            id: newvideo._id,
+            like:[],
+          });
+          newLike.save(function (err){
+            if(err) return handleError(res,err);
+            else {
+              console.log('like added');
             }
           });
           return res.json(200,newvideo);

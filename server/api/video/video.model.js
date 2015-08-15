@@ -13,7 +13,7 @@ var VideoSchema = new Schema({
   createdOn:{type:Date},
   respect:Number,
   vidRating:{type:Number,default:0},
-  votes:{type:Number, default:0},
+  
   comments:[{comment:{type:Schema.Types.ObjectId, ref:"Comment"}}],
   uploader:{type:Schema.Types.ObjectId, ref:"User"},
   directorCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],

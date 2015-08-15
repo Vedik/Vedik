@@ -4,10 +4,16 @@ var _ = require('lodash');
 var Post = require('./post.model');
 // Get list of posts
 exports.index = function(req, res) {
+  console.log('err');
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
-    return res.json(200, posts);
-  });
+    })
+  .populate('videoId')
+  .exec(function (err, posts){
+      if (err) return handleError(err);
+      console.log(posts);
+      res.json(posts);
+  })
 };
 
 // Get a single post

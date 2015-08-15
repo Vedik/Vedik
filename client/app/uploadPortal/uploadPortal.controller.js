@@ -1,9 +1,18 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('UploadPortalCtrl', function ($scope,Auth,UploadPortalService) {
+  .controller('UploadPortalCtrl', function ($scope,Auth,$http) {
     $scope.message = 'Hello';
     $scope.submitted = false;
+
+    console.log('a');
+    $http.get('/api/posts/').success(function (response){
+        console.log('response');
+        $scope.posts = response;
+        
+    });
+
+    /*
     $scope.submit = function (form){
     	$scope.submitted = true;
     	//validation
@@ -13,5 +22,5 @@ angular.module('myAppApp')
     		if(response){ console.log(response); }
     		else {console.log('no data received'); }
     	});
-    };
+    };*/
 });
