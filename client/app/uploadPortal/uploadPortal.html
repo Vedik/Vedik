@@ -2,14 +2,11 @@
 
 
 <div ng-controller="UploadPortalCtrl">
-	<ul>
-	<li ng-repeat="posts in posts">
-		<span>{{posts.type}} {{posts.imageId.imgName}} </span>
-		
-	</li>
-	</ul>
+	<div>
+	<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
+	</content-item>
+	</div>
 
-<div ng-include
 
 <div id="for_blur" class="thumbs_wrap col-md-12">									
 									<div class="img_div thumbs_wrap col-md-12">

@@ -1,1 +1,38 @@
-<div>this is the club directive</div>
+<div ng-controller="ClubCtrl">
+
+	<div id="club_wrapper" class="col-md-9">
+		<img src="http://dreamatico.com/data_images/dance/dance-7.jpg" id="club_img">
+		<div class="triangle"></div>
+		<!--<script>
+			var widthel= $(window).width()*0.75;
+
+			$("#club_wrapper").css("width", widthel);
+		</script>-->
+	</div>
+
+	<!--**********************Club info goes here*****************-->
+	<div id="club_info" class="col-md-3">
+		<h2>Dance</h2>
+	</div>
+
+	<!--/*****************************************posts go here-********************-->
+	<div class="col-md-8" style="margin:0px 16.67%;position:absolute;top:400px">
+		<div ng-include="'app/uploadPortal/uploadPortal.html'"></div>
+	</div>
+	<!--***********************Image & Video view Modal********************-->
+
+	<div ng-include="'app/admin/admin.html'"></div>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+</div>

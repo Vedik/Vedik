@@ -1,0 +1,31 @@
+#club_wrapper{
+    position: relative;
+    float: left;
+}
+.triangle{
+    border-left:500px solid;
+    border-top: 200px solid;
+    border-color: rgba(0,0,0,0);
+    border-right:500px solid #fff;    
+    border-bottom:200px solid #fff;
+    width:100% ;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 1;
+    /*filter:blur(10px);*/
+}
+#club_img   {
+    width: 100%;
+    height: 400px;
+    position: absolute;
+}
+#club_info  {
+    width: 
+}
+
+
+
+
+
+

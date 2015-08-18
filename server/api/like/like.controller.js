@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Like = require('./like.model');
+var Post = require('../post/post.model');
 
 
 
@@ -76,15 +77,16 @@ exports.index = function(req, res) {
 
 // Get a single like
 exports.show = function(req, res) {
-  console.log(req.params.postId);
+ // console.log(req.params.postId);
+  
   
   Like.findOne({id:req.params.postId}, function (err, like) {
 
-    
+        var liked;
     if(err) { return handleError(res, err); }
    if(!like) { return res.status(404).send('Not Found'); }
 
-    var liked=false;
+    
 
     if(like.like.length==0)
     {
@@ -100,6 +102,8 @@ exports.show = function(req, res) {
           liked=true;
           break;
         }
+        else
+           liked=false;;
       }
       
 

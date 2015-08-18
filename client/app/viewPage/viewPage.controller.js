@@ -9,17 +9,18 @@ angular.module('myAppApp')
     //$scope.vidCode =vidCode;
     //console.log($scope.vidCode);
     var a = $location.url();
-    var b = a.split('viewPage/');
-    b = b[1].split('#');
-    console.log(b[0]);
+    var b=[];
+    b = a.split('viewPage/');
+    var c = b[1].split('#');
+    console.log(c[0]);
     var refresh = function (){
-      $http.get('/api/videos/'+b[0]).success(function (response){
+      $http.get('/api/videos/'+c[0]).success(function (response){
         console.log(response);
         $scope.video = response;
       });
     }
     refresh();
-    $scope.vidCode = b[0];
+    $scope.vidCode = c[0];
     console.log($scope.vidCode);
     $scope.user = User.get();
 
@@ -52,6 +53,7 @@ angular.module('myAppApp')
     }
 
   })
+  
   .directive('myYoutube', function($sce) {
   return {
     restrict: 'EA',

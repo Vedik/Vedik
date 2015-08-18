@@ -2,20 +2,34 @@
 
 var _ = require('lodash');
 var Post = require('./post.model');
+var Article = require('../article/article.model');
+var User = require('../user/user.model');
 // Get list of posts
 exports.index = function(req, res) {
   console.log('err');
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
+  .lean()
   .populate('articleId videoId imageId')
-  
   .exec(function (err, posts){
+
+    var options = {
+      path: 'articleId.uploader',
+      model:'User',
+    };
       if (err) return handleError(err);
      
       console.log('er2');
-      console.log(posts);
+      console.log(posts.articleId);
+
+      
+     
+      Post.populate(posts, options, function (err, posts) {
+        //console.log(posts);
       return res.json(posts);
+      
+    });
   })
 };
 
