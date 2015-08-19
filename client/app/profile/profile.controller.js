@@ -8,6 +8,14 @@ angular.module('myAppApp')
     console.log(name);
     $http.get('/api/users/'+name).success(function (response){
       $scope.user = response;
+       if($scope.user.galleryPic)
+        {
+          $scope.GalleryPic= $scope.user.galleryPic;
+        }
+    else
+    {  
+         $scope.GalleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+    }
 
       console.log(response);
     });
@@ -17,6 +25,7 @@ angular.module('myAppApp')
     $scope.loggedInUser = User.get();
     console.log(User.get());
     $scope.tags=[];
+  
 
 
 
@@ -57,9 +66,9 @@ angular.module('myAppApp')
       });
     }
 
-    $scope.editGalleryPic = function (url){
-      return $http.post('/api/users/galleryPic/'+url).success(function (response) {
-        $scope.galleryPic=url;
+    $scope.editGalleryPic = function (form){
+      return $http.post('/api/users/galleryPic/',{galleryPic:form.galPicUrl}).success(function (response) {
+        $scope.galleryPic=form.galPicUrl;
         console.log($scope.galleryPic);
       });
     }

@@ -14,4 +14,14 @@ angular.module('myAppApp')
         }
       });
     };
+
+
+     $scope.submit = function (form){
+        //validation to be done
+        $http.post('/api/clubs',{name:form.clubname,description:form.description,posterUrl:form.posterUrl}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+    }
+
   });

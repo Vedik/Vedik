@@ -13,7 +13,7 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 //router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
-router.post('/galleryPic/:url', auth.isAuthenticated(), controller.galPicChange);
+router.post('/galleryPic/', auth.isAuthenticated(), controller.galPicChange);
 router.get('/search/:searchQuery', controller.search);
 router.get('/:name', controller.showUser);
 module.exports = router;

@@ -101,9 +101,9 @@
 		display: hidden;
 	}
 
-	 	#user_poster    {
+	 #user_poster    {
                 width: 100%
-            }
+    }
 	.thumbs_in:hover #img_post
 	{
 	        -webkit-transform: scale(1.3);

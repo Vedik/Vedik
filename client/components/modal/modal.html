@@ -8,8 +8,12 @@
         
         <div class="modal-body img_modal-body centric glassy">
         	<p>New Gallery Pic</p>
-          <input ng-model="galPicUrl" placeholder="New Url of gallery Picture" class="form-control">
-          <button type="button" class="btn btn-default" ng-click="editGalleryPic(galPicUrl)">Submit</button>
+        	<form name="form" ng-submit="editGalleryPic(form)" ng-model="form">
+        		<div class="form-group">
+	          		<input type="text" ng-model="form.galPicUrl" placeholder="New Url of gallery Picture" class="form-control">
+	          	</div>
+	         <button type="submit" class="b2w">Submit</button>
+	         </form>
         </div>
         
       </div>

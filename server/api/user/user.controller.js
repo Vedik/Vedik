@@ -34,18 +34,18 @@ exports.create = function (req, res, next) {
   });
 };
 
+//to change gallery pic
 exports.galPicChange = function (req, res) {
-  var newUser = new User({
-    galleryPic:req.parems.url
+  var userId = req.user._id;
+  console.log(req.body.galleryPic);
+  User.findById(userId, function (err,user){
+    user.galleryPic=req.body.galleryPic;
+    user.save(function (err) {
+      if (err) { return handleError(res, err); }
+      console.log(user.galleryPic);
+      return res.json(200, user);
+
     });
-  
-   newUser.save(function (err){
-    if(err) return handleError(res, err);
-    else
-    {
-      console.log('pic added');
-    }
-  
   });
 };
 

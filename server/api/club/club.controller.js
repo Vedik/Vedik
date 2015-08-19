@@ -31,11 +31,21 @@ exports.create = function(req, res) {
     name: req.body.name,
     picUrl:req.body.posterUrl,
     description:req.body.description,
+    createdOn:Date.now(),
     posts:[],
     subscribed_users:[],
     stage_for:[],
     events:[]
   })
+  newClub.save(function (err){
+    if(err){
+      return handleError(res,err);
+    }
+    else {
+      console.log('The club is saved as \n'+newClub);
+      res.json(newClub);
+    }
+  });
 };
 
 // Updates an existing club in the DB.
