@@ -1,10 +1,31 @@
+<!--***********************Image & Video view Modal********************-->
+
+<div ng-include="'components/modal/modal.html'"></div>
+<!--******************************************************************-->
+
+
 <div ng-controller="ProfileCtrl" id="for_blur">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 
             <div id="profile">
             <!--user pic and info goes here-->
             	<div id="pro_pic">
-           			<img src="Pro_pic/prabhas.jpg" style="width:100%;height:100%;"></img>
+            		<div id="pro_pic_wrapper" >
+           				<img src="Pro_pic/prabhas.jpg" style="width:100%;height:100%;"></img>
+           				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'"><a href=""><u>Edit Pic</u></a></div>
+
+           				<script>
+					  	$(document).ready(function(){
+					   		$("#gal_pic_edit").click(function(){
+								var windowHeight= $(window).height();
+								var modalHeight= $(".modal_center").innerHeight;
+								var margin= (windowHeight*25)/100;
+									
+								$(".glassy").css("border", "5 solid black");
+							});
+						});
+						</script>
+           			</div>
 	            	<div id="stages_list">
 					</div>
 
@@ -44,10 +65,11 @@
 		        	<div onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'">
 		        		<button ng-show="user.name==loggedInUser.name" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
 		        	</div>
+		        	
 	        	</div>
 	        
 
-	      
+	                                               
 				<!--users content, videos etc-->
 				 <div id="user_hist_div1">
 				 	<div id="empty">
@@ -109,186 +131,8 @@
 			</div>
 </div>
 
-<!--***********************************upload section******************************************-->
-	        
-
-								
-
-			<div class="booking_body">
-
-					<div id="upload" class="modal img_modal fade" role="dialog">
-						<div class="modal-dialog img_modal-dialog">
-
-						<!-- Modal content-->
-					      
-								
-				        	<div class="modal-body img_modal-body centric">
-				        		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
-				        		<div onclick="document.getElementById('upld_display').style.display = 'block'">
-					        		<a href="#article_form" data-toggle="tab" ><button type="button" class="b2w" id="up_art">Article</button></a>
-					        		<a href="#img_form" data-toggle="tab" ><button type="button" class="b2w" id="up_art">Image</button></a>
-					        		<a href="#video_form" data-toggle="tab" ><button type="button" class="b2w" id="up_art">Video</button></a>
-					        	</div>
 
 
-				        		<div id="upld_display"  class="tab-content col-md-6">
-		        					<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
-									<ul class="nav nav-tabs">
-									 	 <li class="active"><a data-toggle="tab" href="#upload_form">Info</a></li>
-									    <li><a href="#credits" data-toggle="tab">Credits</a></li>
-									</ul>
-
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="upload_form" ng-controller="UploadPortalCtrl">
-											<div class="tab-content">
-
-											<!--************Video Upload Form********-->
-												<div id="video_form" class="tab-pane fade" >
-													<h3>Add your Video here</h3>
-													<form name="form" ng-submit="videoSubmit(form)" ng-model="form">
-														<div class="form-group">
-															
-															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
-														</div>
-														<div class="form-group">
-															
-															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
-														</div>
-														<div class="form-group">
-															
-															<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
-														</div>
-														<div class="form-group"> <!-- need to put select with multi option selection -->
-															<label>Genre/Category</label>
-															<select ng-model="form.genres" class="form-control upld_form" placeholder="Genres">
-																<option value="horror">horror</option>
-																<option value="comedy">comedy</option>
-															</select>   <!-- Make it a maximum of three using array size in controller -->
-														</div>
-														<div class="form-group"> <!-- Put text area -->
-															
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-														</div>
-														<div class="form-group">
-															<label>Stage to be tagged</label>
-															
-														</div>
-														<button type="submit" class="b2w">Submit</button>
-													</form>
-
-												</div>
-										
-												<!--***************Article Upload form**************-->
-
-												<div id="article_form"  class="tab-pane fade">
-													<h3>Add your Article here</h3>
-													<form name="form" ng-submit="articleSubmit(form)" ng-model="form">
-														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.articleName" placeholder="Article Name">
-														</div>
-														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-														</div>
-														<div class="form-group">	
-															<textarea  class="form-control upld_form" ng-model="form.content" placeholder="Type your Article" ></textarea>
-														</div>
-														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
-														</div>
-															<button type="submit" class="b2w">Submit</button>
-													</form>
-												</div>
-
-												<!--**********Image Upload Form******************-->
-
-												<div id="img_form"  class="tab-pane fade">
-													<h3>Add your Image here</h3>
-													<form name="form" ng-submit="imageSubmit(form)" ng-model="form">
-														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
-														</div>
-														<div class="form-group">
-															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-														</div>
-														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-														</div>
-														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
-														</div>
-															<button type="submit" class="b2w">Submit</button>
-													</form>
-												</div>
-											</div>
-
-										</div>
-										<div id="credits" class="tab-pane fade">
-										    <h3>Credits</h3>
-										    <div class="col-md-6">
-								      			<label>Credit</label>
-								      			<div>
-								      				<tags-input ng-model="credits.directors" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'>
-      													<auto-complete 
-      													source="getSuggestionsForCredits($query)"
-      													min-length='1'
-      													>
-      													</auto-complete>
-    												</tags-input>
-    												<p>Model: {{credits.credit}}</p>
-    											</div>
-								      		</div>
-								      		<div class="col-md-6">
-								      			<label>Directors</label>
-								      			<div>
-								      				<tags-input ng-model="credits.creditNames" display-property="name" add-from-autocomplete-only="true">
-      													<auto-complete 
-      													source="getSuggestionsForNames($query)"
-      													min-length='1'>
-      													</auto-complete>
-    												</tags-input>
-    												<p>Model: {{credits.creditNames}}</p>
-    											</div>
-								      		</div>
-								      		<div ng-repeat="credit in credits">
-								      			<label>{{credit.name}}</label>
-								      			<tags-input ng-model="result.{{credit.name}}" display-property="name" add-from-autocomplete-only="true">
-      												<auto-complete 
-      											source="getSuggestions($query)"
-      											min-length='1'>
-      												</auto-complete>
-    											</tags-input>
-    											<p>{{result}}</p>
-								      		</div>
-								      		<div>
-								      			<label>Editors</label>
-								      			<tags-input ng-model="credits.editors" display-property="name" add-from-autocomplete-only="true">
-      												<auto-complete 
-      													source="getSuggestions($query)"
-      													min-length='1'>
-      												</auto-complete>
-    											</tags-input>
-    											<p>Model: {{credits.editors}}</p>
-								      		</div>
-								      		<div>
-								      			<h2>Add Credits</h2>
-								      		</div>
-								    	</div>
-									</div>
-										
-								</div>
-							
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-<!--********************************upload section closes***********************************-->
-
-
-<!--********************************Video Viewing Modal************************************-->
-
-<div ng-include="'app/admin/admin.html'"></div>
 
 
 

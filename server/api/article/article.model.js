@@ -6,12 +6,7 @@ var mongoose = require('mongoose'),
 var ArticleSchema = new Schema({
   articleName: String,
   description:String,
-  content:String,
-  createdOn:{type:Date,default:Date.now()},
-  tags:[String],
-  uploader:{type:Schema.Types.ObjectId, ref:"User"},
-  rating:Number,
-  view_count:Number,
+  content:String
   
 });
 

@@ -29,12 +29,9 @@ exports.create = function(req, res) {
 
   var newArticle = new Article({
     articleName:req.body.articleName,
-    tags:req.body.tags,
     content:req.body.content,
     description:req.body.description,
-    uploader:req.user._id,
-    view_count:0,
-    createdOn:Date.now()
+    
   });
 
   
@@ -52,7 +49,11 @@ exports.create = function(req, res) {
           });
           var newPost = new Post({
             articleId: newArticle._id,
+            tags:req.body.tags,
             type:1,
+            uploader:req.user._id,
+            view_count:0,
+            like:[],
             createdOn:Date.now()
           });
           newPost.save(function(err){
@@ -62,16 +63,7 @@ exports.create = function(req, res) {
             }
           });
 
-          var newLike = new Like ({
-            id: newArticle._id,
-            like:[],
-          });
-          newLike.save(function (err){
-            if(err) return handleError(res,err);
-            else {
-              console.log('like added');
-            }
-          });
+          
           return res.json(200,newArticle);
         }
     

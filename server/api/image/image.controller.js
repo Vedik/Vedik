@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Image = require('./image.model');
 var Post = require('../post/post.model');
 var User = require('../user/user.model');
-var Like = require('../like/like.model');
+
 
 // Get list of images
 exports.index = function(req, res) {
@@ -30,11 +30,7 @@ exports.create = function(req, res) {
   var newImage = new Image({
     imgName:req.body.imgName,
     picUrl:req.body.picUrl,
-    tags:req.body.tags,
-    description:req.body.description,
-    uploader:req.user._id,
-    view_count:0,
-    createdOn:Date.now()
+    description:req.body.description
   });
 
   
@@ -53,7 +49,12 @@ exports.create = function(req, res) {
           var newPost = new Post({
             imageId: newImage._id,
             type:2,
-            createdOn:Date.now()
+            createdOn:Date.now(),
+            uploader:req.user._id,
+            view_count:0,
+            tags:req.body.tags,
+            like:[]
+            
           });
           newPost.save(function(err){
             if(err) return handleError(res,err);
@@ -62,16 +63,7 @@ exports.create = function(req, res) {
             }
           });
 
-          var newLike = new Like ({
-            id: newImage._id,
-            like:[],
-          });
-          newLike.save(function (err){
-            if(err) return handleError(res,err);
-            else {
-              console.log('like added');
-            }
-          });
+          
           return res.json(200,newImage);
         }
     

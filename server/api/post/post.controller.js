@@ -2,34 +2,20 @@
 
 var _ = require('lodash');
 var Post = require('./post.model');
-var Article = require('../article/article.model');
-var User = require('../user/user.model');
 // Get list of posts
 exports.index = function(req, res) {
   console.log('err');
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .lean()
-  .populate('articleId videoId imageId')
+  .populate('articleId videoId imageId like uploader')
+  
   .exec(function (err, posts){
-
-    var options = {
-      path: 'articleId.uploader',
-      model:'User',
-    };
       if (err) return handleError(err);
      
       console.log('er2');
-      console.log(posts.articleId);
-
       
-     
-      Post.populate(posts, options, function (err, posts) {
-        //console.log(posts);
       return res.json(posts);
-      
-    });
   })
 };
 
@@ -75,6 +61,65 @@ exports.destroy = function(req, res) {
     });
   });
 };
+
+
+exports.like = function (req,res){
+  console.log(req.params.postId);
+  console.log('dfsdfbv');
+  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId } ] },function (err,post){
+    if(err){
+      return handleError(res,err);
+    }
+    
+    post.like.push({user:req.user._id});
+    post.save(function (err){
+      if(err){
+        return handleError(res,err);
+      }
+      else{
+        console.log('liked');
+        return res.json({added:true});
+      }
+    });  
+  });
+};
+exports.unlike = function (req,res){
+  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId } ] },function (err,post){
+    if(err){
+      return handleError(res,err);
+    }
+    
+    var i =0;
+    for(i;i<post.like.length;i++)
+    {
+      if(post.like[i].user.equals(req.user._id))
+      {
+        post.like[i].remove(function (err) {
+          if(err){
+            return handleError(res,err);
+            c
+          } 
+        });
+        break;
+      }
+    };
+        
+         
+            post.save(function (err){
+              if(err){ return handleError(res, err);}
+              else 
+              {
+                console.log('error');
+                return res.json({removed : true});
+              }
+            });
+          
+        
+         
+  });
+};
+
+
 
 function handleError(res, err) {
   return res.send(500, err);

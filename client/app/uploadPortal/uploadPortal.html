@@ -4,8 +4,18 @@
 <div ng-controller="UploadPortalCtrl">
 	<div>
 	<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
+		<span id="post_time">
+										 <span id="respond_post">
+										 		<span ng-hide="liked" ng-click="like({{content.articleId._id}})"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px">{{content.like.length}} Like</a></span>
+										 		<span ng-show="liked" ng-click="like({{content.articleId._id}})"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px">{{content.like.length}} Unlike</a></span>
+										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
+										 </span>
+
+										 12:30 pm 8th August
+			</span>
 	</content-item>
 	</div>
+	
 
 
 <div id="for_blur" class="thumbs_wrap col-md-12">									

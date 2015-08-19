@@ -57,6 +57,13 @@ angular.module('myAppApp')
       });
     }
 
+    $scope.editGalleryPic = function (url){
+      return $http.post('/api/users/galleryPic/'+url).success(function (response) {
+        $scope.galleryPic=url;
+        console.log($scope.galleryPic);
+      });
+    }
+
 
 
    $scope.watchVid = function (vidurl) {

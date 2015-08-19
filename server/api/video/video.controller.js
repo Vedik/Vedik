@@ -39,12 +39,9 @@ exports.create = function(req, res) {
   var newvideo = new Video({
     vidname:req.body.vidname,
     vidurl:req.body.vidurl,
-    genres:req.body.genres,
     description:req.body.description,
     posterurl:req.body.posterurl,
-    uploader:req.user._id,
-    view_count:0,
-    createdOn:Date.now()
+    
   });
 
   /*newvideo.save(function (err){
@@ -81,6 +78,10 @@ exports.create = function(req, res) {
           var newPost = new Post({
             videoId: newvideo._id,
             type:3,
+            tags:req.body.genres,
+            uploader:req.user._id,
+            view_count:0,
+            like:[],
             createdOn:Date.now()
           });
           newPost.save(function(err){
@@ -90,16 +91,7 @@ exports.create = function(req, res) {
             }
           });
 
-          var newLike = new Like ({
-            id: newvideo._id,
-            like:[],
-          });
-          newLike.save(function (err){
-            if(err) return handleError(res,err);
-            else {
-              console.log('like added');
-            }
-          });
+          
           return res.json(200,newvideo);
         }
     

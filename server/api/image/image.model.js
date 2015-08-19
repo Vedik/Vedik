@@ -6,13 +6,7 @@ var mongoose = require('mongoose'),
 var ImageSchema = new Schema({
   imgName: String,
   picUrl:String,
-  description:String,
-  tags:[String],
-  createdOn:{type:Date,default:Date.now()},
-  uploader:[{type:Schema.Types.ObjectId, ref:"User"}],
-  rating:Number,
-  view_count:Number,
-
+  description:String
 });
 
 module.exports = mongoose.model('Image', ImageSchema);

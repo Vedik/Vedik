@@ -34,6 +34,21 @@ exports.create = function (req, res, next) {
   });
 };
 
+exports.galPicChange = function (req, res) {
+  var newUser = new User({
+    galleryPic:req.parems.url
+    });
+  
+   newUser.save(function (err){
+    if(err) return handleError(res, err);
+    else
+    {
+      console.log('pic added');
+    }
+  
+  });
+};
+
 /**
  * Get a single user
  */
