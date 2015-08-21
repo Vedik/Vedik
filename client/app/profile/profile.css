@@ -23,7 +23,7 @@
 
             }
             #pro_pic    {
-                position: fixed;
+                position: relative;
                 width: 100%;
                 top:0px;
             }
@@ -216,8 +216,7 @@
                 width: 100%;
             }
             #empty  {
-                width: 100%;
-                height:700px;
+                
             }
             #art_wrap {
                 background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");

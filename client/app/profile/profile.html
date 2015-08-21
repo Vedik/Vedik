@@ -31,7 +31,17 @@
 
 		            <div id="user_profile" class="col-md-3 ">
 			            <div>
-			                <span id="pro_name">{{user.name}}</span>
+			                <span>
+			                	<span ng-click="editName=true" ng-hide="editName && user.name==loggedInUser.name" id="pro_name"><a href="">{{user.name}}</a></span>
+			                	<div ng-show="editName && user.name==loggedInUser.name">
+			                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
+			                			<input type="text" value="{{user.name}}" ng-model="form.name">
+			                			<br>
+			                			<button type="submit" class="w2b">Save</button> 
+			                			<button type="button" ng-click="editName=false" class="w2b">Cancel</button>
+			                		</form>
+			                	</div>
+			                </span>
 			            </div>
 			        
 			        	<div id="infodiv">
@@ -53,9 +63,19 @@
 		        			
 		        			<h4>About<hr></hr></h4>
 		        			
-								Prabhas (born Prabhas Raju Uppalapati) is an Indian film actor known for his works exclusively in the Telugu cinema.[1] Prabhas is the nephew of Telugu actor Uppalapati Krishnam Raju.[2] Prabhas made his film debut with the 2002 drama film, Eshwar. His works include box office hits such as Varsham (2004), Chatrapathi (2005), Chakram (2005), Billa (2009), Mr. Perfect (2011), Mirchi (2013) and Baahubali: The Beginning (2015).[3] In 2014 he appeared in the Bollywood film Action Jackson directed by Prabhudeva. He stars in Baahubali: The Beginning (2015), which recorded the highest grossing opening for an Indian film.</br>
-								Prabhas was born to U. Suryanarayana Raju and Siva Kumari. He is the youngest of three children, with an elder brother Pramod Uppalapati and sister Pragathi. He is the nephew of Telugu actor Uppalapati Krishnam Raju.[7]
-								Prabhas was born to U. Suryanarayana Raju and Siva Kumari. He is the youngest of three children, with an elder brother Pramod Uppalapati and sister Pragathi. He is the nephew of Telugu actor Uppalapati Krishnam Raju.[7]
+							<span>
+			                	<span ng-click="edit=true" ng-hide="edit && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name"><a href="">{{userAbout}}</a></span>
+			                	<div ng-show="edit && user.name==loggedInUser.name">
+			                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form"> 
+			                			<textarea elastic style="width:100%" value="{{userAbout}}" ng-model="form.about">
+			                			</textarea>
+			                			
+			                			<br>
+			                			<button type="submit" class="w2b">Save</button> 
+			                			<button type="button" ng-click="edit=false" class="w2b">Cancel</button>
+			                		</form>
+			                	</div>
+			                </span>
 										        		</span>
 		        		<span id="HOF" class="tab-pane fade">
 		        			<h4>Hall of Fame<hr></hr></h4>

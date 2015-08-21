@@ -10,6 +10,7 @@ var UserSchema = new Schema({
   email: { type: String,required:true,unique:true, lowercase: true },
   proPic: String,
   galleryPic:String,
+  about:String,
   role: {
     type: String,
     default: 'user'

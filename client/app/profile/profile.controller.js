@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl', function ($scope,$location, Auth, $state,User,$http) {
+  .controller('ProfileCtrl', ['$scope', '$location', 'Auth', '$state' ,'User','$http','$interval',function ($scope,$location, Auth, $state,User,$http,$interval) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var name = $location.url().split('/profile/')[1];
     console.log(name);
+    $scope.abcd="1234";
     $http.get('/api/users/'+name).success(function (response){
       $scope.user = response;
        if($scope.user.galleryPic)
@@ -15,6 +16,15 @@ angular.module('myAppApp')
     else
     {  
          $scope.GalleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+    }
+
+    if($scope.user.about)
+        {
+          $scope.userAbout= $scope.user.about;
+        }
+    else
+    {  
+         $scope.userAbout = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
     }
 
       console.log(response);
@@ -67,11 +77,24 @@ angular.module('myAppApp')
     }
 
     $scope.editGalleryPic = function (form){
-      return $http.post('/api/users/galleryPic/',{galleryPic:form.galPicUrl}).success(function (response) {
-        $scope.galleryPic=form.galPicUrl;
-        console.log($scope.galleryPic);
-      });
+     $http.post('/api/users/galleryPic/',{galleryPic:form.galPicUrl}).success(function (response) {
+        $scope.abcd="123";
+        $scope.GalleryPic=form.galPicUrl;
+        console.log($scope.GalleryPic);
+
+        })
+
+      }
+
+    $scope.editProfile = function (form,type){
+      $http.post('/api/users/editProfile/'+type,{editProfile:form}).success(function (response){
+        console.log($scope.user.name);
+      })
+
     }
+     $scope.edit=false;
+     
+
 
 
 
@@ -90,4 +113,21 @@ angular.module('myAppApp')
     })
    };
 
-  });
+  }])
+.directive('elastic', [
+    '$timeout',
+    function($timeout) {
+        return {
+            restrict: 'A',
+            link: function($scope, element) {
+                $scope.initialHeight = $scope.initialHeight || element[0].style.height;
+                var resize = function() {
+                    element[0].style.height = $scope.initialHeight;
+                    element[0].style.height = "" + element[0].scrollHeight + "px";
+                };
+                element.on("input change", resize);
+                $timeout(resize, 0);
+            }
+        };
+    }
+]);

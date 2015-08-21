@@ -35,7 +35,7 @@ exports.create = function (req, res, next) {
 };
 
 //to change gallery pic
-exports.galPicChange = function (req, res) {
+/*exports.galPicChange = function (req, res) {
   var userId = req.user._id;
   console.log(req.body.galleryPic);
   User.findById(userId, function (err,user){
@@ -47,8 +47,39 @@ exports.galPicChange = function (req, res) {
 
     });
   });
-};
+};*/
 
+
+exports.editProfile = function (req, res) {
+  var userId = req.user._id;
+  var type=req.params.type;
+  
+  console.log(req.body.editProfile);
+  console.log(req.params.type);
+
+  User.findById(userId, function (err,user){
+
+    if(type==1)
+    {
+     user.name=req.body.editProfile; 
+    }
+    else if (type==2)
+    {
+      user.about=req.body.editProfile;
+    }
+    else if (type==3)
+    {
+      user.galleryPic=req.body.editProfile;
+    }
+    
+    user.save(function (err) {
+      if (err) { return handleError(res, err); }
+      
+      return res.json(200, user);
+
+    });
+  });
+};
 /**
  * Get a single user
  */
@@ -164,4 +195,8 @@ exports.search = function (req, res, next) {
       } 
     } 
   );
+}
+
+function handleError(res, err) {
+  return res.send(500, err);
 }

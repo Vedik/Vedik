@@ -1,140 +1,86 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-	
-	<!--Facebook likes JS code-->
-			<div id="fb-root"></div>
-			<script>(function(d, s, id) {
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) return;
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));</script>
 
 
+<script>
+  angular.module('intervalExample', [])
+    .controller('ExampleController', ['$scope', '$interval',
+      function($scope, $interval) {
+        $scope.format = 'M/d/yy h:mm:ss a';
+        $scope.blood_1 = 100;
+        $scope.blood_2 = 120;
 
-			<script>
-				$(".scroll_anim").click(function(event){     
-				    
-				    $('html,body').animate({scrollLeft:$(this.hash).offset().left}, 500);
-				});
-			</script>
+        var stop;
+        $scope.fight = function() {
+          // Don't start a new fight if we are already fighting
+          if ( angular.isDefined(stop) ) return;
 
+          stop = $interval(function() {
+            if ($scope.blood_1 > 0 && $scope.blood_2 > 0) {
+              $scope.blood_1 = $scope.blood_1 - 3;
+              $scope.blood_2 = $scope.blood_2 - 4;
+            } else {
+              $scope.stopFight();
+            }
+          }, 100);
+        };
 
+        $scope.stopFight = function() {
+          if (angular.isDefined(stop)) {
+            $interval.cancel(stop);
+            stop = undefined;
+          }
+        };
 
-	
-	<div class="container-inner">
-		<div id="event_page_info">
+        $scope.resetFight = function() {
+          $scope.blood_1 = 100;
+          $scope.blood_2 = 120;
+        };
 
-	<!--Background Image-->
+        $scope.$on('$destroy', function() {
+          // Make sure that the interval is destroyed too
+          $scope.stopFight();
+        });
+      }])
+    // Register the 'myCurrentTime' directive factory method.
+    // We inject $interval and dateFilter service since the factory method is DI.
+    .directive('myCurrentTime', ['$interval', 'dateFilter',
+      function($interval, dateFilter) {
+        // return the directive link function. (compile function not needed)
+        return function(scope, element, attrs) {
+          var format,  // date format
+              stopTime; // so that we can cancel the time updates
 
-			<div style="position:absolute;z-index:-1;top:0px;width:100%;height:100%;"><img src="EventImg/saarang.jpg" width="100%" height="100%	">
-			</div>
+          // used to update the UI
+          function updateTime() {
+            element.text(dateFilter(new Date(), format));
+          }
 
+          // watch the expression, and update the UI on change.
+          scope.$watch(attrs.myCurrentTime, function(value) {
+            format = value;
+            updateTime();
+          });
 
-			<div>
+          stopTime = $interval(updateTime, 1000);
 
-				<div class="centric" id="event_page_centric">
-					<div id="event_name">Saarang</div> 
-					<a href="#event_page_cntnt" id="arrow_right" class="scroll_anim">>></a>
-					<button type="button" data-toggle="modal" data-target="#img_view">Register</button>
-					<button>Website</button>
-					<div class="fb-like" data-href="https://www.facebook.com/saavasteam?notif_t=page_new_likes" data-width="0px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-				</div>
-				<div id="event_nav_bar" class="centric">
-					<span>Events</span>
-					<span>About</span>
-					<span>Team</span>
-					<span>Sponsers</span>					
-				</div>
-			</div>
-			
+          // listen on DOM destroy (removal) event, and cancel the next UI update
+          // to prevent updating time after the DOM element was removed.
+          element.on('$destroy', function() {
+            $interval.cancel(stopTime);
+          });
+        }
+      }]);
+</script>
 
-		</div>
-
-		<div id="event_page_cntnt" >
-			<div id="hidden"></div>
-			<a href="#event_page_info" id="arrow_left" class="scroll_anim"><<</a>
-			
-		</div>
-	</div>
-
-
-<div id="img_view" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-  	<!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">What info do you need?</h4>
-      </div>
-      <div class="modal-body">
-
-      	<form>
-      		<table id="create_event">
-      			<tr>
-      				<th>Event Name</th>
-      				<td><input type="text" name="event_name" placeholder="Event Name"></td>
-      			</tr>
-      			<tr>
-      				<th>Description</th>
-      				<td><input type="text" name="description" placeholder="Description"></td>
-      			</tr>
-      			<tr>
-      				<th>Venue</th>
-      				<td><input type="text" name="venue" placeholder="Venue"></td>
-      			</tr>
-      			<tr>
-      				<th>Start time</th>
-      				<td><div class="col-md-6 datepckr">
-				            <p class="input-group">
-				              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />
-				              <span class="input-group-btn">
-				                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-				              </span>
-				            </p>
-				        </div>  
-				    </td>
-      			</tr>
-      			<tr>
-      				<th>End time</th>
-      				<td><div class="col-md-6 datepckr">
-				            <p class="input-group">
-				              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />
-				              <span class="input-group-btn">
-				                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-				              </span>
-
-				            </p>
-				        </div>  
-				    </td>
-      			</tr>
-      		</table>
-      		<br>
-      				<b>Should users register to come to your event?</b></th>
-      				<select>
-						  <option value="Yes">Yes</option>
-						  <option value="No">No</option>
-						  <option value="I will tell later">I will tell later</option>
-						</select>
-					
-				
-      		</table>
-      	
-      		
-      		
-        <ul id="req_user_info">
-        	<li><input type="checkbox" name="name"> Name</li>
-        	<li><input type="checkbox" name="email"> Email</li>
-        	<li><input type="checkbox" name="ph_no"> Phone Number</li>
-        	<li><input type="checkbox" name="roll_no"> Roll No.</li>
-        	<li><input type="checkbox" name="room_addr"> Room and Hostel</li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Next</button>
-      </div>
-    </div>
-
+<div>
+  <div ng-controller="ExampleController">
+    <label>Date format: <input ng-model="format"></label> <hr/>
+    Current time is: <span my-current-time="format"></span>
+    <hr/>
+    Blood 1 : <font color='red'>{{blood_1}}</font>
+    Blood 2 : <font color='red'>{{blood_2}}</font>
+    <button type="button" data-ng-click="fight()">Fight</button>
+    <button type="button" data-ng-click="stopFight()">StopFight</button>
+    <button type="button" data-ng-click="resetFight()">resetFight</button>
   </div>
+</div>
 
-   
