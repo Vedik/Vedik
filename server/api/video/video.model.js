@@ -14,7 +14,7 @@ var VideoSchema = new Schema({
   respect:Number,
   vidRating:{type:Number,default:0},
   votes:{type:Number, default:0},
-  comments:[{type:Schema.Types.ObjectId, ref:"Comment"}],
+  comments:[{comment:{type:Schema.Types.ObjectId, ref:"Comment"}}],
   uploader:{type:Schema.Types.ObjectId, ref:"User"},
   directorCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],
   editorCredits:[{name:{type:Schema.Types.ObjectId, ref:'User'},ratingInVid:{type:Number,default:0}}],

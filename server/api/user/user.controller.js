@@ -138,7 +138,7 @@ exports.authCallback = function(req, res, next) {
 exports.search = function (req, res, next) {
   var query = req.params.searchQuery;
   User.find(
-    { "name": { "$regex": query, "$options": "i" } },'name',
+    { "name": { "$regex": query, "$options": "i"} },'name',
     function(err,docs) {
       if(!err) {
         console.log(docs);

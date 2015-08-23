@@ -1,31 +1,4 @@
-<div ng-controller="ProfileCtrl">
-	<div ng-include="'components/navbar/navbar.html'"></div>
-
-
-	<div>
-		<p>{{user.name}}</p>
-		<p>{{user.email}}</p>
-		<p>{{user.role}}</p>
-		<p>Account Created on {{user.createdOn | date:'medium'}}</p>
-		<p>Last logged in on {{user.updatedOn | date:'medium'}}</p>
-		<ul>
-			<li ng-repeat="video in user.videos">
-				<a href="#" ng-click="watchVid(video.video.vidurl)">
-					<img src="{{video.video.posterurl}}">
-					<p>Name : {{video.video.vidname}}</p>
-					<p>Description:{{video.video.description}}</p>
-					<p>Date uploaded : {{video.video.createdOn | date:'medium'}}</p>
-					<p>Views : {{video.video.view_count}}</p>
-
-				</a>
-			</li>
-		</ul>
-		<div>
-			<button ng-click="openModal('5hgONuRZA00')">Open modal</button>
-		</div>
-	</div>
-	<script type="text/ng-template" id="myModalContent.html">
-			<div id="videoview" class="modal img_modal fade" role="dialog">
+<div id="videoview" class="modal img_modal fade" role="dialog">
 	<div class="centric">
   		<div class="modal-dialog img_modal-dialog">
     	<!-- Modal content-->
@@ -108,22 +81,4 @@
         	</div>
         </div>
     </div>    
-</div>
-	<div my-youtube code='vidCode'></div>
-	<div>
-		<p>{{video.vidname}}</p>
-		<p>{{video.description}}</p>
-		<p>{{video.createdOn | date:'medium'}}</p>
-		<p>{{video.vidRating}}</p>
-		<p>{{video.view_count}}</p>
-		<p>{{video.votes}}</p>
-		<div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)">
-        </div>
-        <div ng-repeat="comment in video.comments">
-        	<p>{{comment.comment.commentData}}</p>
-        	<p>{{comment.comment.commentPutter.name}}</p>
-        	<p>{{comment.comment.createdOn | date:'medium'}}</p>
-        </div>
-	</div>
-	</script>
 </div>

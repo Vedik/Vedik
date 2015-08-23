@@ -14,10 +14,21 @@ exports.index = function(req, res) {
 
 // Get a single video
 exports.show = function(req, res) {
-  Video.findById(req.params.id, function (err, video) {
-    if(err) { return handleError(res, err); }
-    if(!video) { return res.send(404); }
-    return res.json(video);
+  console.log(req.params.vidCode);
+  Video.findOne({vidurl:'https://www.youtube.com/watch?v='+req.params.vidCode})
+  .populate('comments.comment')
+  .populate('comments.comment.commentPutter')
+  .exec(function (err, video){
+    if(err) {
+      console.log('this is error '+err);
+      next(err);
+    }
+    else {
+    console.log(video+' is the real erroor');
+    console.log(video.comments);
+    res.json(video);
+
+  }
   });
 };
 
@@ -116,9 +127,6 @@ exports.rate = function(req, res, next) {
   console.log(req.body.rating);
   var vidurl = 'https://www.youtube.com/watch?v='+vidCode;
   Video.findOne({vidurl:vidurl}, function (err, docs){
-    if(docs.length>1){
-      console.log('serious prob');
-    }
     if(err) {
       console.log(err+'is the error');
     }
@@ -129,9 +137,8 @@ exports.rate = function(req, res, next) {
           res.send(401);
         }
         else {
-          if(!user) {
+          /*if(!user) {
             docs.vidRating = (docs.vidRating*docs.votes+req.body.rating)/(docs.votes+1);
-            console.log(docs.vidRating);
             docs.votes= docs.votes+1;
             req.user.RatedVids.push({videoId:docs,Rating:req.body.rating});
             user = req.user;
@@ -164,7 +171,40 @@ exports.rate = function(req, res, next) {
             else {
               console.log(user);
             }
-          });
+          });*/
+          var i=0;
+      var user = req.user;
+      var isFound = false;
+      for(i=0;i<user.RatedVids.length;i++){
+        if(user.RatedVids[i].videoId.equals(docs._id)){
+          docs.vidRating = (docs.vidRating*docs.votes+req.body.rating-user.RatedVids[i].Rating)/(docs.votes);
+          user.RatedVids[i].Rating = req.body.rating;
+          isFound = true;
+          break;
+        }
+      }
+      if(!isFound){
+        user.RatedVids.push({Rating:req.body.rating,videoId:docs._id});
+        docs.vidRating = (docs.vidRating*docs.votes + req.body.rating)/(docs.votes+1);
+        docs.votes++;
+      }
+
+    user.save(function (err){
+      if(err){
+        return handleError(res,err);
+      }
+      else {
+        console.log(user+' is saved as thus');
+      }
+    });
+    docs.save(function (err){
+      if(err){
+        return handleError(res,err);
+      }
+      else {
+        console.log(docs.vidRating+' is saved as thus');
+      }
+    });
         }
       });
     }

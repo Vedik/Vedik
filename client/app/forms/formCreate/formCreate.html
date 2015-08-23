@@ -1,0 +1,17 @@
+<div class="col-md-12">
+	<h1>Write form details</h1>
+		<div class="form-group">
+			<label>enter name of the form</label>
+			<input class="form-control" type="text" ng-model="name">
+		</div>
+		<!-- ************ preview mode starts**************** -->
+		<content-item ng-repeat="question in questions" content="question"></content-item>
+		<button ng-click="submitForm(questions)">Submit Form</button>
+		<!-- ************ preview mode ends**************** -->
+	<form ng-submit="addQuestion(form)">
+			<select ng-options="option.name for option in options" ng-model="form.type" > <!-- add track by id-->
+			</select>
+			<input type="text" class="form-control" ng-model="form.data">
+			<button type="submit">Add question</button>
+	</form>
+</div>

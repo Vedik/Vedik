@@ -10,11 +10,12 @@ angular.module('myAppApp')
     $scope.user = User.get();
     var a = $location.url();
     var b = a.split('viewPage/');
-    console.log(b[1]);
+    $http.get('/api/videos/'+b[1]).success(function (response){
+      console.log(response);
+      $scope.video = response;
+    });
     $scope.vidCode = b[1];
-    console.log($scope.vidCode);
     $scope.rating1 = 5;
-    $http.get('/api/videos')
   $scope.rateFunction = function(rating) {
     console.log("Rating selected: " + rating);
     $http.post('/api/videos/ratings/'+$scope.vidCode,{rating:rating}).success(function (response){
@@ -22,6 +23,19 @@ angular.module('myAppApp')
       $scope.rating1 = rating;
     })
   };
+  $scope.submit = function (){
+    //validation
+    console.log($scope.commentData);
+    $http.post('/api/comments/',{commentData:$scope.commentData,videoId:$scope.video._id}).success(function (response){
+      console.log(response);
+    });
+  }
+
+  $scope.delete = function (id){
+    $http.delete('/api/comments/'+id).success(function (response){
+      console.log(response);
+    })
+  }
     
   })
   .directive('myYoutube', function($sce) {
