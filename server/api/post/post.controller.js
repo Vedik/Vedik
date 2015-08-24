@@ -8,7 +8,7 @@ exports.index = function(req, res) {
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploader')
+  .populate('articleId videoId imageId like uploader.user uploader.club')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -20,12 +20,42 @@ exports.index = function(req, res) {
 };
 
 // Get a single post
-exports.show = function(req, res) {
-  Post.findById(req.params.id, function (err, post) {
+exports.showForUser = function(req, res) {
+  console.log('req.params.');
+  var user_id = req.params.id;
+  var query = {};
+  query['uploader.' + 'user'] = user_id;
+  Post.find(query,function (err, posts) {
     if(err) { return handleError(res, err); }
-    if(!post) { return res.send(404); }
-    return res.json(post);
-  });
+    })
+  .populate('articleId videoId imageId like uploader.user')
+  
+  .exec(function (err, posts){
+      if (err) return handleError(err);
+     
+      console.log('er12');
+      
+      return res.json(posts);
+  })
+};
+
+exports.showForClub = function(req, res) {
+  console.log(req.params.id);
+   var club_id = req.params.id;
+  var query = {};
+  query['uploader.' + 'club'] = club_id;
+  Post.find(query,function (err, posts) {
+    if(err) { return handleError(res, err); }
+    })
+  .populate('articleId videoId imageId like uploader.club')
+  
+  .exec(function (err, posts){
+      if (err) return handleError(err);
+     
+      console.log('er2');
+      
+      return res.json(posts);
+  })
 };
 
 // Creates a new post in the DB.

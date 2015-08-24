@@ -12,7 +12,7 @@
             	<div id="pro_pic">
             		<div id="pro_pic_wrapper" >
            				<img src="{{GalleryPic}}" style="width:100%;height:100%;"></img>
-           				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'"><a href=""><u>Edit Pic</u></a></div>
+           				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div>
 
            				<script>
 					  	$(document).ready(function(){
@@ -32,13 +32,13 @@
 		            <div id="user_profile" class="col-md-3 ">
 			            <div>
 			                <span>
-			                	<span ng-click="editName=true" ng-hide="editName && user.name==loggedInUser.name" id="pro_name"><a href="">{{user.name}}</a></span>
-			                	<div ng-show="editName && user.name==loggedInUser.name">
+			                	<span ng-click="edit.name=true" ng-hide="edit.name && user.name==loggedInUser.name" id="pro_name">{{user.name}}</span>
+			                	<div ng-show="edit.name && user.name==loggedInUser.name">
 			                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
-			                			<input type="text" value="{{user.name}}" ng-model="form.name">
+			                			<input type="text" value="{{user.name}}" ng-model="form.name" autofocus>
 			                			<br>
 			                			<button type="submit" class="w2b">Save</button> 
-			                			<button type="button" ng-click="editName=false" class="w2b">Cancel</button>
+			                			<button type="button" ng-click="edit.name=false" class="w2b">Cancel</button>
 			                		</form>
 			                	</div>
 			                </span>
@@ -64,15 +64,31 @@
 		        			<h4>About<hr></hr></h4>
 		        			
 							<span>
-			                	<span ng-click="edit=true" ng-hide="edit && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name"><a href="">{{userAbout}}</a></span>
-			                	<div ng-show="edit && user.name==loggedInUser.name">
-			                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form"> 
-			                			<textarea elastic style="width:100%" value="{{userAbout}}" ng-model="form.about">
+			                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
+			                	<div ng-show="edit.about && user.name==loggedInUser.name">
+			                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
+			                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='Auto-Expanding Textarea' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
 			                			</textarea>
+			                			<script >
+			                				$(document)
+										    .one('focus.textarea', '.autoExpand', function(){
+										        var savedValue = this.value;
+										        this.value = '';
+										        this.baseScrollHeight = this.scrollHeight;
+										        this.value = savedValue;
+										    })
+										    .on('input.textarea', '.autoExpand', function(){
+										        var minRows = this.getAttribute('data-min-rows')|0,
+										            rows;
+										        this.rows = minRows;
+										        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 32);
+										        this.rows = minRows + rows;
+										    });
+			                			</script>
 			                			
 			                			<br>
 			                			<button type="submit" class="w2b">Save</button> 
-			                			<button type="button" ng-click="edit=false" class="w2b">Cancel</button>
+			                			<button type="button" ng-click="edit.about=false" class="w2b">Cancel</button>
 			                		</form>
 			                	</div>
 			                </span>
@@ -98,30 +114,17 @@
 			            <div id="user_hist_div2" class="thumbs_wrap">
 				
 							<div class="thumbs_wrap">
-								<span ng-repeat="video in user.videos" class="thumbs_wrap">
+								<span  class="thumbs_wrap">
 									
 									<span id="user_art" class="thumbs_wrap">
 										
 										
-											<div class="" ="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#videoview" onclick="document.getElementById('for_blur').style.filter = 'blur(40px)'">
-												<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
-													<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
-													<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="410px" style="opacity:0.5;"></span>
-													<span id="img_name">{{video.video.vidname}}</span>
-													<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png" class="play">	
+										<div>
+											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
+												
+											</content-item>
+											</div>
 
-													
-																<span class="thumb_trnsprnt">
-																</span>
-																<span id="user_art_info">
-																	<div id="a">
-																	<span id="vid_data">{{video.video.vidname}}</span>
-																<!--	<div id="vid_data">{{video.video.description}}</div>-->
-																	<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-																	</div>
-																</span>		
-												</div>
-								</div>
 											<div>
 										    	<input type="text" ng-model="creditDet">
 										    	<button ng-click="submitCredit(creditDet)">Submit Credit</button>

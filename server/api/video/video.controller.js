@@ -6,6 +6,7 @@ var User = require('../user/user.model');
 var mongoose = require('mongoose');
 var Post = require('../post/post.model')
 var Like = require('../like/like.model')
+var Club = require('../club/club.model')
 // Get list of videos
 exports.index = function(req, res) {
   Video.find(function (err, videos) {
@@ -32,6 +33,7 @@ exports.show = function(req, res) {
 // Creates a new video in the DB.
 exports.create = function(req, res) {
   console.log(req.body.genres);
+  console.log('jhgf');
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
@@ -66,7 +68,7 @@ exports.create = function(req, res) {
   newvideo.save(function (err){
     if(err) return handleError(res, err);
     else {
-          req.user.videos.push({video:newvideo,role:['actor']});
+        /*  req.user.videos.push({video:newvideo,role:['actor']});
           req.user.save(function (error) {
             if(error) {
               return handleError(res, err);
@@ -74,18 +76,95 @@ exports.create = function(req, res) {
             else {
               console.log('user saved??');
             }
-          });
+          });*/
           var newPost = new Post({
             videoId: newvideo._id,
             type:3,
             tags:req.body.genres,
-            uploader:req.user._id,
+            uploader:{user:req.user._id},   //club:req.params.id},
+            
             view_count:0,
             like:[],
             createdOn:Date.now()
           });
           newPost.save(function(err){
             if(err) return handleError(res,err);
+            else {
+              console.log('post created');
+            }
+          });
+
+          
+          return res.json(200,newvideo);
+        }
+    
+    });
+};
+
+
+// Creates a new video of club in the DB.
+exports.clubPost = function(req, res) {
+  console.log(req.params.id);
+  /*Video.create(req.body, function(err, video) {
+    if(err) { return handleError(res, err); }
+    return res.json(201, video);
+  });*/
+  var newvideo = new Video({
+    vidname:req.body.vidname,
+    vidurl:req.body.vidurl,
+    description:req.body.description,
+    posterurl:req.body.posterurl,
+    
+  });
+
+  /*newvideo.save(function (err){
+    if(!err) {
+        User.findOne({_id:newvideo.uploader},function (error, user){
+          if(!err) {
+            user.videos.push(newvideo);
+            user.save(function (err1){
+              if(!err) console.log("no error saving user"+user);
+              else console.log(err1);
+            });
+            console.log("pushed the id");
+            console.log(user);
+          }
+          else console.log("error");
+        });
+    }
+    else {
+      console.log('i am getting error as '+err);
+    }
+  });*/
+
+  newvideo.save(function (err){
+ 
+    if(err) {return handleError(res, err); }
+    else {
+  
+          /*req.user.videos.push({video:newvideo,role:['actor']});
+          req.user.save(function (error) {
+            if(error) {
+              return handleError(res, err);
+            }
+            else {
+              console.log('user saved??');
+            }
+          });*/
+         
+          var newPost = new Post({
+            videoId: newvideo._id,
+            type:6, //clubVideo
+            tags:req.body.genres,
+            uploader:({user:req.user._id},{club:req.params.id}),
+            view_count:0,
+            like:[],
+            createdOn:Date.now()
+          });
+          console.log('yo');
+          newPost.save(function(err){
+            if(err) {return handleError(res,err);console.log('post create2d');}
+
             else {
               console.log('post created');
             }

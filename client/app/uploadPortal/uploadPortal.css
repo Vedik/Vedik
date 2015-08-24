@@ -36,9 +36,9 @@
 		 transition: all 0.3s ease 0s;
 		
 	}
-	.img_div	{
+	.post_div	{
 		position: relative;
-		padding: 10px 5px;
+		padding: 5px 5px;
 		
 		/*margin: 30px 0px;*/
 		float: left;
@@ -89,10 +89,10 @@
 		width: 5%;
 		height:14%;
 		position: absolute;
-		top: 43%;
+		bottom: 10%;
 		z-index: 2;
 		margin: 0px auto;
-		left: 45%;
+		right: 5%;
 	 	}
 	 .play	{
 	 	display: block;

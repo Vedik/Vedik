@@ -71,6 +71,56 @@ exports.create = function(req, res) {
 };
 
 
+exports.clubPost = function(req, res) {
+  console.log(req.params.id);
+  /*Video.create(req.body, function(err, video) {
+    if(err) { return handleError(res, err); }
+    return res.json(201, video);
+  });*/
+ 
+  var newImage = new Image({
+    imgName:req.body.imgName,
+    picUrl:req.body.picUrl,
+    description:req.body.description
+  });
+ 
+
+  newImage.save(function (err){
+ 
+    if(err) {return handleError(res, err); }
+    else {
+  
+          
+         
+          var newPost = new Post({
+            imageId: newImage._id,
+            type:2,
+            createdOn:Date.now(),
+            uploader:({user:req.user._id},{club:req.params.id}),
+            view_count:0,
+            tags:req.body.tags,
+            like:[]
+            
+          });
+            
+          
+          newPost.save(function(err){
+            if(err) {return handleError(res,err);}
+
+            else {
+              console.log('post created');
+            }
+          });
+
+          
+          return res.json(200,newImage);
+        }
+    
+    });
+};
+
+
+
 // Updates an existing image in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }

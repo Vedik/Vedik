@@ -6,9 +6,10 @@ var mongoose = require('mongoose'),
 var ClubSchema = new Schema({
   name: String,
   posts:[{post:{type:Schema.Types.ObjectId, ref:"Post"}}],
-  picUrl:String,
-  description:String,
+  galleryPic:String,
+  about:String,
   createdOn:{type:Date,default:Date.now()},
+  admin:{type:Schema.Types.ObjectId, ref:"User"},
   subscribed_users:[{user:{type:Schema.Types.ObjectId, ref:"User"}}],
   stage_for:[{stage:{type:Schema.Types.ObjectId, ref:"Stage"}}],
   events:[{event:{type:Schema.Types.ObjectId, ref:"Event"}}]

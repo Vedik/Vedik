@@ -75,7 +75,7 @@ exports.editProfile = function (req, res) {
     user.save(function (err) {
       if (err) { return handleError(res, err); }
       
-      return res.json(200, user);
+       res.json(200, user);
 
     });
   });
@@ -126,7 +126,7 @@ exports.changePassword = function(req, res, next) {
 };
 
 exports.showUser = function(req, res, next) {
-  var name = req.params.name;
+  var userId = req.params.id;
   /*User.findOne({
     _id: userId
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
@@ -134,7 +134,7 @@ exports.showUser = function(req, res, next) {
     if (!user) return res.json(401);
     res.json(user);
   });*/
-  User.findOne({name:name},'-salt -hashedPassword')
+  User.findById(userId,'-salt -hashedPassword')
   .populate('videos.video')
   .exec(function (err, user){
     if(err) {

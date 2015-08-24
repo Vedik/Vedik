@@ -6,7 +6,8 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.get('/',auth.isAuthenticated(), controller.index);
-router.get('/:id', controller.show);
+router.get('/user/:id', controller.showForUser);
+router.get('/club/:id', controller.showForClub);
 router.post('/', controller.create);
 router.get('/:postId/like',auth.isAuthenticated(),controller.like);
 router.delete('/:postId/unlike',auth.isAuthenticated(),controller.unlike);

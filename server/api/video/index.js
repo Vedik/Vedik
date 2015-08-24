@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:vidCode', controller.show);
 router.post('/',auth.isAuthenticated(), controller.create);
+router.post('/:id',auth.isAuthenticated(), controller.clubPost);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 //router.delete('/comments/:videoId/:commentId', controller.deleteComment);

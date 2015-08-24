@@ -38,7 +38,7 @@ exports.create = function(req, res) {
   newArticle.save(function (err){
     if(err) return handleError(res, err);
     else {
-          req.user.articles.push({article:newArticle,role:['actor']});
+         /* req.user.articles.push({article:newArticle,role:['actor']});
           req.user.save(function (error) {
             if(error) {
               return handleError(res, err);
@@ -46,12 +46,12 @@ exports.create = function(req, res) {
             else {
               console.log('user saved');
             }
-          });
+          });*/
           var newPost = new Post({
             articleId: newArticle._id,
             tags:req.body.tags,
             type:1,
-            uploader:req.user._id,
+            uploader:{user:req.user._id},
             view_count:0,
             like:[],
             createdOn:Date.now()
@@ -69,6 +69,55 @@ exports.create = function(req, res) {
     
     });
 };
+
+
+exports.clubPost = function(req, res) {
+  console.log(req.params.id);
+  /*Video.create(req.body, function(err, video) {
+    if(err) { return handleError(res, err); }
+    return res.json(201, video);
+  });*/
+  var newArticle = new Article({
+    articleName:req.body.articleName,
+    content:req.body.content,
+    description:req.body.description,
+    
+  });
+ 
+
+  newArticle.save(function (err){
+ 
+    if(err) {return handleError(res, err); }
+    else {
+  
+          
+         
+          var newPost = new Post({
+            articleId: newArticle._id,
+            tags:req.body.tags,
+            type:4,
+            uploader:({user:req.user._id},{club:req.params.id}),
+            view_count:0,
+            like:[],
+            createdOn:Date.now()
+          });
+          
+          newPost.save(function(err){
+            if(err) {return handleError(res,err);}
+
+            else {
+              console.log('post created');
+            }
+          });
+
+          
+          return res.json(200,newArticle);
+        }
+    
+    });
+};
+
+
 
 
 // Updates an existing article in the DB.

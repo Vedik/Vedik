@@ -34,9 +34,9 @@ var UserSchema = new Schema({
     videoId:{type:Schema.Types.ObjectId, ref:'Video'},
     Rating:Number
   }],
-  videos:[{video:{type:Schema.Types.ObjectId, ref:'Video'},role:[String]}],
+  /*videos:[{video:{type:Schema.Types.ObjectId, ref:'Video'},role:[String]}],
   images:[{image:{type:Schema.Types.ObjectId, ref:'Image'},role:[String]}],
-  articles:[{article:{type:Schema.Types.ObjectId, ref:'Article'},role:[String]}],
+  articles:[{article:{type:Schema.Types.ObjectId, ref:'Article'},role:[String]}],*/
 
   facebook: {},
   twitter: {},

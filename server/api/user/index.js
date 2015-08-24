@@ -16,5 +16,5 @@ router.post('/', controller.create);
 //router.post('/galleryPic/', auth.isAuthenticated(), controller.galPicChange);
 router.post('/editProfile/:type', auth.isAuthenticated(), controller.editProfile);
 router.get('/search/:searchQuery', controller.search);
-router.get('/:name', controller.showUser);
+router.get('/:id', controller.showUser);
 module.exports = router;

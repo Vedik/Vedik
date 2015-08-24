@@ -13,11 +13,34 @@ exports.index = function(req, res) {
 
 // Get a single club
 exports.show = function(req, res) {
+  console.log('sdf');
   Club.findById(req.params.id, function (err, club) {
     if(err) { return handleError(res, err); }
     if(!club) { return res.send(404); }
+    console.log(club);
     return res.json(club);
   });
+  
+ // var clubId = req.params.id;
+  /*User.findOne({
+    _id: userId
+  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+    if (err) return next(err);
+    if (!user) return res.json(401);
+    res.json(user);
+  });*/
+ /* User.findById(clubId)
+  .populate('videos.video')
+  .exec(function (err, user){
+    if(err) {
+      console.log(err);
+      next(err);
+    }
+    else {
+    res.json(user);
+
+  }
+  });*/
 };
 
 // Creates a new club in the DB.
@@ -29,10 +52,11 @@ exports.create = function(req, res) {
 
   var newClub = new Club({
     name: req.body.name,
-    picUrl:req.body.posterUrl,
-    description:req.body.description,
+    galleryPic:req.body.posterUrl,
+    about:req.body.description,
     createdOn:Date.now(),
     posts:[],
+    admin:req.user._id,
     subscribed_users:[],
     stage_for:[],
     events:[]
@@ -45,6 +69,37 @@ exports.create = function(req, res) {
       console.log('The club is saved as \n'+newClub);
       res.json(newClub);
     }
+  });
+};
+
+exports.editProfile = function (req, res) {
+  var userId = req.user._id;
+  var type=req.params.type;
+  
+  console.log(req.body.editProfile);
+  console.log(req.params.type);
+
+  Club.findById(userId, function (err,club){
+
+    if(type==1)
+    {
+     club.name=req.body.editProfile; 
+    }
+    else if (type==2)
+    {
+      club.about=req.body.editProfile;
+    }
+    else if (type==3)
+    {
+      club.galleryPic=req.body.editProfile;
+    }
+    
+    club.save(function (err) {
+      if (err) { return handleError(res, err); }
+      
+       res.json(200, club);
+
+    });
   });
 };
 

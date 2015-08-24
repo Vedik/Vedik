@@ -99,6 +99,7 @@
                 letter-spacing: 2px;
                 font-size: 14px;
                 display: none;
+                word-wrap: break-word;
 
                 
             }
@@ -240,14 +241,14 @@
                 margin: 0% auto;                
                 height:auto;
                 box-sizing:content-box;
-               
+               color:white;
                 float:none;
                 width:840px;
 
             }
             #user_hist_div2 {
-                text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-                color:white;
+                
+                
             }
             #user_art   {
                 padding:0px 10px;
@@ -316,3 +317,17 @@
             li  {
                 height: auto;
             }
+
+
+            textarea{  
+  display:block;
+  box-sizing: padding-box;
+  overflow:hidden;
+
+  padding:10px;
+  width:250px;
+  font-size:14px;
+  margin:50px auto;
+  border-radius:8px;
+  border:6px solid #556677;
+}

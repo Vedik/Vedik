@@ -7,14 +7,14 @@
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
           <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
             <div id="indiv_res">
-                <a href="/profile/{{obj.name}}" >{{obj.name}}</a>
+                <a href="/profile/{{obj._id}}" >{{obj.name}}</a>
             </div>
           </div>
     </div>
     <div id="nav">
        
         <div class="dropdown">
-            <a href="/profile/{{getCurrentUser().name}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
+            <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
             <a href="/login" id="_logo" ng-hide="isLoggedIn()">Guest</a>       
             <span class="dropdown-toggle" id="menu1">
             <span id="caretid">

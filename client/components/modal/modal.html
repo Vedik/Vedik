@@ -7,7 +7,10 @@
      
         
         <div class="modal-body img_modal-body centric glassy">
-        	<p>New Gallery Pic</p>
+        	<p>
+        		New Gallery Pic
+        		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+        	</p>
         	<form name="form" ng-submit="editProfile(form.galPicUrl,3)" ng-model="form">
         		<div class="form-group">
 	          		<input type="text" ng-model="form.galPicUrl" placeholder="New Url of gallery Picture" class="form-control">

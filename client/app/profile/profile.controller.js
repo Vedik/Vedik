@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl', ['$scope', '$location', 'Auth', '$state' ,'User','$http','$interval',function ($scope,$location, Auth, $state,User,$http,$interval) {
+  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
-    var name = $location.url().split('/profile/')[1];
-    console.log(name);
+    var id = $location.url().split('/profile/')[1];
+    console.log(id);
     $scope.abcd="1234";
-    $http.get('/api/users/'+name).success(function (response){
+    $http.get('/api/users/'+id).success(function (response){
       $scope.user = response;
        if($scope.user.galleryPic)
         {
@@ -27,7 +27,9 @@ angular.module('myAppApp')
          $scope.userAbout = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
     }
 
-      console.log(response);
+      $scope.form={};
+       $scope.form.about=$scope.user.about;
+       console.log($scope.form.about);  
     });
     console.log($scope.user);
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -36,7 +38,11 @@ angular.module('myAppApp')
     console.log(User.get());
     $scope.tags=[];
   
-
+    $http.get('/api/posts/user/'+id).success(function (response){
+        console.log(response);
+        $scope.posts = response;
+        console.log($scope.posts);
+    });
 
 
     $scope.getSuggestionsForNames = function (query){
@@ -88,11 +94,26 @@ angular.module('myAppApp')
 
     $scope.editProfile = function (form,type){
       $http.post('/api/users/editProfile/'+type,{editProfile:form}).success(function (response){
-        console.log($scope.user.name);
+        
+        $scope.user=response;
+        $scope.GalleryPic=$scope.user.galleryPic;
+        $scope.edit=false;         
+        $scope.userAbout=$scope.user.about;
+         console.log($scope.userAbout);
+        $route.reload();
       })
 
     }
+
+    $scope.editAbout = function (){
+        $scope.formAbout=$scope.user.about;
+        $scope.editAbout=true;
+        console.log($scope.user.about);
+       
+    }
+
      $scope.edit=false;
+     
      
 
 
@@ -113,16 +134,20 @@ angular.module('myAppApp')
     })
    };
 
-  }])
+  })
+
+
+
 .directive('elastic', [
     '$timeout',
     function($timeout) {
         return {
             restrict: 'A',
             link: function($scope, element) {
+
                 $scope.initialHeight = $scope.initialHeight || element[0].style.height;
                 var resize = function() {
-                    element[0].style.height = $scope.initialHeight;
+                    element[0].style.height = $scope.initialHeight + 20;
                     element[0].style.height = "" + element[0].scrollHeight + "px";
                 };
                 element.on("input change", resize);
