@@ -8,14 +8,53 @@ exports.index = function(req, res) {
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploader.user uploader.club')
+  .populate('articleId videoId imageId uploader.user uploader.club')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
-     
-      console.log('er2');
+
+      
+      //console.log(posts);
       
       return res.json(posts);
+  })
+};
+
+exports.likeInfo = function(req, res) {
+  console.log('err4567');
+  Post.findOne({ $or: [ { articleId:req.params.postIdLike }, { videoId:req.params.postIdLike }, { imageId:req.params.postIdLike } ] },function (err, posts) {
+    if(err) { return handleError(res, err); }
+    })
+  .populate('like')
+  
+  .exec(function (err, post){
+      if (err) return handleError(err);
+
+      var i=0,j=0;
+      
+      var liking=false;
+      console.log(post.like.length);
+        {
+          for(j;j<post.like.length;j++)
+          {
+            console.log(post.like[j].user);
+            console.log(req.user._id);
+             if(post.like[j].user.equals(req.user._id))
+             {
+                
+                liking = true;
+                break;
+             }
+             
+
+          } 
+        }
+        
+           
+     
+      console.log(liking);
+      
+      return res.json(liking);
   })
 };
 
@@ -107,8 +146,8 @@ exports.like = function (req,res){
         return handleError(res,err);
       }
       else{
-        console.log('liked');
-        return res.json({added:true});
+        console.log(post.like.length);
+        return res.json(post.like.length);
       }
     });  
   });
@@ -139,8 +178,8 @@ exports.unlike = function (req,res){
               if(err){ return handleError(res, err);}
               else 
               {
-                console.log('error');
-                return res.json({removed : true});
+                
+                return res.json(post.like.length);
               }
             });
           

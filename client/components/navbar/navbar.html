@@ -13,7 +13,7 @@
     </div>
     <div id="nav">
        
-        <div class="dropdown">
+        <div class="dropdown" ng-if="isLoggedIn()">
             <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
             <a href="/login" id="_logo" ng-hide="isLoggedIn()">Guest</a>       
             <span class="dropdown-toggle" id="menu1">

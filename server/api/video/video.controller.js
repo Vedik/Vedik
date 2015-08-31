@@ -33,14 +33,15 @@ exports.show = function(req, res) {
 // Creates a new video in the DB.
 exports.create = function(req, res) {
   console.log(req.body.genres);
-  console.log('jhgf');
+  var vidUrl=req.body.vidurl;
+  a = vidurl.split('watch?v=');
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
   var newvideo = new Video({
     vidname:req.body.vidname,
-    vidurl:req.body.vidurl,
+    vidurl:req.body.a[1],
     description:req.body.description,
     posterurl:req.body.posterurl,
     

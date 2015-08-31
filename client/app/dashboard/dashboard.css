@@ -120,6 +120,7 @@
             display:none;
             top:0px;
             left:0px;
+            transition: all 0.3s ease 0s;
 
         }
         .thumb_cntnt    {
