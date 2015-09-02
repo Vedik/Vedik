@@ -66,6 +66,16 @@ angular.module('myAppApp')
                                         '</div>'    +
                                     '</div>'    +
                                     '<span id="post_time">{{content.articleId.createdOn}}</span>'   +
+                                    '<div ng-controller="DatepickerDemoCtrl">' +
+                                        '<div class="col-md-6 datepckr">'+
+                                            '<p class="input-group">' +
+                                                '<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="2037-06-22" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />' +
+                                                '<span class="input-group-btn">' +
+                                                    '<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>' +
+                                                '</span>' +
+                                            '</p>' +
+                                        '</div>' +
+                                    '</div>' +
                                 '</div>'    +
                             '</div>';
     var articleClubTemplate ='<div>'   +

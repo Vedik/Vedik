@@ -15,7 +15,7 @@
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="https://iso.500px.com/wp-content/uploads/2014/04/20482.jpg" id="img_post">
 										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Gorgeous Tamanna</span>
+										<span id="img_name">Gorgeous Tamannacccccccccccc</span>
 
 										
 													<span class="thumb_trnsprnt">
@@ -35,6 +35,14 @@
 										 </span>
 
 										 12:30 pm 8th August
+											<div class="col-md-6 datepckr">
+										            <p class="input-group">
+										              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />
+										              <span class="input-group-btn">
+										                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										              </span>
+										            </p>
+										        </div> 
 									</span>
 								</div>
 
@@ -174,3 +182,25 @@
 
 
 
+<div>
+	<div class="post_div col-md-12">
+		<div class="text_type_post" id="article">
+			<a href="#">
+				<span id="event_post_heading">{{content.articleId.articleName}}</span>
+			</a>
+			</br>{{content.articleId.content}}</br></br>
+			<div>
+				<p>by<a href="#"> {{content.uploader.user.name}}</a></p>
+				<span id="respond_post" ng-hide="likingName" ng-click="like(content.articleId._id)">
+					<a href="#">
+						<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Like
+					</a>
+				</span>
+				<span id="respond_post" ng-show="likingName" ng-click="unlike(content.articleId._id)">
+					<a href="#"><img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Unlike</a>
+				</span>
+			</div>
+		</div>
+		<span id="post_time">{{content.articleId.createdOn}}</span>
+	</div>
+</div>
