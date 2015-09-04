@@ -1,4 +1,6 @@
 <div ng-controller="AdminCtrl">
+  <div ng-include="'components/navbar/navbar.html'"></div>
+  <div id="hidden"></div>
 <!--<div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
@@ -26,6 +28,37 @@
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
+
+
+
+  <h2>Booking Approval<hr> </h2>  
+  <div ng-controller="DatepickerDemoCtrl" class="col-md-12">
+      <div class="col-md-4 datepckr">
+          <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dtAdmin" is-open="opened" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" ng-change="bookingDate()"/>
+              <span class="input-group-btn">
+                   <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </p>
+      </div>
+  
+    <form name="form" ng-submit="bookingApproval(bookingCheckbox)" ng-model="form" style="float:left" class="col-md-12">
+      <table>
+        <tr ng-repeat="book in bookings">
+          <td>{{book.sequence}}</td>
+          <td>{{book.user.name}}</td>
+          <td>{{book.postId._id}}</td>
+          <td>{{book.postId.articleId.articleName}}</td>
+          <td>
+            <input type="checkbox" ng-model="bookingCheckbox[$index]">
+          </td>
+            <td>{{bookingCheckbox[$index]}}</td>
+        </tr>
+        </table>
+        <button type="submit" class="b2w">Submit</button>
+    </form>
+  </div>
+  
 
 </div>
 

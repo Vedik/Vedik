@@ -1,8 +1,57 @@
-angular.module('myAppApp').controller('DatepickerDemoCtrl', function ($scope) {
-  $scope.today = function() {
+angular.module('myAppApp').controller('DatepickerDemoCtrl', function ($scope, $http) {
+  
+$scope.today = function() {
     $scope.dt = new Date();
   };
   $scope.today();
+
+$scope.bookPost=function(post_id){
+  var date = $scope.dt ;
+  var d = date.getDate();
+  var m = date.getMonth()+1;
+  var y = date.getFullYear();
+  var bookingDate=d+"-"+m+"-"+y;
+  console.log(d+"-"+m+"-"+y);
+   $http.post('/api/bookings/'+post_id,{bookingDate:bookingDate}).success(function (response){
+    console.log(booked);
+  })
+ 
+};
+
+  $scope.dtAdmin=$scope.dt;
+$scope.bookingDate=function(post_id){
+
+  
+ 
+  var dateAdmin = $scope.dtAdmin;    
+    var d = dateAdmin.getDate();
+    var m = dateAdmin.getMonth()+1;
+    var y = dateAdmin.getFullYear();
+    var bookingDate=d+"-"+m+"-"+y;
+
+    
+     $http.get('/api/bookings/'+bookingDate).success(function (response){
+        console.log(response);
+        $scope.bookings = response;
+        console.log($scope.bookings);
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********************************from angularjs datepicker************/
+
+  
 
   $scope.clear = function () {
     $scope.dt = null;

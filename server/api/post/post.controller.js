@@ -134,6 +134,12 @@ exports.destroy = function(req, res) {
 
 exports.like = function (req,res){
   console.log(req.params.postId);
+
+ /* var date = new Date(Date.now());  // dateStr you get from mongodb
+
+var d = date.getFullYear();
+  console.log(d+'d');*/
+
   console.log('dfsdfbv');
   Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId } ] },function (err,post){
     if(err){
