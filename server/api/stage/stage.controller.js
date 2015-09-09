@@ -5,15 +5,18 @@ var Stage = require('./stage.model');
 
 // Get list of stages
 exports.index = function(req, res) {
-  Stage.find(function (err, stages) {
+  var query = req.params.query;
+  Stage.find({ "name": { "$regex": query, "$options": "i" } },'name',function (err, stages) {
     if(err) { return handleError(res, err); }
+    console.log(stages);
     return res.json(200, stages);
   });
 };
 
 // Get a single stage
 exports.show = function(req, res) {
-  Stage.findOne({name:req.params.name}, function (err, stage) {
+
+  Stage.findById(req.params.id, function (err, stage) {
     console.log(req.user._id);
     if(err) { return handleError(res, err); }
     if(!stage) { return res.send(404); }
@@ -27,6 +30,7 @@ exports.show = function(req, res) {
       isFollowing=false;
     }
     console.log({stage:stage,isFollowing:isFollowing});
+   
     return res.json({stage:stage,isFollowing:isFollowing});
   });
 };

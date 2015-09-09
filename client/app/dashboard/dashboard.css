@@ -1,8 +1,8 @@
             *, *:before, *:after{ 
                 box-sizing: border-box; 
                 -moz-box-sizing: border-box; 
-                -webkit-box-sizing: border-box; 
-            }   
+                -webkit-box-sizing: border-box;
+                word-wrap:break-word;            }   
             .stage_btm_1 { 
                 position: fixed;
                 bottom: 50px; 
@@ -51,7 +51,7 @@
             margin: 0px;
             width: 100%;
           
-            background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");          
+            background-image: url("http://okgo.ws/wp-content/uploads/2015/01/website-background-small3.jpg");          
            padding: 0px;
            background-repeat: repeat;   
     }

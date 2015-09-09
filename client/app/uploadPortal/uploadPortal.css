@@ -57,7 +57,7 @@
 		font-size: 17px;
 		color: white;
 	}
-	.img_close	{
+	.close	{
 		margin: 0px 5px;
 		position: absolute;
 		right: 5px;
@@ -66,19 +66,25 @@
 		z-index: 2;
 
 	}
-	.img_modal 	{
+	.modal 	{
 		-webkit-filter: blur(0px);
   		filter: blur(0px);
 	}
-	.img_modal-dialog	{
+	.modal-dialog	{
 		width:auto;
 		position: relative;
+		margin: 0px auto;
 				
 	}
-	.img_modal-body	{
+	.modal-content	{
+		background-color: rgba(0,0,0,0);
+		box-shadow: none;
+		border: 0px;
+	}
+	.modal-body	{
 		padding: 0px;
 	}
-	.img_modal-body #img_viewed	{
+	.modal-body #img_viewed	{
 		box-shadow: 0px 20px 50px #000;
 	}
 	#up000{
@@ -203,4 +209,15 @@
      	padding: 10px;
      	overflow: hidden;
      	white-space: nowrap;
+     }
+
+     .a {
+     	
+     }
+
+     .a.my-class	{
+     	filter:blur(40px);
+     }
+     #img_view 	{
+     	padding: 10px 0px;
      }

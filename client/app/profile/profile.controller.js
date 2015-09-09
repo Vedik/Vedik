@@ -50,18 +50,26 @@ angular.module('myAppApp')
         console.log(response);
         return response;
       });
-    }
+    };
+    $scope.loadTags = function(query) {
 
+      return $http.get('/api/stages/tagingStage/'+query).success(function (response){
+          console.log(response);
+          return response;
+      });
+
+    };
 
    $scope.videoSubmit = function (form){
           $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres}).success(function (response){
             console.log(response);
             $scope.form={};
         })
-   }
+   };
 
     $scope.imageSubmit = function (form){
-          $http.post('/api/images',{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tages:form.tags}).success(function (response){
+        console.log('form.vedik');
+          $http.post('/api/images',{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik}).success(function (response){
             console.log(response);
             $scope.form={};
             console.log(form.imgName);

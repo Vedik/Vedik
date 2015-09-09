@@ -13,7 +13,7 @@
 			<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
 			<button ng-show="isFollowing"  ng-click="unfollow()" class="w2b">Following</button>
 		</div>
-		<div id="stage_pic" class="col-md-12"><img src="{{stage.posterUrl}}" width="100%" height="400px" alt="Badminton ART"></div>
+		<div id="stage_pic" class="col-md-12"><img src="{{stage.posterUrl}}" width="100%" height="auto" alt="Badminton ART"></div>
 		<div class="stage_nav_wrap_out thumbs_wrap">
 			<script>
 				$(".scroll_anim").click(function(event){     
@@ -39,7 +39,11 @@
 						<div id="bkd" class="tab-pane fade in active">
 
 
-									<div ng-include="'app/uploadPortal/uploadPortal.html'"></div>
+									<div>
+										<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur">
+											
+										</content-item>
+									</div>
 
 						</div>
 						<div id="trending" class="tab-pane fade">Hot content </div>

@@ -5,8 +5,8 @@ var controller = require('./stage.controller');
 var auth  = require('../../auth/auth.service');
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/:name',auth.isAuthenticated(), controller.show);
+router.get('/tagingStage/:query', controller.index);
+router.get('/:id',auth.isAuthenticated(), controller.show);
 router.get('/:name/addSubscriber',auth.isAuthenticated(),controller.addSubscriber);
 router.delete('/:name/deleteSubscriber',auth.isAuthenticated(),controller.deleteSubscriber);
 router.post('/',auth.isAuthenticated(), controller.create);

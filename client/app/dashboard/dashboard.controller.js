@@ -11,6 +11,12 @@ angular.module('myAppApp')
     $scope.user = Auth.getCurrentUser();
     $scope.val=true;
 
+   function Ctrl2($scope, UploadPortalService) {
+   
+    $scope.for_blur = UploadPortalService.getProperty()
+    }
+
+
     $scope.submit = function (form){
         //validation to be done
         $http.post('/api/stages',{name:form.stagename,description:form.description,posterUrl:form.posterUrl}).success(function (response){
@@ -26,10 +32,21 @@ angular.module('myAppApp')
     $scope.toUploadPortal = function () {
     	$state.go('uploadPortal');
     };
-  });
 
-  $(document).ready(function(){
-    $("#unknown").mouseenter(function(){
-        $(this).hide();
+     var dateAdmin = new Date(Date.now());    
+    var d = dateAdmin.getDate();
+    var m = dateAdmin.getMonth()+1;
+    var y = dateAdmin.getFullYear();
+    var bookingDate=d+"-"+m+"-"+y;
+     console.log('bookingDate');
+    console.log(bookingDate);
+
+    
+     $http.get('/api/bookings/'+bookingDate).success(function (response){
+        console.log(response);
+        $scope.bookings = response;
+        $scope.posts=$scope.bookings.postId;
+        console.log($scope.bookings);
     });
-});
+  })
+

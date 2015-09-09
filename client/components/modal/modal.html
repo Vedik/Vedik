@@ -144,7 +144,7 @@
 
 												<div id="img_form"  class="tab-pane fade">
 													<h3>Add your Image here</h3>
-													<form name="form" ng-submit="imageSubmit(form)" ng-model="form">
+													<form name="form" ng-submit="imageSubmit(form)" ng-model="form" >
 														<div class="form-group">
 															<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
 														</div>
@@ -154,11 +154,22 @@
 														<div class="form-group">	
 															<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
 														</div>
+
 														<div class="form-group">	
-															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
+															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
+														</div>
+														<div class="form-group">
+															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+
+														      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+														    </tags-input>
 														</div>
 															<button type="submit" class="b2w">Submit</button>
 													</form>
+													<div  >
+														<img src="{{form.picUrl}}" height="400px" width="auto" >
+													</div>
 												</div>
 											</div>
 
@@ -228,25 +239,18 @@
 
 
 <!-- IMAGE Modal -->
-<div id="img_view" class="img_modal modal fade" role="dialog">
-<div class="centric ">
-  <div class="modal-dialog img_modal-dialog">
 
-    <!-- Modal content-->
-   
-     
-        
-       
-   
-      <div class="modal-body img_modal-body">
+
+<script type="text/ng-template" id="myModalImage.html">
+	<div id="img_view" >
       	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
       	<div="wrapper">
-        <img src="http://beautifulyoucoachingacademy.com/wp-content/uploads/2014/01/Beautiful-Day-1024x640.jpg"	id="img_viewed">
+        <img src="{{image.picUrl}}"	id="img_viewed">
 	        <div id="img_viewed_info">
 	       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
-		        <div id="img_name">Name</div>
+		        <div id="img_name">{{image.imgName}}</div>
 		        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
-		        <div id="img_des">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
+		        <div id="img_des">{{image.description}}</div>
 	        </div>
         </div>
         <div id="img_des_com" class="glassy col-md-8">
@@ -276,28 +280,19 @@
     
 
   </div>
-</div>
-</div>
+
+</script>
 
 
 
 <!--****************************************Video view modal***************************-->
 
 <div id="videoview" class="modal img_modal fade" role="dialog">
-<div class="centric">
-  <div class="modal-dialog img_modal-dialog">
 
-    <!-- Modal content-->
-   
-     
-        
-       
-   
-      <div class="modal-body img_modal-body">
       <button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
 
 
-      <div ng-controller="ViewPageCtrl">
+      
     
 
     <div  id="video">
@@ -384,12 +379,118 @@
         </div>
         
     
-</div>
+
 
       </div>
       
     
 
-  </div>
-</div>
-</div>
+  
+
+
+
+<script type="text/ng-template" id="myModalVideo.html">
+
+		
+	
+
+
+			<div id="video">
+        		<div class="wrapper">
+         			<img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
+         			<div my-youtube code='vidCode'></div>         
+       			</div>
+        		<div class="content" id="title">
+            		<span id="video_name">{{video.vidname}}</span>
+        		</div>
+        		<!--<div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>-->
+    		</div>
+
+    		<div class="stage col-md-9"  id="vid_stuff">
+            	<div class="content">
+            	<!--Crew and cast-->
+                	<div id="credits" >
+                	<!--credits start-->              
+                                           
+                    </div>
+                    
+                   
+                <!--credits end-->
+
+               
+                </div>
+
+                <div class="col-md-12">
+	       	
+					  <ul class="nav nav-tabs"> 					    
+					    <li class="active"><a data-toggle="tab" href="#best_parts">Best part</a></li>
+					    <li><a data-toggle="tab" href="#commentss">Comments</a></li>
+					    <li><a data-toggle="tab" href="#reviewss">Reviews</a></li>
+					  </ul>
+
+					  <div class="tab-content">
+					  	<div id="best_parts" class="tab-pane fade in active">
+					       <h3>Best part<hr></hr></h3>
+					    </div>
+					    
+					    <div id="commentss" class="tab-pane fade">
+					      <div>
+	                            <div>
+	                                <h4>Leave a Comment:</h4>
+	                                <form name="myForm" ng-submit="submit()" class="form" novalidate> 
+	                                    <div class="form-group">
+	                                        <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
+	                                    </div>
+	                                    <button type="submit" class="btn btn-primary">Submit</button>
+	                                </form>
+	                            </div>
+	                            <ul id="comments_list">
+	                                <li ng-repeat="comment in video.comments" >
+	                                    
+	                                    <div class="thumbs_wrap comments">
+	                                    
+	                                        <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
+	                                        <span class="commenter">
+	                                        	{{comment.comment.commentPutter}}
+	                                        </span>
+	                                     	<span>
+	                                     	 	<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute">
+	                                     	</span>
+	                                        <span id="comment_data">
+	                                        	{{comment.comment.commentData}}
+	                                        </span>
+	                                        <br/>
+	                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
+	                                        	<span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+	                                        	<span  ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span>
+	                                        </span>
+	                                        <div class="form-group" ng-show="toggleVal">
+	                                           	<textarea class="form-control" rows="3" ng-model="editData"></textarea>
+	                                           	<button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+	                                        </div>
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+					    </div>
+					    
+					    <div id="reviewss" class="tab-pane fade">
+					      <h2>Reviews<hr></hr></h2>
+					    </div>
+					  </div>
+
+
+				</div>
+
+                
+                <!--Best part, comments, review-->
+	           
+  			</div>
+</script>
+
+
+
+
+
+
+

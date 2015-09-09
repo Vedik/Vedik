@@ -5,12 +5,19 @@ angular.module('myAppApp')
     $scope.message = 'Hello';
     $scope.user = User.get();
     var url = $location.url();
-    var name = url.split('/stage/')[1];
+    var id = url.split('/stage/')[1];
     console.log(name);
-    $http.get('/api/stages/'+name).success(function (response){
+    $http.get('/api/stages/'+id).success(function (response){
     	console.log(response);
     	$scope.stage = response.stage;
+        console.log($scope.stage);
         $scope.isFollowing = response.isFollowing;
+    });
+
+    $http.get('/api/posts/stage/'+id).success(function (response){
+        console.log(response);
+        $scope.posts = response;
+        console.log($scope.posts);
     });
     $scope.follow = function(){
         $http.get('/api/stages/'+name+'/addSubscriber').success(function (response){

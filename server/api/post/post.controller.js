@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Post = require('./post.model');
+var User = require('../user/user.model');
 // Get list of posts
 exports.index = function(req, res) {
   console.log('err');
@@ -87,6 +88,30 @@ exports.showForClub = function(req, res) {
     if(err) { return handleError(res, err); }
     })
   .populate('articleId videoId imageId like uploader.club')
+  
+  .exec(function (err, posts){
+      if (err) return handleError(err);
+     
+      console.log('er2');
+      
+      return res.json(posts);
+  })
+};
+//).elemMatch("vedik",{"_id":stage_id}).exec(
+exports.showForStage = function(req, res) {
+  console.log(req.user._id);
+   var stage_id = req.params.id;
+    var x ='ObjectId("'+stage_id+'")';
+    var y=req.user._id;
+    console.log(x);
+ 
+  Post.find({ vedik: { $elemMatch: {vedik:stage_id} } },function (err, posts) {
+    console.log(posts);
+    if(err) { console.log(posts+"dfggf"); return handleError(res, err);
+     }
+     console.log(posts+"dfggf")
+    })
+  .populate('articleId videoId imageId like uploader.club uploader.name')
   
   .exec(function (err, posts){
       if (err) return handleError(err);

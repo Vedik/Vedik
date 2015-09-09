@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('UploadPortalCtrl', function ($scope,Auth,$http) {
+  .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService) {
     $scope.message = 'Hello';
     $scope.submitted = false;
     
@@ -34,8 +34,13 @@ angular.module('myAppApp')
         });
     }*/
 
+    $scope.blur = function ()   {
+        UploadPortalService.setProperty().then(function (response){
+                console.log(response);
+        }); 
+    };
 
-
+    
     
     /*
     $scope.submit = function (form){
@@ -49,12 +54,12 @@ angular.module('myAppApp')
     	});
     };*/
 
-
+ //onclick="document.getElementById(for_blur).style.filter = blur(40px)"
 
 })
 .directive('contentItem', function ($compile, $http,$modal) {
     var imageTemplate = '<div><div class="post_div thumbs_wrap col-md-12" ng-click="viewImage(content.imageId._id)"><div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"><img src="{{content.imageId.picUrl}}" id="img_post"><span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span><span id="img_name">{{content.imageId.imgName}}</span><span class="thumb_trnsprnt"></span><span id="user_art_info"><div id="a"><div id="vid_data">{{content.imageId.description}}</div><span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span></div></span></div><span id="post_time"><span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a></span>{{content.createdOn}}</span></div></div>';
-    var videoTemplate = '<div><div class="post_div thumbs_wrap col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" onclick="document.getElementById(for_blur).style.filter = blur(40px)">{{content.videoId.vidurl}}<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"><img src="{{content.videoId.posterurl}}" id="img_post"><span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;"></span><span id="img_name">{{content.videoId.vidname}}</span><span class="play"><img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">,njhgfcxz</span><span class="thumb_trnsprnt"></span><span id="user_art_info"><div id="a"><div id="vid_data">{{content.videoId.description}}</div><span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span></div></span></div><span id="post_time"><span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>  {{content.createdOn}}</span></div></div>';
+    var videoTemplate = '<div  ng-click=blur()><div class="post_div thumbs_wrap col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" ><div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"><img src="{{content.videoId.posterurl}}" id="img_post"><span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;"></span><span id="img_name">{{content.videoId.vidname}}</span><span class="play"><img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">,njhgfcxz</span><span class="thumb_trnsprnt"></span><span id="user_art_info"><div id="a"><div id="vid_data">{{content.videoId.description}}</div><span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span></div></span></div><span id="post_time"><span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>  {{content.createdOn}}</span></div></div>';
     var articleTemplate = '<div>'   +
                                 '<div class="post_div col-md-12">'  +
                                     '<div class="text_type_post" id="article">' +
@@ -173,7 +178,10 @@ angular.module('myAppApp')
             });
         };
 
-      
+        function Ctrl2($scope, UploadPortalService) {
+            $scope.prop2 = "Second";
+            $scope.both = UploadPortalService.setProperty()
+        }
 
         
         
@@ -188,20 +196,30 @@ angular.module('myAppApp')
             });
         };
 
+         scope.blur =function(){
+            scope.for_blur = {
+                'filter': 'blur('+40+'px)'
+            };
+        };
+
         scope.viewVideo =function(vidurl){
+
+            document.getElementById('for_blur').style.filter = 
+            'blur(20px)';
+
           
             console.log(vidurl);
            
             var modalInstance = $modal.open({
               animation: true,
-              templateUrl:'myModalContent.html' ,
+              templateUrl:'myModalVideo.html' ,
               controller: 'ModalInstanceCtrl',
               resolve: {
                   vidCode: function(){
                     return(vidurl);
                   },
                   user: function(){
-                    return scope.user;
+                    return scope.content.type;
                   }
                 }
             });
@@ -211,8 +229,21 @@ angular.module('myAppApp')
         
 
         scope.viewImage =function(imageId){
-        
-    }   ;
+            document.getElementById('for_blur').style.filter = 
+            'blur(20px)';
+             var modalInstance = $modal.open({
+              animation: true,
+              templateUrl:'myModalImage.html' ,
+              controller: 'ModalImageInstanceCtrl',
+              resolve: {
+                  
+                  image: function(){
+                    return scope.content.imageId;
+                  }
+                }
+            });
+    
+        };
     }
 
     return {
@@ -223,7 +254,8 @@ angular.module('myAppApp')
         }
     };
 });
-;
+
+
 
 angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$modalInstance,vidCode, user,$http){
   console.log('hello');
@@ -237,6 +269,7 @@ angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$moda
   });
   $scope.user = user;
 
+
   $scope.rating1 = 5;
   $scope.rateFunction = function(rating) {
     console.log("Rating selected: " + rating);
@@ -245,6 +278,18 @@ angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$moda
       $scope.rating1 = rating;
     })
   };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
+
+angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,image,$http){
+  console.log('hello');
+   $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+    $scope.image=image;  
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');

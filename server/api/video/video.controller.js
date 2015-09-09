@@ -18,7 +18,7 @@ exports.index = function(req, res) {
 // Get a single video
 exports.show = function(req, res) {
   console.log(req.params.vidCode);
-  Video.findOne({vidurl:'https://www.youtube.com/watch?v='+req.params.vidCode})
+  Video.findOne({vidurl:req.params.vidCode})
   .populate('comments.comment')
   .exec(function (err, video){
     if(err) {
@@ -34,14 +34,14 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   console.log(req.body.genres);
   var vidUrl=req.body.vidurl;
-  a = vidurl.split('watch?v=');
+  var a = vidUrl.split('watch?v=');
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
   var newvideo = new Video({
     vidname:req.body.vidname,
-    vidurl:req.body.a[1],
+    vidurl:a[1],
     description:req.body.description,
     posterurl:req.body.posterurl,
     

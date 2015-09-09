@@ -1,15 +1,10 @@
 
 
 
-<div ng-controller="UploadPortalCtrl">
-<div ng-repeat="book in bookings">
-	{{book._id}}
-	{{book.articleId.articleName}}
-	
-</div>
+<div ng-controller="UploadPortalCtrl" class="a" ng-class="for_blur">
 
 	<div>
-	<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
+	<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur">
 		
 	</content-item>
 	</div>
@@ -17,7 +12,7 @@
 
 
 <div id="for_blur" class="thumbs_wrap col-md-12">									
-									<div class="img_div thumbs_wrap col-md-12">
+									<div class="img_div thumbs_wrap col-md-12" ng-click="blur()">
 									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
 										<img src="https://iso.500px.com/wp-content/uploads/2014/04/20482.jpg" id="img_post">
 										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
@@ -188,14 +183,13 @@
 
 
 
+<!--
 
-
-<script type="text/ng-template" id="myModalContent.html">
-			<div id="videoview" class="modal img_modal fade" role="dialog">
+			/*<div id="videoview" class="modal img_modal fade" role="dialog">
 <div class="centric">
   <div class="modal-dialog img_modal-dialog">
 
-    <!-- Modal content-->
+    <!-- Modal content
    
      
         
@@ -211,7 +205,7 @@
     <div  id="video">
         <div class="wrapper">
          <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
-         <iframe  ng-src="https://www.youtube.com/embed/{{vidurl}}" frameborder="0" allowfullscreen></iframe>
+         <iframe  src="https://www.youtube.com/embed/3p_R7K13-Fs" frameborder="0" allowfullscreen></iframe>
             
         </div>
         <div class="content" id="title">
@@ -219,12 +213,12 @@
         </div>
         <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
     </div>
-      <!-- info, comments, reviews etc of video-->
+      <!-- info, comments, reviews etc of video
         <div class="stage col-md-9"  id="vid_stuff">
             <div class="content">
-            <!--Crew and cast-->
+            <!--Crew and cast
                 <div id="credits" >
-                <!--credits start-->
+                <!--credits start
                 
  
   
@@ -238,14 +232,14 @@
 
                
                 </div>
-                <!--Best part, comments, review-->
+                <!--Best part, comments, review
                 <ul class="nav nav-tabs" id="view_page_tabs">
                         <li class="active"><a data-toggle="tab" href="#best_part">Best Part</a></li>
                         <li><a href="#comments" data-toggle="tab">Comments</a></li>
                         <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
                  </ul>
 
-                 <!--tab content-->
+                 <!--tab content
                 <div class="tab-content">
                     <div id="best_part" class="tab-pane fade in active">
                         <h3>Best part<hr></hr></h3>
@@ -269,7 +263,7 @@
                                     
                                          <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
                                         <span class="commenter">{{comment.comment.commentPutter}}</span>
-                                     <!--   <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute"></span>-->
+                                     <!--   <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute"></span>
                                         <span id="comment_data">{{comment.comment.commentData}}</span><br>
                                         <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
                                         <span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
@@ -284,7 +278,7 @@
                         </div>
                     </div>
                     <div id="reviews" class="tab-pane fade">
-                    <!--add review part here-->
+                    <!--add review part here
                         <h2>Reviews<hr></hr></h2>
                     </div>
                 </div>
@@ -301,6 +295,8 @@
   </div>
 </div>
 </div>
-	</script>
+</div>
+	</script>-->
 
 </div>
+

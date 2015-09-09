@@ -26,7 +26,14 @@ exports.show = function(req, res) {
 // Creates a new image in the DB.
 exports.create = function(req, res) {
   console.log(req.body.imgName);
-
+  var a=req.body.vedik;
+  console.log(a[1]);
+  var b=[];
+  for(var i=0;i<a.length;i++)
+  {
+    b[i]=a[i]._id;
+  }
+  console.log(b);
   var newImage = new Image({
     imgName:req.body.imgName,
     picUrl:req.body.picUrl,
@@ -37,7 +44,7 @@ exports.create = function(req, res) {
   newImage.save(function (err){
     if(err) return handleError(res, err);
     else {
-          req.user.images.push({image:newImage,role:['actor']});
+       /*   req.user.images.push({image:newImage,role:['actor']});
           req.user.save(function (error) {
             if(error) {
               return handleError(res, err);
@@ -45,17 +52,22 @@ exports.create = function(req, res) {
             else {
               console.log('user saved');
             }
-          });
+          });*/
           var newPost = new Post({
             imageId: newImage._id,
             type:2,
-            createdOn:Date.now(),
-            uploader:req.user._id,
-            view_count:0,
             tags:req.body.tags,
-            like:[]
+            uploader:{user:req.user._id},   //club:req.params.id},
             
+            view_count:0,
+            like:[],
+            createdOn:Date.now()
           });
+          for(i=0;i<b.length;i++)
+          {
+            newPost.vedik.push({vedik:b[i]});
+          }
+          
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else {
