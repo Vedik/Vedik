@@ -26,6 +26,13 @@ exports.show = function(req, res) {
 // Creates a new article in the DB.
 exports.create = function(req, res) {
   
+  var a=req.body.vedik;
+  console.log(a[1]);
+  var b=[];
+  for(var i=0;i<a.length;i++)
+  {
+    b[i]=a[i]._id;
+  }
 
   var newArticle = new Article({
     articleName:req.body.articleName,
@@ -56,6 +63,10 @@ exports.create = function(req, res) {
             like:[],
             createdOn:Date.now()
           });
+          for(i=0;i<b.length;i++)
+          {
+            newPost.vedik.push({vedik:b[i]});
+          }
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else {

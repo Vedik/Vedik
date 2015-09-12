@@ -68,7 +68,7 @@ exports.showForUser = function(req, res) {
   Post.find(query,function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploader.user')
+  .populate('articleId videoId imageId like.user uploader.user vedik.vedik')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -111,7 +111,7 @@ exports.showForStage = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploader.club uploader.name')
+  .populate('articleId videoId imageId like uploader.club uploader.user ')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -122,6 +122,30 @@ exports.showForStage = function(req, res) {
   })
 };
 
+exports.showStageForUser = function(req, res) {
+  console.log(req.user._id);
+   var stage_id = req.params.id;
+    var x ='ObjectId("'+stage_id+'")';
+    var y=req.user._id;
+    console.log(x);
+     var query = {};
+  query['uploader.' + 'user'] = y;
+  Post.find( { $and: [ query, {vedik: { $elemMatch: {vedik:stage_id} } }  ] },function (err, posts) {
+    console.log(posts);
+    if(err) { console.log(posts+"dfggf"); return handleError(res, err);
+     }
+     console.log(posts+"dfggf")
+    })
+  .populate('articleId videoId imageId like uploader.club uploader.user ')
+  
+  .exec(function (err, posts){
+      if (err) return handleError(err);
+     
+      console.log('er2');
+      
+      return res.json(posts);
+  })
+};
 // Creates a new post in the DB.
 exports.create = function(req, res) {
   Post.create(req.body, function(err, post) {

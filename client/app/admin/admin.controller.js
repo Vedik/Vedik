@@ -30,9 +30,17 @@ angular.module('myAppApp')
       });
     };
 
-     $scope.submit = function (form){
+     $scope.submitClub = function (form){
         //validation to be done
         $http.post('/api/clubs',{name:form.clubname,description:form.description,posterUrl:form.posterUrl}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+    };
+
+    $scope.submitStage = function (form){
+        //validation to be done
+        $http.post('/api/stages',{name:form.stagename,description:form.description,posterUrl:form.posterUrl}).success(function (response){
             console.log(response);
             $scope.form={};
         })

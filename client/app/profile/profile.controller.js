@@ -42,8 +42,48 @@ angular.module('myAppApp')
         console.log(response);
         $scope.posts = response;
         console.log($scope.posts);
-    });
+    
 
+    $scope.stageId=["aa"];
+    $scope.stageList=[];
+    var x=0;
+    for(var i=0;i<$scope.posts.length;i++)
+    {
+      for(var j=0;j<$scope.posts[i].vedik.length;j++)
+      {
+          console.log($scope.posts[i].vedik);
+          for(var k=0;k<$scope.stageId.length;k++)
+          {
+              console.log('sssssssssssssss1');
+              var z=0;
+              if($scope.stageId[k]==$scope.posts[i].vedik[j].vedik._id)
+              {
+                z=1;
+                break;
+              }
+              
+              $scope.stageId[x]=$scope.posts[i].vedik[j].vedik._id;
+                $scope.stageList[x]={'name':$scope.posts[i].vedik[j].vedik.name, 'id':$scope.posts[i].vedik[j].vedik._id};
+                x++;
+          }
+          
+      }
+    }
+      console.log($scope.stageId);
+      console.log($scope.stageList);
+  });
+    $scope.stageDiv = function (id){
+
+        $http.get('/api/posts/stage/user/'+id).success(function (response){
+         
+            $scope.stageDivPosts = response;
+            console.log($scope.stageDivPosts);
+        });
+    };
+
+    $scope.myFilter = function (item,y) { 
+        return item === y; 
+    };
 
     $scope.getSuggestionsForNames = function (query){
       return $http.get('/api/users/search/'+query).success(function (response) {
@@ -77,7 +117,7 @@ angular.module('myAppApp')
    }
 
     $scope.articleSubmit = function (form){
-          $http.post('/api/articles',{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags}).success(function (response){
+          $http.post('/api/articles',{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik}).success(function (response){
             console.log(response);
             $scope.form={};
         })

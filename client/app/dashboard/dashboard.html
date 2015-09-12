@@ -45,7 +45,12 @@
 	<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 			<div id="stage" class="tab-pane fade">
 					<div class="col-md-2" id="clubs_list">
-						<div id="clubs_list_wrap"><a href="#"><h3>Clubs</h3></a></div>
+						<div id="clubs_list_wrap">
+							<p style="font-size:13px;color:white">Clubs</p>
+							<a href="/club/{{clubsList._id}}" ng-repeat="clubsList in clubsList">
+							<button type="button" class="btn btn-info btn-lg w2b col-md-12" style="font-size:12px;margin:0px 0px;padding:4px 10px;text-align:left">{{clubsList.name}}</button>
+							</a>
+						</div>
 					</div>
 					<div id="main_stage" class="col-md-8">
 									
@@ -179,21 +184,7 @@
 		</div>
 		</div>
 
-		<form name="form" ng-submit="submit(form)">
-		<div class="form-group">
-			<label>Name of Stage</label>
-			<input type="text" class="form-control" ng-model="form.stagename">
-		</div>
-		<div class="form-group">
-			<label>Description</label>
-			<input type="text" class="form-control" ng-model="form.description">
-		</div>
-		<div class="form-group">
-			<label>cover pic</label>
-			<input type="text" class="form-control" ng-model="form.posterUrl">
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+		
 
 	</div>
 	</div>

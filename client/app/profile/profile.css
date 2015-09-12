@@ -212,7 +212,7 @@
             #stages_list {
                 background-color: rgba(255,255,255,0.3);
                 border-bottom: 5px double #0f6f84;
-                height:50px;
+                
               /*  position: absolute;*/
                 width: 100%;
             }
@@ -228,7 +228,7 @@
                 padding: 0px 0px 100px;
             }
             #user_hist_div1  {
-                margin:10px auto;
+                
                 position: static;
                  
             }

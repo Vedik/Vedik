@@ -27,6 +27,10 @@
 						</script>
            			</div>
 	            	<div id="stages_list">
+	            		<ul class="nav nav-tabs">
+	            			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>  
+						  	<li ng-repeat="stageList in stageList" ng-click="stageDiv(stageList.id)"><a data-toggle="tab" href="#{{stageList.id}}">{{stageList.name}}</a></li>
+						</ul>
 					</div>
 
 		            <div id="user_profile" class="col-md-3 ">
@@ -119,17 +123,27 @@
 									<span id="user_art" class="thumbs_wrap">
 										
 										
-										<div>
-											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
-												
-											</content-item>
+										
+
+										<div class="tab-content">
+											<div id="home" class="tab-pane fade in active">
+												<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
+													
+												</content-item>
 											</div>
 
+											  <div  class="tab-pane fade" ng-repeat="stageDiv in stageList" id="{{stageDiv.id}}">
+											    <content-item ng-repeat="item in stageDivPosts | orderBy:'-createdOn' " content="item">
+													
+												</content-item>
+											  </div>
+
+											
+										</div>	
 											<div>
 										    	<input type="text" ng-model="creditDet">
 										    	<button ng-click="submitCredit(creditDet)">Submit Credit</button>
-										    </div>
-										</div>	
+										    </div>	
 												
 													<span id="user_art" >
 										

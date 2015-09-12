@@ -17,13 +17,7 @@ angular.module('myAppApp')
     }
 
 
-    $scope.submit = function (form){
-        //validation to be done
-        $http.post('/api/stages',{name:form.stagename,description:form.description,posterUrl:form.posterUrl}).success(function (response){
-            console.log(response);
-            $scope.form={};
-        })
-    }
+    
 
     $scope.loadMore = function () {
     	$scope.limit = $scope.limit+1;
@@ -47,6 +41,11 @@ angular.module('myAppApp')
         $scope.bookings = response;
         $scope.posts=$scope.bookings.postId;
         console.log($scope.bookings);
+    });
+
+     $http.get('/api/clubs/').success(function (response){
+        console.log(response);
+        $scope.clubsList = response;
     });
   })
 

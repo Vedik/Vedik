@@ -10,6 +10,7 @@ router.get('/likeInfo/:postIdLike',auth.isAuthenticated(), controller.likeInfo);
 router.get('/user/:id', controller.showForUser);
 router.get('/club/:id', controller.showForClub);
 router.get('/stage/:id',auth.isAuthenticated(), controller.showForStage);
+router.get('/stage/user/:id',auth.isAuthenticated(), controller.showStageForUser);
 router.post('/', controller.create);
 router.get('/:postId/like',auth.isAuthenticated(),controller.like);
 router.delete('/:postId/unlike',auth.isAuthenticated(),controller.unlike);

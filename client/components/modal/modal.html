@@ -136,6 +136,13 @@
 														<div class="form-group">	
 															<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
 														</div>
+														<div class="form-group">
+															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+
+														      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+														    </tags-input>
+														</div>
 															<button type="submit" class="b2w">Submit</button>
 													</form>
 												</div>
