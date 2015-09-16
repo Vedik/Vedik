@@ -40,7 +40,14 @@ exports.create = function(req, res) {
     description:req.body.description
   });
 
-  
+  var type;
+  if(req.body.type)
+  {
+      type=req.body.type;
+  }
+  else
+      type=2;
+
   newImage.save(function (err){
     if(err) return handleError(res, err);
     else {
@@ -55,10 +62,11 @@ exports.create = function(req, res) {
           });*/
           var newPost = new Post({
             imageId: newImage._id,
-            type:2,
+            type:type,
             tags:req.body.tags,
             uploader:{user:req.user._id},   //club:req.params.id},
-            
+            ratings:[],
+            rating:0,
             view_count:0,
             like:[],
             createdOn:Date.now()
@@ -110,6 +118,8 @@ exports.clubPost = function(req, res) {
             createdOn:Date.now(),
             uploader:({user:req.user._id},{club:req.params.id}),
             view_count:0,
+            ratings:[],
+            rating:0,
             tags:req.body.tags,
             like:[]
             

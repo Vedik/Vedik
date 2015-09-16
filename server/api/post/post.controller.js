@@ -9,7 +9,7 @@ exports.index = function(req, res) {
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId uploader.user uploader.club')
+  .populate('articleId videoId imageId uploader.user uploader.club eventId comments.comment')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -23,7 +23,7 @@ exports.index = function(req, res) {
 
 exports.likeInfo = function(req, res) {
   console.log('err4567');
-  Post.findOne({ $or: [ { articleId:req.params.postIdLike }, { videoId:req.params.postIdLike }, { imageId:req.params.postIdLike } ] },function (err, posts) {
+  Post.findOne({ $or: [ { articleId:req.params.postIdLike }, { videoId:req.params.postIdLike }, { imageId:req.params.postIdLike }, { eventId:req.params.postIdLike } ] },function (err, posts) {
     if(err) { return handleError(res, err); }
     })
   .populate('like')
@@ -59,6 +59,40 @@ exports.likeInfo = function(req, res) {
   })
 };
 
+exports.ratingInfo = function(req, res) {
+  console.log('err4567');
+  Post.findById(req.params.postIdRating,function (err, post) {
+    if(err) { return handleError(res, err); }
+  
+   var i=0,j=0;
+      
+      var rating=false;
+      var ratingValue;
+
+        {
+          for(j;j<post.ratings.length;j++)
+          {
+            
+             if(post.ratings[j].user.equals(req.user._id))
+             {
+                
+                rating = true;
+                ratingValue=post.ratings[j].rating;
+                break;
+             }
+             
+
+          } 
+        }
+        
+           
+     
+     
+      
+      return res.json({rating:rating,ratingValue:ratingValue,votes:post.ratings.length});
+  })
+};
+
 // Get a single post
 exports.showForUser = function(req, res) {
   console.log('req.params.');
@@ -68,7 +102,7 @@ exports.showForUser = function(req, res) {
   Post.find(query,function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like.user uploader.user vedik.vedik')
+  .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -87,7 +121,26 @@ exports.showForClub = function(req, res) {
   Post.find(query,function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploader.club')
+  .populate('articleId videoId imageId like uploader.club eventId')
+  
+  .exec(function (err, posts){
+      if (err) return handleError(err);
+     
+      console.log('er2');
+      
+      return res.json(posts);
+  })
+};
+
+exports.showForEvent = function(req, res) {
+  console.log('req.params.id');
+   var event_id = req.params.id;
+  var query = {};
+  query['uploader.' + 'event'] = event_id;
+  Post.find(query,function (err, posts) {
+    if(err) { return handleError(res, err); }
+    })
+  .populate('articleId videoId imageId like uploader.club eventId')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -111,7 +164,7 @@ exports.showForStage = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploader.club uploader.user ')
+  .populate('articleId videoId imageId like uploader.club uploader.user event')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -136,7 +189,7 @@ exports.showStageForUser = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploader.club uploader.user ')
+  .populate('articleId videoId imageId like uploader.club uploader.user event')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -190,7 +243,7 @@ var d = date.getFullYear();
   console.log(d+'d');*/
 
   console.log('dfsdfbv');
-  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId } ] },function (err,post){
+  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId }, { eventId:req.params.postIdLike } ] },function (err,post){
     if(err){
       return handleError(res,err);
     }
@@ -208,7 +261,7 @@ var d = date.getFullYear();
   });
 };
 exports.unlike = function (req,res){
-  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId } ] },function (err,post){
+  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId }, { eventId:req.params.postIdLike }  ] },function (err,post){
     if(err){
       return handleError(res,err);
     }
@@ -242,6 +295,61 @@ exports.unlike = function (req,res){
          
   });
 };
+
+exports.rate = function(req, res, next) {
+  var id = req.user._id;
+  var postId = req.params.postId;
+  console.log(req.body.rating);
+
+  Post.findById(postId, function (err, doc){
+    if(doc.length>1){
+      console.log('serious prob');
+    }
+    if(err) {
+      console.log(err+'is the error');
+    }
+    else {
+
+            var rated=false;
+            var currentRating=0;
+            var votes=doc.ratings.length;
+            var votesNew=votes;
+            for(var i=0;i<doc.ratings.length;i++)
+            {
+              if(doc.ratings[i].user.equals(id))
+              {
+                currentRating=doc.ratings[i].rating;
+                doc.ratings[i].rating=req.body.rating;
+                rated=true;
+
+                console.log('changed rating');
+                break;
+              }
+            }
+            if(!rated)
+            {
+              doc.ratings.push({user:id,rating:req.body.rating});
+              console.log('addnew rating');
+              votesNew= votes+1;
+            }
+       
+          
+            doc.rating = (doc.rating*(votes)+req.body.rating-currentRating)/(votesNew);
+
+          
+          doc.save(function (err){
+            if(err) {
+              console.log(err);
+            }
+            else {
+              res.json({rating:doc.rating,votes:votesNew}); //to update votes and vidRatings on putting rating
+            }
+          });
+        }
+          
+        });
+      };
+
 
 
 

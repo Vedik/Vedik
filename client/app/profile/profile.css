@@ -20,6 +20,9 @@
                 top:0px;
                 float:left;
                position: static;
+               background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");
+                background-repeat: repeat;   
+                
 
             }
             #pro_pic    {
@@ -220,15 +223,13 @@
                 
             }
             #art_wrap {
-                background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");
-                background-repeat: repeat;   
-                width: 100%;
+                
                 position: relative;
                 height: auto;
                 padding: 0px 0px 100px;
             }
             #user_hist_div1  {
-                
+
                 position: static;
                  
             }

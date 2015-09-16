@@ -27,6 +27,12 @@
 						</script>
            			</div>
 	            	<div id="stages_list">
+	            		
+	            		<ul class="nav nav-tabs">
+	            			<button ng-show="club.admin==loggedInUser._id" type="button" class="btn btn-info btn-lg b2w" data-toggle="modal" data-target="#event" > Create Event</button>
+	            			<li class="active" ng-click="clubPostsDisplay()"><a>Posts</a></li>
+
+	            		</ul>
 					</div>
 
 		            <div id="user_profile" class="col-md-3 ">
@@ -99,7 +105,8 @@
 		        		</span>
 		        	</div>
 		        	<div onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'">
-		        		<button ng-show="club.admin==loggedInUser._id" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
+		        		<button ng-show="club.admin==loggedInUser._id" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#uploadd" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
+		        		
 		        	</div>
 		        	
 	        	</div>
@@ -107,10 +114,20 @@
 
 	                                               
 				<!--***************************users content, videos etc**********************-->
-				 <div id="user_hist_div1">
-				 	<div id="empty">
-				 	</div>
-				 	<div id="art_wrap" class="thumbs_wrap">
+				 <div id="user_hist_div1" class="thumbswrap">
+				 	<div class="col-md-2" id="clubs_list">
+						<div id="clubs_list_wrap">
+							<p style="font-size:13px;color:white">Events</p>						
+								
+								<span ng-repeat="eventsList in eventsList" ng-click="clubTabsDisplay(eventsList._id)">
+									<a data-toggle="tab" href="#eventss">
+										<button type="button" class="btn btn-info btn-lg w2b col-md-12" style="font-size:12px;margin:0px 0px;padding:4px 10px;text-align:left">{{eventsList.name}}</button>
+									</a>
+								</span>
+							
+						</div>
+					</div>
+				 	<div id="art_wrap" class="thumbs_wrap col-md-8">
 			            <div id="user_hist_div2" class="thumbs_wrap">
 				
 							<div class="thumbs_wrap">
@@ -119,11 +136,18 @@
 									<span id="user_art" class="thumbs_wrap">
 										
 										
-										<div>
+										<div id="club_posts" class="tab-pane fade in active" ng-show="displayPosts">
 											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
-												
+													
 											</content-item>
+										</div>
+										<div class="tab-content" id="clubEventsTab"  ng-if="showEvent">
+											<div ng-include="'app/event/event.html'"   >										
 											</div>
+										</div>	
+										
+									
+
 
 											<div>
 										    	<input type="text" ng-model="creditDet">

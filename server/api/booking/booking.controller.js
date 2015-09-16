@@ -4,6 +4,8 @@ var _ = require('lodash');
 var Booking = require('./booking.model');
 var Post = require('../post/post.model');
 var Article = require('../article/article.model');
+var Image = require('../image/image.model');
+
 
 // Get list of bookings
 exports.index = function(req, res) {
@@ -20,7 +22,9 @@ exports.index = function(req, res) {
   
   .exec(function (err, posts){
       if (err) return handleError(err);*/
-      
+      var posts=[];
+           var postsNew=[];
+           var a=[];
       
       var todaysDate=req.params.bookingDate;
       console.log(todaysDate);
@@ -40,19 +44,79 @@ exports.index = function(req, res) {
         })
          .lean()
         .populate({ path : 'postId'})
+     
         
         .exec(function (err, bookings){
-              var options = {
+           if (err) return handleError(err);
+           var posts=[];
+           var postsNew=[];
+           var a=[];
+           for(var i=0;i<bookings.length;i++)
+           {
+            if(bookings[i].postId.type==1)
+            {
+                var options = {
+                path: 'postId.articleId',
+                model: 'Article'
+              }
+            }
+            else if(bookings[i].postId.type==2)
+            {   console.log('image');
+                var options={
+                path: 'postId.imageId',
+                model: 'Image'
+              };
+              
+            }
+            else if(bookings[i].postId.type==3)
+            {
+                var options={
+                path: 'postId.videoId',
+                model: 'Video'
+              };
+            } 
+
+              Booking.populate(bookings[i], options, function (err, post){
+             
+                  posts=JSON.parse(JSON.stringify(post));
+                   postsNew[i] = function(posts) {
+                    if (posts != null && typeof(posts) != 'string' &&
+                      typeof(posts) != 'number' && typeof(posts) != 'boolean' ) {
+                      //for array length is defined however for objects length is undefined
+                      if (typeof(posts.length) == 'undefined') { 
+                        delete posts._id;
+                        for (var key in posts) {
+                          postsNew[i](posts[key]); //recursive del calls on object elements
+                        }
+                      }
+                      else {
+                        for (var j = 0; j < posts.length; j++) {
+                          postsNew[i](posts[j]);  //recursive del calls on array elements
+                        }
+                      }
+                    }
+                  } 
+                  a[i]=posts;
+                  
+
+              });
+           }
+              /*var options = {
                 path: 'postId.articleId',
                 model: 'Article'
               };
+              var options2={
+                path: 'postId.imageId',
+                model: 'Image'
+              };*/
 
-              if (err) return handleError(err);
-              Booking.populate(bookings, options, function (err, posts){
+             
+              /*Booking.populate(bookings, options2, function (err, posts){
                 console.log(posts);
                 res.json(posts);
-              });
-           
+              });*/
+              
+            res.json({a:a});
              /*Post.populate(booking,'articleId',function (err, booking ){
               
              });*/

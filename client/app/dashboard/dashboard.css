@@ -51,7 +51,7 @@
             margin: 0px;
             width: 100%;
           
-            background-image: url("http://okgo.ws/wp-content/uploads/2015/01/website-background-small3.jpg");          
+            background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");          
            padding: 0px;
            background-repeat: repeat;   
     }
@@ -76,7 +76,8 @@
             box-shadow: 0px 0px 3px grey;
             float: left;
             height: auto;
-            padding: 0px;
+            margin: 5px 0px;
+            padding: 0px 0px;
             width: 100%;
          
             text-align: center;
@@ -85,7 +86,7 @@
             
             height:auto;
             box-sizing:border-box;
-            margin:10px auto;
+            margin:0px auto;
             padding:10px 10px;
             overflow:visible;
             word-wrap: break-word;

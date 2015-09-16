@@ -1,86 +1,189 @@
+<div ng-controller="EventCtrl">
+<div ng-include="'components/navbar/navbar.html'" ng-if="navbar"></div>
+<div id="hidden" ng-style="hidden" ng-if="navbar"></div>
 
 
-<script>
-  angular.module('intervalExample', [])
-    .controller('ExampleController', ['$scope', '$interval',
-      function($scope, $interval) {
-        $scope.format = 'M/d/yy h:mm:ss a';
-        $scope.blood_1 = 100;
-        $scope.blood_2 = 120;
+      <div class="booking_body" ng-if="postingRight">
 
-        var stop;
-        $scope.fight = function() {
-          // Don't start a new fight if we are already fighting
-          if ( angular.isDefined(stop) ) return;
+          
 
-          stop = $interval(function() {
-            if ($scope.blood_1 > 0 && $scope.blood_2 > 0) {
-              $scope.blood_1 = $scope.blood_1 - 3;
-              $scope.blood_2 = $scope.blood_2 - 4;
-            } else {
-              $scope.stopFight();
-            }
-          }, 100);
-        };
+            <!-- Modal content-->
+                
+                
+                  
+                   
+                    
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#articleForm" data-toggle="tab" >Post</a></li>
+                        <li><a href="#imgForm" data-toggle="tab" >Images</a></li>
+                        <li><a href="#videoForm" data-toggle="tab" >Video</a></li>
+                      </ul>
+                    
 
-        $scope.stopFight = function() {
-          if (angular.isDefined(stop)) {
-            $interval.cancel(stop);
-            stop = undefined;
-          }
-        };
 
-        $scope.resetFight = function() {
-          $scope.blood_1 = 100;
-          $scope.blood_2 = 120;
-        };
+                    <div class="tab-content">
+                      
+                        <!--<ul class="nav nav-tabs">
+                           <li class="active"><a data-toggle="tab" href="#upload_form">Info</a></li>
+                            <li><a href="#credits" data-toggle="tab">Credits</a></li>
+                        </ul>
 
-        $scope.$on('$destroy', function() {
-          // Make sure that the interval is destroyed too
-          $scope.stopFight();
-        });
-      }])
-    // Register the 'myCurrentTime' directive factory method.
-    // We inject $interval and dateFilter service since the factory method is DI.
-    .directive('myCurrentTime', ['$interval', 'dateFilter',
-      function($interval, dateFilter) {
-        // return the directive link function. (compile function not needed)
-        return function(scope, element, attrs) {
-          var format,  // date format
-              stopTime; // so that we can cancel the time updates
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="upload_form" ng-controller="UploadPortalCtrl">
+                      <div class="tab-content">-->
 
-          // used to update the UI
-          function updateTime() {
-            element.text(dateFilter(new Date(), format));
-          }
+                      <!--************Video Upload Form********-->
+                        <div id="videoForm" class="tab-pane fade" >
+                          <h3>Add your Video here</h3>
+                          <form name="form" ng-submit="videoSubmit(form)" ng-model="form">
+                            <div class="form-group">
+                              
+                              <input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
+                            </div>
+                            <div class="form-group">
+                              
+                              <input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+                            </div>
+                            <div class="form-group">
+                              
+                              <input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+                            </div>
+                            <div class="form-group"> <!-- need to put select with multi option selection -->
+                              <label>Genre/Category</label>
+                              <select ng-model="form.genres" class="form-control upld_form" placeholder="Genres">
+                                <option value="horror">horror</option>
+                                <option value="comedy">comedy</option>
+                              </select>   <!-- Make it a maximum of three using array size in controller -->
+                            </div>
+                            <div class="form-group"> <!-- Put text area -->
+                              
+                              <input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+                            </div>
+                            <div class="form-group">
+                              <label>Stage to be tagged</label>
+                              
+                            </div>
+                            <button type="submit" class="b2w">Submit</button>
+                          </form>
 
-          // watch the expression, and update the UI on change.
-          scope.$watch(attrs.myCurrentTime, function(value) {
-            format = value;
-            updateTime();
-          });
+                        </div>
+                    
+                        <!--***************Article Upload form**************-->
 
-          stopTime = $interval(updateTime, 1000);
+                        <div id="articleForm"  class="tab-pane fade in active">
+                          <h3>Add your Article here</h3>
+                          <form name="form" ng-submit="postSubmit(form)" ng-model="form">
+                            <div class="form-group">
+                              <input type="text" class="form-control upld_form" ng-model="form.articleName" placeholder="Article Name">
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+                            </div>
+                            <div class="form-group">  
+                              <textarea  class="form-control upld_form" ng-model="form.content" placeholder="Type your Article" ></textarea>
+                            </div>
+                            <div class="form-group">  
+                              <input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
+                            </div>
+                            <div class="form-group">
+                              <tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
 
-          // listen on DOM destroy (removal) event, and cancel the next UI update
-          // to prevent updating time after the DOM element was removed.
-          element.on('$destroy', function() {
-            $interval.cancel(stopTime);
-          });
-        }
-      }]);
-</script>
+                                  <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 
-<div>
-  <div ng-controller="ExampleController">
-    <label>Date format: <input ng-model="format"></label> <hr/>
-    Current time is: <span my-current-time="format"></span>
-    <hr/>
-    Blood 1 : <font color='red'>{{blood_1}}</font>
-    Blood 2 : <font color='red'>{{blood_2}}</font>
-    <button type="button" data-ng-click="fight()">Fight</button>
-    <button type="button" data-ng-click="stopFight()">StopFight</button>
-    <button type="button" data-ng-click="resetFight()">resetFight</button>
-  </div>
+                                </tags-input>
+                            </div>
+                              <button type="submit" class="b2w">Submit</button>
+                          </form>
+                        </div>
+
+                        <!--**********Image Upload Form******************-->
+
+                        <div id="imgForm"  class="tab-pane fade">
+                          <h3>Add your Image here</h3>
+                          <form name="form" ng-submit="imageSubmit(form)" ng-model="form" >
+                            <div class="form-group">
+                              <input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+                            </div>
+                            <div class="form-group">  
+                              <input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+                            </div>
+
+                            <div class="form-group">  
+                              <input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
+                            </div>
+                            <div class="form-group">
+                              <tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+
+                                  <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+                                </tags-input>
+                            </div>
+                              <button type="submit" class="b2w">Submit</button>
+                          </form>
+                          <div  >
+                            <img src="{{form.picUrl}}" height="400px" width="auto" >
+                          </div>
+                        </div>
+                    </div>
+
+      </div>
+                   <!-- <div id="credits" class="tab-pane fade">
+                        <h3>Credits</h3>
+                        <div class="col-md-6">
+                            <label>Credit</label>
+                            <div>
+                              <tags-input ng-model="credits.directors" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'>
+                                <auto-complete 
+                                source="getSuggestionsForCredits($query)"
+                                min-length='1'
+                                >
+                                </auto-complete>
+                            </tags-input>
+                            <p>Model: {{credits.credit}}</p>
+                          </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label>Directors</label>
+                            <div>
+                              <tags-input ng-model="credits.creditNames" display-property="name" add-from-autocomplete-only="true">
+                                <auto-complete 
+                                source="getSuggestionsForNames($query)"
+                                min-length='1'>
+                                </auto-complete>
+                            </tags-input>
+                            <p>Model: {{credits.creditNames}}</p>
+                          </div>
+                          </div>
+                          <div ng-repeat="credit in credits">
+                            <label>{{credit.name}}</label>
+                            <tags-input ng-model="result.{{credit.name}}" display-property="name" add-from-autocomplete-only="true">
+                              <auto-complete 
+                            source="getSuggestions($query)"
+                            min-length='1'>
+                              </auto-complete>
+                          </tags-input>
+                          <p>{{result}}</p>
+                          </div>
+                          <div>
+                            <label>Editors</label>
+                            <tags-input ng-model="credits.editors" display-property="name" add-from-autocomplete-only="true">
+                              <auto-complete 
+                                source="getSuggestions($query)"
+                                min-length='1'>
+                              </auto-complete>
+                          </tags-input>
+                          <p>Model: {{credits.editors}}</p>
+                          </div>
+                          <div>
+                            <h2>Add Credits</h2>
+                          </div>
+                      </div>-->
+          
+          <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ></content-item>
+
 </div>
-
+                    
+                

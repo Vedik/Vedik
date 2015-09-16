@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Comment = require('./comment.model');
-var Video = require('../video/video.model');
+var Post = require('../post/post.model');
 // Get list of comments
 exports.index = function(req, res) {
   Comment.find(function (err, comments) {
@@ -23,18 +23,25 @@ exports.show = function(req, res) {
 // Creates a new comment in the DB.
 exports.create = function(req, res) {
   var user = req.user;
-  var newComment = new Comment({commentPutter:user.name,commentData:req.body.commentData,videoId:req.body.videoId,datePosted:Date.now(),dateEdited:Date.now()});
+  var newComment = new Comment({
+
+    commentPutter:user.name,
+    commentData:req.body.commentData,
+    postId:req.body.postId,
+    datePosted:Date.now(),
+    dateEdited:Date.now()});
   newComment.save(function(err){
     if(err){
       return handleError(res, err);
     }
     else {
-      Video.findById(newComment.videoId,function (err,doc){
+      Post.findById(req.body.postId,function (err,doc){
         if(err){
           return handleError(res, err);
         }
         else {
-          doc.comments.push({comment:newComment});
+          doc.comments.push({comment:newComment._id});
+          
           doc.save(function (err){
             if(err){
               return handleError(res, err);
@@ -69,11 +76,11 @@ exports.destroy = function(req, res) {
   Comment.findById(req.params.id, function (err, comment) {
     if(err) { return handleError(res, err); }
     if(!comment) { return res.send(404); }
-    var videoId = comment.videoId;
+    var postId = comment.postId;
     var commentId = comment._id;
     comment.remove(function(err) {
       if(err) { return handleError(res, err); }
-      Video.findOne({_id:videoId},function (err,doc){
+      Post.findById(postId,function (err,doc){
         var i = 0;
         for(i=0;i<doc.comments.length;i++){
           if(doc.comments[i].comment.equals(commentId)){

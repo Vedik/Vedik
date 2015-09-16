@@ -12,5 +12,6 @@ router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
+router.get('/search/:searchQuery', controller.search);
 
 module.exports = router;

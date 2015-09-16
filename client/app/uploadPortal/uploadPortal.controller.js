@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService) {
+  .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService,User) {
     $scope.message = 'Hello';
     $scope.submitted = false;
     
@@ -58,8 +58,63 @@ angular.module('myAppApp')
 
 })
 .directive('contentItem', function ($compile, $http,$modal) {
-    var imageTemplate = '<div><div class="post_div thumbs_wrap col-md-12" ng-click="viewImage(content.imageId._id)"><div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"><img src="{{content.imageId.picUrl}}" id="img_post"><span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span><span id="img_name">{{content.imageId.imgName}}</span><span class="thumb_trnsprnt"></span><span id="user_art_info"><div id="a"><div id="vid_data">{{content.imageId.description}}</div><span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span></div></span></div><span id="post_time"><span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a></span>{{content.createdOn}}</span></div></div>';
-    var videoTemplate = '<div  ng-click=blur()><div class="post_div thumbs_wrap col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" ><div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"><img src="{{content.videoId.posterurl}}" id="img_post"><span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;"></span><span id="img_name">{{content.videoId.vidname}}</span><span class="play"><img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">,njhgfcxz</span><span class="thumb_trnsprnt"></span><span id="user_art_info"><div id="a"><div id="vid_data">{{content.videoId.description}}</div><span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span></div></span></div><span id="post_time"><span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>  {{content.createdOn}}</span></div></div>';
+    var imageTemplate = '<div>'+
+                            '<div class="post_div thumbs_wrap col-md-12">'+
+                                '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                    '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                                    '<span>'+
+                                        '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
+                                    '</span>'+
+                                    '<span id="img_name">{{content.imageId.imgName}}</span>'+
+                                    '<span class="thumb_trnsprnt"></span>'+
+                                    '<span id="user_art_info">'+
+                                        '<div id="a">'+
+                                            '<div id="vid_data">{{content.imageId.description}}</div>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span>'+
+                                        '</div>'+
+                                    '</span>'+
+                                '</div>'+
+                                '<span id="post_time">'+
+                                    '<span id="respond_post">'+
+                                        '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}'+
+                                    '</span>'+
+                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                '</span>'+
+                            '</div>'+                            
+                        '</div>';
+    var videoTemplate = '<div  ng-click=blur()>' +
+                            '<div class="post_div thumbs_wrap col-md-12" >'+
+                               '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                    '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+                                    '<span>'+
+                                        '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
+                                    '</span>'+
+                                    '<span id="img_name">'+
+                                        '{{content.videoId.vidname}}'+
+                                    '</span>'+
+                                    '<span class="play">'+
+                                        '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
+                                    '</span>'+
+                                    '<span class="thumb_trnsprnt"></span>'+
+                                    '<span id="user_art_info">'+
+                                        '<div id="a">'+
+                                            '<div id="vid_data">{{content.videoId.description}}</div>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span>'+
+                                        '</div>'+
+                                    '</span>'+
+                                '</div>'+
+                                '<span id="post_time">'+
+                                    '<span id="respond_post">'+
+                                        '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}'+
+                                    '</span>'+
+                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                '</span>'+
+                            '</div>'+
+                        '</div>';
     var articleTemplate = '<div>'   +
                                 '<div class="post_div col-md-12">'  +
                                     '<div class="text_type_post" id="article">' +
@@ -68,33 +123,39 @@ angular.module('myAppApp')
                                         '</a>'  +
                                         '</br>{{content.articleId.content}}</br></br>'  +
                                         '<div>' +
-                                            '<p>by<a href="#"> {{content.uploader.user.name}}</a></p>'  +
-                                            '<span id="respond_post" ng-hide="likingName" ng-click="like(content.articleId._id)">'  +
+                                            '<span>by<a href="#"> {{content.uploader.user.name}}</a></span>'  +                                            
+                                        '</div>'    +
+                                    '</div>'    +
+                                    '<span id="post_time">'+
+                                            '<span id="respond_post">'+
+                                                '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                                '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                                '{{postTime}}'+
+                                            '</span>'+
+                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                    '</span>'   +                                    
+                                '</div>'    +
+                            '</div>';
+    var eventClubTemplate ='<div>'   +
+                                '<div class="post_div col-md-12">'  +
+                                    '<div class="text_type_post" id="article">' +
+                                        '<a href="/event">'  +
+                                            '<span id="event_post_heading">{{content.eventId.name}}</span>'    +
+                                        '</a>'  +
+                                        '</br>{{content.eventId.description}}</br></br>'  +
+                                        '<div>' +
+                                            '<p>by<a href="#"> {{content.uploader.club.name}}</a></p>'  +
+                                            '<span id="respond_post" ng-hide="likingName" ng-click="like(content.eventId._id)">'  +
                                                 '<a href="#">'   +
                                                     '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Like'  +
                                                 '</a>'  +
                                             '</span>'   +
-                                            '<span id="respond_post" ng-show="likingName" ng-click="unlike(content.articleId._id)">'    +
+                                            '<span id="respond_post" ng-show="likingName" ng-click="unlike(content.eventId._id)">'    +
                                                 '<a href="#"><img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Unlike</a>'    +
                                             '</span>'   +
                                         '</div>'    +
                                     '</div>'    +
-                                    '<span id="post_time">{{content.articleId.createdOn}}</span>'   +
-                                    '<div>' +
-                                        '<div ng-controller="DatepickerDemoCtrl">' +
-                                            '<form name="form" ng-submit="bookPost(content._id)" ng-model="form" >' +
-                                                '<div class="col-md-6 datepckr">'+
-                                                    '<p class="input-group">' +
-                                                        '<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="' + '"2037-06-22"' + '" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />' +
-                                                        '<span class="input-group-btn">' +
-                                                            '<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>' +
-                                                        '</span>' +
-                                                    '</p>' +
-                                                '</div>' +
-                                                '<button type="submit" class="b2w">Book</button>' +
-                                            '</form>' +
-                                        '</div>' +
-                                    '</div>' +
+                                    '<span id="post_time">{{content.createdOn}}</span>'   +
                                 '</div>'    +
                             '</div>';
     var articleClubTemplate ='<div>'   +
@@ -105,20 +166,19 @@ angular.module('myAppApp')
                                         '</a>'  +
                                         '</br>{{content.articleId.content}}</br></br>'  +
                                         '<div>' +
-                                            '<p>by<a href="#"> {{content.uploader.club.name}}</a></p>'  +
-                                            '<span id="respond_post" ng-hide="likingName" ng-click="like(content.articleId._id)">'  +
-                                                '<a href="#">'   +
-                                                    '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Like'  +
-                                                '</a>'  +
-                                            '</span>'   +
-                                            '<span id="respond_post" ng-show="likingName" ng-click="unlike(content.articleId._id)">'    +
-                                                '<a href="#"><img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Unlike</a>'    +
-                                            '</span>'   +
+                                            '<span>by<a href="#"> {{content.uploader.club.name}}</a></span>'  +                                            
                                         '</div>'    +
                                     '</div>'    +
-                                    '<span id="post_time">{{content.articleId.createdOn}}</span>'   +
+                                    '<span id="post_time">'+
+                                            '<span id="respond_post">'+
+                                                '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                                '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                                '{{postTime}}'+
+                                            '</span>'+
+                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                    '</span>'   +                                    
                                 '</div>'    +
-                            '</div>';
+                            '</div>';                      
     var getTemplate = function(contentType) {
         var template = '';
 
@@ -141,6 +201,12 @@ angular.module('myAppApp')
             case 6:
                 template = videoTemplate;
                 break;
+            case 7:
+                template = eventClubTemplate;
+                break;
+            case 71:
+                template = articleClubTemplate;
+                break;
         }
         
         return template;
@@ -154,19 +220,44 @@ angular.module('myAppApp')
 
         $compile(element.contents())(scope);
 
+       /* var date = scope.content.createdOn ;
+            console.log(date);
+          var d = date.getDate();
+          var m = date.getMonth()+1;
+          var y = date.getFullYear();
+          var min="0" + date.getMinutes();
+          var h="0" + date.getHours();
+          var s= "0" + date.getSeconds();
+          scope.postTime=d+"-"+m+"-"+y+" "+h+":"+min;*/
 
 
-        if(scope.content.type==1)
-        {
-            var postIdLike=scope.content.articleId._id;
-            var likingName='liking'+postIdLike;
-            console.log(likingName);
-            $http.get('/api/posts/likeInfo/'+postIdLike).success(function (response){
-                scope.likingName=response;
-                console.log(scope.likingName);
+        
+        
+           
+            scope.one="one";
+            scope.two="two";
+            scope.three="three";
+            scope.max = 5;
+            var postIdRating=scope.content._id;
+            var ratingName='rating'+postIdRating;
+            $http.get('/api/posts/ratingInfo/'+postIdRating).success(function (response){
+                scope.ratingName=response;
+                console.log(scope.ratingName);
+                scope.ratingHalf=scope.content.rating/2;
+                var roundedRating=Math.round(scope.ratingHalf);
+                
+                if(roundedRating==scope.ratingHalf)
+                {
+                    scope.rate=roundedRating;
+                }
+                else if((roundedRating-scope.ratingHalf)>0)
+                    scope.rate=roundedRating-1;
+                else
+                    scope.rate=roundedRating;                
+                                 
             });
-        }
 
+        
 
         scope.like = function(postId){
             $http.get('/api/posts/'+postId+'/like').success(function (response){
@@ -218,8 +309,11 @@ angular.module('myAppApp')
                   vidCode: function(){
                     return(vidurl);
                   },
-                  user: function(){
-                    return scope.content.type;
+                  videoPost: function(){
+                    return scope.content;
+                  },
+                  ratingArray: function(){
+                    return scope.ratingName;
                   }
                 }
             });
@@ -244,6 +338,20 @@ angular.module('myAppApp')
             });
     
         };
+
+        scope.bookADay = function(postId){
+            var modalInstance = $modal.open({
+              animation: true,
+              templateUrl:'myModalBookADay.html' ,
+              controller: 'ModalBookADayInstanceCtrl',
+              resolve: {
+                  
+                  bookingPostId: function(){
+                    return postId;
+                  }
+                }
+            });
+        }
     }
 
     return {
@@ -257,27 +365,81 @@ angular.module('myAppApp')
 
 
 
-angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$modalInstance,vidCode, user,$http){
+angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$modalInstance,Auth,vidCode, videoPost,ratingArray,$http){
   console.log('hello');
    $scope.ok = function () {
     $modalInstance.close($scope.selected.item);
   };
+   $scope.user = Auth.getCurrentUser;
+    console.log($scope.user().name);
+
   $scope.vidCode=vidCode;
-  $http.get('/api/videos/'+vidCode).success(function (response){
-    $scope.video = response;
-    console.log(response);
+ 
+    $scope.video = videoPost;
+
+
+  $scope.ratingArray = ratingArray;
+  $scope.rate=$scope.ratingArray.ratingValue;
+  $scope.max = 10;
+  $scope.rating=$scope.video.rating;
+  $scope.votes=$scope.ratingArray.votes;
+
+  $scope.isReadonly = false;
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+  }
+
+  $scope.ratePost = function(rate) {
+        $http.post('/api/posts/rating/'+$scope.video._id,{rating:rate}).success(function (response){
+            $scope.votes=response.votes;
+            $scope.rating=response.rating;
+            console.log($scope.votes+$scope.rating);
   });
-  $scope.user = user;
+};
 
-
-  $scope.rating1 = 5;
+  /*$scope.rating1 = 5;
   $scope.rateFunction = function(rating) {
     console.log("Rating selected: " + rating);
     $http.post('/api/videos/ratings/'+$scope.vidCode,{rating:rating}).success(function (response){
       console.log(response);
       $scope.rating1 = rating;
     })
-  };
+  };*/
+
+  //////  Comment Functions ////////////////
+   $scope.toggleVal = false;
+
+  $scope.submitComment = function (){
+      if($scope.commentData===undefined){
+
+      }
+      else {
+        console.log($scope.commentData);
+        $http.post('/api/comments/',{commentData:$scope.commentData,postId:$scope.video._id}).success(function (response){
+          $scope.commentData='';
+          console.log(response);
+          refresh();
+        });
+      }
+    }
+
+    $scope.delete = function (id){
+      $http.delete('/api/comments/'+id).success(function (response){
+        console.log(response);
+        refresh();
+      });
+    }
+    $scope.edit = function (id,editData){
+      console.log(editData);
+      $http.put('/api/comments/'+id,{commentData:editData}).success(function (response){
+        console.log('the edited document is '+response);
+        refresh();
+      });
+    }
+
+    /////////// comment functions close////////////
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
@@ -290,6 +452,121 @@ angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,
     $modalInstance.close($scope.selected.item);
   };
     $scope.image=image;  
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
+
+angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($scope,$modalInstance,bookingPostId,$http){
+  console.log('hello');
+   $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+    $scope.postId=bookingPostId;  
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+
+    var dateTdy;
+
+    $scope.today = function() {
+    dateTdy= new Date();
+
+    var d = dateTdy.getDate();
+    var m = dateTdy.getMonth()+1;
+    var y = dateTdy.getFullYear();
+    var month=["January","February","March","April","May","June","July","August","September","October","November","December"]
+    $scope.dtNumeric=d+"-"+m+"-"+y;
+    $scope.dt=d+"-"+month[m-1]+"-"+y;
+    $scope.dt2=$scope.dt;
+  };
+  $scope.today();
+
+    $scope.bookPost=function(){
+        if($scope.dt2!=$scope.dt)
+        {
+          var date = $scope.dt ;
+          var dd = date.getDate();
+          var mm = date.getMonth()+1;
+          var yy = date.getFullYear();
+          var bookingDate=dd+"-"+mm+"-"+yy;
+        }
+        else
+            var bookingDate=$scope.dtNumeric;
+
+      
+       $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate}).success(function (response){
+        console.log(booked);
+      })
+     
+    };
+
+    $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  $scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.openED = function($event) {    //OpenEndDate
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.openedED = true;
+  };
+  $scope.openSD = function($event) {    //OpenStart Date
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.openedSD = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 2);
+  $scope.events =
+    [
+      {
+        date: tomorrow,
+        status: 'full'
+      },
+      {
+        date: afterTomorrow,
+        status: 'partially'
+      }
+    ];
+
+  $scope.getDayClass = function(date, mode) {
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+      for (var i=0;i<$scope.events.length;i++){
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  };
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');

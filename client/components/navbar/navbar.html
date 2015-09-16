@@ -4,12 +4,33 @@
         <a href="/" id="_logo"><span>Vedik</span></a>
     </div>
     <div id="search">
+
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
-          <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
-            <div id="indiv_res">
-                <a href="/profile/{{obj._id}}" >{{obj.name}}</a>
+        <div id="search_res">
+            <div ng-show="searchStage" id="search_res">{{vedik}}</div>
+             <div ng-show="searchQuery" ng-repeat="obj in objsStage" id="search_res">
+              <div id="indiv_res">
+                  <a href="/stage/{{obj._id}}" >{{obj.name}}</a>
+              </div>
             </div>
-          </div>
+            <div ng-show="searchUser" id="search_res">{{userList}}</div>
+            <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
+              <div id="indiv_res">
+                  <a href="/profile/{{obj._id}}" >{{obj.name}}</a>
+              </div>
+            </div>
+              <div ng-show="searchClub" id="search_res">{{club}}</div>
+             <div ng-show="searchQuery" ng-repeat="obj in objsClub" id="search_res">
+              <div id="indiv_res">
+                  <a href="/club/{{obj._id}}" >{{obj.name}}</a>
+              </div>
+            </div>
+             <div ng-show="noResult" id="search_res">
+                <div id="indiv_res">
+                    No result Found
+                </div>
+            </div>
+        </div>
     </div>
     <div id="nav">
        

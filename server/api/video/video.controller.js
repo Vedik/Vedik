@@ -39,6 +39,14 @@ exports.create = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
+  var type;
+  if(req.body.type)
+  {
+      type=req.body.type;
+  }
+  else
+      type=3;
+
   var newvideo = new Video({
     vidname:req.body.vidname,
     vidurl:a[1],
@@ -80,10 +88,11 @@ exports.create = function(req, res) {
           });*/
           var newPost = new Post({
             videoId: newvideo._id,
-            type:3,
+            type:type,
             tags:req.body.genres,
             uploader:{user:req.user._id},   //club:req.params.id},
-            
+            ratings:[],
+            rating:0,
             view_count:0,
             like:[],
             createdOn:Date.now()

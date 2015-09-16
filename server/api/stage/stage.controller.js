@@ -133,6 +133,23 @@ exports.deleteSubscriber = function (req,res){
   });
 };
 
+
+exports.search = function (req, res, next) {
+  var query = req.params.searchQuery;
+  Stage.find(
+    { "name": { "$regex": query, "$options": "i" } },'name',
+    function(err,docs) {
+      if(!err) {
+        res.json(docs);
+      }
+      else {
+        console.log(err);
+        res.json([{name:'Error',href:"#"}]);
+      } 
+    } 
+  );
+}
+
 function handleError(res, err) {
   return res.send(500, err);
 }

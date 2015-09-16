@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('DashboardCtrl', function ($scope,$state, Auth,$http) {
+  .controller('DashboardCtrl', function ($scope,$state, Auth,$http,ClubEventService) {
     /*$scope.message = 'Hello';
     $scope.slots = ;
     */
@@ -11,11 +11,7 @@ angular.module('myAppApp')
     $scope.user = Auth.getCurrentUser();
     $scope.val=true;
 
-   function Ctrl2($scope, UploadPortalService) {
-   
-    $scope.for_blur = UploadPortalService.getProperty()
-    }
-
+  
 
     
 
@@ -46,6 +42,9 @@ angular.module('myAppApp')
      $http.get('/api/clubs/').success(function (response){
         console.log(response);
         $scope.clubsList = response;
+        console.log(ClubEventService.setEventId('3333333333'));
+            console.log(ClubEventService.getEventId());
+
     });
   })
 

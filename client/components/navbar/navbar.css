@@ -20,6 +20,7 @@ body {
 }
 
 #top_logo {
+            
             background-color:rgba(0,0,0,0.3);
             height:45px;
             width:100%;
@@ -63,7 +64,7 @@ body {
         }
         #indiv_res  {
             border:;
-            margin:2px 0px; 
+             
             padding:5px 10px;
         }
         #nav    {

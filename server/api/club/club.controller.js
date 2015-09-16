@@ -129,6 +129,22 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.search = function (req, res, next) {
+  var query = req.params.searchQuery;
+  Club.find(
+    { "name": { "$regex": query, "$options": "i" } },'name',
+    function(err,docs) {
+      if(!err) {
+        res.json(docs);
+      }
+      else {
+        console.log(err);
+        res.json([{name:'Error',href:"#"}]);
+      } 
+    } 
+  );
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

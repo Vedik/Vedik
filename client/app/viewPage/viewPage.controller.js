@@ -54,7 +54,7 @@ angular.module('myAppApp')
 
   })
   
-  .directive('myYoutube', function($sce) {
+.directive('myYoutube', function($sce) {
   return {
     restrict: 'EA',
     scope: { code:'=' },

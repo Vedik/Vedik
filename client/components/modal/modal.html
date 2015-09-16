@@ -1,4 +1,4 @@
-
+<!--***************************Edit Gallerypic ********************************-->
 		<!-- Modal -->
   <div class="modal img_modal fade" id="gal_pic_modal" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">
@@ -16,6 +16,95 @@
 	          		<input type="text" ng-model="form.galPicUrl" placeholder="New Url of gallery Picture" class="form-control">
 	          	</div>
 	         <button type="submit" class="b2w">Submit</button>
+	         </form>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+<!--***************************Edit Gallerypic Closes ********************************-->
+
+
+<!--********************* booking date****************************************-->
+
+<script type="text/ng-template" id="myModalBookADay.html">
+	 
+				
+                    <form name="form" ng-submit="bookPost()" ng-model="form" >
+                   		<div class="col-md-6 datepckr">
+                            <p class="input-group">
+                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="openedSD" min-date="minDate" max-date="' + '"2037-06-22"' + '" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <button type="submit" class="b2w">Book</button>
+                    </form>
+                
+            
+</script>
+
+<!--***************booking date closes*****************************************-->
+
+<!--***************************Create Event ******************************************-->
+
+
+  <div class="modal img_modal fade" id="event" role="dialog">
+    <div class="modal-dialog img_modal-dialog" id="modal-center">
+    
+      <!-- Modal content-->
+     
+        
+        <div class="modal-body img_modal-body centric glassy">
+        	<p>
+        		Create Event
+        		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+        	</p>
+        	<form name="form" ng-submit="createEvent(form)" ng-model="form" style="color:black">
+        		<div class="form-group">
+	          		<input type="text" ng-model="form.name" placeholder="Event Name" class="form-control">
+	          	</div>
+	          	<div class="form-group">
+	          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true"></textarea>
+	          	</div>
+	          	<div class="form-group">
+	          		Start Date
+		          	<div ng-controller="DatepickerDemoCtrl">
+		          		<div class="col-md-6 datepckr">
+				            <p class="input-group">
+					            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dtSD" is-open="openedSD" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />
+								<span class="input-group-btn">
+								    <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							</p>
+						</div> 
+					</div>
+				</div>
+				<div class="form-group">
+	          		End Date
+	          		<div ng-controller="DatepickerDemoCtrl">
+		          		<div class="col-md-6 datepckr">
+				            <p class="input-group">
+					            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dtED" is-open="openedED" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="height:34px" />
+								<span class="input-group-btn">
+								    <button type="button" class="btn btn-default" ng-click="openED($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							</p>
+						</div> 
+					</div>
+				</div>
+				<div class="form-group">	
+					<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
+				</div>
+				<div class="form-group">
+					<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+     			      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+				    </tags-input>
+				</div>
+
+	         	<button type="submit" class="b2w">Submit</button>
 	         </form>
         </div>
         
@@ -240,7 +329,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				
 
 <!--********************************upload section closes***********************************-->
 
@@ -408,9 +497,12 @@
          			<div my-youtube code='vidCode'></div>         
        			</div>
         		<div class="content" id="title">
-            		<span id="video_name">{{video.vidname}}</span>
+            		<span id="video_name">{{video.videoId.vidname}}</span>
         		</div>
-        		<!--<div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>-->
+        		
+        			<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ng-click="ratePost(rate)"></rating> {{rating}} by {{votes}}
+        			<br><span ng-if="!ratingArray.rating" style="font-size:10px">You Have not rated yet</span>
+        		
     		</div>
 
     		<div class="stage col-md-9"  id="vid_stuff">
@@ -444,7 +536,7 @@
 					      <div>
 	                            <div>
 	                                <h4>Leave a Comment:</h4>
-	                                <form name="myForm" ng-submit="submit()" class="form" novalidate> 
+	                                <form name="myForm" ng-submit="submitComment()" class="form" novalidate> 
 	                                    <div class="form-group">
 	                                        <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
 	                                    </div>
@@ -461,15 +553,15 @@
 	                                        	{{comment.comment.commentPutter}}
 	                                        </span>
 	                                     	<span>
-	                                     	 	<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute">
+	                                     	 	
 	                                     	</span>
 	                                        <span id="comment_data">
 	                                        	{{comment.comment.commentData}}
 	                                        </span>
 	                                        <br/>
 	                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
-	                                        	<span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
-	                                        	<span  ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span>
+	                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+	                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="toggleVal=!toggleVal><a href="#">Edit</a></span>
 	                                        </span>
 	                                        <div class="form-group" ng-show="toggleVal">
 	                                           	<textarea class="form-control" rows="3" ng-model="editData"></textarea>

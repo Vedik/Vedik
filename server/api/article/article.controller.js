@@ -32,7 +32,8 @@ exports.create = function(req, res) {
   for(var i=0;i<a.length;i++)
   {
     b[i]=a[i]._id;
-  }
+  };
+  
 
   var newArticle = new Article({
     articleName:req.body.articleName,
@@ -60,6 +61,8 @@ exports.create = function(req, res) {
             type:1,
             uploader:{user:req.user._id},
             view_count:0,
+            ratings:[],
+            rating:0,
             like:[],
             createdOn:Date.now()
           });
@@ -88,6 +91,27 @@ exports.clubPost = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
+  var a=req.body.vedik;
+  console.log(a[1]);
+  var b=[];
+  for(var i=0;i<a.length;i++)
+  {
+    b[i]=a[i]._id;
+  };
+  
+  var type;
+  var eventId;
+  if(req.body.type)
+  {
+      type=req.body.type;
+      eventId=req.body.eventId;
+  }
+  else
+  {
+      type=4;
+      eventId="";
+  }
+
   var newArticle = new Article({
     articleName:req.body.articleName,
     content:req.body.content,
@@ -106,12 +130,18 @@ exports.clubPost = function(req, res) {
           var newPost = new Post({
             articleId: newArticle._id,
             tags:req.body.tags,
-            type:4,
-            uploader:({user:req.user._id},{club:req.params.id}),
+            type:type,
+            uploader:({user:req.user._id},{club:req.params.id,event:eventId}),
             view_count:0,
+            ratings:[],
+            rating:0,
             like:[],
             createdOn:Date.now()
           });
+          for(i=0;i<b.length;i++)
+          {
+            newPost.vedik.push({vedik:b[i]});
+          }
           
           newPost.save(function(err){
             if(err) {return handleError(res,err);}

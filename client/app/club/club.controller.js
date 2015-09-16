@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval) {
+  .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval,ClubEventService) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/club/')[1];
     console.log(id);
+    $scope.clubId=id;
+
+    
     
     $http.get('/api/clubs/'+id).success(function (response){
       $scope.club = response;
@@ -61,7 +64,7 @@ angular.module('myAppApp')
    }
 
     $scope.imageSubmit = function (form){
-          $http.post('/api/images/'+id,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tages:form.tags}).success(function (response){
+          $http.post('/api/images/'+id,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags}).success(function (response){
             console.log(response);
             $scope.form={};
             console.log(form.imgName);
@@ -73,7 +76,23 @@ angular.module('myAppApp')
             console.log(response);
             $scope.form={};
         })
+   };
+
+   $scope.createEvent = function (form){
+          $http.post('/api/events/'+id,{name:form.name,description:form.description,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
    }
+
+   $scope.loadTags = function(query) {
+
+      return $http.get('/api/stages/tagingStage/'+query).success(function (response){
+          console.log(response);
+          return response;
+      });
+
+    };
 
     $scope.getSuggestionsForCredits = function (query){
       return $http.get('/api/creditDets/search/'+query).success(function (response) {
@@ -138,5 +157,48 @@ angular.module('myAppApp')
     })
    };
 
+   $http.get('/api/events/club/'+id).success(function (response){
+        console.log(response);
+        $scope.eventsList = response;
+    });
 
-  });
+   $scope.showEvent=false;
+   $scope.displayPosts=true;
+   $scope.clubPostsDisplay = function (){
+      $scope.showEvent=false;
+     $scope.displayPosts=true;
+  };
+
+    $scope.clubTabsDisplay = function (eventId){
+          ClubEventService.setEventId(eventId,$scope.clubId);
+          $scope.showEvent=false;
+          
+          $scope.displayPosts=false;
+          if($scope.showEvent==false)
+          $scope.showEvent=true;
+          
+  };
+
+
+  })
+
+
+.directive('elastic', [
+    '$timeout',
+    function($timeout) {
+        return {
+            restrict: 'A',
+            link: function($scope, element) {
+
+                $scope.initialHeight = $scope.initialHeight || element[0].style.height;
+                var resize = function() {
+                    element[0].style.height = $scope.initialHeight + 20;
+                    element[0].style.height = "" + element[0].scrollHeight + "px";
+                };
+                element.on("input change", resize);
+                $timeout(resize, 0);
+            }
+        };
+    }
+]);
+

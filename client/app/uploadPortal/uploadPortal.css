@@ -126,9 +126,12 @@
 		 padding: 10px;
 		 color: white;
 	}
+	.float_right	{
+		float: right;
+	}
 	.text_type_post	{
 		background-color: rgba(230,230,230,1);
-		padding: 10px 10px 10px;
+		padding: 10px 10px 0px 10px;
 		box-shadow: 1px 1px 5px grey;
 		font-family: arial;
 		letter-spacing: 1px;
