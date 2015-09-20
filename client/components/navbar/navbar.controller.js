@@ -8,11 +8,48 @@ angular.module('myAppApp')
     }];
     var pendingTask;
     $scope.isCollapsed = true;
+    $scope.notif=false;
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     console.log($scope.getCurrentUser().name);
+
+    if($scope.getCurrentUser().name)
+    {
+
+
+        $http.get('/api/posts/unseenNotifs').success(function (response){
+            console.log(response);
+            $scope.posts = response;
+            console.log($scope.posts);
+
+            $scope.dummyId=[];
+            $scope.dummyName=[];
+            var x=0;
+            for(var i=0;i<$scope.posts.length;i++)
+            {
+              console.log($scope.posts[i].uploader.user._id);
+              var found=false;
+              for(var j;j<$scope.dummyId.length;j++)
+              {
+                if(($scope.dummyId[j]==$scope.posts[i].uploader.user._id) && $scope.posts[i].type<14)
+                {
+                  found=true;
+                  break;
+                }
+
+              }
+              if(found==false)
+              {
+                $scope.dummyId[x]=$scope.posts[i].uploader.user._id;
+                $scope.dummyName[x]=$scope.posts[i].uploader.user.name;
+                x++;
+              }
+            }
+            console.log($scope.dummyId,$scope.dummyName);
+        });
+    }
 
     $scope.logout = function() {
       Auth.logout();

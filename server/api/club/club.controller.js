@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Club = require('./club.model');
+var Stage = require('../stage/stage.model');
+
 
 // Get list of clubs
 exports.index = function(req, res) {
@@ -17,8 +19,19 @@ exports.show = function(req, res) {
   Club.findById(req.params.id, function (err, club) {
     if(err) { return handleError(res, err); }
     if(!club) { return res.send(404); }
-    console.log(club);
-    return res.json(club);
+     var i =0,isFollowing;
+    for(;i<club.subscribed_users.length;i++){
+      if(club.subscribed_users[i].user.equals(req.user._id)){
+        isFollowing = true;
+      }
+    }
+    if(isFollowing!=true){
+      isFollowing=false;
+    }
+    console.log({club:club,isFollowing:isFollowing});
+   
+    return res.json({club:club,isFollowing:isFollowing});
+    
   });
   
  // var clubId = req.params.id;
@@ -143,6 +156,51 @@ exports.search = function (req, res, next) {
       } 
     } 
   );
+};
+
+exports.addSubscriber = function (req,res){
+  Club.findById(req.params.id,function (err,club){
+    if(err){
+      return handleError(res,err);
+    }
+    if(!club) { return res.send(404); }
+    club.subscribed_users.push({user:req.user._id});
+    club.save(function (err){
+      if(err){
+        return handleError(res,err);
+      }
+      else{
+        console.log(club);
+        return res.json({added:true});
+      }
+    });  
+  });
+  
+};
+
+exports.deleteSubscriber = function (req,res){
+  Club.findById(req.params.id,function (err,club){
+    if(err){
+      return handleError(res,err);
+    }
+    if(!club) { return res.send(404); }
+    var i =0;
+    for(;i<club.subscribed_users.length;i++){
+      if(club.subscribed_users[i].user.equals(req.user._id)){
+        club.subscribed_users[i].remove(function (err){
+          if(err){ return handleError(res,err);}
+          else{
+            club.save(function (err){
+              if(err){ return handleError(res, err);}
+              else {
+                return res.json({removed : true});
+              }
+            });
+          }
+        })
+      }
+    } 
+  });
 };
 
 function handleError(res, err) {

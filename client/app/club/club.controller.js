@@ -11,7 +11,9 @@ angular.module('myAppApp')
     
     
     $http.get('/api/clubs/'+id).success(function (response){
-      $scope.club = response;
+      $scope.club = response.club;
+      $scope.isFollowing = response.isFollowing;
+
        if($scope.club.galleryPic)
         {
           $scope.GalleryPic= $scope.club.galleryPic;
@@ -57,14 +59,14 @@ angular.module('myAppApp')
 
 
    $scope.videoSubmit = function (form){
-          $http.post('/api/videos/'+id,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres}).success(function (response){
+          $http.post('/api/videos/'+id,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik}).success(function (response){
             console.log(response);
             $scope.form={};
         })
    }
 
     $scope.imageSubmit = function (form){
-          $http.post('/api/images/'+id,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags}).success(function (response){
+          $http.post('/api/images/'+id,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik}).success(function (response){
             console.log(response);
             $scope.form={};
             console.log(form.imgName);
@@ -72,7 +74,7 @@ angular.module('myAppApp')
    }
 
     $scope.articleSubmit = function (form){
-          $http.post('/api/articles/'+id,{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags}).success(function (response){
+          $http.post('/api/articles/'+id,{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik}).success(function (response){
             console.log(response);
             $scope.form={};
         })
@@ -178,6 +180,23 @@ angular.module('myAppApp')
           $scope.showEvent=true;
           
   };
+
+  $scope.follow = function(){
+        $http.get('/api/clubs/'+id+'/addSubscriber').success(function (response){
+            console.log(response);
+            if(response.added==true){
+                $scope.isFollowing = true;
+            }
+        });
+    }
+    $scope.unfollow = function(){
+        $http.delete('/api/clubs/'+id+'/deleteSubscriber').success(function (response){
+            console.log(response);
+            if(response.removed==true){
+                $scope.isFollowing = false;
+            }
+        });
+    }
 
 
   })

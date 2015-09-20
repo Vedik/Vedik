@@ -22,18 +22,34 @@ exports.index = function(req, res) {
   
   .exec(function (err, posts){
       if (err) return handleError(err);*/
-      var posts=[];
-           var postsNew=[];
-           var a=[];
       
       var todaysDate=req.params.bookingDate;
       console.log(todaysDate);
 
-
+      var bPosts=[];
          Booking.find({bookedFor:todaysDate},function (err, bookings) {
        var sequence= bookings.length;
+            for(var i=0;i<bookings.length;i++)
+            {
+                bPosts[i]=bookings[i].postId;
+            }
       
+            console.log(bPosts);
+            Post.find({
+                        '_id': { $in: bPosts}
+                      },function (err, posts) {
+              if(err) { return handleError(res, err); }
+              })
+            .populate('articleId videoId imageId uploader.user uploader.club eventId comments.comment')
+            
+            .exec(function (err, posts){
+                if (err) return handleError(err);
 
+                
+                //console.log(posts);
+                
+                return res.json(posts);
+  });
      /*  var i=0;
        var posts ={};
        for(i; i<bookings.length;i++)
@@ -41,66 +57,8 @@ exports.index = function(req, res) {
 
         
             
-        })
-         .lean()
-        .populate({ path : 'postId'})
-     
+        });
         
-        .exec(function (err, bookings){
-           if (err) return handleError(err);
-           var posts=[];
-           var postsNew=[];
-           var a=[];
-           for(var i=0;i<bookings.length;i++)
-           {
-            if(bookings[i].postId.type==1)
-            {
-                var options = {
-                path: 'postId.articleId',
-                model: 'Article'
-              }
-            }
-            else if(bookings[i].postId.type==2)
-            {   console.log('image');
-                var options={
-                path: 'postId.imageId',
-                model: 'Image'
-              };
-              
-            }
-            else if(bookings[i].postId.type==3)
-            {
-                var options={
-                path: 'postId.videoId',
-                model: 'Video'
-              };
-            } 
-
-              Booking.populate(bookings[i], options, function (err, post){
-             
-                  posts=JSON.parse(JSON.stringify(post));
-                   postsNew[i] = function(posts) {
-                    if (posts != null && typeof(posts) != 'string' &&
-                      typeof(posts) != 'number' && typeof(posts) != 'boolean' ) {
-                      //for array length is defined however for objects length is undefined
-                      if (typeof(posts.length) == 'undefined') { 
-                        delete posts._id;
-                        for (var key in posts) {
-                          postsNew[i](posts[key]); //recursive del calls on object elements
-                        }
-                      }
-                      else {
-                        for (var j = 0; j < posts.length; j++) {
-                          postsNew[i](posts[j]);  //recursive del calls on array elements
-                        }
-                      }
-                    }
-                  } 
-                  a[i]=posts;
-                  
-
-              });
-           }
               /*var options = {
                 path: 'postId.articleId',
                 model: 'Article'
@@ -116,12 +74,7 @@ exports.index = function(req, res) {
                 res.json(posts);
               });*/
               
-            res.json({a:a});
-             /*Post.populate(booking,'articleId',function (err, booking ){
-              
-             });*/
-            
-            });
+           
 
         /*}*/
         

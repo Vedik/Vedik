@@ -89,7 +89,19 @@ exports.show = function (req, res, next) {
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
-    res.json(user.profile);
+    var i =0,isFollowing;
+    for(;i<user.subscribed_users.length;i++){
+      if(user.subscribed_users[i].user.equals(req.user._id)){
+        isFollowing = true;
+      }
+    }
+    if(isFollowing!=true){
+      isFollowing=false;
+    }
+    console.log({user:user,isFollowing:isFollowing});
+   
+    return res.json({user:user,isFollowing:isFollowing});
+    
   });
 };
 
@@ -142,7 +154,19 @@ exports.showUser = function(req, res, next) {
       next(err);
     }
     else {
-    res.json(user);
+      var i=0;
+      var isFollowing;
+      for(;i<user.subscribed_users.length;i++){
+      if(user.subscribed_users[i].user.equals(req.user._id)){
+        isFollowing = true;
+      }
+    }
+    if(isFollowing!=true){
+      isFollowing=false;
+    }
+    console.log({user:user,isFollowing:isFollowing});
+   
+    return res.json({user:user,isFollowing:isFollowing});
 
   }
   });
@@ -168,11 +192,56 @@ exports.me = function(req, res, next) {
       next(err);
     }
     else {
-    console.log(user);
-    res.json(user);
+      res.json(user);
+
   }
   });
 };
+
+exports.addSubscriber = function (req,res){
+  User.findById(req.params.id,function (err,user){
+    if(err){
+      return handleError(res,err);
+    }
+    if(!user) { return res.send(404); }
+    user.subscribed_users.push({user:req.user._id});
+
+    user.save(function (err){
+      if(err){
+        return handleError(res,err);
+      }
+      else{
+        console.log(user);
+        return res.json({added:true});
+      }
+    });  
+  });
+};
+exports.deleteSubscriber = function (req,res){
+  User.findById(req.params.id,function (err,user){
+    if(err){
+      return handleError(res,err);
+    }
+    if(!user) { return res.send(404); }
+    var i =0;
+    for(;i<user.subscribed_users.length;i++){
+      if(user.subscribed_users[i].user.equals(req.user._id)){
+        user.subscribed_users[i].remove(function (err){
+          if(err){ return handleError(res,err);}
+          else{
+            user.save(function (err){
+              if(err){ return handleError(res, err);}
+              else {
+                return res.json({removed : true});
+              }
+            });
+          }
+        })
+      }
+    } 
+  });
+};
+
 
 /**
  * Authentication callback

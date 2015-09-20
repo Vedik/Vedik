@@ -51,6 +51,10 @@
 			        	<div id="infodiv">
 			            	<span id="info">Director Editor Screenwriter</br></span>
 			            	<span id="info">9th Feb 1996</span>
+			            	<span ng-if="user._id!=loggedInUser._id">
+				            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
+								<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
+							</span>
 			            </div>
 
 		        	</div>
@@ -71,7 +75,7 @@
 			                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
 			                	<div ng-show="edit.about && user.name==loggedInUser.name">
 			                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
-			                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='Auto-Expanding Textarea' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
+			                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='About' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
 			                			</textarea>
 			                			<script >
 			                				$(document)

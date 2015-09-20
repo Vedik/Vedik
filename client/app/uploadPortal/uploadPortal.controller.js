@@ -5,6 +5,7 @@ angular.module('myAppApp')
     $scope.message = 'Hello';
     $scope.submitted = false;
     
+
   
     $http.get('/api/posts/').success(function (response){
         console.log(response);
@@ -186,10 +187,19 @@ angular.module('myAppApp')
             case 2:
                 template = imageTemplate;
                 break;
+            case 12:
+                template = imageTemplate;
+                break;
             case 3:
                 template = videoTemplate;
                 break;
+            case 13:
+                template = videoTemplate;
+                break;
             case 1:
+                template = articleTemplate;
+                break;
+            case 11:
                 template = articleTemplate;
                 break;
             case 4:
@@ -325,6 +335,15 @@ angular.module('myAppApp')
         scope.viewImage =function(imageId){
             document.getElementById('for_blur').style.filter = 
             'blur(20px)';
+
+            
+               scope.height=$(window).height();
+                /*$("#img_viewed").css("height", "579px");
+                alert(height);*/
+                
+            
+            
+
              var modalInstance = $modal.open({
               animation: true,
               templateUrl:'myModalImage.html' ,
@@ -333,6 +352,9 @@ angular.module('myAppApp')
                   
                   image: function(){
                     return scope.content.imageId;
+                  },
+                  height:function(){
+                    return scope.height;
                   }
                 }
             });
@@ -446,13 +468,29 @@ angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$moda
   };
 });
 
-angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,image,$http){
+angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,image,height,$http){
   console.log('hello');
    $scope.ok = function () {
     $modalInstance.close($scope.selected.item);
   };
     $scope.image=image;  
+    $scope.img_viewed = {
+        'height': getHeight()+"px"
+    };
 
+   
+    
+    $scope.img_viewed_info = {
+        'width': getWidth()+"px"
+    };
+
+    function getHeight() {
+            return (window.innerHeight * .90);
+        }
+    function getWidth() {
+            return (100);
+        }
+    
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };

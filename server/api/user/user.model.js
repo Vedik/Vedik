@@ -18,7 +18,9 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-
+  unseenNotifs:[{type:Schema.Types.ObjectId}],
+  subscribed_users:[{user:{type:Schema.Types.ObjectId, ref:'User'}}],
+  
   directorRating:{type:Number,default:0},
   actorRating:{type:Number,default:0},
   cinematographyRating:{type:Number,default:0},
@@ -29,11 +31,6 @@ var UserSchema = new Schema({
 
   createdOn:{type:Date, default:Date.now()},
   updatedOn:{type:Date, default:Date.now()},
-  RatedVids:[
-  {
-    videoId:{type:Schema.Types.ObjectId, ref:'Video'},
-    Rating:Number
-  }],
   /*videos:[{video:{type:Schema.Types.ObjectId, ref:'Video'},role:[String]}],
   images:[{image:{type:Schema.Types.ObjectId, ref:'Image'},role:[String]}],
   articles:[{article:{type:Schema.Types.ObjectId, ref:'Article'},role:[String]}],*/

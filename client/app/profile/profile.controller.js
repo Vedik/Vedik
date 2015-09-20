@@ -8,7 +8,8 @@ angular.module('myAppApp')
     console.log(id);
     $scope.abcd="1234";
     $http.get('/api/users/'+id).success(function (response){
-      $scope.user = response;
+      $scope.user = response.user;
+         $scope.isFollowing = response.isFollowing;
        if($scope.user.galleryPic)
         {
           $scope.GalleryPic= $scope.user.galleryPic;
@@ -51,27 +52,52 @@ angular.module('myAppApp')
     {
       for(var j=0;j<$scope.posts[i].vedik.length;j++)
       {
+          var z=0;
           console.log($scope.posts[i].vedik);
           for(var k=0;k<$scope.stageId.length;k++)
           {
-              console.log('sssssssssssssss1');
-              var z=0;
+              
+              
               if($scope.stageId[k]==$scope.posts[i].vedik[j].vedik._id)
               {
                 z=1;
+                console.log('sssssssssssssss1');
                 break;
               }
               
-              $scope.stageId[x]=$scope.posts[i].vedik[j].vedik._id;
-                $scope.stageList[x]={'name':$scope.posts[i].vedik[j].vedik.name, 'id':$scope.posts[i].vedik[j].vedik._id};
-                x++;
+                
           }
+
+          if(z==0)
+              {
+                $scope.stageId[x]=$scope.posts[i].vedik[j].vedik._id;
+                $scope.stageList[x]={'name':$scope.posts[i].vedik[j].vedik.name, 'id':$scope.posts[i].vedik[j].vedik._id};
+                x++; 
+              }
           
       }
     }
       console.log($scope.stageId);
       console.log($scope.stageList);
   });
+
+    $scope.follow = function(){
+        $http.get('/api/users/'+id+'/addSubscriber').success(function (response){
+            console.log(response);
+            if(response.added==true){
+                $scope.isFollowing = true;
+            }
+        });
+    }
+    $scope.unfollow = function(){
+        $http.delete('/api/users/'+id+'/deleteSubscriber').success(function (response){
+            console.log(response);
+            if(response.removed==true){
+                $scope.isFollowing = false;
+            }
+        });
+    }
+
     $scope.stageDiv = function (id){
 
         $http.get('/api/posts/stage/user/'+id).success(function (response){

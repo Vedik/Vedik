@@ -4,7 +4,7 @@
         <a href="/" id="_logo"><span>Vedik</span></a>
     </div>
     <div id="search">
-
+        <span class=" glyphicon glyphicon-search" style="position:absolute;top:16px;left:55px"></span>
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
         <div id="search_res">
             <div ng-show="searchStage" id="search_res">{{vedik}}</div>
@@ -35,12 +35,14 @@
     <div id="nav">
        
         <div class="dropdown" ng-if="isLoggedIn()">
+            <span class="dropdown-toggle" id="menu1">
+                <span id="caretid">
+                    <span class=" glyphicon glyphicon-th-large" ></span>
+                </span>
+            </span>
             <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
             <a href="/login" id="_logo" ng-hide="isLoggedIn()">Guest</a>       
-            <span class="dropdown-toggle" id="menu1">
-            <span id="caretid">
-                <span class="caret" ></span></span>
-            </span>
+            
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                      <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#"  ><li role="presentation">Settings</li></a></div>
                                      <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#" ng-click="logout()" ><li role="presentation">Sign out</li></a></div>
@@ -48,9 +50,37 @@
                                      <div id="indiv_res" ng-hide="isLoggedIn()" ><a role="menuitem" tabindex="-1" href="/signup" ><li role="presentation">Signup</li></a></div>
                                 </ul>
          </div>
-
-                </div>
-
     </div>
+
+         <div class="container">                                         
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" style="margin:6.5px 0px;background:none;border:0px">
+                <span class="glyphicon glyphicon-envelope" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span></button>
+                <div  id="notifDropDown" class="dropdown-menu">
+                    
+                        <ul class="nav nav-pills nav-stacked" id="notifMenu" onclick="document.getElementById('notifDropDown').style.display = 'block'">
+                            <a data-toggle="tab" href="#allNotifs" ><li class="active">All</li></a>
+                            <a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName"><li >{{friend}}</li></a>
+                        </ul>
+                    
+                    
+                    <div class="tab-content" id="notifs">
+                            <div id="allNotifs" class="tab-pane fade in active">
+                                <span ng-repeat="notif in posts"  >{{notif.articleId.articleName}}<br></span>
+                            </div>
+                            <span ng-repeat="friendId in dummyId" id="{{friendId}}" class="tab-pane fade">
+                               <span ng-repeat="notif in posts" ng-if="(friendId==notif.uploader.user._id) && (notif.type<14)">
+                                  {{notif.articleId.articleName}}
+                              </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+
+
+   
+</div>
     
     

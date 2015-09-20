@@ -53,6 +53,10 @@
 			        	<div id="infodiv">
 			            	<span id="info">Director Editor Screenwriter</br></span>
 			            	<span id="info">9th Feb 1996</span>
+			            	<span ng-if="club.admin!=loggedInUser._id">
+				            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
+								<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
+							</span>
 			            </div>
 
 		        	</div>
@@ -104,10 +108,12 @@
 		        			Actor
 		        		</span>
 		        	</div>
-		        	<div onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'">
-		        		<button ng-show="club.admin==loggedInUser._id" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#uploadd" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
-		        		
+		        	
+		        		<div onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'">
+		        		<button ng-show="club.admin==loggedInUser._id" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#upload" id="upload_btn"><span class="glyphicon glyphicon-open"></span> Upload</button>
 		        	</div>
+		        		
+		        	
 		        	
 	        	</div>
 	        

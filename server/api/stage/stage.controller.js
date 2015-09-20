@@ -91,7 +91,7 @@ exports.destroy = function(req, res) {
 };
 
 exports.addSubscriber = function (req,res){
-  Stage.findOne({name:req.params.name},function (err,stage){
+  Stage.findById(req.params.id,function (err,stage){
     if(err){
       return handleError(res,err);
     }
@@ -109,7 +109,7 @@ exports.addSubscriber = function (req,res){
   });
 };
 exports.deleteSubscriber = function (req,res){
-  Stage.findOne({name:req.params.name},function (err,stage){
+  Stage.findById(req.params.id,function (err,stage){
     if(err){
       return handleError(res,err);
     }

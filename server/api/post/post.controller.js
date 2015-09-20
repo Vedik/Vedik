@@ -21,6 +21,29 @@ exports.index = function(req, res) {
   })
 };
 
+
+exports.unseenNotifs = function(req, res) {
+  console.log(req.user.unseenNotifs);
+
+  Post.find({
+                '_id': { $in: req.user.unseenNotifs}
+                      },function (err, posts) {
+              if(err) {console.log('dddddddd'); return handleError(res, err); }
+              })
+            .populate('articleId videoId imageId uploader.user uploader.club eventId comments.comment')
+            
+            .exec(function (err, posts){
+                if (err) return handleError(err);
+
+                
+               
+                console.log('dddddddd')
+                console.log(posts);
+                return res.json(posts);
+  });
+};
+
+
 exports.likeInfo = function(req, res) {
   console.log('err4567');
   Post.findOne({ $or: [ { articleId:req.params.postIdLike }, { videoId:req.params.postIdLike }, { imageId:req.params.postIdLike }, { eventId:req.params.postIdLike } ] },function (err, posts) {
@@ -133,7 +156,7 @@ exports.showForClub = function(req, res) {
 };
 
 exports.showForEvent = function(req, res) {
-  console.log('req.params.id');
+  console.log(' req.params.id');
    var event_id = req.params.id;
   var query = {};
   query['uploader.' + 'event'] = event_id;

@@ -13,8 +13,10 @@ router.get('/club/:id', controller.showForClub);
 router.get('/event/:id', auth.isAuthenticated(), controller.showForEvent);
 router.get('/stage/:id',auth.isAuthenticated(), controller.showForStage);
 router.get('/stage/user/:id',auth.isAuthenticated(), controller.showStageForUser);
-router.post('/', controller.create);
+router.get('/unseenNotifs',auth.isAuthenticated(), controller.unseenNotifs);
 router.get('/:postId/like',auth.isAuthenticated(),controller.like);
+
+router.post('/', controller.create);
 router.delete('/:postId/unlike',auth.isAuthenticated(),controller.unlike);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

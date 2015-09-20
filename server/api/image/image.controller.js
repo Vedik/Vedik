@@ -46,7 +46,7 @@ exports.create = function(req, res) {
       type=req.body.type;
   }
   else
-      type=2;
+      type=12;
 
   newImage.save(function (err){
     if(err) return handleError(res, err);
@@ -75,14 +75,49 @@ exports.create = function(req, res) {
           {
             newPost.vedik.push({vedik:b[i]});
           }
-          
           newPost.save(function(err){
             if(err) return handleError(res,err);
-            else {
-              console.log('post created');
-            }
-          });
+            else 
+              {
 
+                console.log('post created');
+             
+
+                
+                User.findById(req.user._id,function (err,user){
+                    if(err) { return handleError(res, err); }
+                })
+                .populate('subscribed_users.user')
+                .exec(function(err,user){
+                    if (err) return handleError(err);
+                  for(var i=0;i<user.subscribed_users.length;i++)
+                  {
+                      console.log(user.subscribed_users[i].user._id);
+                      if(user.subscribed_users[i].user._id.equals(req.user._id))
+                      {
+                        console.log('user');
+                      }
+                      else
+                      {
+                        user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        user.subscribed_users[i].user.save(function (error){
+                          if(error){
+                            return handleError(res,err);
+                          }
+                          else
+                          {
+                             console.log('add unseen notif to');
+                          }
+                       
+                        });
+                      }
+                  }
+                 
+                  
+                });
+              };
+          });
+        
           
           return res.json(200,newImage);
         }
@@ -97,6 +132,27 @@ exports.clubPost = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
+  
+    var a=req.body.vedik;
+  
+  var b=[];
+  for(var i=0;i<a.length;i++)
+  {
+    b[i]=a[i]._id;
+  };
+  
+  var type;
+  var eventId;
+  if(req.body.type)
+  {
+      type=req.body.type;
+      eventId=req.body.eventId;
+  }
+  else
+  {
+      type=22;
+      
+  }
  
   var newImage = new Image({
     imgName:req.body.imgName,
@@ -114,9 +170,9 @@ exports.clubPost = function(req, res) {
          
           var newPost = new Post({
             imageId: newImage._id,
-            type:2,
+            type:type,
             createdOn:Date.now(),
-            uploader:({user:req.user._id},{club:req.params.id}),
+        
             view_count:0,
             ratings:[],
             rating:0,
@@ -124,13 +180,59 @@ exports.clubPost = function(req, res) {
             like:[]
             
           });
+
+          if(eventId)
+              newPost.uploader=({user:req.user._id},{club:req.params.id},{event:eventId});
+          else
+              newPost.uploader=({user:req.user._id},{club:req.params.id});
+            
+          for(i=0;i<b.length;i++)
+          {
+            newPost.vedik.push({vedik:b[i]});
+          }
+
+         
             
           
           newPost.save(function(err){
             if(err) {return handleError(res,err);}
 
-            else {
+            else 
+            {
               console.log('post created');
+
+               Club.findById(req.params.id,function (err,club){
+                    if(err) { return handleError(res, err); }
+                })
+                .populate('subscribed_users.user')
+                .exec(function(err,club){
+                    if (err) return handleError(err);
+                  for(var i=0;i<club.subscribed_users.length;i++)
+                  {
+                      console.log(club.subscribed_users[i].user._id);
+                      if(club.subscribed_users[i].user._id.equals(req.user._id))
+                      {
+                        console.log('user');
+                      }
+                      else
+                      {
+                        club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        club.subscribed_users[i].user.save(function (error){
+                          if(error){
+                            return handleError(res,err);
+                          }
+                          else
+                          {
+                             console.log('add unseen notif to');
+                          }
+                       
+                        });
+                      }
+                  }
+                 
+                  
+                });
+
             }
           });
 

@@ -336,18 +336,31 @@
 
 <!-- IMAGE Modal -->
 
+<script>
+	$(document).ready(function(){
+    
+       var height=$(window).height();
+        $("#img_viewed").css("height", height);
+    
+});
+</script>
+
+
 
 <script type="text/ng-template" id="myModalImage.html">
 	<div id="img_view" >
       	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
       	<div="wrapper">
-        <img src="{{image.picUrl}}"	id="img_viewed">
-	        <div id="img_viewed_info">
+      	<div ng-style="img_viewed" id="abcds">
+        	<img src="{{image.picUrl}}"	id="img_viewed" >
+        </div>
+	        <div id="img_viewed_info" ng-style="img_viewed_info">
 	       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
 		        <div id="img_name">{{image.imgName}}</div>
 		        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
 		        <div id="img_des">{{image.description}}</div>
 	        </div>
+
         </div>
         <div id="img_des_com" class="glassy col-md-8">
 	       	

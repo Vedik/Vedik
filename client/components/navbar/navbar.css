@@ -142,9 +142,10 @@ li:hover#nav_li, li:active#nav_li{
 #caretid    {
     margin:20px 0px;
     padding:0px 10px;
-    border:1px solid #266277;
-    border-radius: 6px;
-    background-color: rgba(255,255,255,0.5);
+    border:0px;
+    color: white;
+    cursor: pointer;
+    background-color: none;
 
 }
 .dropdown-menu  {
@@ -152,3 +153,35 @@ li:hover#nav_li, li:active#nav_li{
     background: rgba(255,255,255,0.8);
 
 }
+#notifDropDown {
+    width: 500px;
+    border: 0px;
+    background-color: rgba(255,255,255,0.8);
+    z-index: 10000;
+    
+}
+#notifMenu {
+    width: 145px;
+    float: left;
+    border-right: 1px solid grey;
+    padding: 4px;
+
+}
+
+
+#notifMenu ul   {
+    list-style: none;
+    text-align: left;
+    padding: 0px 10px;
+}
+#notifMenu li   {
+    padding: 4px;
+
+}
+#notifs {
+    width: 345px;
+    float: left;
+    padding: 4px;
+}
+
+

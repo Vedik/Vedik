@@ -20,7 +20,7 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
     $scope.follow = function(){
-        $http.get('/api/stages/'+name+'/addSubscriber').success(function (response){
+        $http.get('/api/stages/'+id+'/addSubscriber').success(function (response){
             console.log(response);
             if(response.added==true){
                 $scope.isFollowing = true;
@@ -28,7 +28,7 @@ angular.module('myAppApp')
         });
     }
     $scope.unfollow = function(){
-        $http.delete('/api/stages/'+name+'/deleteSubscriber').success(function (response){
+        $http.delete('/api/stages/'+id+'/deleteSubscriber').success(function (response){
             console.log(response);
             if(response.removed==true){
                 $scope.isFollowing = false;

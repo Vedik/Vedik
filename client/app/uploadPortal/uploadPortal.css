@@ -183,8 +183,9 @@
 	}
 	#img_viewed	{
 		display: block;
-        height: auto;
-        width: 70%;
+        
+       height: 100%;
+       width: auto;
         left:15%;
         position: relative;
 	}
@@ -194,7 +195,7 @@
         top:0px;
         position: absolute;
                 
-        width: 70%;
+        width: 100px;
         margin:0% auto;
 	}
 	 #img_shade_bottom   {
