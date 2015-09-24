@@ -110,6 +110,18 @@ angular.module('myAppApp')
     $scope.myFilter = function (item,y) { 
         return item === y; 
     };
+    $scope.creditName=[];
+      $scope.creditUser=[];
+    $scope.creditName[0]=[];
+      $scope.creditUser[0]=[];
+    
+    var creditNum=0;
+    $scope.addCredit= function (){
+      creditNum++;
+      console.log(creditNum);
+      $scope.creditName[creditNum]=[];
+      $scope.creditUser[creditNum]=[];
+    }
 
     $scope.getSuggestionsForNames = function (query){
       return $http.get('/api/users/search/'+query).success(function (response) {
@@ -117,6 +129,18 @@ angular.module('myAppApp')
         return response;
       });
     };
+
+    $scope.getSuggestionsForCredits = function (query){
+      return $http.get('/api/creditDets/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
+    }
+
+   $scope.creditsSubmit = function (){
+      console.log($scope.creditName,$scope.creditUser);
+   }
+
     $scope.loadTags = function(query) {
 
       return $http.get('/api/stages/tagingStage/'+query).success(function (response){
@@ -126,8 +150,10 @@ angular.module('myAppApp')
 
     };
 
+
+
    $scope.videoSubmit = function (form){
-          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres}).success(function (response){
+          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditName:$scope.creditName,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })
@@ -149,12 +175,9 @@ angular.module('myAppApp')
         })
    }
 
-    $scope.getSuggestionsForCredits = function (query){
-      return $http.get('/api/creditDets/search/'+query).success(function (response) {
-        console.log(response);
-        return response;
-      });
-    }
+    
+
+    
 
     $scope.editGalleryPic = function (form){
      $http.post('/api/users/galleryPic/',{galleryPic:form.galPicUrl}).success(function (response) {
@@ -202,11 +225,7 @@ angular.module('myAppApp')
    	
    };
 
-   $scope.submitCredit = function (creditDet){
-    $http.post('/api/creditDets',{creditDetail:creditDet}).success(function (response){
-      console.log(response);
-    })
-   };
+   
 
   })
 

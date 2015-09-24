@@ -33,20 +33,24 @@ exports.show = function(req, res) {
 // Creates a new video in the DB.
 exports.create = function(req, res) {
   console.log(req.body.genres);
+  console.log(req.body.creditName,req.body.creditUser);
   var vidUrl=req.body.vidurl;
   var a = vidUrl.split('watch?v=');
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
-  var type;
-  if(req.body.type)
-  {
-      type=req.body.type;
-  }
-  else
-      type=13;
+  var type=13;
+ 
 
+  var c=req.body.vedik;
+  
+  var b=[];
+  for(var i=0;i<c.length;i++)
+  {
+    b[i]=c[i]._id;
+  };
+    console.log(b);
   var newvideo = new Video({
     vidname:req.body.vidname,
     vidurl:a[1],
@@ -74,7 +78,9 @@ exports.create = function(req, res) {
       console.log('i am getting error as '+err);
     }
   });*/
+console.log(newvideo);
   newvideo.save(function (err){
+    console.log('12');
     if(err) return handleError(res, err);
     else {
         /*  req.user.videos.push({video:newvideo,role:['actor']});
@@ -86,6 +92,8 @@ exports.create = function(req, res) {
               console.log('user saved??');
             }
           });*/
+          
+          console.log('12');
           var newPost = new Post({
             videoId: newvideo._id,
             type:type,
@@ -97,10 +105,12 @@ exports.create = function(req, res) {
             like:[],
             createdOn:Date.now()
           });
-          for(i=0;i<b.length;i++)
+          
+          for(var i=0;i<b.length;i++)
           {
             newPost.vedik.push({vedik:b[i]});
           }
+          console.log('1');
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else 
@@ -176,7 +186,7 @@ exports.clubPost = function(req, res) {
   }
   else
   {
-      type=21; //2=club
+      type=23; //2=club
       
   }
   

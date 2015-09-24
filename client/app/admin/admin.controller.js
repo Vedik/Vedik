@@ -46,4 +46,11 @@ angular.module('myAppApp')
         })
     }
 
+     $scope.submitCredit = function (creditDet){
+      $http.post('/api/creditDets',{creditDetail:creditDet}).success(function (response){
+        console.log(response);
+        $scope.creditDet="";
+      })
+     };
+
   });

@@ -31,7 +31,7 @@ angular.module('myAppApp')
             {
               console.log($scope.posts[i].uploader.user._id);
               var found=false;
-              for(var j;j<$scope.dummyId.length;j++)
+              for(var j=0;j<$scope.dummyId.length;j++)
               {
                 if(($scope.dummyId[j]==$scope.posts[i].uploader.user._id) && $scope.posts[i].type<14)
                 {

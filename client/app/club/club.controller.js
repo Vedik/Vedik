@@ -49,17 +49,39 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
 
+     $scope.creditName=[];
+      $scope.creditUser=[];
+    $scope.creditName[0]=[];
+      $scope.creditUser[0]=[];
+     var creditNum=0;
+    $scope.addCredit= function (){
+      creditNum++;
+      console.log(creditNum);
+      $scope.creditName[creditNum]=[];
+      $scope.creditUser[creditNum]=[];
+    }
 
     $scope.getSuggestionsForNames = function (query){
       return $http.get('/api/users/search/'+query).success(function (response) {
         console.log(response);
         return response;
       });
+    };
+
+    $scope.getSuggestionsForCredits = function (query){
+      return $http.get('/api/creditDets/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
     }
+
+   $scope.creditsSubmit = function (){
+      console.log($scope.creditName,$scope.creditUser);
+   }
 
 
    $scope.videoSubmit = function (form){
-          $http.post('/api/videos/'+id,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik}).success(function (response){
+          $http.post('/api/videos/'+id,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditName:$scope.creditName,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })

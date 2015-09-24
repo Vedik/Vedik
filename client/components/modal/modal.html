@@ -164,8 +164,7 @@
 				        		<div id="upld_display"  class="tab-content col-md-6">
 		        					<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
 									<ul class="nav nav-tabs">
-									 	 <li class="active"><a data-toggle="tab" href="#upload_form">Info</a></li>
-									    <li><a href="#credits" data-toggle="tab">Credits</a></li>
+									 	 
 									</ul>
 
 									<div class="tab-content">
@@ -173,9 +172,12 @@
 											<div class="tab-content">
 
 											<!--************Video Upload Form********-->
-												<div id="video_form" class="tab-pane fade" >
+											<div id="video_form" class="tab-pane fade in active" >
+											<form name="form" ng-submit="videoSubmit(form)" ng-model="form">
+												<div class="tab-content">
+												<div id="video_det" class="tab-pane fade in active" >
 													<h3>Add your Video here</h3>
-													<form name="form" ng-submit="videoSubmit(form)" ng-model="form">
+													
 														<div class="form-group">
 															
 															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
@@ -200,13 +202,62 @@
 															<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
 														</div>
 														<div class="form-group">
-															<label>Stage to be tagged</label>
-															
+															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+
+														      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+														    </tags-input>
 														</div>
-														<button type="submit" class="b2w">Submit</button>
-													</form>
+														<a href="#creditsVideo" data-toggle="tab" class="b2w">Next</a>
+													
+
+													
 
 												</div>
+												<div id="creditsVideo" class="tab-pane fade">
+										    
+										    
+													    <table>
+													    	<tr>
+													    		<th>Credit</th>
+													    		<th>User</th>
+													    	</tr>
+													    				
+														    	<tr ng-repeat="credit in creditName">
+														    		<td style="width:50%;verticle-align:top">
+														    			<tags-input ng-model="creditName[$index]" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'  class="bootstrap">
+				      													<auto-complete 
+				      													source="getSuggestionsForCredits($query)"
+				      													min-length='1'
+				      													>
+				      													</auto-complete>
+				    												</tags-input>
+														    		</td>
+														    		<td style="width:50%;verticle-align:top">
+														    			<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap">
+				      													<auto-complete 
+				      													source="getSuggestionsForNames($query)"
+				      													min-length='1'>
+				      													</auto-complete>
+				    												</tags-input>
+														    		</td>
+														    	</tr>	
+													    							    		
+													    </table>
+
+												   
+										      		<div>
+										      			<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+										      			<a data-toggle="tab" href="#video_det" class="b2w">Back</a>
+										      			<br/>
+										      			<button type="submit" class="b2w">Submit</button>
+										      		</div>
+
+										      		
+										    	</div>
+										    	</div>
+										    </form>
+										   	</div>
 										
 												<!--***************Article Upload form**************-->
 
@@ -232,7 +283,7 @@
 
 														    </tags-input>
 														</div>
-															<button type="submit" class="b2w">Submit</button>
+															<a href="#credits" data-toggle="tab" class="b2w">Next</a>
 													</form>
 												</div>
 
@@ -261,8 +312,7 @@
 
 														    </tags-input>
 														</div>
-															<button type="submit" class="b2w">Submit</button>
-													</form>
+															<a href="#credits" data-toggle="tab" class="b2w">Next</a>													</form>
 													<div  >
 														<img src="{{form.picUrl}}" height="400px" width="auto" >
 													</div>
@@ -271,55 +321,45 @@
 
 										</div>
 										<div id="credits" class="tab-pane fade">
-										    <h3>Credits</h3>
-										    <div class="col-md-6">
-								      			<label>Credit</label>
-								      			<div>
-								      				<tags-input ng-model="credits.directors" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'>
-      													<auto-complete 
-      													source="getSuggestionsForCredits($query)"
-      													min-length='1'
-      													>
-      													</auto-complete>
-    												</tags-input>
-    												<p>Model: {{credits.credit}}</p>
-    											</div>
-								      		</div>
-								      		<div class="col-md-6">
-								      			<label>Directors</label>
-								      			<div>
-								      				<tags-input ng-model="credits.creditNames" display-property="name" add-from-autocomplete-only="true">
-      													<auto-complete 
-      													source="getSuggestionsForNames($query)"
-      													min-length='1'>
-      													</auto-complete>
-    												</tags-input>
-    												<p>Model: {{credits.creditNames}}</p>
-    											</div>
-								      		</div>
-								      		<div ng-repeat="credit in credits">
-								      			<label>{{credit.name}}</label>
-								      			<tags-input ng-model="result.{{credit.name}}" display-property="name" add-from-autocomplete-only="true">
-      												<auto-complete 
-      											source="getSuggestions($query)"
-      											min-length='1'>
-      												</auto-complete>
-    											</tags-input>
-    											<p>{{result}}</p>
-								      		</div>
+										    
+										    
+											    <table>
+											    	<tr>
+											    		<th>Credit</th>
+											    		<th>User</th>
+											    	</tr>
+											    				
+												    	<tr ng-repeat="credit in creditName">
+												    		<td style="width:50%;verticle-align:top">
+												    			<tags-input ng-model="creditName[$index]" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'  class="bootstrap">
+		      													<auto-complete 
+		      													source="getSuggestionsForCredits($query)"
+		      													min-length='1'
+		      													>
+		      													</auto-complete>
+		    												</tags-input>
+												    		</td>
+												    		<td style="width:50%;verticle-align:top">
+												    			<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap">
+		      													<auto-complete 
+		      													source="getSuggestionsForNames($query)"
+		      													min-length='1'>
+		      													</auto-complete>
+		    												</tags-input>
+												    		</td>
+												    	</tr>	
+											    							    		
+											    </table>
+
+										   
 								      		<div>
-								      			<label>Editors</label>
-								      			<tags-input ng-model="credits.editors" display-property="name" add-from-autocomplete-only="true">
-      												<auto-complete 
-      													source="getSuggestions($query)"
-      													min-length='1'>
-      												</auto-complete>
-    											</tags-input>
-    											<p>Model: {{credits.editors}}</p>
+								      			<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+								      			<a data-toggle="tab" href="#upload_form" class="b2w">Back</a>
+								      			<br/>
+								      			<button type="submit" class="b2w">Submit</button>
 								      		</div>
-								      		<div>
-								      			<h2>Add Credits</h2>
-								      		</div>
+
+								      		
 								    	</div>
 									</div>
 										
