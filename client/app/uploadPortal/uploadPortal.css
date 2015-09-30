@@ -28,6 +28,11 @@
 		box-shadow: 1px 1px 5px grey;
 		height: 200px;
 			}
+	.notif_div_wrap	{
+		padding: 0px;
+		border-bottom: 1px solid grey;
+		height:90px;
+			}
 	#img_post 	{
 		position: absolute;
 			
@@ -40,6 +45,11 @@
 		position: relative;
 		padding: 5px 5px;
 		
+		/*margin: 30px 0px;*/
+		float: left;
+	}
+	.notif_div	{
+		position: relative;		
 		/*margin: 30px 0px;*/
 		float: left;
 	}
@@ -86,6 +96,14 @@
 	}
 	.modal-body #img_viewed	{
 		box-shadow: 0px 20px 50px #000;
+	}
+	.modalbackdrop	{
+		filter:blur(40px);
+		background-color: black;
+	}
+	.modal-backdrop{
+		opacity: 0.8;
+	    filter:blur('100px');
 	}
 	#up000{
 		width: 100%;
@@ -139,6 +157,16 @@
 		color: black;
 
 	}
+	.text_type_notif	{
+		background-color: rgba(230,230,230,1);
+		padding: 10px 10px 0px 10px;
+		font-family: arial;
+		letter-spacing: 1px;
+		font-size: 13px;		
+		color: black;
+		border-bottom: 1px solid grey;
+
+	}
 	#event_det	{
 		height: 200px;
 	}
@@ -186,16 +214,16 @@
         
        height: 100%;
        width: auto;
-        left:15%;
+        margin:0px 15%;
         position: relative;
 	}
 	#img_viewed_info	{
 		height: 100%;
-        left: 15%;
+        
         top:0px;
         position: absolute;
                 
-        width: 100px;
+        width: 100%;
         margin:0% auto;
 	}
 	 #img_shade_bottom   {
@@ -217,6 +245,9 @@
 
      .a {
      	
+     }
+     #wrapper {
+     	position: relative;
      }
 
      .a.my-class	{

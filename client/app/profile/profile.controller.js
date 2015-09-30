@@ -151,6 +151,23 @@ angular.module('myAppApp')
     };
 
 
+   /*$scope.getVideoDetails = function (videoId){
+      console.log(videoId);
+      var a = videoId.split('watch?v=');
+      if(a[1])
+      {
+        var video_id='HfLZnE3fIyI';
+        var key='AIzaSyChm_agHP2KpiAIaoN8-s7EvnOxYeOSthQ';
+
+        /*$.getJSON('https://www.googleapis.com/youtube/v3/videos?id='+video_id+'&key='+key+'&part=snippet',function(data,status,xhr){
+            alert(data);
+            // data contains the JSON-Object below
+        });
+        $http.get('https://www.googleapis.com/youtube/v3/videos?id='+video_id+'&key='+key+'&part=snippet').success(function (response){
+          console.log(response);
+        })
+      }
+   }*/
 
    $scope.videoSubmit = function (form){
           $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditName:$scope.creditName,creditUser:$scope.creditUser}).success(function (response){

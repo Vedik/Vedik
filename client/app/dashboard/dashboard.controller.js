@@ -42,8 +42,7 @@ angular.module('myAppApp')
      $http.get('/api/clubs/').success(function (response){
         console.log(response);
         $scope.clubsList = response;
-        console.log(ClubEventService.setEventId('3333333333'));
-            console.log(ClubEventService.getEventId());
+        
 
     });
   })

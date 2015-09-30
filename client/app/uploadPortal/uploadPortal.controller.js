@@ -145,17 +145,17 @@ angular.module('myAppApp')
                                         '</a>'  +
                                         '</br>{{content.eventId.description}}</br></br>'  +
                                         '<div>' +
-                                            '<p>by<a href="#"> {{content.uploader.club.name}}</a></p>'  +
-                                            '<span id="respond_post" ng-hide="likingName" ng-click="like(content.eventId._id)">'  +
-                                                '<a href="#">'   +
-                                                    '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Like'  +
-                                                '</a>'  +
-                                            '</span>'   +
-                                            '<span id="respond_post" ng-show="likingName" ng-click="unlike(content.eventId._id)">'    +
-                                                '<a href="#"><img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Unlike</a>'    +
-                                            '</span>'   +
-                                        '</div>'    +
+                                            'by<a href="#"> {{content.uploader.club.name}}</a>'  +
+                                        '</div>'    +                                        
                                     '</div>'    +
+                                     '<span id="post_time">'+
+                                                    '<span id="respond_post">'+
+                                                        '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                                        '{{postTime}}'+
+                                                    '</span>'+
+                                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                            '</span>'   +
                                     '<span id="post_time">{{content.createdOn}}</span>'   +
                                 '</div>'    +
                             '</div>';
@@ -176,7 +176,7 @@ angular.module('myAppApp')
                                                 '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                             '</span>'+
-                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';                      
@@ -184,31 +184,22 @@ angular.module('myAppApp')
         var template = '';
 
         switch(contentType) {
-            case 2:
-                template = imageTemplate;
-                break;
             case 12:
                 template = imageTemplate;
-                break;
-            case 3:
-                template = videoTemplate;
                 break;
             case 13:
                 template = videoTemplate;
                 break;
-            case 1:
-                template = articleTemplate;
-                break;
             case 11:
                 template = articleTemplate;
                 break;
-            case 4:
+            case 21:
                 template = articleClubTemplate;
                 break;
-            case 5:
+            case 22:
                 template = imageTemplate;
                 break;
-            case 6:
+            case 23:
                 template = videoTemplate;
                 break;
             case 7:
@@ -305,7 +296,7 @@ angular.module('myAppApp')
 
         scope.viewVideo =function(vidurl){
 
-            document.getElementById('for_blur').style.filter = 
+           document.getElementById('for_blur').style.filter = 
             'blur(20px)';
 
           
@@ -314,7 +305,8 @@ angular.module('myAppApp')
             var modalInstance = $modal.open({
               animation: true,
               templateUrl:'myModalVideo.html' ,
-              controller: 'ModalInstanceCtrl',
+              controller: 'ModalVideoInstanceCtrl',
+              backdropClass:'modalbackdrop',
               resolve: {
                   vidCode: function(){
                     return(vidurl);
@@ -350,11 +342,14 @@ angular.module('myAppApp')
               controller: 'ModalImageInstanceCtrl',
               resolve: {
                   
-                  image: function(){
-                    return scope.content.imageId;
+                  imagePost: function(){
+                    return scope.content;
                   },
                   height:function(){
                     return scope.height;
+                  },
+                  ratingArray: function(){
+                    return scope.ratingName;
                   }
                 }
             });
@@ -383,11 +378,316 @@ angular.module('myAppApp')
             content:'='
         }
     };
+})
+
+.directive('contentNotif', function ($compile, $http,$modal) {
+    var imageTemplate = '<div>'+
+                            '<div class="notif_div thumbs_wrap col-md-12">'+
+                                '<div class="notif_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                    '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                                    '<span>'+
+                                    '</span>'+
+                                    '<span id="img_name">{{content.imageId.imgName}}</span>'+
+                                    '<span class="thumb_trnsprnt"></span>'+
+                                    '<span id="user_art_info">'+
+                                        '<div id="a">'+
+                                            '<div id="vid_data">{{content.imageId.description}}</div>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span>'+
+                                        '</div>'+
+                                    '</span>'+
+                                '</div>'+
+                            '</div>'+                            
+                        '</div>';
+    var videoTemplate = '<div  ng-click=blur()>' +
+                            '<div class="notif_div thumbs_wrap col-md-12" >'+
+                               '<div class="notif_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                    '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+                                    '<span>'+
+                                    '</span>'+
+                                    '<span id="img_name">'+
+                                        '{{content.videoId.vidname}}'+
+                                    '</span>'+
+                                    '<span class="play">'+
+                                        '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
+                                    '</span>'+
+                                    '<span class="thumb_trnsprnt"></span>'+
+                                    '<span id="user_art_info">'+
+                                        '<div id="a">'+
+                                            '<div id="vid_data">{{content.videoId.description}}</div>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span>'+
+                                        '</div>'+
+                                    '</span>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>';
+    var articleTemplate = '<div>'   +
+                                '<div class="notif_div col-md-12">'  +
+                                    '<div class="text_type_notif" id="article">' +
+                                        '<a href="#">'  +
+                                            '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
+                                        '</a>'  +
+                                        '</br>{{content.articleId.content}}</br>'  +
+                                        '<div>' +
+                                            '<span>by<a href="#"> {{content.uploader.user.name}}</a></span>'  +                                            
+                                        '</div>'    +
+                                    '</div>'    +
+                                '</div>'    +
+                            '</div>';
+    var eventClubTemplate ='<div>'   +
+                                '<div class="post_div col-md-12">'  +
+                                    '<div class="text_type_post" id="article">' +
+                                        '<a href="/event">'  +
+                                            '<span id="event_post_heading">{{content.eventId.name}}</span>'    +
+                                        '</a>'  +
+                                        '</br>{{content.eventId.description}}</br></br>'  +
+                                        '<div>' +
+                                            'by<a href="#"> {{content.uploader.club.name}}</a>'  +
+                                        '</div>'    +                                        
+                                    '</div>'    +
+                                    '<span id="post_time">{{content.createdOn}}</span>'   +
+                                '</div>'    +
+                            '</div>';
+    var articleClubTemplate ='<div>'   +
+                                '<div class="post_div col-md-12">'  +
+                                    '<div class="text_type_post" id="article">' +
+                                        '<a href="#">'  +
+                                            '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
+                                        '</a>'  +
+                                        '</br>{{content.articleId.content}}</br></br>'  +
+                                        '<div>' +
+                                            '<span>by<a href="#"> {{content.uploader.club.name}}</a></span>'  +                                            
+                                        '</div>'    +
+                                    '</div>'    +
+                                    '<span id="post_time">'+
+                                            '<span id="respond_post">'+
+                                                '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                                '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                                '{{postTime}}'+
+                                            '</span>'+
+                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                    '</span>'   +                                    
+                                '</div>'    +
+                            '</div>';                      
+    var getTemplate = function(contentType) {
+        var template = '';
+
+        switch(contentType) {
+            case 12:
+                template = imageTemplate;
+                break;
+            case 13:
+                template = videoTemplate;
+                break;
+            case 11:
+                template = articleTemplate;
+                break;
+            case 21:
+                template = articleClubTemplate;
+                break;
+            case 22:
+                template = imageTemplate;
+                break;
+            case 23:
+                template = videoTemplate;
+                break;
+            case 7:
+                template = eventClubTemplate;
+                break;
+            case 71:
+                template = articleClubTemplate;
+                break;
+        }
+        
+        return template;
+    }
+
+    
+
+    var linker = function(scope, element, attrs, controller) {
+
+        element.html(getTemplate(scope.content.type)).show();
+
+        $compile(element.contents())(scope);
+
+       /* var date = scope.content.createdOn ;
+            console.log(date);
+          var d = date.getDate();
+          var m = date.getMonth()+1;
+          var y = date.getFullYear();
+          var min="0" + date.getMinutes();
+          var h="0" + date.getHours();
+          var s= "0" + date.getSeconds();
+          scope.postTime=d+"-"+m+"-"+y+" "+h+":"+min;*/
+
+
+        
+        
+           
+            scope.one="one";
+            scope.two="two";
+            scope.three="three";
+            scope.max = 5;
+            var postIdRating=scope.content._id;
+            var ratingName='rating'+postIdRating;
+            $http.get('/api/posts/ratingInfo/'+postIdRating).success(function (response){
+                scope.ratingName=response;
+                console.log(scope.ratingName);
+                scope.ratingHalf=scope.content.rating/2;
+                var roundedRating=Math.round(scope.ratingHalf);
+                
+                if(roundedRating==scope.ratingHalf)
+                {
+                    scope.rate=roundedRating;
+                }
+                else if((roundedRating-scope.ratingHalf)>0)
+                    scope.rate=roundedRating-1;
+                else
+                    scope.rate=roundedRating;                
+                                 
+            });
+
+        
+
+        scope.like = function(postId){
+            $http.get('/api/posts/'+postId+'/like').success(function (response){
+                console.log(response);
+                var likingName='liking'+postId;
+                scope.content.like.length=response;
+                scope.likingName = true;
+                
+            });
+        };
+
+        function Ctrl2($scope, UploadPortalService) {
+            $scope.prop2 = "Second";
+            $scope.both = UploadPortalService.setProperty()
+        }
+
+        
+        
+
+        scope.unlike = function(postId){
+            $http.delete('/api/posts/'+postId+'/unlike').success(function (response){
+                console.log(response);
+                var likingName='liking'+postId;
+                scope.content.like.length=response;
+                scope.likingName = false;
+                
+            });
+        };
+
+         scope.blur =function(){
+            scope.for_blur = {
+                'filter': 'blur('+40+'px)'
+            };
+        };
+
+        scope.viewVideo =function(vidurl){
+
+           document.getElementById('for_blur').style.filter = 
+            'blur(20px)';
+
+          
+            console.log(vidurl);
+           
+            var modalInstance = $modal.open({
+              animation: true,
+              templateUrl:'myModalVideo.html' ,
+              controller: 'ModalVideoInstanceCtrl',
+              backdropClass:'modalbackdrop',
+              resolve: {
+                  vidCode: function(){
+                    return(vidurl);
+                  },
+                  videoPost: function(){
+                    return scope.content;
+                  },
+                  ratingArray: function(){
+                    return scope.ratingName;
+                  }
+                }
+            });
+        };
+
+        
+        
+
+        scope.viewImage =function(imageId){
+            document.getElementById('for_blur').style.filter = 
+            'blur(20px)';
+
+            
+               scope.height=$(window).height();
+                /*$("#img_viewed").css("height", "579px");
+                alert(height);*/
+                
+            
+            
+
+             var modalInstance = $modal.open({
+              animation: true,
+              templateUrl:'myModalImage.html' ,
+              controller: 'ModalImageInstanceCtrl',
+              resolve: {
+                  
+                  imagePost: function(){
+                    return scope.content;
+                  },
+                  height:function(){
+                    return scope.height;
+                  },
+                  ratingArray: function(){
+                    return scope.ratingName;
+                  }
+                }
+            });
+    
+        };
+
+        scope.bookADay = function(postId){
+            var modalInstance = $modal.open({
+              animation: true,
+              templateUrl:'myModalBookADay.html' ,
+              controller: 'ModalBookADayInstanceCtrl',
+              resolve: {
+                  
+                  bookingPostId: function(){
+                    return postId;
+                  }
+                }
+            });
+        }
+    }
+
+    return {
+        restrict: "E",
+        link: linker,
+        scope: {
+            content:'='
+        }
+    };
+})
+
+
+.directive('enforceMaxTags', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngCtrl) {
+      var maxTags = attrs.maxTags ? parseInt(attrs.maxTags, '10') : null;
+
+      ngCtrl.$parsers.push(function(value) {
+        if (value && maxTags && value.length > maxTags) {
+          value.splice(value.length - 1, 1);
+        }
+        return value;
+      });
+    }
+  };
 });
 
 
 
-angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$modalInstance,Auth,vidCode, videoPost,ratingArray,$http){
+angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,$modalInstance,Auth,vidCode, videoPost,ratingArray,$http,$document){
   console.log('hello');
    $scope.ok = function () {
     $modalInstance.close($scope.selected.item);
@@ -413,10 +713,22 @@ angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$moda
     $scope.percent = 100 * (value / $scope.max);
   }
 
+    $scope.isReadonly = false;
+
+      if(!$scope.ratingArray.rating)
+      {
+        $scope.userRate=true;
+      }
+      else
+      {
+        $scope.userRate=false;
+      }
+
   $scope.ratePost = function(rate) {
         $http.post('/api/posts/rating/'+$scope.video._id,{rating:rate}).success(function (response){
             $scope.votes=response.votes;
             $scope.rating=response.rating;
+            $scope.userRate=false;
             console.log($scope.votes+$scope.rating);
   });
 };
@@ -462,24 +774,65 @@ angular.module('myAppApp').controller('ModalInstanceCtrl',function ($scope,$moda
     }
 
     /////////// comment functions close////////////
+    $(document).keyup(function(e) {
+
+         if (e.keyCode==27) { 
+            $("#for_blur").css("filter", 'blur(0px)'); 
+             
+        }
+    });
 
   $scope.cancel = function () {
+    console.log('clsing modal');
+    $document.getElementById('for_blur').style.filter = 
+            'blur(0px)';
     $modalInstance.dismiss('cancel');
+
   };
 });
 
-angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,image,height,$http){
+angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,imagePost,ratingArray,height,$http){
   console.log('hello');
    $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
-  };
-    $scope.image=image;  
+        $modalInstance.close($scope.selected.item);
+
+    };
+    $scope.image=imagePost;  
     $scope.img_viewed = {
         'height': getHeight()+"px"
     };
 
    
-    
+    $scope.ratingArray = ratingArray;
+      $scope.rate=$scope.ratingArray.ratingValue;
+      $scope.max = 10;
+      $scope.rating=$scope.image.rating;
+      $scope.votes=$scope.ratingArray.votes;
+
+      $scope.isReadonly = false;
+
+      if(!$scope.ratingArray.rating)
+      {
+        $scope.userRate=true;
+      }
+      else
+      {
+        $scope.userRate=false;
+      }
+      $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+      }
+
+      $scope.ratePost = function(rate) {
+            $http.post('/api/posts/rating/'+$scope.image._id,{rating:rate}).success(function (response){
+                $scope.votes=response.votes;
+                $scope.rating=response.rating;
+                $scope.userRate=false;
+                console.log($scope.votes+$scope.rating+"sdfgbfbh"+$scope.userRate);
+        });
+      };
+
     $scope.img_viewed_info = {
         'width': getWidth()+"px"
     };
@@ -490,11 +843,25 @@ angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,
     function getWidth() {
             return (100);
         }
-    
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
+
+
+    $(document).keyup(function(e) {
+
+         if (e.keyCode==27) { 
+            $("#for_blur").css("filter", 'blur(0px)'); 
+             
+        }
+    });
+        
+      $scope.cancel = function () {
+        $(document).ready(function() {
+                $("#for_blur").css("filter", 'blur(0px)'); 
+        });
+        $modalInstance.dismiss('cancel');
+      };
 });
+
+/*******************************Booking modal******************************************/
 
 angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($scope,$modalInstance,bookingPostId,$http){
   console.log('hello');
@@ -539,6 +906,10 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
       })
      
     };
+
+     $scope.ok = function () {
+        $modalInstance.close($scope.postId);
+      };
 
     $scope.clear = function () {
     $scope.dt = null;
@@ -606,7 +977,15 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
     return '';
   };
 
+  $(document).keyup(function(e) {
+
+         if (e.keyCode==27) { 
+            $("#for_blur").css("filter", 'blur(0px)'); 
+             
+        }
+    });
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
 });
+

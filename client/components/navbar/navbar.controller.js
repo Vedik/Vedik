@@ -15,6 +15,9 @@ angular.module('myAppApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
     console.log($scope.getCurrentUser().name);
 
+    $scope.showNotif=false;
+
+
     if($scope.getCurrentUser().name)
     {
 
@@ -26,25 +29,51 @@ angular.module('myAppApp')
 
             $scope.dummyId=[];
             $scope.dummyName=[];
+            $scope.clubId=[];
+            $scope.clubName=[];
             var x=0;
+            var y=0;
             for(var i=0;i<$scope.posts.length;i++)
             {
-              console.log($scope.posts[i].uploader.user._id);
-              var found=false;
-              for(var j=0;j<$scope.dummyId.length;j++)
+              if($scope.posts[i].uploader.user && $scope.posts[i].uploader.club)
               {
-                if(($scope.dummyId[j]==$scope.posts[i].uploader.user._id) && $scope.posts[i].type<14)
+                var found=false;
+                for(var j=0;j<$scope.clubId.length;j++)
                 {
-                  found=true;
-                  break;
-                }
+                  if(($scope.clubId[j]==$scope.posts[i].uploader.club._id) && $scope.posts[i].type>14)
+                  {
+                    found=true;
+                    break;
+                  }
 
+                }
+                if(found==false)
+                {
+                  $scope.clubId[y]=$scope.posts[i].uploader.club._id;
+                  
+                  $scope.clubName[y]=$scope.posts[i].uploader.club.name;
+                  y++;
+                }
               }
-              if(found==false)
+              else if($scope.posts[i].uploader.user)
               {
-                $scope.dummyId[x]=$scope.posts[i].uploader.user._id;
-                $scope.dummyName[x]=$scope.posts[i].uploader.user.name;
-                x++;
+                var found=false;
+                for(var j=0;j<$scope.dummyId.length;j++)
+                {
+                  if(($scope.dummyId[j]==$scope.posts[i].uploader.user._id) && $scope.posts[i].type<14)
+                  {
+                    found=true;
+                    break;
+                  }
+
+                }
+                if(found==false)
+                {
+                  $scope.dummyId[x]=$scope.posts[i].uploader.user._id;
+                  console.log($scope.dummyId[x]);
+                  $scope.dummyName[x]=$scope.posts[i].uploader.user.name;
+                  x++;
+                }
               }
             }
             console.log($scope.dummyId,$scope.dummyName);

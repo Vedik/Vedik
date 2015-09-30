@@ -154,11 +154,13 @@ li:hover#nav_li, li:active#nav_li{
 
 }
 #notifDropDown {
-    width: 500px;
+    width: 490px;
     border: 0px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     z-index: 10000;
-    
+    position: absolute;
+    left: 60px;
+    box-shadow: 1px 1px 5px grey;    
 }
 #notifMenu {
     width: 145px;
@@ -182,6 +184,9 @@ li:hover#nav_li, li:active#nav_li{
     width: 345px;
     float: left;
     padding: 4px;
+    max-height:400px;
+    overflow-y: auto;
+    overflow-x:hidden;  
 }
 
 

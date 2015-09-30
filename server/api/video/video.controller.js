@@ -3,10 +3,9 @@
 var _ = require('lodash');
 var Video = require('./video.model');
 var User = require('../user/user.model');
-var mongoose = require('mongoose');
-var Post = require('../post/post.model')
-var Like = require('../like/like.model')
-var Club = require('../club/club.model')
+var Post = require('../post/post.model');
+var Like = require('../like/like.model');
+var Club = require('../club/club.model');
 // Get list of videos
 exports.index = function(req, res) {
   Video.find(function (err, videos) {
@@ -51,54 +50,28 @@ exports.create = function(req, res) {
     b[i]=c[i]._id;
   };
     console.log(b);
-  var newvideo = new Video({
+  var newVideo = new Video({
     vidname:req.body.vidname,
     vidurl:a[1],
     description:req.body.description,
-    posterurl:req.body.posterurl,
+    posterurl:req.body.posterurl
     
   });
 
-  /*newvideo.save(function (err){
-    if(!err) {
-        User.findOne({_id:newvideo.uploader},function (error, user){
-          if(!err) {
-            user.videos.push(newvideo);
-            user.save(function (err1){
-              if(!err) console.log("no error saving user"+user);
-              else console.log(err1);
-            });
-            console.log("pushed the id");
-            console.log(user);
-          }
-          else console.log("error");
-        });
-    }
+  
+console.log(newVideo);
+  newVideo.save(function (err){
+  
+    if(err) { console.log('sd'); return handleError(res, err);}
     else {
-      console.log('i am getting error as '+err);
-    }
-  });*/
-console.log(newvideo);
-  newvideo.save(function (err){
-    console.log('12');
-    if(err) return handleError(res, err);
-    else {
-        /*  req.user.videos.push({video:newvideo,role:['actor']});
-          req.user.save(function (error) {
-            if(error) {
-              return handleError(res, err);
-            }
-            else {
-              console.log('user saved??');
-            }
-          });*/
+        
           
           console.log('12');
           var newPost = new Post({
             videoId: newvideo._id,
             type:type,
             tags:req.body.genres,
-            uploader:{user:req.user._id},   //club:req.params.id},
+            uploadedUser:req.user._id,   //club:req.params.id},
             ratings:[],
             rating:0,
             view_count:0,
@@ -161,10 +134,110 @@ console.log(newvideo);
     });
 };
 
+exports.clubPost = function(req, res) {
+  console.log(req.body.genres);
+  console.log(req.body.creditName,req.body.creditUser);
+  var vidUrl=req.body.vidurl;
+  var a = vidUrl.split('watch?v=');
+  
+  var type=23;
+ 
+
+  var c=req.body.vedik;
+  
+  var b=[];
+  for(var i=0;i<c.length;i++)
+  {
+    b[i]=c[i]._id;
+  };
+    console.log(b);
+  var newvideo = new Video({
+    vidname:req.body.vidname,
+    vidurl:a[1],
+    description:req.body.description,
+    posterurl:req.body.posterurl,
+    
+  });
+
+ 
+console.log(newvideo);
+  newvideo.save(function (err){
+    console.log('12');
+    if(err) return handleError(res, err);
+    else {
+        
+          console.log('12');
+          var newPost = new Post({
+            videoId: newvideo._id,
+            type:type,
+            tags:req.body.genres,
+            uploadedUser:req.user._id,   //club:req.params.id},
+            uploaderClub:req.body.id,
+            ratings:[],
+            rating:0,
+            view_count:0,
+            like:[],
+            createdOn:Date.now()
+          });
+          
+          for(var i=0;i<b.length;i++)
+          {
+            newPost.vedik.push({vedik:b[i]});
+          }
+          console.log('1');
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else 
+              {
+
+                console.log('post created');
+             
+
+                
+                User.findById(req.user._id,function (err,user){
+                    if(err) { return handleError(res, err); }
+                })
+                .populate('subscribed_users.user')
+                .exec(function(err,user){
+                    if (err) return handleError(err);
+                  for(var i=0;i<user.subscribed_users.length;i++)
+                  {
+                      console.log(user.subscribed_users[i].user._id);
+                      if(user.subscribed_users[i].user._id.equals(req.user._id))
+                      {
+                        console.log('user');
+                      }
+                      else
+                      {
+                        user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        user.subscribed_users[i].user.save(function (error){
+                          if(error){
+                            return handleError(res,err);
+                          }
+                          else
+                          {
+                             console.log('add unseen notif to');
+                          }
+                       
+                        });
+                      }
+                  }
+                 
+                  
+                });
+            }
+          });
+
+          
+          return res.json(200,newvideo);
+        }
+    
+    });
+};
 
 // Creates a new video of club in the DB.
-exports.clubPost = function(req, res) {
-  console.log(req.params.id);
+exports.clubEventPost = function(req, res) {
+  console.log(req.user._id);
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
@@ -245,9 +318,9 @@ exports.clubPost = function(req, res) {
           });
 
            if(eventId)
-              newPost.uploader=({user:req.user._id},{club:req.params.id},{event:eventId});
+              newPost.uploader.push({user:req.user._id},{club:req.params.id},{event:eventId});
           else
-              newPost.uploader=({user:req.user._id},{club:req.params.id});
+              newPost.uploader.push({user:req.user._id},{club:req.params.id});
             
           for(i=0;i<b.length;i++)
           {

@@ -40,7 +40,8 @@
                                 </span>
                             </p>
                         </div>
-                        <button type="submit" class="b2w">Book</button>
+                        <div ng-click="ok()"><button type="submit" class="b2w">Book</button></div>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                     </form>
                 
             
@@ -184,7 +185,8 @@
 														</div>
 														<div class="form-group">
 															
-															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video" 
+															>
 														</div>
 														<div class="form-group">
 															
@@ -225,10 +227,10 @@
 													    				
 														    	<tr ng-repeat="credit in creditName">
 														    		<td style="width:50%;verticle-align:top">
-														    			<tags-input ng-model="creditName[$index]" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'  class="bootstrap">
+														    			<tags-input ng-model="creditName[$index]" display-property="creditDetail" add-from-autocomplete-only="true" max-tags="1" enforce-max-tags  class="bootstrap">
 				      													<auto-complete 
 				      													source="getSuggestionsForCredits($query)"
-				      													min-length='1'
+				      													
 				      													>
 				      													</auto-complete>
 				    												</tags-input>
@@ -389,21 +391,25 @@
 
 <script type="text/ng-template" id="myModalImage.html">
 	<div id="img_view" >
-      	<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
-      	<div="wrapper">
-      	<div ng-style="img_viewed" id="abcds">
-        	<img src="{{image.picUrl}}"	id="img_viewed" >
-        </div>
-	        <div id="img_viewed_info" ng-style="img_viewed_info">
-	       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
-		        <div id="img_name">{{image.imgName}}</div>
-		        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
-		        <div id="img_des">{{image.description}}</div>
+      	<button type="button" class="close img_close" ng-click="cancel()">&times;</button>
+      	<div id="wrapper">
+	      	<div id="img_viewed">
+	        	<img src="{{image.imageId.picUrl}}"	width="100%" >
+	        
+		        <div id="img_viewed_info">
+		       		<img src="assets/images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" alt="">
+			        <div id="img_name">{{image.imageId.imgName}}</div>
+			        <img src="assets/images/fade2black btm.png" height="70px" width="100%" style="opacity:0.5;" alt="" id="img_shade_bottom">
+			        <div id="img_des">{{image.imageId.description}}</div>
+		        </div>
 	        </div>
 
         </div>
         <div id="img_des_com" class="glassy col-md-8">
-	       	
+        	  <div class="centric">
+	       		<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ng-click="ratePost(rate)"></rating> {{rating}} by {{votes}}
+        			<br><span ng-show="userRate" style="font-size:10px">You Have not rated yet</span>
+        	  </div>		
 			  <ul class="nav nav-tabs">			  	
 			    <li><a data-toggle="tab" href="#img_description">Description</a></li>
 			    <li class="active"><a data-toggle="tab" href="#img_comments">Comments</a></li>
@@ -545,6 +551,7 @@
 
 
 			<div id="video">
+				<button type="button" class="close img_close" ng-click="cancel()">&times;</button>
         		<div class="wrapper">
          			<img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
          			<div my-youtube code='vidCode'></div>         
@@ -554,7 +561,7 @@
         		</div>
         		
         			<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ng-click="ratePost(rate)"></rating> {{rating}} by {{votes}}
-        			<br><span ng-if="!ratingArray.rating" style="font-size:10px">You Have not rated yet</span>
+        			<br><span ng-show="userRate" style="font-size:10px">You Have not rated yet</span>
         		
     		</div>
 

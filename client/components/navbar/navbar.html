@@ -53,25 +53,32 @@
     </div>
 
          <div class="container">                                         
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" style="margin:6.5px 0px;background:none;border:0px">
-                <span class="glyphicon glyphicon-envelope" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span></button>
-                <div  id="notifDropDown" class="dropdown-menu">
+              <div style="position:relative;width:300px;margin:0px 20px">
+                <button class="btn btn-primary" type="button" style="margin:6.5px 0px;background:none;border:0px"  ng-click="showNotif=!showNotif">
+                  <span class="glyphicon glyphicon-envelope" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
+                </button>
+                <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
-                        <ul class="nav nav-pills nav-stacked" id="notifMenu" onclick="document.getElementById('notifDropDown').style.display = 'block'">
+                        <ul class="nav nav-pills nav-stacked" id="notifMenu" >
                             <a data-toggle="tab" href="#allNotifs" ><li class="active w2b">All</li></a>
                             <a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName"><li class="w2b">{{friend}}</li></a>
                         </ul>
                     
                     
                     <div class="tab-content" id="notifs">
-                            <div id="allNotifs" class="tab-pane fade in active">
-                                <span ng-repeat="notif in posts"  >{{notif.articleId.articleName}}<br></span>
+                            <div id="allNotifs" class="tab-pane fade in active" ng-click="showNotif=false">
+                                <content-notif ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur" >    
+                                </content-notif>
                             </div>
                             <span ng-repeat="friendId in dummyId" id="{{friendId}}" class="tab-pane fade">
-                               <span ng-repeat="notif in posts" ng-if="(friendId==notif.uploader.user._id) && (notif.type<14)">
-                                  {{notif.articleId.articleName}}
-                              </span>
+                               <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploader.user._id) && (notif.type<14)">    
+                                </content-notif>
+                               
+                            </span>
+                            <span ng-repeat="friendId in clubId" id="{{friendId}}" class="tab-pane fade">
+                               <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploader.club._id) && (notif.type>14)">    
+                                </content-notif>
+                               
                             </span>
                         </div>
                     </div>

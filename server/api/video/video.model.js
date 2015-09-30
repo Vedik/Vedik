@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var VideoSchema = new Schema({
-  vidname:{type:String, required:true, unique:true},
+  vidname:String,
   description: String,
   
   vidurl:{type:String, required:true, unique:true},
