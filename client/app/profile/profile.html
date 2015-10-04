@@ -50,7 +50,7 @@
 			        
 			        	<div id="infodiv">
 			            	<span id="info">Director Editor Screenwriter</br></span>
-			            	<span id="info">9th Feb 1996</span>
+			            	<span id="info" ng-click="test()">9th Feb 1996</span>
 			            	<span ng-if="user._id!=loggedInUser._id">
 				            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
 								<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>

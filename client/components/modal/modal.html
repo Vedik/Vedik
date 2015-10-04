@@ -210,7 +210,7 @@
 												<a href="#creditsVideo" data-toggle="tab" class="b2w">Next</a>
 						
 											</div>
-											<div id="creditsVideo" class="tab-pane fade">
+											<div id="creditsVideo" class="tab-pane fade" ng-controller="ProfileCtrl as ctrl">
 									    
 											    <table>
 											    	<tr>
@@ -219,7 +219,7 @@
 												  	</tr>											    				
 											    	<tr ng-repeat="credit in creditType">
 											    		<td style="width:50%;verticle-align:top">
-		 									    			<div ng-controller="ProfileCtrl as ctrl" layout="column" ng-cloak>
+		 									    			<div  layout="column" ng-cloak>
 				  <md-content class="md-padding">
 				    <form ng-submit="$event.preventDefault()" name="searchForm">
 				     
@@ -230,11 +230,12 @@
 				            md-input-minlength="2"
 				            md-input-maxlength="18"
 				            md-no-cache="ctrl.noCache"
-				            md-selected-item="creditType[$index]"
+				            md-selected-item="ctrl.creditTypee"
 				            md-search-text="ctrl.searchText"
 				            md-items="item in ctrl.querySearch(ctrl.searchText)"
 				            md-item-text="item.creditDetail"
 				            md-floating-label="Credit"
+				           	md-selected-item-change="saveCredit(ctrl.creditTypee,$index)"
 				           >
 				          <md-item-template>
 				            <span md-highlight-text="ctrl.searchText">{{item.creditDetail}}</span>
@@ -248,7 +249,8 @@
 				      </div>
 				       </form>
 				  </md-content>
-				  {{creditType[$index].creditDetail}}
+				  <p ng-click="test()">dsaf</p>
+				  {{creditType[$index]}}
 				</div>
 														    			
 														    		</td>

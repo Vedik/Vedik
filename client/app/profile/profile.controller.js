@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval,$q) {
+  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/profile/')[1];
@@ -116,16 +116,16 @@ angular.module('myAppApp')
     };
     $scope.creditType=[];
       $scope.creditUser=[];
-    $scope.creditType[0]=null;
+    $scope.creditType[0]='';
       $scope.creditUser[0]=[];
     
     var creditNum=0;
     $scope.addCredit= function (){
-      console.log('saaaaaaaaaa');
       console.log($scope.creditType);
+     
       creditNum++;
       console.log(creditNum);
-      $scope.creditType[creditNum]=null;
+      $scope.creditType[creditNum]='';
       $scope.creditUser[creditNum]=[];
     }
 
@@ -250,6 +250,7 @@ angular.module('myAppApp')
    	
    };
 
+   
 
    var self = this;
 
@@ -257,6 +258,7 @@ angular.module('myAppApp')
     
     self.searchText    = null;
     self.querySearch   = querySearch;
+
 
     // ******************************
     // Internal methods
@@ -269,9 +271,20 @@ angular.module('myAppApp')
     function querySearch (query) {
       return $http.get('/api/creditDets/search/'+query).then(function(response){
               console.log(response);
+
               return response.data;
             });
     }
+    var x;
+    $scope.saveCredit =function (creditType,index){
+      console.log(creditType,index);
+      x=$scope.creditType[index]=creditType.creditDetail;
+      console.log($scope.creditType);
+      $scope.test();
+    }
+    $scope.test = function(){
+      console.log($scope.creditType,x);
+   }
 
     
 
