@@ -64,6 +64,7 @@ exports.searchCredit = function(req, res){
     { "creditDetail": { "$regex": name, "$options": "i" } },'creditDetail',
     function(err,docs) {
       if(!err) {
+        console.log(docs);
         res.json(docs);
       }
       else {

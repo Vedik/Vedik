@@ -42,7 +42,7 @@ angular.module('myAppApp')
     });
 
     $scope.videoSubmit = function (form){
-          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,type:73,eventId:$scope.eventId}).success(function (response){
+          $http.post('/api/videos/'+$scope.Id.clubId,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,type:33,eventId:$scope.eventId,vedik:form.vedik}).success(function (response){
             console.log(response);
             $scope.form={};
         })
@@ -50,7 +50,7 @@ angular.module('myAppApp')
 
     $scope.imageSubmit = function (form){
         console.log('form.vedik');
-          $http.post('/api/images',{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,type:72,eventId:$scope.eventId}).success(function (response){
+          $http.post('/api/images/'+$scope.Id.clubId,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,type:32,eventId:$scope.eventId}).success(function (response){
             console.log(response);
             $scope.form={};
             console.log(form.imgName);
@@ -58,9 +58,19 @@ angular.module('myAppApp')
    }
 
     $scope.postSubmit = function (form){
-          $http.post('/api/articles/'+$scope.Id.clubId,{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,type:71,eventId:$scope.eventId}).success(function (response){
+          $http.post('/api/articles/'+$scope.Id.clubId,{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,type:31,eventId:$scope.eventId}).success(function (response){
             console.log(response);
             $scope.form={};
         })
    }
+
+    $scope.loadTags = function(query) {
+
+      return $http.get('/api/stages/tagingStage/'+query).success(function (response){
+          console.log(response);
+          return response;
+      });
+
+    };
+
   });

@@ -60,15 +60,24 @@
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
                         <ul class="nav nav-pills nav-stacked" id="notifMenu" >
-                            <a data-toggle="tab" href="#allNotifs" ><li class="active w2b">All</li></a>
-                            <a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName"><li class="w2b">{{friend}}</li></a>
+                            <a data-toggle="tab" href="#allNotifs" ><li class="active w2b"><b>All</b></li></a>
+                            <li style="padding:4px 0px 4px 0px"><b>Friends</b>
+                              <ul style="padding:0px">
+                                <a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName"><li style="padding:3px 0px 3px 10px" class="w2b">{{friend}}</li></a>
+                              </ul>
+                            </li>
+                            <li style="padding:0px 0px 4px 0px"><b>Clubs</b>
+                              <ul style="padding:0px"> 
+                                <a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName"><li style="padding:3px 0px 3px 10px" class="w2b">{{friend}}</li></a>
+                              </ul>
+                            </li>
                         </ul>
                     
                     
                     <div class="tab-content" id="notifs">
                             <div id="allNotifs" class="tab-pane fade in active" ng-click="showNotif=false">
                                 <content-notif ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur" >    
-                                </content-notif>
+                                </content-notif style="padding:2px 0px">
                             </div>
                             <span ng-repeat="friendId in dummyId" id="{{friendId}}" class="tab-pane fade">
                                <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploader.user._id) && (notif.type<14)">    
@@ -76,7 +85,7 @@
                                
                             </span>
                             <span ng-repeat="friendId in clubId" id="{{friendId}}" class="tab-pane fade">
-                               <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploader.club._id) && (notif.type>14)">    
+                               <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploaderClub._id) && (notif.type>14)">    
                                 </content-notif>
                                
                             </span>

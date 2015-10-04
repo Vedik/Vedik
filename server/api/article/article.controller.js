@@ -171,15 +171,19 @@ exports.clubPost = function(req, res) {
             tags:req.body.tags,
             type:type,
             view_count:0,
+            uploader:{user:req.user._id},
             ratings:[],
             rating:0,
             like:[],
             createdOn:Date.now()
           });
           if(eventId)
-              newPost.uploader=({user:req.user._id},{club:req.params.id},{event:eventId});
+          {
+              newPost.uploaderClub=req.params.id;
+              newPost.eventId=eventId;
+          }
           else
-              newPost.uploader=({user:req.user._id},{club:req.params.id});
+              newPost.uploaderClub=req.params.id;
 
           for(i=0;i<b.length;i++)
           {
@@ -192,7 +196,8 @@ exports.clubPost = function(req, res) {
 
                 console.log('post created');
              
-                Club.findById(req.params.id,function (err,club){
+                
+               Club.findById(req.params.id,function (err,club){
                     if(err) { return handleError(res, err); }
                 })
                 .populate('subscribed_users.user')

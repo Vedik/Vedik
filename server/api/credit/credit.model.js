@@ -8,8 +8,9 @@ var CreditSchema = new Schema({
   // this will contain a way to add respect(rating) to the cast..
   // suppose a guy's performance is good, the viewer can +1 at his rating which will enhance that guy's rating
   //in his profile, use of refereences here??
-  creditDetId:{type:Schema.Types.ObjectId, ref:'CreditDet'},
-  user:{type:Schema.Types.ObjectId, ref:'User'}
+  	postId:{type:Schema.Types.ObjectId, ref:"Post"},
+    credit:{type:Schema.Types.ObjectId, ref:"CreditDet"},
+    creditedUser:[{user:{type:Schema.Types.ObjectId, ref:"User"}}],
 });
 
 module.exports = mongoose.model('Credit', CreditSchema);

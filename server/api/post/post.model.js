@@ -9,18 +9,19 @@ var PostSchema = new Schema({
     articleId:{type:Schema.Types.ObjectId, ref:"Article"},
     eventId: {type:Schema.Types.ObjectId, ref:"Event"},
     type:Number,
-    uploadedUser:{type:Schema.Types.ObjectId, ref:"User"},
+    uploader:{user:{type:Schema.Types.ObjectId, ref:"User"}},
     uploaderClub:{type:Schema.Types.ObjectId, ref:"Club"},
     like:[{user:{type:Schema.Types.ObjectId,ref:'User'}}],
     comments:[{comment:{type:Schema.Types.ObjectId, ref:"Comment"}}],
     ratings:[{user:{type:Schema.Types.ObjectId, ref:"User"},rating:{type:Number,default:0}}],
     rating:{type:Number,default:0},
-    credits:[{user:{type:Schema.Types.ObjectId, ref:"User"},creditDet:{type:Schema.Types.ObjectId, ref:"creditDet"}}],
-    tags: String,
+    tags: [String],
     vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
     viewCount:{type:Number,default:0},
     createdOn:{type:Date,default:Date.now()}
 });
 
 module.exports = mongoose.model('Post', PostSchema);
+
+
 

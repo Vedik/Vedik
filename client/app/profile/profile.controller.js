@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval) {
+  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval,$q) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/profile/')[1];
@@ -81,6 +81,10 @@ angular.module('myAppApp')
       console.log($scope.stageList);
   });
 
+
+
+
+    
     $scope.follow = function(){
         $http.get('/api/users/'+id+'/addSubscriber').success(function (response){
             console.log(response);
@@ -133,9 +137,10 @@ angular.module('myAppApp')
     $scope.getSuggestionsForCredits = function (query){
       return $http.get('/api/creditDets/search/'+query).success(function (response) {
         console.log(response);
+
         return response;
       });
-    }
+    };
 
    $scope.creditsSubmit = function (){
       console.log($scope.creditName,$scope.creditUser);
@@ -146,6 +151,7 @@ angular.module('myAppApp')
       return $http.get('/api/stages/tagingStage/'+query).success(function (response){
           console.log(response);
           return response;
+
       });
 
     };
@@ -242,6 +248,32 @@ angular.module('myAppApp')
    	
    };
 
+
+   var self = this;
+
+    
+    $scope.selectedItem  = null;
+    self.searchText    = null;
+    self.querySearch   = querySearch;
+
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+              $scope.credit=self.selectedItem;
+              return response.data;
+            });
+    }
+
+    
+
    
 
   })
@@ -266,3 +298,5 @@ angular.module('myAppApp')
         };
     }
 ]);
+
+
