@@ -35,7 +35,7 @@ exports.show = function(req, res) {
 
 exports.create = function(req, res) {
   console.log(req.body.genres);
-  console.log(req.body.creditName,req.body.creditUser);
+  console.log(req.body.creditType,req.body.creditUser);
   var vidUrl=req.body.vidurl;
   var a = vidUrl.split('watch?v=');
   /*Video.create(req.body, function(err, video) {
@@ -92,11 +92,11 @@ console.log(newVideo);
             else 
               {
 
-                for(var i=0;i<req.body.creditName.length;i++)
+                /*for(var i=0;i<req.body.creditType.length;i++)
                 {
                   var newCredit =  new Credit({
                     postId:newPost._id,
-                    credit:req.body.creditName[i]._id,
+                    credit:req.body.creditType[i]._id,
                   });
 
                   for(var j=0;j<req.body.creditUser[i].length;j++){
@@ -107,7 +107,7 @@ console.log(newVideo);
                   console.log('Credit added');
                 })
 
-                }
+                }*/
 
 
                 console.log('post created');
@@ -161,7 +161,7 @@ console.log(newVideo);
 
 exports.clubPost = function(req, res) {
   console.log(req.params.id);
-  console.log(req.body.creditName,req.body.creditUser);
+  console.log(req.body.creditType,req.body.creditUser);
   var vidUrl=req.body.vidurl;
   var a = vidUrl.split('watch?v=');
   

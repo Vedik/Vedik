@@ -114,16 +114,18 @@ angular.module('myAppApp')
     $scope.myFilter = function (item,y) { 
         return item === y; 
     };
-    $scope.creditName=[];
+    $scope.creditType=[];
       $scope.creditUser=[];
-    $scope.creditName[0]=[];
+    $scope.creditType[0]=null;
       $scope.creditUser[0]=[];
     
     var creditNum=0;
     $scope.addCredit= function (){
+      console.log('saaaaaaaaaa');
+      console.log($scope.creditType);
       creditNum++;
       console.log(creditNum);
-      $scope.creditName[creditNum]=[];
+      $scope.creditType[creditNum]=null;
       $scope.creditUser[creditNum]=[];
     }
 
@@ -143,7 +145,7 @@ angular.module('myAppApp')
     };
 
    $scope.creditsSubmit = function (){
-      console.log($scope.creditName,$scope.creditUser);
+      console.log($scope.creditType,$scope.creditUser);
    }
 
     $scope.loadTags = function(query) {
@@ -176,7 +178,7 @@ angular.module('myAppApp')
    }*/
 
    $scope.videoSubmit = function (form){
-          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditName:$scope.creditName,creditUser:$scope.creditUser}).success(function (response){
+          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })
@@ -252,7 +254,7 @@ angular.module('myAppApp')
    var self = this;
 
     
-    $scope.selectedItem  = null;
+    
     self.searchText    = null;
     self.querySearch   = querySearch;
 
@@ -267,7 +269,6 @@ angular.module('myAppApp')
     function querySearch (query) {
       return $http.get('/api/creditDets/search/'+query).then(function(response){
               console.log(response);
-              $scope.credit=self.selectedItem;
               return response.data;
             });
     }

@@ -136,7 +136,8 @@
 
 
 md-autocomplete[md-floating-label] {
-  padding-bottom: 26px;
+  padding-bottom: 0px;
+  text-align: left;
 }
 
 .md-padding{
