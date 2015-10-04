@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Image = require('./image.model');
 var Post = require('../post/post.model');
 var User = require('../user/user.model');
-
+var Club = require('../club/club.model');
 
 // Get list of images
 exports.index = function(req, res) {
@@ -172,7 +172,7 @@ exports.clubPost = function(req, res) {
             imageId: newImage._id,
             type:type,
             createdOn:Date.now(),
-        
+            uploader:{user:req.user._id},
             view_count:0,
             ratings:[],
             rating:0,
@@ -182,9 +182,12 @@ exports.clubPost = function(req, res) {
           });
 
           if(eventId)
-              newPost.uploader=({user:req.user._id},{club:req.params.id},{event:eventId});
+          {
+              newPost.uploaderClub=req.params.id;
+              newPost.eventId=eventId;
+          }
           else
-              newPost.uploader=({user:req.user._id},{club:req.params.id});
+              newPost.uploaderClub=req.params.id;
             
           for(i=0;i<b.length;i++)
           {

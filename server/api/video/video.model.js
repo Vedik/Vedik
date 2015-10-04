@@ -7,7 +7,7 @@ var VideoSchema = new Schema({
   vidname:String,
   description: String,
   
-  vidurl:{type:String, required:true, unique:true},
+  vidurl:String,
   posterurl:String,
   
   respect:Number,

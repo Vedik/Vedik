@@ -133,3 +133,12 @@
   background-color: white;
 
 }
+
+
+md-autocomplete[md-floating-label] {
+  padding-bottom: 26px;
+}
+
+.md-padding{
+  padding: 0px;
+}

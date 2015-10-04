@@ -35,12 +35,12 @@ angular.module('myAppApp')
             var y=0;
             for(var i=0;i<$scope.posts.length;i++)
             {
-              if($scope.posts[i].uploader.user && $scope.posts[i].uploader.club)
+              if($scope.posts[i].type>14 && $scope.posts[i].uploader)
               {
                 var found=false;
                 for(var j=0;j<$scope.clubId.length;j++)
                 {
-                  if(($scope.clubId[j]==$scope.posts[i].uploader.club._id) && $scope.posts[i].type>14)
+                  if(($scope.clubId[j]==$scope.posts[i].uploaderClub._id) && $scope.posts[i].type>14)
                   {
                     found=true;
                     break;
@@ -49,13 +49,13 @@ angular.module('myAppApp')
                 }
                 if(found==false)
                 {
-                  $scope.clubId[y]=$scope.posts[i].uploader.club._id;
+                  $scope.clubId[y]=$scope.posts[i].uploaderClub._id;
                   
-                  $scope.clubName[y]=$scope.posts[i].uploader.club.name;
+                  $scope.clubName[y]=$scope.posts[i].uploaderClub.name;
                   y++;
                 }
               }
-              else if($scope.posts[i].uploader.user)
+              else if($scope.posts[i].type<14 && $scope.posts[i].uploader)
               {
                 var found=false;
                 for(var j=0;j<$scope.dummyId.length;j++)

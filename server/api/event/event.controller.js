@@ -75,8 +75,9 @@ exports.create = function(req, res) {
           var newPost = new Post({
             eventId: newEvent._id,
             tags:req.body.tags,
-            type:7,                         //7=club event
-            uploader:({user:req.user._id},{club:req.params.id}),
+            type:30,                         //7=club event
+            uploader:{user:req.user._id},
+            uploaderClub:req.params.id,
             view_count:0,
             like:[],
             createdOn:Date.now()

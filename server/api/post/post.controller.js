@@ -9,7 +9,7 @@ exports.index = function(req, res) {
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId uploader.user uploader.club eventId comments.comment')
+  .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -30,7 +30,7 @@ exports.unseenNotifs = function(req, res) {
                       },function (err, posts) {
               if(err) {console.log('dddddddd'); return handleError(res, err); }
               })
-            .populate('articleId videoId imageId uploader.user uploader.club eventId comments.comment')
+            .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment')
             
             .exec(function (err, posts){
                 if (err) return handleError(err);
@@ -137,19 +137,19 @@ exports.showForUser = function(req, res) {
 };
 
 exports.showForClub = function(req, res) {
-  console.log(req.params.id);
+  console.log(req.params.id+'jbbhgf');
    var club_id = req.params.id;
   var query = {};
-  query['uploader.' + 'club'] = club_id;
-  Post.find(query,function (err, posts) {
+  
+  Post.find({uploaderClub:club_id},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploader.club eventId')
+  .populate('articleId videoId imageId like uploaderClub eventId')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
      
-      console.log('er2');
+      console.log(posts);
       
       return res.json(posts);
   })
@@ -159,11 +159,11 @@ exports.showForEvent = function(req, res) {
   console.log(' req.params.id');
    var event_id = req.params.id;
   var query = {};
-  query['uploader.' + 'event'] = event_id;
+  query['eventId'] = event_id;
   Post.find(query,function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploader.club eventId')
+  .populate('articleId videoId imageId like uploaderClub eventId')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -187,7 +187,7 @@ exports.showForStage = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploader.club uploader.user event')
+  .populate('articleId videoId imageId like uploaderClub uploader.user event')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -212,7 +212,7 @@ exports.showStageForUser = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploader.club uploader.user event')
+  .populate('articleId videoId imageId like uploaderClub uploader.user event')
   
   .exec(function (err, posts){
       if (err) return handleError(err);

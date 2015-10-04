@@ -6,6 +6,8 @@ var User = require('../user/user.model');
 var Post = require('../post/post.model');
 var Like = require('../like/like.model');
 var Club = require('../club/club.model');
+var Credit = require('../credit/credit.model');
+
 // Get list of videos
 exports.index = function(req, res) {
   Video.find(function (err, videos) {
@@ -30,6 +32,7 @@ exports.show = function(req, res) {
 };
 
 // Creates a new video in the DB.
+
 exports.create = function(req, res) {
   console.log(req.body.genres);
   console.log(req.body.creditName,req.body.creditUser);
@@ -68,10 +71,10 @@ console.log(newVideo);
           
           console.log('12');
           var newPost = new Post({
-            videoId: newvideo._id,
+            videoId: newVideo._id,
             type:type,
             tags:req.body.genres,
-            uploadedUser:req.user._id,   //club:req.params.id},
+            uploader:{user:req.user._id},   //club:req.params.id},
             ratings:[],
             rating:0,
             view_count:0,
@@ -89,10 +92,27 @@ console.log(newVideo);
             else 
               {
 
+                for(var i=0;i<req.body.creditName.length;i++)
+                {
+                  var newCredit =  new Credit({
+                    postId:newPost._id,
+                    credit:req.body.creditName[i]._id,
+                  });
+
+                  for(var j=0;j<req.body.creditUser[i].length;j++){
+                    newCredit.creditedUser.push({user:req.body.creditUser[i]._id});
+                  }
+                  newCredit.save(function(err){
+                  if(err) return handleError(res,err);
+                  console.log('Credit added');
+                })
+
+                }
+
+
                 console.log('post created');
              
 
-                
                 User.findById(req.user._id,function (err,user){
                     if(err) { return handleError(res, err); }
                 })
@@ -121,26 +141,42 @@ console.log(newVideo);
                         });
                       }
                   }
+
+
                  
                   
                 });
-            }
+                
+                
+               
+              }
           });
 
           
-          return res.json(200,newvideo);
+          return res.json(200,newVideo);
         }
     
     });
 };
 
 exports.clubPost = function(req, res) {
-  console.log(req.body.genres);
+  console.log(req.params.id);
   console.log(req.body.creditName,req.body.creditUser);
   var vidUrl=req.body.vidurl;
   var a = vidUrl.split('watch?v=');
   
-  var type=23;
+  var type;
+  var eventId;
+  if(req.body.type)
+  {
+      type=req.body.type;
+      eventId=req.body.eventId;
+  }
+  else
+  {
+      type=23;
+      
+  }
  
 
   var c=req.body.vedik;
@@ -171,8 +207,8 @@ console.log(newvideo);
             videoId: newvideo._id,
             type:type,
             tags:req.body.genres,
-            uploadedUser:req.user._id,   //club:req.params.id},
-            uploaderClub:req.body.id,
+            uploader:{user:req.user._id}, //club:req.params.id},
+           
             ratings:[],
             rating:0,
             view_count:0,
@@ -180,6 +216,14 @@ console.log(newvideo);
             createdOn:Date.now()
           });
           
+          if(eventId)
+          {
+              newPost.uploaderClub=req.params.id;
+              newPost.eventId=eventId;
+          }
+          else
+              newPost.uploaderClub=req.params.id;
+
           for(var i=0;i<b.length;i++)
           {
             newPost.vedik.push({vedik:b[i]});
@@ -191,26 +235,24 @@ console.log(newvideo);
               {
 
                 console.log('post created');
-             
 
-                
-                User.findById(req.user._id,function (err,user){
+                Club.findById(req.params.id,function (err,club){
                     if(err) { return handleError(res, err); }
                 })
                 .populate('subscribed_users.user')
-                .exec(function(err,user){
+                .exec(function(err,club){
                     if (err) return handleError(err);
-                  for(var i=0;i<user.subscribed_users.length;i++)
+                  for(var i=0;i<club.subscribed_users.length;i++)
                   {
-                      console.log(user.subscribed_users[i].user._id);
-                      if(user.subscribed_users[i].user._id.equals(req.user._id))
+                      console.log(club.subscribed_users[i].user._id);
+                      if(club.subscribed_users[i].user._id.equals(req.user._id))
                       {
                         console.log('user');
                       }
                       else
                       {
-                        user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
-                        user.subscribed_users[i].user.save(function (error){
+                        club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        club.subscribed_users[i].user.save(function (error){
                           if(error){
                             return handleError(res,err);
                           }
@@ -225,7 +267,8 @@ console.log(newvideo);
                  
                   
                 });
-            }
+                
+              }
           });
 
           
