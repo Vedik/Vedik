@@ -20,7 +20,7 @@ router.post('/', controller.create);
 router.delete('/:postId/unlike',auth.isAuthenticated(),controller.unlike);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+router.delete('/:postId', controller.destroy);
 router.post('/rating/:postId',auth.isAuthenticated(),controller.rate);
 
 module.exports = router;

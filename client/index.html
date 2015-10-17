@@ -93,6 +93,24 @@
       ga('send', 'pageview');
     </script>
 
+
+    <script >
+                              $(document)
+                        .one('focus.textarea', '.autoExpand', function(){
+                            var savedValue = this.value;
+                            this.value = '';
+                            this.baseScrollHeight = this.scrollHeight;
+                            this.value = savedValue;
+                        })
+                        .on('input.textarea', '.autoExpand', function(){
+                            var minRows = this.getAttribute('data-min-rows')|0,
+                                rows;
+                            this.rows = minRows;
+                            rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 32);
+                            this.rows = minRows + rows;
+                        });
+                            </script>
+
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>

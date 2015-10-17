@@ -19,6 +19,15 @@ angular.module('myAppApp')
          $scope.GalleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
     }
 
+    if($scope.user.proPic)
+        {
+          $scope.ProfilePic= $scope.user.proPic;
+        }
+    else
+    {  
+         $scope.ProfilePic = "http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
+    }
+
     if($scope.user.about)
         {
           $scope.userAbout= $scope.user.about;
@@ -219,12 +228,21 @@ angular.module('myAppApp')
         
         $scope.user=response;
         $scope.GalleryPic=$scope.user.galleryPic;
-        $scope.edit=false;         
+        $scope.edit=false;
+        $scope.ProfilePic=$scope.user.proPic;         
         $scope.userAbout=$scope.user.about;
+        $scope.modal="modal";
          console.log($scope.userAbout);
-        $route.reload();
+        if(type==1)
+        {
+          $state.reload();
+        }
       })
 
+    }
+
+    $scope.displayProPic = function(url){
+        $scope.ProfilePic=url;
     }
 
     $scope.editAbout = function (){
@@ -252,7 +270,44 @@ angular.module('myAppApp')
 
    
 
-   var self = this;
+   
+    
+
+   
+
+  })
+
+
+
+.directive('elastic', [
+    '$timeout',
+    function($timeout) {
+        return {
+            restrict: 'A',
+            link: function($scope, element) {
+
+                $scope.initialHeight = $scope.initialHeight || element[0].style.height;
+                var resize = function() {
+                    element[0].style.height = $scope.initialHeight + 20;
+                    element[0].style.height = "" + element[0].scrollHeight + "px";
+                };
+                element.on("input change", resize);
+                $timeout(resize, 0);
+            }
+        };
+    }
+]);
+
+
+(function () {
+  'use strict';
+  angular
+      .module('myAppApp')
+      .controller('AutoComplete', AutoComplete);
+  function AutoComplete ($timeout, $q) {
+
+
+      var self = this;
 
     
     
@@ -282,35 +337,31 @@ angular.module('myAppApp')
       console.log($scope.creditType);
       $scope.test();
     }
-    $scope.test = function(){
-      console.log($scope.creditType,x);
-   }
 
-    
+  
 
-   
+  }
+})();  
 
+angular
+  .module('myAppApp')
+  .controller('InputCtrl', function($scope) {
+    $scope.user = {
+      title: 'Developer',
+      email: 'ipsum@lorem.com',
+      firstName: '',
+      lastName: '' ,
+      company: 'Google' ,
+      address: '1600 Amphitheatre Pkwy' ,
+      city: 'Mountain View' ,
+      state: 'CA' ,
+      biography: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!',
+      postalCode : '94043'
+    };
   })
-
-
-
-.directive('elastic', [
-    '$timeout',
-    function($timeout) {
-        return {
-            restrict: 'A',
-            link: function($scope, element) {
-
-                $scope.initialHeight = $scope.initialHeight || element[0].style.height;
-                var resize = function() {
-                    element[0].style.height = $scope.initialHeight + 20;
-                    element[0].style.height = "" + element[0].scrollHeight + "px";
-                };
-                element.on("input change", resize);
-                $timeout(resize, 0);
-            }
-        };
-    }
-]);
-
-
+  .config( function($mdThemingProvider){
+    // Configure a dark theme with primary foreground yellow
+    $mdThemingProvider.theme('docs-dark', 'default')
+        .primaryPalette('yellow')
+        .dark();
+  });

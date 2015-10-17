@@ -143,3 +143,23 @@ md-autocomplete[md-floating-label] {
 .md-padding{
   padding: 0px;
 }
+
+#editModal{
+  width: 50%;
+  position: absolute;
+  top: 150px;
+  left: 25%;
+}
+
+
+
+
+.inputdemoBasicUsage md-datepicker {
+  margin-top: 18px; }
+.inputdemoBasicUsage .md-datepicker-button {
+  height: 36px;
+  width: 36px;
+  line-height: 36px; }
+.inputdemoBasicUsage .md-datepicker-input-container {
+  margin-left: 2px; }
+

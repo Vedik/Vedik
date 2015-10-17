@@ -118,9 +118,13 @@ exports.ratingInfo = function(req, res) {
 
 // Get a single post
 exports.showForUser = function(req, res) {
-  console.log('req.params.');
+  console.log('23');
+  console.log(req.params.id);
+  if(1)
+  {
   var user_id = req.params.id;
   var query = {};
+
   query['uploader.' + 'user'] = user_id;
   Post.find(query,function (err, posts) {
     if(err) { return handleError(res, err); }
@@ -134,6 +138,7 @@ exports.showForUser = function(req, res) {
       
       return res.json(posts);
   })
+}
 };
 
 exports.showForClub = function(req, res) {
@@ -246,7 +251,8 @@ exports.update = function(req, res) {
 
 // Deletes a post from the DB.
 exports.destroy = function(req, res) {
-  Post.findById(req.params.id, function (err, post) {
+  console.log(req.params.postId);
+  Post.findById(req.params.postId, function (err, post) {
     if(err) { return handleError(res, err); }
     if(!post) { return res.send(404); }
     post.remove(function(err) {

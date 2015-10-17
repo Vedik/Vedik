@@ -71,10 +71,14 @@ exports.editProfile = function (req, res) {
     {
       user.galleryPic=req.body.editProfile;
     }
+    else if(type==4)
+    {
+      user.proPic=req.body.editProfile;
+    }
     
     user.save(function (err) {
       if (err) { return handleError(res, err); }
-      
+        console.log(user.proPic);
        res.json(200, user);
 
     });

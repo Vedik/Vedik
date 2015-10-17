@@ -22,8 +22,37 @@
       </div>
       
     </div>
-  </div>
 <!--***************************Edit Gallerypic Closes ********************************-->
+
+
+ <div class="modal img_modal fade" id="dp_modal" role="dialog">
+    <div class="modal-dialog img_modal-dialog" id="modal-center">
+    
+      <!-- Modal content-->
+     	
+        
+        <div class="modal-body img_modal-body centric glassy" id="editModal">
+
+        	<p>
+        		New Profile Pic
+        		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+        	</p>
+        	<div class="col-md-3">
+        		<img src="{{ProfilePic}}" width="100%" height="100%">
+        	</div>
+        	<div class="col-md-9" style="padding:10px 5px">
+	        	<form name="form" ng-submit="editProfile(form.proPicUrl,4)" ng-model="form">
+	        		<div class="form-group">
+		          		<input type="text" ng-model="form.proPicUrl" placeholder="New Url of Profile Picture" class="form-control" ng-change="displayProPic(form.proPicUrl">
+		          	</div>
+		         <button type="submit" class="b2w">Submit</button>
+		         </form>
+	        </div>
+        </div>
+        
+      </div>
+      
+    </div>
 
 
 <!--********************* booking date****************************************-->
@@ -191,17 +220,20 @@
 															
 													<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
 												</div>
-												<div class="form-group"> <!-- need to put select with multi option selection -->
-													<label>Genre/Category</label>
-													<select ng-model="form.genres" class="form-control upld_form" placeholder="Genres">
-														<option value="horror">horror</option>							  <option value="comedy">comedy</option>
-													</select>   <!-- Make it a maximum of three using array size in controller -->
-												</div>
 												<div class="form-group"> <!-- Put text area -->
+													<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+			                						</textarea>
 															
-													<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+													
 												</div>
-												<div class="form-group">
+												<div >
+													<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+												    </tags-input>
+												</div>
+												
+												<div>
 													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
 												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 
@@ -210,7 +242,7 @@
 												<a href="#creditsVideo" data-toggle="tab" class="b2w">Next</a>
 						
 											</div>
-											<div id="creditsVideo" class="tab-pane fade" ng-controller="ProfileCtrl as ctrl">
+											<div id="creditsVideo" class="tab-pane fade">
 									    
 											    <table>
 											    	<tr>
@@ -219,7 +251,7 @@
 												  	</tr>											    				
 											    	<tr ng-repeat="credit in creditType">
 											    		<td style="width:50%;verticle-align:top">
-		 									    			<div  layout="column" ng-cloak>
+		 									    			<div  layout="column" ng-cloak  ng-controller="AutoComplete as ctrl">
 				  <md-content class="md-padding">
 				    <form ng-submit="$event.preventDefault()" name="searchForm">
 				     
@@ -230,12 +262,12 @@
 				            md-input-minlength="2"
 				            md-input-maxlength="18"
 				            md-no-cache="ctrl.noCache"
-				            md-selected-item="ctrl.creditTypee"
+				            md-selected-item="ctrl.credit[$index]"
 				            md-search-text="ctrl.searchText"
 				            md-items="item in ctrl.querySearch(ctrl.searchText)"
 				            md-item-text="item.creditDetail"
 				            md-floating-label="Credit"
-				           	md-selected-item-change="saveCredit(ctrl.creditTypee,$index)"
+				           	md-selected-item-change="saveCredit(ctrl.credit[$index],$index)"
 				           >
 				          <md-item-template>
 				            <span md-highlight-text="ctrl.searchText">{{item.creditDetail}}</span>
@@ -250,7 +282,7 @@
 				       </form>
 				  </md-content>
 				  <p ng-click="test()">dsaf</p>
-				  {{creditType[$index]}}
+				  {{ctrl.credit[1]}}
 				</div>
 														    			
 														    		</td>

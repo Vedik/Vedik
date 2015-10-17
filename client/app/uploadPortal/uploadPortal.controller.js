@@ -13,11 +13,11 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
 
-     $http.get('/api/bookings/').success(function (response){
+     /*$http.get('/api/bookings/').success(function (response){
         console.log(response);
         $scope.bookings = response;
         console.log($scope.bookings);
-    });
+    });*/
     
     /* $scope.like = function(postId){
         $http.get('/api/posts/'+postId+'/like').success(function (response){
@@ -66,12 +66,14 @@ angular.module('myAppApp')
                                     '<span>'+
                                         '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
                                     '</span>'+
-                                    '<span id="img_name">{{content.imageId.imgName}}</span>'+
+                                    '<span id="img_name">'+
+                                        '{{content.imageId.imgName}}'+                                    
+                                        '<span style="font-size:12px"> by {{content.uploader.user.name}}</span>'+
+                                    '</span>'+
                                     '<span class="thumb_trnsprnt"></span>'+
                                     '<span id="user_art_info">'+
                                         '<div id="a">'+
-                                            '<div id="vid_data">{{content.imageId.description}}</div>'+
-                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute">{{content.imageId.description}}</span>'+
                                         '</div>'+
                                     '</span>'+
                                 '</div>'+
@@ -81,8 +83,15 @@ angular.module('myAppApp')
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                             '{{postTime}}'+
                                     '</span>'+
-                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
-                                '</span>'+
+                                    '<div class="dropdown">'+
+                                        '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                        '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                        '</ul>'+
+                                    '</div>'+
+                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                    '</span>'+
                             '</div>'+                            
                         '</div>';
     var videoTemplate = '<div  ng-click=blur()>' +
@@ -93,7 +102,8 @@ angular.module('myAppApp')
                                         '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
                                     '</span>'+
                                     '<span id="img_name">'+
-                                        '{{content.videoId.vidname}}'+
+                                        '{{content.videoId.vidname}}'+                                    
+                                        '<span style="font-size:12px"> by {{content.uploader.user.name}}</span>'+
                                     '</span>'+
                                     '<span class="play">'+
                                         '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
@@ -101,8 +111,7 @@ angular.module('myAppApp')
                                     '<span class="thumb_trnsprnt"></span>'+
                                     '<span id="user_art_info">'+
                                         '<div id="a">'+
-                                            '<div id="vid_data">{{content.videoId.description}}</div>'+
-                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute">{{content.videoId.description}}</span>'+
                                         '</div>'+
                                     '</span>'+
                                 '</div>'+
@@ -112,7 +121,13 @@ angular.module('myAppApp')
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                             '{{postTime}}'+
                                     '</span>'+
-                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                    '<div class="dropdown">'+
+                                        '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                        '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" >Delete</a></li>'+
+                                        '</ul>'+
+                                    '</div>'+
                                 '</span>'+
                             '</div>'+
                         '</div>';
@@ -133,7 +148,13 @@ angular.module('myAppApp')
                                                 '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                             '</span>'+
-                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></spa>'+
+                                            '<div class="dropdown">'+
+                                                '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                                '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                '</ul>'+
+                                            '</div>'+
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
@@ -275,7 +296,11 @@ angular.module('myAppApp')
             $scope.both = UploadPortalService.setProperty()
         }
 
-        
+        scope.deletePost = function(postId){
+            $http.delete('/api/posts/'+postId).success(function(response){
+                console.log('Deleted');
+            })
+        }
         
 
         scope.unlike = function(postId){
