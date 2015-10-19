@@ -242,7 +242,7 @@
 												<a href="#creditsVideo" data-toggle="tab" class="b2w">Next</a>
 						
 											</div>
-											<div id="creditsVideo" class="tab-pane fade">
+											<div id="creditsVideo" class="tab-pane fade" style="background:white">
 									    
 											    <table>
 											    	<tr>
@@ -252,6 +252,7 @@
 											    	<tr ng-repeat="credit in creditType">
 											    		<td style="width:50%;verticle-align:top">
 		 									    			<div  layout="column" ng-cloak  ng-controller="AutoComplete as ctrl">
+
 				  <md-content class="md-padding">
 				    <form ng-submit="$event.preventDefault()" name="searchForm">
 				     
@@ -264,10 +265,11 @@
 				            md-no-cache="ctrl.noCache"
 				            md-selected-item="ctrl.credit[$index]"
 				            md-search-text="ctrl.searchText"
-				            md-items="item in ctrl.querySearch(ctrl.searchText)"
+				            md-items="item in ctrl.querySearch(ctrl.searchText,$index)"
 				            md-item-text="item.creditDetail"
 				            md-floating-label="Credit"
-				           	md-selected-item-change="saveCredit(ctrl.credit[$index],$index)"
+				           
+				           	md-menu-class="autoCompleteDropDown"
 				           >
 				          <md-item-template>
 				            <span md-highlight-text="ctrl.searchText">{{item.creditDetail}}</span>
@@ -277,16 +279,16 @@
 				            <div ng-message="minlength">Your entry is not long enough.</div>
 				            <div ng-message="maxlength">Your entry is too long.</div>
 				          </div>-->
+
 				        </md-autocomplete>
 				      </div>
 				       </form>
+
 				  </md-content>
-				  <p ng-click="test()">dsaf</p>
-				  {{ctrl.credit[1]}}
 				</div>
 														    			
 														    		</td>
-														    		<td style="width:50%;verticle-align:top">
+														    		<td style="width:50%;vertical-align: bottom;">
 														    			<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" >
 				      													<auto-complete 
 				      													source="getSuggestionsForNames($query)"
@@ -294,15 +296,21 @@
 				      													</auto-complete>
 				    												</tags-input>
 														    		</td>
-														    	</tr>	
+														    	</tr>
+														    	<tr>
+														    		<td style="padding:10px 0px">
+														    			<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+														    		</td>
+														    		<td style="padding:10px 0px"><a data-toggle="tab" href="#video_det" class="b2w">Back</a>
+										      						</td>
+										      					</tr>
+										      				
 													    							    		
 													    </table>
 
 												   
 										      		<div>
-										      			<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
-										      			<a data-toggle="tab" href="#video_det" class="b2w">Back</a>
-										      			<br/>
+										      			
 										      			<button type="submit" class="b2w">Submit</button>
 										      		</div>
 

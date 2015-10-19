@@ -1,3 +1,4 @@
+var creditaaa=[];
 'use strict';
 
 angular.module('myAppApp')
@@ -304,7 +305,7 @@ angular.module('myAppApp')
   angular
       .module('myAppApp')
       .controller('AutoComplete', AutoComplete);
-  function AutoComplete ($timeout, $q) {
+  function AutoComplete ($timeout, $q,$scope,$http) {
 
 
       var self = this;
@@ -313,6 +314,7 @@ angular.module('myAppApp')
     
     self.searchText    = null;
     self.querySearch   = querySearch;
+    self.credit=[];
 
 
     // ******************************
@@ -323,10 +325,10 @@ angular.module('myAppApp')
      * Search for states... use $timeout to simulate
      * remote dataservice call.
      */
-    function querySearch (query) {
+    function querySearch (query,index) {
       return $http.get('/api/creditDets/search/'+query).then(function(response){
               console.log(response);
-
+              creditaaa[index]=response.data;
               return response.data;
             });
     }
@@ -338,10 +340,16 @@ angular.module('myAppApp')
       $scope.test();
     }
 
+    $scope.test = function(){
+      console.log(creditaaa);
+    }
+
   
 
   }
-})();  
+})(); 
+
+
 
 angular
   .module('myAppApp')

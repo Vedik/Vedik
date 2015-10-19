@@ -116,8 +116,7 @@
 
 .bootstrap .autocomplete .suggestion-item  {
 	font-size: 12px;
-
-	font-size: 
+ 
   font-weight: bold;
 
   background-color: none;
@@ -142,6 +141,10 @@ md-autocomplete[md-floating-label] {
 
 .md-padding{
   padding: 0px;
+
+}
+.autoCompleteDropDown  {
+  z-index: 100000 !important;
 }
 
 #editModal{
