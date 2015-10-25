@@ -141,9 +141,9 @@
                 position: absolute;
                 top: 10%;
                 padding: 0px;
-                left: 40%;
-                max-width: 40%;
-                min-width: 40%;
+                left: 30%;
+                max-width: 60%;
+                min-width: 60%;
                 max-height: 60%;
                 background-color: rgba(255,255,255,0.8);
                 overflow-y:scroll;
@@ -166,6 +166,25 @@
                 opacity: 1;
                 background-color: rgba(255,255,255,0.05);
 
+            }
+            #upload_form0 li{
+                width: 33%;
+            }
+            #upload_wrapper_left{
+                width: 60%;
+                float: left;
+                padding: 5px;
+            }
+            #upload_wrapper_right{
+                width: 40%;
+                float: left;
+                padding: 5px;
+                position: relative;
+
+            }
+            #upload_wrapper_right li {
+                width: 33%;
+                float: left;
             }
             .active {
                 border:0px;

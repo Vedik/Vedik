@@ -269,7 +269,16 @@ angular.module('myAppApp')
    	
    };
 
-   
+    $scope.searchText    = null;
+    $scope.querySearch   = querySearch;
+
+   function querySearch (query,index) {
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+              
+              return response.data;
+            });
+    }
 
    
     
@@ -312,8 +321,7 @@ angular.module('myAppApp')
 
     
     
-    self.searchText    = null;
-    self.querySearch   = querySearch;
+   
     self.credit=[];
 
 

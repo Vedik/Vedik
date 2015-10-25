@@ -74,6 +74,7 @@
 		        		<ul>
 		        			<a href="#about_user" data-toggle="tab"><li>About</li></a>
 		        			<a href="#HOF" data-toggle="tab"><li>Hall of Fame</li></a>
+		        			<a href="#upload_form0" data-toggle="tab"><li>Upload</li></a>
 		        		</ul>
 		        	</div>
 		        	<div id="HOF_display" class="tab-content">
@@ -97,96 +98,218 @@
 			                		</form>
 			                	</div>
 			                </span>
-										        		</span>
+						</span>
 		        		<span id="HOF" class="tab-pane fade">
 		        			<h4>Hall of Fame<hr></hr></h4>
 		        			Actor
 		        		</span>
-		        		<span id="article_up" class="tab-pane fade">
-		        			<h3>Add your Article here</h3>					
-								<div class="form-group">
+		
+		        		<div id="upload_form0" class="tab-pane fade">
+		        			<div class="tab-content">
+		        			<div class="tab-pane fade in active" id="upload_form2">
+		        			<div id="upload_wrapper_left">
+		        				<div class="form-group">
 									<input type="text" class="form-control upld_form" ng-model="form.articleName" placeholder="Article Name">
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+									<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+						    		</textarea>													
+															
 								</div>
-								<div class="form-group">	
-									<textarea  class="form-control upld_form" ng-model="form.content" placeholder="Type your Article" ></textarea>
-								</div>
-								<div class="form-group">	
-									<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
-								</div>
-								<div class="form-group">
+								<div>
+									<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+								        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+								    </tags-input>
+								</div>												
+								<div>
 									<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-	 								    <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+								        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 								    </tags-input>
 								</div>
-								<a href="#creditsArticle" data-toggle="tab" class="b2w">Next</a>
-		        		</span>
-		        		<span id="image_up" class="tab-pane fade">
-		        			<h3>Add your Image here</h3>
-											
-							<div class="form-group">
-								<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-							</div>
-							<div class="form-group">	
-								<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-							</div>
-							<div class="form-group">	
-								<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
-							</div>
-							<div class="form-group">
-								<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-							    </tags-input>
-							</div>
-							<a href="#creditsImage" data-toggle="tab" class="b2w">Next</a>
-		        		</span>
-		        		<span id="video_up" class="tab-pane fade">
-								<h3>Add your Video here</h3>
-													
-									<div class="form-group">
-													
-										<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
+								<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+		        			</div>
+		        			<ul class="nav nav-tabs" style="width:40%;position:absolute;bottom:5px;right:0px">
+					        		<li  class="active"><a href="#article_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Article</a></li>	        			
+					        		<li ><a href="#image_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
+					        		<li><a href="#video_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
+					        	</ul>
+		        			<div id="upload_wrapper_right">
+		        				
+		        				<div class="tab-content">
+		        					<div id="article_up" class="tab-pane fade in active">
+		        						<div class="form-group">
+											<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
+								    		</textarea>						
+										</div>
 									</div>
-									<div class="form-group">
-														
-										<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+									<div id="image_up" class="tab-pane fade">
+		        						<div class="form-group">	
+											<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+										</div>
+										<img src="{{form.picUrl}}" width="100%" height="auto">
 									</div>
-									<div class="form-group">
-															
-										<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+									<div id="video_up" class="tab-pane fade">
+		        						<div class="form-group">
+																	
+											<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+										</div>
+										<div class="form-group">							
+											<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+										</div>
+										<img src="{{form.picUrl}}" width="100%" height="auto">
 									</div>
-									<div class="form-group"> <!-- Put text area -->
-										<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
-			                			</textarea>													
-													
-									</div>
-									<div>
-										<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-									        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+								</div>
+								
+									
+				        		
+		        			</div>
+		        			</div>
+		        			<div id="credits2" class="tab-pane fade" style="background:white">
+										    
+								<table>
+								   	<tr>
+								   		<th>Credit</th>
+								   		<th>User</th>
+								  	</tr>											    				
+								   	<tr ng-repeat="credit in creditType track by $index">
+								   		<td style="width:50%;verticle-align:top">
+			 					   			<div  layout="column" ng-cloak>
 
-									    </tags-input>
-									</div>
-												
-									<div>
-										<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-									        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-									    </tags-input>
-									</div>
-									<a href="#creditsVideo" data-toggle="tab" class="b2w">Next</a>
-		        		</span>
+											  <md-content class="md-padding">
+											    <form ng-submit="$event.preventDefault()" name="searchForm">
+											     
+											      <div layout-gt-sm="row">
+											        
+											        <md-autocomplete flex required
+											            md-input-name="autocompleteField"
+											            md-input-minlength="2"
+											            md-input-maxlength="18"
+											            md-no-cache="false"
+											            md-selected-item="creditType[$index]"
+											            md-search-text="searchText"
+											            md-items="item in querySearch(searchText,$index)"
+											            md-item-text="item.creditDetail"
+											            md-floating-label="Credit"
+											           
+											           	md-menu-class="autoCompleteDropDown"
+											           >
+											          <md-item-template>
+											            <span md-highlight-text="searchText">{{item.creditDetail}}</span>
+											          </md-item-template>
+											          <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+											            <div ng-message="required">You <b>must</b> have a favorite state.</div>
+											            <div ng-message="minlength">Your entry is not long enough.</div>
+											            <div ng-message="maxlength">Your entry is too long.</div>
+											          </div>-->
+
+											        </md-autocomplete>
+											      </div>
+											       </form>
+
+											  </md-content>
+											</div>
+															    			
+										</td>
+										<td style="width:50%;vertical-align: bottom;">
+											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" >
+												<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
+					      						</auto-complete>
+					    					</tags-input>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding:10px 0px">
+											<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+										</td>
+										<td style="padding:10px 0px"><a data-toggle="tab" href="#upload_form2" class="b2w">Back</a><span ng-click="test()">sdafd</span>
+										</td>
+									</tr>      							    			
+								</table>	
+								<div>
+											      			
+									<button type="submit" class="b2w">Submit</button>
+					      		</div>
+
+											      		
+					    	</div>
+					    	</div>
+		        		</div>
+
+							<!--<div class="tab-pane fade in active" id="upload_form2">
+				        		<div class="tab-content">
+					        		<span id="articlee_up" class="tab-pane fade">
+					        			<h3>Add your Article here</h3>					
+											
+											<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+					        		</span>
+					        		<span id="imagee_up" class="tab-pane fade">
+					        			<h3>Add your Image here</h3>
+														
+										<div class="form-group">
+											<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+										</div>
+										<div class="form-group">	
+											<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+										</div>
+										<div class="form-group">	
+											<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
+										</div>
+										<div class="form-group">
+											<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+										        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+										    </tags-input>
+										</div>
+										<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+					        		</span>
+					        		<span id="videoe_up" class="tab-pane fade">
+											<h3>Add your Video here</h3>
+																
+												<div class="form-group">
+																
+													<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
+												</div>
+												<div class="form-group">
+																	
+													<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+												</div>
+												<div class="form-group">
+																		
+													<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+												</div>
+												<div class="form-group"> <!-- Put text area --
+													<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+						                			</textarea>													
+																
+												</div>
+												<div>
+													<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+												    </tags-input>
+												</div>
+															
+												<div>
+													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+												    </tags-input>
+												</div>
+												<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+					        		</span>
+					        	</div>
+				        	</div>-->
+				        	
+			        	</div>
 		        	</div>
-		        	<div id="upload_btn" onclick="document.getElementById('HOF_display').style.display = 'block'">
+		        	<!--<div id="upload_btn" onclick="document.getElementById('HOF_display').style.display = 'block'">
 		        		<ul>
 		        			<a href="#article_up" data-toggle="tab"><li><span class="glyphicon glyphicon-open"></span> Article</li></a>		        			
 		        			<a href="#image_up" data-toggle="tab"><li><span class="glyphicon glyphicon-open"></span> Image</li></a>
 		        			<a href="#video_up" data-toggle="tab"><li><span class="glyphicon glyphicon-open"></span> Video</li></a>
 		        		</ul>
-		        	</div>
+		        	</div>-->
 
 		        	
 		        	
