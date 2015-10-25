@@ -92,7 +92,9 @@ angular.module('myAppApp')
   });
 
 
-
+     $http.get('/api/posts/hof/'+id).success(function (response){
+        $scope.hof=response;
+     });
 
     
     $scope.follow = function(){
@@ -348,10 +350,7 @@ angular.module('myAppApp')
       $scope.test();
     }
 
-    $scope.test = function(){
-      console.log(creditaaa);
-    }
-
+   
   
 
   }

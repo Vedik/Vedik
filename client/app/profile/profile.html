@@ -101,7 +101,10 @@
 						</span>
 		        		<span id="HOF" class="tab-pane fade">
 		        			<h4>Hall of Fame<hr></hr></h4>
-		        			Actor
+
+		        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" ng-style="margin:5px;width:50%;float:left" class="col-md-6">
+													
+							</content-item>
 		        		</span>
 		
 		        		<div id="upload_form0" class="tab-pane fade">

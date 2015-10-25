@@ -15,8 +15,11 @@ router.get('/:id/addSubscriber',auth.isAuthenticated(),controller.addSubscriber)
 router.delete('/:id/deleteSubscriber',auth.isAuthenticated(),controller.deleteSubscriber);
 //router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
+router.post('/addHOF/:postId',auth.isAuthenticated(), controller.addHOF);
+
 //router.post('/galleryPic/', auth.isAuthenticated(), controller.galPicChange);
 router.post('/editProfile/:type', auth.isAuthenticated(), controller.editProfile);
 router.get('/search/:searchQuery', controller.search);
 router.get('/:id',auth.isAuthenticated(), controller.showUser);
+
 module.exports = router;

@@ -14,6 +14,7 @@ router.get('/event/:id', auth.isAuthenticated(), controller.showForEvent);
 router.get('/stage/:id',auth.isAuthenticated(), controller.showForStage);
 router.get('/stage/user/:id',auth.isAuthenticated(), controller.showStageForUser);
 router.get('/unseenNotifs',auth.isAuthenticated(), controller.unseenNotifs);
+router.get('/hof/:id',auth.isAuthenticated(), controller.hof);
 router.get('/:postId/like',auth.isAuthenticated(),controller.like);
 
 router.post('/', controller.create);

@@ -43,6 +43,27 @@ exports.unseenNotifs = function(req, res) {
   });
 };
 
+exports.hof = function(req, res) {
+  
+
+  Post.find({
+                '_id': { $in: req.user.hof}
+                      },function (err, posts) {
+              if(err) {console.log('hof'); return handleError(res, err); }
+              })
+            .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment')
+            
+            .exec(function (err, posts){
+                if (err) return handleError(err);
+
+                
+               
+                console.log('hof2')
+                console.log(posts);
+                return res.json(posts);
+  });
+};
+
 
 exports.likeInfo = function(req, res) {
   console.log('err4567');

@@ -88,6 +88,7 @@ angular.module('myAppApp')
                                         '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
                                               '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
                                               '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                         '</ul>'+
                                     '</div>'+
                                     '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
@@ -126,6 +127,7 @@ angular.module('myAppApp')
                                         '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
                                               '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
                                               '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" >Delete</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                         '</ul>'+
                                     '</div>'+
                                 '</span>'+
@@ -153,6 +155,8 @@ angular.module('myAppApp')
                                                 '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
                                                       '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
                                                       '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                      
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+  
                                                 '</ul>'+
                                             '</div>'+
                                     '</span>'   +                                    
@@ -299,6 +303,12 @@ angular.module('myAppApp')
         scope.deletePost = function(postId){
             $http.delete('/api/posts/'+postId).success(function(response){
                 console.log('Deleted');
+            })
+        }
+
+        scope.addHOF = function(postId){
+            $http.post('/api/users/addHOF/'+postId).success(function(response){
+                console.log('added');
             })
         }
         

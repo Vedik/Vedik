@@ -34,6 +34,23 @@ exports.create = function (req, res, next) {
   });
 };
 
+exports.addHOF = function (req, res, next) {
+
+    console.log(req.params.postId);
+
+    
+    console.log('erro2r');
+  
+  req.user.hof.push(req.params.postId);
+
+  req.user.save(function (err) {
+      if (err) { return handleError(res, err); }
+        console.log(req.user.hof);
+       res.json(200, req.user.hof);
+
+    });
+};
+
 //to change gallery pic
 /*exports.galPicChange = function (req, res) {
   var userId = req.user._id;

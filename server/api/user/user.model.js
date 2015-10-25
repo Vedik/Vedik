@@ -20,6 +20,7 @@ var UserSchema = new Schema({
   salt: String,
   unseenNotifs:[{type:Schema.Types.ObjectId}],
   subscribed_users:[{user:{type:Schema.Types.ObjectId, ref:'User'}}],
+  hof:[{type:Schema.Types.ObjectId}],
   
   directorRating:{type:Number,default:0},
   actorRating:{type:Number,default:0},
