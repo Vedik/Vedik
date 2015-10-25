@@ -11,7 +11,7 @@
 <!--*********************************user pic and info goes here************************-->
             	<div id="pro_pic">
             		<div id="pro_pic_wrapper" >
-           				<img src="{{GalleryPic}}" style="width:100%;height:100%;"></img>
+           				<img src="{{GalleryPic}}" style="width:100%;height:100%;z-index:0;position:relative" alt="" du-parallax y="background"></img>
            				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div>
 
            				<script>
@@ -120,7 +120,7 @@
 
 	                                               
 				<!--***************************users content, videos etc**********************-->
-				 <div id="user_hist_div1" class="thumbswrap">
+				 <div id="user_hist_div1" class="thumbs_wrap">
 				 	<div class="col-md-2" id="clubs_list">
 						<div id="clubs_list_wrap">
 							<p style="font-size:13px;color:white">Events</p>						

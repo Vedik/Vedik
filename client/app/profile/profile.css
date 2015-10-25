@@ -27,8 +27,8 @@
                 top:0px;
                 float:left;
                position: static;
-               background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
-               background-repeat: repeat;              
+               /*background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+               */background-repeat: repeat;              
 
             }
             #pro_pic    {
@@ -55,7 +55,23 @@
                 color: white;
 
             }
+            #upload_btn     {
+                position: absolute;
+                top: 10%;
+                right: 5%;
+           
+                font-size: 14px;
+                border-radius: 0px;
+                border: 0px;
+            }
+            #upload_btn:hover   {
+           
+                color: #247ba0;
+            }
             #HOF_div    ul  {
+                padding: 0px;
+            }
+            #upload_btn    ul  {
                 padding: 0px;
             }
             #HOF_div    {
@@ -72,7 +88,21 @@
                 border: 1px solid #DDD;
                 color: #337AB7
             }
+
             #HOF_div li:hover   {
+                background-color: #247ba0;
+                color: white;
+                border: 1px solid #247ba0
+            }
+            #upload_btn  li    {   
+                background-color: rgba(255,255,255,0.8);
+                padding: 10px;
+                list-style-type: none;
+                width: 150%;
+                border: 1px solid #DDD;
+                color: #337AB7
+            }
+            #upload_btn li:hover   {
                 background-color: #247ba0;
                 color: white;
                 border: 1px solid #247ba0
@@ -176,13 +206,13 @@
                 border-color: none;
                 border-style: solid;
                 border-bottom-color: rgba(255,255,255,0.1);
-                border-bottom-width: 3px;
+                border-bottom-width: 1px;
 
 
                      
                 font-size: 13px !important;
-                background: rgba(255, 255, 255, 0.005) none repeat scroll 0% 0%;
-                color: white;  
+            
+                color: black;  
                 border-radius: 0px !important;
                 transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
                 
@@ -195,8 +225,7 @@
                     border-right:0px white !important;
                     border-bottom: 1px solid #0000ff !important;
                     box-shadow: none;
-                    background: rgba(255, 255, 255, 0.005) none repeat scroll 0% 0%;
-                color: white; 
+                   
             }
             .upld_form  {
                 width: 100% !important;
@@ -249,19 +278,7 @@
                 margin: 0px 5%;
                 box-shadow: 1px 1px 5px black;
             }
-            #upload_btn     {
-                position: absolute;
-                top: 10%;
-                right: 20px;
-                background-color: rgba(38,88,132,1);
-                font-size: 14px;
-                border-radius: 0px;
-                border: 0px;
-            }
-            #upload_btn:hover   {
-                background-color: white;
-                color: #247ba0;
-            }
+            
             #gal_pic_edit   {
                 position: absolute;
                 bottom: 200px;
@@ -327,6 +344,8 @@
                 padding: 0px 0px 100px;
             }
             #user_hist_div1  {
+               background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+               
 
                 position: static;
                  
@@ -422,8 +441,7 @@
 
 
             #textarea{ 
-            background: rgba(255, 255, 255, 0.005) none repeat scroll 0% 0%;
-color: white; 
+            
   display:block;
   box-sizing: padding-box;
   overflow:hidden;

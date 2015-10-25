@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval,ClubEventService) {
+  .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval,ClubEventService,parallaxHelper) {
+    
+    $scope.background = parallaxHelper.createAnimator(-0.3, 150, -150);
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/club/')[1];
