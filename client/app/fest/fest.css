@@ -21,6 +21,7 @@
 }
 #event_page_info	{
 	position: relative;
+	
 	float: left;
 	width: 50%;
 	height:100%
@@ -31,6 +32,7 @@
 	top: 50%;
 	font-size: 25px;
 	right: 20px;	
+	color: white;
 }
 #arrow_left	{
 	position: absolute;
@@ -39,19 +41,30 @@
 	left: 20px;	
 	color: black;
 }
+
 #event_page_cntnt	{
 	position: relative;
 	float: left;
 	width: 50%;
-	height:100%;
-	overflow:hidden;
-	background-color: white;
+	height: 800px;
+	background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");
+	background-repeat: repeat;
 	color: black;	
+}
+.container-inner_wrap_out	{
+	
+	overflow-x:scroll; 
+    width: 100%;
+    overflow-y:hidden;
+
+
 }
 .container-inner	{
 	width: 200%;	
-	position: relative;
+	word-wrap:normal;
 	height: 100%;
+
+
 }
 #req_user_info	{
 	list-style-type: none;

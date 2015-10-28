@@ -2,7 +2,7 @@
     box-sizing:border-box;
 }
 body {
-            ;
+            
             position:relative;
             min-height:100%;
             top:0px;
@@ -11,7 +11,7 @@ body {
            letter-spacing: 1.5px;
          /*   background-image:  url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");*/
             font-size: 12px;
-            background-color: white;
+
             }
 .centric    {
     text-align:center;

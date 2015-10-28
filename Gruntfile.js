@@ -186,7 +186,7 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'server/app.js',
+       
         options: {
           file: 'server/app.js',
           nodeArgs: ['--debug-brk'],

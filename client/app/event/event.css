@@ -2,7 +2,7 @@
 	color: blue;
 	background-color:white ;
 
-	margin:10px 5px 35px 5px;
+	margin:10px 5px 50px 5px;
 	font-size: 12px;
 	font-family:;
 	position: relative;
@@ -10,7 +10,7 @@
 }
 .awarding_div #border	{
 	padding: 10px 20px;
-	border: 4px double #BFB278;	
+	min-height: 100px;
 }
 .awarding_div #post_time a	{
 	font-size: 10px !important;
@@ -47,3 +47,41 @@
 
      
     }
+
+   	#event_gal_pic	{
+   		position: absolute;
+
+   	}
+   	.posts_wrapper	{
+   		background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+        width: 100%;
+        float: left;
+   	}
+   	#posts {
+   		padding: 30px 10px 10px 30px;
+   	}
+   	#navbar_mdl	{
+   		background-color: black;
+   		border-color: black;
+   		border-radius: 0px;
+   	}
+   	.calign	{
+   		position: absolute;
+   		top: 150px;
+   		margin: 0px 30%;
+
+   	}
+   	#event_det_wrapper	{
+   		width: 40%;
+   		text-align: center;
+   	}
+   	.e_name	{
+   		font-size: 40px;
+   		color: white;
+   		opacity: 0.9;
+   	}
+   	.e_host	{
+   		font-size: 14px;
+   		color: black;
+   		opacity: 0.5;
+   	}

@@ -130,6 +130,7 @@ angular.module('myAppApp')
                                               '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                         '</ul>'+
                                     '</div>'+
+                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
                                 '</span>'+
                             '</div>'+
                         '</div>';
@@ -159,6 +160,7 @@ angular.module('myAppApp')
                                                       '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+  
                                                 '</ul>'+
                                             '</div>'+
+                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
@@ -179,8 +181,7 @@ angular.module('myAppApp')
                                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                         '{{postTime}}'+
                                                     '</span>'+
-                                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
-                                            '</span>'   +
+                                     '</span>'   +
                                     '<span id="post_time">{{content.createdOn}}</span>'   +
                                 '</div>'    +
                             '</div>';

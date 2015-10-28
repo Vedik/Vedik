@@ -2,246 +2,88 @@
 
 <div ng-controller="EventCtrl">
 <div ng-include="'components/navbar/navbar.html'" ng-if="navbar"></div>
-<div id="hidden" ng-style="hidden" ng-if="navbar"></div>
 
-<h1>Perfect Parallax</h1>
-  <div perfect-parallax parallax-ratio="0.1" parallax-css="transform:translateY">
-    <div perfect-parallax parallax-ratio="0.5" parallax-css="background-position-y" parallax-init-val="-100" class="imgaa">
-      <p perfect-parallax parallax-ratio="1.0" parallax-css="bottom" parallax-init-val="100" class="txtaa">Perfect Parallax</p>
+  <div id="pro_pic" style="background:black">
+    <img src="https://yalantis.com/media/content/ckeditor/2014/06/Live-Events-01.jpg" width="100%" height="auto" id="event_gal_pic" style="opacity:0.8">
+
+    <script>
+    $(document).ready(function(){
+        
+            $("#event_gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
+            $("#pro_pic").css({"height": $(window).height()+'px'});
+      });
+    </script>
+    <div class="calign" id="event_det_wrapper">
+      <span class="e_name">{{event.name}}</span>
+      <hr></hr>
+      <span class="e_host">{{event.club.name}}</span>
     </div>
   </div>
-
-<div class="awarding_div">
-
-  <div id="border">
-      <div id="certif_icon"><img src="assets/images/gold.png"></div>
-      <span><a>Venkat</a></span> was awarded <span><a>first</a></span> in <span><a>Manual Robotics</a></span> organised by <span><a>Shaastra 2015</a></span>
-  </div>
-  <div id="post_time">
-      <div id="respond_post">
-          <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="10px" height="auto"> Like</a>
-          <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png"  width="10px" height="auto"> Comment</a>
-          <span>12:30 pm 8th August   </span>
+  
+  <div class='posts_wrapper'>
+    <nav class="navbar navbar-default" id="navbar_mdl">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Updates</a>
+        </div>
       </div>
-                       
-  </div>
-</div>
-<div class="awarding_div">
+    </nav>
 
-  <div id="border">
-      <div id="certif_icon"><img src="assets/images/silver.png"></div>
-      <span><a>Venkat</a></span> was awarded <span><a>first</a></span> in <span><a>Manual Robotics</a></span> organised by <span><a>Shaastra 2015</a></span>
-  </div>
-  <div id="post_time">
-      <div id="respond_post">
-          <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="10px" height="auto"> Like</a>
-          <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png"  width="10px" height="auto"> Comment</a>
-          <span>12:30 pm 8th August   </span>
+    <div class="col-md-6" id="posts">
+
+      <div class="awarding_div">
+
+        <div id="border">
+            <div id="certif_icon"><img src="assets/images/gold.png"></div>
+            <span><a>Venkat</a></span> was awarded <span><a>first</a></span> in <span><a>Manual Robotics</a></span> organised by <span><a>Shaastra 2015</a></span>
+        </div>
+        <div id="post_time">
+            <div id="respond_post">
+                <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="10px" height="auto"> Like</a>
+                <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png"  width="10px" height="auto"> Comment</a>
+                <span>12:30 pm 8th August   </span>
+            </div>
+                             
+        </div>
       </div>
-                       
-  </div>
-</div>
-<div class="awarding_div">
+      <div class="awarding_div">
 
-  <div id="border">
-      <div id="certif_icon"><img src="assets/images/bronze.png"></div>
-      <span><a>Venkat</a></span> was awarded <span><a>first</a></span> in <span><a>Manual Robotics</a></span> organised by <span><a>Shaastra 2015</a></span>
-  </div>
-  <div id="post_time">
-      <div id="respond_post">
-          <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="10px" height="auto"> Like</a>
-          <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png"  width="10px" height="auto"> Comment</a>
-          <span>12:30 pm 8th August   </span>
+        <div id="border">
+            <div id="certif_icon"><img src="assets/images/silver.png"></div>
+            <span><a>Venkat</a></span> was awarded <span><a>first</a></span> in <span><a>Manual Robotics</a></span> organised by <span><a>Shaastra 2015</a></span>
+        </div>
+        <div id="post_time">
+            <div id="respond_post">
+                <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="10px" height="auto"> Like</a>
+                <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png"  width="10px" height="auto"> Comment</a>
+                <span>12:30 pm 8th August   </span>
+            </div>
+                             
+        </div>
       </div>
-                       
-  </div>
-</div>
+      <div class="awarding_div">
 
-
-      <div class="booking_body" ng-if="postingRight">
-
-          
-
-            <!-- Modal content-->
-                
-                
-                  
-                   
-                    
-                      <ul class="nav nav-tabs">
-                        <li class="active"><a href="#articleForm" data-toggle="tab" >Post</a></li>
-                        <li><a href="#imgForm" data-toggle="tab" >Images</a></li>
-                        <li><a href="#videoForm" data-toggle="tab" >Video</a></li>
-                      </ul>
-                    
-
-
-                    <div class="tab-content">
-                      
-                        <!--<ul class="nav nav-tabs">
-                           <li class="active"><a data-toggle="tab" href="#upload_form">Info</a></li>
-                            <li><a href="#credits" data-toggle="tab">Credits</a></li>
-                        </ul>
-
-                  <div class="tab-content">
-                    <div class="tab-pane fade in active" id="upload_form" ng-controller="UploadPortalCtrl">
-                      <div class="tab-content">-->
-
-                      <!--************Video Upload Form********-->
-                        <div id="videoForm" class="tab-pane fade" >
-                          <h3>Add your Video here</h3>
-                          <form name="form" ng-submit="videoSubmit(form)" ng-model="form">
-                            <div class="form-group">
-                              
-                              <input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
-                            </div>
-                            <div class="form-group">
-                              
-                              <input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
-                            </div>
-                            <div class="form-group">
-                              
-                              <input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
-                            </div>
-                            <div class="form-group"> <!-- need to put select with multi option selection -->
-                              <label>Genre/Category</label>
-                              <select ng-model="form.genres" class="form-control upld_form" placeholder="Genres">
-                                <option value="horror">horror</option>
-                                <option value="comedy">comedy</option>
-                              </select>   <!-- Make it a maximum of three using array size in controller -->
-                            </div>
-                            <div class="form-group"> <!-- Put text area -->
-                              
-                              <input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-                            </div>
-                            <div class="form-group">
-                              <tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-
-                                  <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-
-                                </tags-input>
-                            </div>
-                            <button type="submit" class="b2w">Submit</button>
-                          </form>
-
-                        </div>
-                    
-                        <!--***************Article Upload form**************-->
-
-                        <div id="articleForm"  class="tab-pane fade in active">
-                          <h3>Add your Article here</h3>
-                          <form name="form" ng-submit="postSubmit(form)" ng-model="form">
-                            <div class="form-group">
-                              <input type="text" class="form-control upld_form" ng-model="form.articleName" placeholder="Article Name">
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-                            </div>
-                            <div class="form-group">  
-                              <textarea  class="form-control upld_form" ng-model="form.content" placeholder="Type your Article" ></textarea>
-                            </div>
-                            <div class="form-group">  
-                              <input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
-                            </div>
-                            <div class="form-group">
-                              <tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-
-                                  <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-
-                                </tags-input>
-                            </div>
-                              <button type="submit" class="b2w">Submit</button>
-                          </form>
-                        </div>
-
-                        <!--**********Image Upload Form******************-->
-
-                        <div id="imgForm"  class="tab-pane fade">
-                          <h3>Add your Image here</h3>
-                          <form name="form" ng-submit="imageSubmit(form)" ng-model="form" >
-                            <div class="form-group">
-                              <input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-                            </div>
-                            <div class="form-group">  
-                              <input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-                            </div>
-
-                            <div class="form-group">  
-                              <input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
-                            </div>
-                            <div class="form-group">
-                              <tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-
-                                  <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-
-                                </tags-input>
-                            </div>
-                              <button type="submit" class="b2w">Submit</button>
-                          </form>
-                          <div  >
-                            <img src="{{form.picUrl}}" height="400px" width="auto" >
-                          </div>
-                        </div>
-                    </div>
-
+        <div id="border">
+            <div id="certif_icon"><img src="assets/images/bronze.png"></div>
+            <span><a>Venkat</a></span> was awarded <span><a>first</a></span> in <span><a>Manual Robotics</a></span> organised by <span><a>Shaastra 2015</a></span>
+        </div>
+        <div id="post_time">
+            <div id="respond_post">
+                <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="10px" height="auto"> Like</a>
+                <a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png"  width="10px" height="auto"> Comment</a>
+                <span>12:30 pm 8th August   </span>
+            </div>
+                             
+        </div>
       </div>
-                   <!-- <div id="credits" class="tab-pane fade">
-                        <h3>Credits</h3>
-                        <div class="col-md-6">
-                            <label>Credit</label>
-                            <div>
-                              <tags-input ng-model="credits.directors" display-property="creditDetail" add-from-autocomplete-only="true" max-tags='1'>
-                                <auto-complete 
-                                source="getSuggestionsForCredits($query)"
-                                min-length='1'
-                                >
-                                </auto-complete>
-                            </tags-input>
-                            <p>Model: {{credits.credit}}</p>
-                          </div>
-                          </div>
-                          <div class="col-md-6">
-                            <label>Directors</label>
-                            <div>
-                              <tags-input ng-model="credits.creditNames" display-property="name" add-from-autocomplete-only="true">
-                                <auto-complete 
-                                source="getSuggestionsForNames($query)"
-                                min-length='1'>
-                                </auto-complete>
-                            </tags-input>
-                            <p>Model: {{credits.creditNames}}</p>
-                          </div>
-                          </div>
-                          <div ng-repeat="credit in credits">
-                            <label>{{credit.name}}</label>
-                            <tags-input ng-model="result.{{credit.name}}" display-property="name" add-from-autocomplete-only="true">
-                              <auto-complete 
-                            source="getSuggestions($query)"
-                            min-length='1'>
-                              </auto-complete>
-                          </tags-input>
-                          <p>{{result}}</p>
-                          </div>
-                          <div>
-                            <label>Editors</label>
-                            <tags-input ng-model="credits.editors" display-property="name" add-from-autocomplete-only="true">
-                              <auto-complete 
-                                source="getSuggestions($query)"
-                                min-length='1'>
-                              </auto-complete>
-                          </tags-input>
-                          <p>Model: {{credits.editors}}</p>
-                          </div>
-                          <div>
-                            <h2>Add Credits</h2>
-                          </div>
-                      </div>-->
-          
-          <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ></content-item>
 
+
+             
+              
+              <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ></content-item>
+
+    </div>
+  </div>
 </div>
                     
                 
