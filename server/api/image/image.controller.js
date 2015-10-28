@@ -5,6 +5,7 @@ var Image = require('./image.model');
 var Post = require('../post/post.model');
 var User = require('../user/user.model');
 var Club = require('../club/club.model');
+var Credit = require('../credit/credit.model');
 
 // Get list of images
 exports.index = function(req, res) {
@@ -79,6 +80,26 @@ exports.create = function(req, res) {
             if(err) return handleError(res,err);
             else 
               {
+
+                for(var i=0;i<req.body.creditType.length;i++)
+                {
+                  var users=req.body.creditUser[i];
+                  console.log(users);
+                  var newCredit =  new Credit({
+                    postId:newPost._id,
+                    credit:req.body.creditType[i]._id,
+                    creditedUsers:[]
+                  });
+
+                  for(var j=0;j<req.body.creditUser[i].length;j++){
+                    newCredit.creditedUsers.push({user:users[j]._id});
+                  }
+                  newCredit.save(function(err){
+                  if(err) return handleError(res,err);
+                  console.log('Credit added');
+                })
+
+                }
 
                 console.log('post created');
              

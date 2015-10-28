@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval,ClubEventService,parallaxHelper) {
+  .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval,ClubEventService) {
     
-    $scope.background = parallaxHelper.createAnimator(-0.3, 150, -150);
+
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/club/')[1];
@@ -245,3 +245,17 @@ angular.module('myAppApp')
     }
 ]);
 
+angular.module('myAppApp').
+  controller('ParallaxEff', function($scope, parallaxHelper){
+    $scope.background = parallaxHelper.createAnimator(-0.3, 150, -150);
+    $scope.invertColors = function(elementPosition) {
+      var factor = -0.4;
+      var pos = Math.min(Math.max(elementPosition.elemY*factor, 0), 255);
+      var bg = 255-pos;
+      return {
+        backgroundColor: 'rgb(' + bg + ', ' + bg + ', ' + bg + ')',
+        color: 'rgb(' + pos + ', ' + pos + ', ' + pos + ')'
+      };
+    }
+
+});

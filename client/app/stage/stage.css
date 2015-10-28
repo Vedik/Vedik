@@ -40,7 +40,8 @@
 	color: black;
 	border-bottom: 0px;
 }
-.nav-tabs li	{
+
+.stage_nav_wrap_out .nav-tabs li	{
 	width: 15%;
 	
 	background-color: grey;

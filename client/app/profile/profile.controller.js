@@ -188,28 +188,52 @@ angular.module('myAppApp')
         })
       }
    }*/
+   $scope.type=11;
 
-   $scope.videoSubmit = function (form){
-          $http.post('/api/videos',{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+   $scope.setType= function(type){
+      if(type==11){
+          $scope.type=11;
+
+      }
+      else if(type==12){
+          $scope.type=12;
+      }
+      else if(type==13){
+          $scope.type=13;
+      }
+      
+   }
+
+   $scope.postSubmit = function (form){
+      if($scope.type==11){
+           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })
-   };
-
-    $scope.imageSubmit = function (form){
-        console.log('form.vedik');
-          $http.post('/api/images',{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik}).success(function (response){
+      }
+      else if($scope.type==12){
+           $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
             console.log(form.imgName);
         })
-   }
-
-    $scope.articleSubmit = function (form){
-          $http.post('/api/articles',{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik}).success(function (response){
+      }
+      else if($scope.type==13){
+          $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })
+      }
+          
+   };
+
+    $scope.imageSubmit = function (form){
+        console.log('form.vedik');
+         
+   }
+
+    $scope.articleSubmit = function (form){
+         
    }
 
     
@@ -236,10 +260,7 @@ angular.module('myAppApp')
         $scope.userAbout=$scope.user.about;
         $scope.modal="modal";
          console.log($scope.userAbout);
-        if(type==1)
-        {
-          $state.reload();
-        }
+        $scope.$apply();
       })
 
     }

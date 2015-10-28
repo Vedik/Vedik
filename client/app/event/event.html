@@ -4,19 +4,19 @@
 <div ng-include="'components/navbar/navbar.html'" ng-if="navbar"></div>
 
   <div id="pro_pic" style="background:black">
-    <img src="https://yalantis.com/media/content/ckeditor/2014/06/Live-Events-01.jpg" width="100%" height="auto" id="event_gal_pic" style="opacity:0.8">
-
-    <script>
-    $(document).ready(function(){
-        
-            $("#event_gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
-            $("#pro_pic").css({"height": $(window).height()+'px'});
-      });
+    <img src="https://yalantis.com/media/content/ckeditor/2014/06/Live-Events-01.jpg" width="100%" height="auto" id="gal_pic" style="opacity:0.8">
+     <script>
+      $(document).ready(function(){
+          
+              $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
+              $("#pro_pic").css({"height": $(window).height()+'px'});
+        });
     </script>
+    
     <div class="calign" id="event_det_wrapper">
       <span class="e_name">{{event.name}}</span>
       <hr></hr>
-      <span class="e_host">{{event.club.name}}</span>
+      <a href="/club/{{event.club._id}}"><span class="e_host">{{event.club.name}}</span></a>
     </div>
   </div>
   

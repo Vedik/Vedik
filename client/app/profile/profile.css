@@ -10,9 +10,9 @@
                 top:10%;
                 left:2%;
                 z-index: 1;
-                background-color: rgba(36,123,160,0.7);
-                border: 2px solid white;
-                border-radius: 0px;
+                background-color: white;
+                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
+                
             }
             #user_profile_wrapper{
                 padding:10px 10px 10px 20px;
@@ -35,6 +35,8 @@
                 position: relative;
                 width: 100%;
                 top:0px;
+                min-height: 500px;
+                overflow: hidden;
             }
             #infodiv    {
                 position: static;
@@ -52,17 +54,16 @@
                 font-size: 36px;                
                 padding: 0px;
                 border-radius: 4px;
-                color: white;
+                color: grey;
 
             }
             #upload_btn     {
                 position: absolute;
                 top: 10%;
-                right: 5%;
+                right: 2%;
            
-                font-size: 14px;
-                border-radius: 0px;
-                border: 0px;
+                
+                
             }
             #upload_btn:hover   {
            
@@ -78,21 +79,23 @@
                 position: absolute;
                 top: 30%;
                 left: 2%;
+                font-weight: bold;
+                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
             }
 
             #HOF_div  li    {   
-                background-color: rgba(255,255,255,0.8);
-                padding: 10px;
+                background-color: white;
+                padding: 10px 50px 10px 10px;
                 list-style-type: none;
-                width: 150%;
-                border: 1px solid #DDD;
+                width: auto;
+                
                 color: #337AB7
             }
 
             #HOF_div li:hover   {
                 background-color: #247ba0;
                 color: white;
-                border: 1px solid #247ba0
+                
             }
             #upload_btn  li    {   
                 background-color: rgba(255,255,255,0.8);
@@ -120,8 +123,22 @@
                 color: white;
                 
                 border: 0px;
-            }   
+            } 
 
+            .w2g    {
+                background-color: rgba(255,255,255,0.8);
+                padding: 5px 10px;
+                border: 0px;
+                color: black;
+                border-radius: 0px;
+
+            }
+            .w2g:hover    {
+                background-color: grey;
+                color: white;
+                
+                border: 0px;
+            } 
             .g2b    {
                 background-color: #E6E6E6;
                 padding: 0px 2px 0px 2px;
@@ -478,3 +495,9 @@
         border-radius: 0px;
         font-size: 12px;
     }
+.fab_plus   {
+    font-size: 30px;
+    top: -2px;
+    position: absolute;
+    left: 19px;
+}

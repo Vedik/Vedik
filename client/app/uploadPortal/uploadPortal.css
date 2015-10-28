@@ -173,7 +173,7 @@
 		height: 200px;
 	}
 	#article	{
-		height: auto;
+		min-height: 200px;
 	}
 
 	#event_det div {

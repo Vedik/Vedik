@@ -1,4 +1,8 @@
+//global variable
+var ranX, ranY=0;
+
 'use strict';
+
 
 angular.module('myAppApp')
   .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService,User) {
@@ -60,7 +64,7 @@ angular.module('myAppApp')
 })
 .directive('contentItem', function ($compile, $http,$modal) {
     var imageTemplate = '<div>'+
-                            '<div class="post_div thumbs_wrap col-md-12">'+
+                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
                                 '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
                                     '<img src="{{content.imageId.picUrl}}" id="img_post">'+
                                     '<span>'+
@@ -96,7 +100,7 @@ angular.module('myAppApp')
                             '</div>'+                            
                         '</div>';
     var videoTemplate = '<div  ng-click=blur()>' +
-                            '<div class="post_div thumbs_wrap col-md-12" >'+
+                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
                                '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                     '<img src="{{content.videoId.posterurl}}" id="img_post">'+
                                     '<span>'+
@@ -104,7 +108,7 @@ angular.module('myAppApp')
                                     '</span>'+
                                     '<span id="img_name">'+
                                         '{{content.videoId.vidname}}'+                                    
-                                        '<span style="font-size:12px"> by {{content.uploader.user.name}}</span>'+
+                                        '<span style="font-size:12px"> by {{content.uploader.user.name}} </span>'+
                                     '</span>'+
                                     '<span class="play">'+
                                         '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
@@ -135,7 +139,7 @@ angular.module('myAppApp')
                             '</div>'+
                         '</div>';
     var articleTemplate = '<div>'   +
-                                '<div class="post_div col-md-12">'  +
+                                '<div class="post_div" style="width:{{width}}%">'  +
                                     '<div class="text_type_post" id="article">' +
                                         '<a href="#">'  +
                                             '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
@@ -257,9 +261,33 @@ angular.module('myAppApp')
           var s= "0" + date.getSeconds();
           scope.postTime=d+"-"+m+"-"+y+" "+h+":"+min;*/
 
+            
+            if(ranY==1){
+                scope.width=50;
+                ranY=0;
+                console.log(ranX,ranY,50);
+            }
+            else{
 
-        
-        
+                ranX= Math.floor((Math.random() * 100) + 1);
+                var data=(ranX)/2;
+                if (data === parseInt(data, 10))
+                {
+                    scope.width=50;
+                    ranY=1;
+                    console.log(ranX,ranY,50);
+                }   
+                else
+                {
+                    scope.width=100;
+                    ranY=0; 
+                    console.log(ranX,ranY,100);
+                }
+            }
+            
+            
+                
+         
            
             scope.one="one";
             scope.two="two";

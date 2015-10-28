@@ -93,6 +93,10 @@
       ga('send', 'pageview');
     </script>
 
+   <script>
+                
+                </script>
+
 
     <script >
                               $(document)
@@ -109,6 +113,11 @@
                             rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 32);
                             this.rows = minRows + rows;
                         });
+                        $(document).ready(function(){
+                    
+                        $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
+                        $("#pro_pic").css({"height": $(window).height()+'px'});
+                  });
                             </script>
 
     <!--[if lt IE 9]>
