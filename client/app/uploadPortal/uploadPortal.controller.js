@@ -260,30 +260,35 @@ angular.module('myAppApp')
           var h="0" + date.getHours();
           var s= "0" + date.getSeconds();
           scope.postTime=d+"-"+m+"-"+y+" "+h+":"+min;*/
-
-            
-            if(ranY==1){
+          if(scope.random)
+          {
+                if(ranY==1){
                 scope.width=50;
                 ranY=0;
                 console.log(ranX,ranY,50);
-            }
-            else{
-
-                ranX= Math.floor((Math.random() * 100) + 1);
-                var data=(ranX)/2;
-                if (data === parseInt(data, 10))
-                {
-                    scope.width=50;
-                    ranY=1;
-                    console.log(ranX,ranY,50);
-                }   
-                else
-                {
-                    scope.width=100;
-                    ranY=0; 
-                    console.log(ranX,ranY,100);
                 }
+                else{
+
+                    ranX= Math.floor((Math.random() * 100) + 1);
+                    var data=(ranX)/2;
+                    if (data === parseInt(data, 10))
+                    {
+                        scope.width=50;
+                        ranY=1;
+                        console.log(ranX,ranY,50);
+                    }   
+                    else
+                    {
+                        scope.width=100;
+                        ranY=0; 
+                        console.log(ranX,ranY,100);
+                    }
             }
+          }
+          else
+             scope.width=100;
+            
+            
             
             
                 
@@ -439,7 +444,8 @@ angular.module('myAppApp')
         restrict: "E",
         link: linker,
         scope: {
-            content:'='
+            content:'=',
+            random:'='
         }
     };
 })

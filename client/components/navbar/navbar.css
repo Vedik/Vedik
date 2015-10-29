@@ -18,11 +18,18 @@ body {
     font-size:15px;
     margin:0% auto;
 }
+#nav_fade{
+    width: 100%;
+    opacity: 0.5;
+    height:200px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
 
 #top_logo {
-            
-            background-color:rgba(0,0,0,0);
-            height:45px;
+            height: 45px;            
             width:100%;
             background-size:10px 100%;
             box-sizing:border-box;

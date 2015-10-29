@@ -5,9 +5,9 @@
     top:20%;
     right:2%;
     z-index: 10;
-    background-color: rgba(36,123,160,0.9);            
+    background-color: white;            
     border-radius: 0px;
-    color: white;
+    color: grey;
 }
 #stage_pic	{
 	padding: 0px;
@@ -19,8 +19,8 @@
 	
 	
 	padding: 0px;
-	background-image: url("http://www.wall321.com/thumbnails/detail/20120623/abstract%20blue%20dark%20textures%20backgrounds%201920x1080%20wallpaper_www.wall321.com_11.jpg");
-	background-repeat: repeat;
+	background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+    background-repeat: repeat;
 }
 #bkd {
 	 -webkit-transition: all 0.5s ease;
@@ -60,7 +60,7 @@
 #stage_nav	{
 	position: absolute;
 	bottom: 0px;
-	background-color: rgba(255,255,255,0.9);
+	background-color: rgba(255,255,255,1);
 	padding: 0px 30%;
 	width: 100%;
 }

@@ -246,8 +246,8 @@ angular.module('myAppApp')
 ]);
 
 angular.module('myAppApp').
-  controller('ParallaxEff', function($scope, parallaxHelper){
-    $scope.background = parallaxHelper.createAnimator(-0.3, 150, -150);
+  controller('ParallaxEff', function($scope, parallaxHelper2){
+    $scope.background = parallaxHelper2.createAnimator(-0.8, 150, -150);
     $scope.invertColors = function(elementPosition) {
       var factor = -0.4;
       var pos = Math.min(Math.max(elementPosition.elemY*factor, 0), 255);
@@ -258,4 +258,22 @@ angular.module('myAppApp').
       };
     }
 
+});
+
+
+angular.module('myAppApp').
+factory('parallaxHelper2',
+  function() {
+    function createAnimator (factor, max, min, offset) {
+      return function(params) {
+        var delta = factor*((offset || 0) + params.elemY);
+        // if(angular.isNumber(max) && delta > max) return max;
+        // if(angular.isNumber(min) && delta < min) return min;
+        return delta;
+      };
+    }
+    return {
+      createAnimator: createAnimator,
+      background:     createAnimator(-0.3, 150, -30, 50)
+    };
 });

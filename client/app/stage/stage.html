@@ -7,13 +7,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 	<div class="thumbs_wrap col-md-12">
-		<div id="stage_info" class="col-md-3">
+		<div id="stage_info" class="col-md-3 box_shadow_dwn">
 			<span><h2>{{stage.name}}</h2></span>
 		<!--	<span><p>{{stage.description}}</p></span>	-->
 			<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
 			<button ng-show="isFollowing"  ng-click="unfollow()" class="w2b">Following</button>
 		</div>
-		<div id="stage_pic" class="col-md-12"><img src="{{stage.posterUrl}}" width="100%" height="auto" alt="Badminton ART"></div>
+		<div id="stage_pic" class="col-md-12" ng-controller="ParallaxEff">
+			<img src="{{stage.posterUrl}}" width="100%" height="auto" alt="Badminton ART" du-parallax y="background">
+		</div>
 		<div class="stage_nav_wrap_out thumbs_wrap">
 			<script>
 				$(".scroll_anim").click(function(event){     
@@ -21,7 +23,7 @@
 				    $('html,body').animate({scrollTop:$("#stage_content_wrap").offset().top}, 500);
 				});
 			</script>
-			<ul class="nav nav-tabs" id="stage_nav" class="scroll_anim">
+			<ul class="nav nav-tabs scroll_anim box_shadow_up" id="stage_nav" >
 				<li class="active"><a data-toggle="tab" href="#bkd">Want you to see</a></li>
 				<li><a href="#trending" data-toggle="tab">Will love to see</a></li>
 				<li><a href="#everything" data-toggle="tab">Everything to see</a></li>
@@ -34,7 +36,7 @@
 			
 			
 			<div class="tab-content">
-				<div class="col-md-9">
+				<div class="col-md-6">
 					<div id="stage_content_wrap">
 						<div id="bkd" class="tab-pane fade in active">
 
