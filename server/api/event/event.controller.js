@@ -57,13 +57,19 @@ exports.create = function(req, res) {
   var newEvent = new Event({
     name:req.body.name,
     description:req.body.description,
-    startDate:req.body.StartDate,
+    startDate:req.body.startDate,
     endDate:req.body.endDate,
     club:req.params.id,
     user:req.user._id,
+    eventCover:req.body.eventCover,
+    location:req.body.location,
     
   });
  
+    for(i=0;i<b.length;i++)
+    {
+      newEvent.vedik.push({vedik:b[i]});
+    }
 
   newEvent.save(function (err){
  
@@ -72,28 +78,25 @@ exports.create = function(req, res) {
   
           
          
-          var newPost = new Post({
-            eventId: newEvent._id,
-            tags:req.body.tags,
-            type:30,                         //7=club event
-            uploader:{user:req.user._id},
-            uploaderClub:req.params.id,
-            view_count:0,
-            like:[],
-            createdOn:Date.now()
-          });
-          for(i=0;i<b.length;i++)
-          {
-            newPost.vedik.push({vedik:b[i]});
-          }
+          // var newPost = new Post({
+          //   eventId: newEvent._id,
+          //   tags:req.body.tags,
+          //   type:30,                         //7=club event
+          //   uploader:{user:req.user._id},
+          //   uploaderClub:req.params.id,
+          //   view_count:0,
+          //   like:[],
+          //   createdOn:Date.now()
+          // });
           
-          newPost.save(function(err){
-            if(err) {return handleError(res,err);}
+          
+          // newPost.save(function(err){
+          //   if(err) {return handleError(res,err);}
 
-            else {
-              console.log('post created');
-            }
-          });
+          //   else {
+          //     console.log('post created');
+          //   }
+          // });
 
           
           return res.json(200,newEvent);

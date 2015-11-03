@@ -100,7 +100,7 @@ body {
         }
         a:link    {
             text-decoration:none;
-            color: black;
+            color: #337AB7;
         }
         #indiv_res a:hover   {
             padding:15.5px 0px;

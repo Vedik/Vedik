@@ -6,10 +6,13 @@ var mongoose = require('mongoose'),
 var EventSchema = new Schema({
   name:String,
   description: String,
-  startTime: Date,
-  endTime: Date,
+  startDate: Date,
+  endDate: Date,
   club:{type:Schema.Types.ObjectId, ref:'Club'},
   user:{type:Schema.Types.ObjectId, ref:'User'},
+  location:String,
+  eventCover:String,
+  vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
 });
 
 module.exports = mongoose.model('Event', EventSchema);

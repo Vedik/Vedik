@@ -1,10 +1,15 @@
 
 
 <div ng-controller="EventCtrl">
-<div ng-include="'components/navbar/navbar.html'" ng-if="navbar"></div>
+  <div ng-include="'components/navbar/navbar.html'" ng-if="navbar"></div>
+  <div id="nav_fade">
+    <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="250px">
+  </div>
 
-  <div id="pro_pic" style="background:black">
-    <img src="https://yalantis.com/media/content/ckeditor/2014/06/Live-Events-01.jpg" width="100%" height="auto" id="gal_pic" style="opacity:0.8">
+  <div id="pro_pic" style="background:black;">
+    <div ng-controller="ParallaxEff">
+      <img src="{{event.eventCover}}" width="100%" height="auto" id="gal_pic" opacity="0.8" alt="" du-parallax y="background" >
+    </div>
      <script>
       $(document).ready(function(){
           
@@ -17,6 +22,9 @@
       <span class="e_name">{{event.name}}</span>
       <hr></hr>
       <a href="/club/{{event.club._id}}"><span class="e_host">{{event.club.name}}</span></a>
+      <br><br>
+      <span class="glyphicon glyphicon-map-marker"> {{event.location}}</span>
+      <span class="glyphicon glyphicon-time"> {{event.startTime}}-{{event.endTime}}</span>
     </div>
   </div>
   
@@ -82,6 +90,138 @@
               
               <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ></content-item>
 
+    </div>
+    <div class="col-md-6" style="padding:10px 20px 10px 10px">
+        <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
+            <h4 style="color:white">Annouce<hr></h4>
+            <div >
+              <form name="form" ng-submit="postSubmit(form)" ng-model="form">
+                  <div class="tab-content">
+                      <div class="tab-pane fade in active" id="upload_form2">
+                    
+                        <div id="upload_wrapper_left">
+                          <div class="form-group">
+                        <input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+                          </textarea>                         
+                                    
+                      </div>
+                                            
+                      
+                      <a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+                        </div>
+                        <ul class="nav nav-tabs" style="width:40%;position:absolute;bottom:5px;right:0px">
+                            <li  class="active" ng-click="setType(1)"><a href="#article_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Article</a></li>               
+                            <li ng-click="setType(2)"><a href="#image_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
+                            <li ng-click="setType(3)"><a href="#video_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
+                          </ul>
+                        <div id="upload_wrapper_right">
+                          
+                          <div class="tab-content">
+                            <div id="article_up" class="tab-pane fade in active">
+                              <div class="form-group">
+                            <textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
+                              </textarea>           
+                          </div>
+                        </div>
+                        <div id="image_up" class="tab-pane fade">
+                              <div class="form-group">  
+                            <input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+                          </div>
+                          <img src="{{form.picUrl}}" width="100%" height="auto">
+                        </div>
+                        <div id="video_up" class="tab-pane fade">
+                              <div class="form-group">
+                                        
+                            <input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+                          </div>
+                          <div class="form-group">              
+                            <input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+                          </div>
+                          <img src="{{form.picUrl}}" width="100%" height="auto">
+                        </div>
+                      </div>
+                      
+                        
+                          
+                        </div>
+
+                    </div>
+                  <div id="credits2" class="tab-pane fade" style="background:white">
+                        
+                    <table>
+                        <tr>
+                          <th>Credit</th>
+                          <th>User</th>
+                        </tr>                                 
+                        <tr ng-repeat="credit in creditType track by $index">
+                          <td style="width:50%;verticle-align:top">
+                            <div  layout="column" ng-cloak>
+
+                            <md-content class="md-padding">
+                              <form ng-submit="$event.preventDefault()" name="searchForm">
+                               
+                                <div layout-gt-sm="row">
+                                  
+                                  <md-autocomplete flex required
+                                      md-input-name="autocompleteField"
+                                      md-input-minlength="2"
+                                      md-input-maxlength="18"
+                                      md-no-cache="false"
+                                      md-selected-item="creditType[$index]"
+                                      md-search-text="searchText"
+                                      md-items="item in querySearch(searchText,$index)"
+                                      md-item-text="item.creditDetail"
+                                      md-floating-label="Credit"
+                                     
+                                      md-menu-class="autoCompleteDropDown"
+                                     >
+                                    <md-item-template>
+                                      <span md-highlight-text="searchText">{{item.creditDetail}}</span>
+                                    </md-item-template>
+                                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                                      <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                                      <div ng-message="minlength">Your entry is not long enough.</div>
+                                      <div ng-message="maxlength">Your entry is too long.</div>
+                                    </div>-->
+
+                                  </md-autocomplete>
+                                </div>
+                                 </form>
+
+                            </md-content>
+                          </div>
+                                            
+                        </td>
+                        <td style="width:50%;vertical-align: bottom;">
+                          <tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" >
+                            <auto-complete source="getSuggestionsForNames($query)" min-length='1'>
+                                </auto-complete>
+                            </tags-input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:10px 0px">
+                          <button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+                        </td>
+                        <td style="padding:10px 0px"><a data-toggle="tab" href="#upload_form2" class="b2w">Back</a><span ng-click="test()">sdafd</span>
+                        </td>
+                      </tr>                             
+                    </table>  
+                    <div>
+                                      
+                      <button type="submit" class="b2w">Submit</button>
+                        </div>
+
+                                    
+                    </div>
+                  </div>
+                </form>
+            </div>
+
+        </div>
     </div>
   </div>
 </div>

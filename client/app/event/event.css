@@ -56,6 +56,8 @@
    		background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
         width: 100%;
         float: left;
+        z-index: 1000;
+        position: relative;
    	}
    	#posts {
    		padding: 30px 10px 10px 30px;
@@ -74,6 +76,7 @@
    	#event_det_wrapper	{
    		width: 40%;
    		text-align: center;
+   		z-index: 1;
    	}
    	.e_name	{
    		font-size: 40px;

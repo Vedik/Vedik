@@ -51,15 +51,18 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
 
-     $scope.creditName=[];
+     $scope.creditType=[];
       $scope.creditUser=[];
-    $scope.creditName[0]=[];
+    $scope.creditType[0]='';
       $scope.creditUser[0]=[];
-     var creditNum=0;
+    
+    var creditNum=0;
     $scope.addCredit= function (){
+      console.log($scope.creditType);
+     
       creditNum++;
       console.log(creditNum);
-      $scope.creditName[creditNum]=[];
+      $scope.creditType[creditNum]='';
       $scope.creditUser[creditNum]=[];
     }
 
@@ -73,39 +76,96 @@ angular.module('myAppApp')
     $scope.getSuggestionsForCredits = function (query){
       return $http.get('/api/creditDets/search/'+query).success(function (response) {
         console.log(response);
+
         return response;
       });
-    }
+    };
 
    $scope.creditsSubmit = function (){
       console.log($scope.creditName,$scope.creditUser);
    }
 
+   $scope.searchText    = null;
+    $scope.querySearch   = querySearch;
 
-   $scope.videoSubmit = function (form){
-          $http.post('/api/videos/'+id,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,vedik:form.vedik,creditName:$scope.creditName,creditUser:$scope.creditUser}).success(function (response){
+   function querySearch (query,index) {
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+              
+              return response.data;
+            });
+    }
+
+
+   $scope.type=21;
+
+   $scope.setType= function(type){
+      if(type==1){
+          $scope.type=21;
+
+      }
+      else if(type==2){
+          $scope.type=22;
+          console.log($scope.type);
+      }
+      else if(type==3){
+          $scope.type=23;
+          console.log($scope.type);
+      }
+      
+   }
+
+   $scope.postSubmit = function (form){
+      if($scope.type==21){
+           $http.post('/api/articles/'+id,{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })
-   }
-
-    $scope.imageSubmit = function (form){
-          $http.post('/api/images/'+id,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik}).success(function (response){
+      }
+      else if($scope.type==22){
+           $http.post('/api/images/'+id,{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
             console.log(form.imgName);
         })
-   }
-
-    $scope.articleSubmit = function (form){
-          $http.post('/api/articles/'+id,{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik}).success(function (response){
+      }
+      else if($scope.type==23){
+          $http.post('/api/videos/'+id,{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
             console.log(response);
             $scope.form={};
         })
+      }
+          
    };
 
+
+   $scope.openED = function($event) {    //OpenEndDate
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.openedED = true;
+    };
+    $scope.openSD = function($event) {    //OpenStart Date
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.openedSD = true;
+    };
+
+    $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+     
+  $scope.testDate = function(){
+    console.log(form.dtSD,form.dtED);
+  }
+
    $scope.createEvent = function (form){
-          $http.post('/api/events/'+id,{name:form.name,description:form.description,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik}).success(function (response){
+          $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
             console.log(response);
             $scope.form={};
         })
@@ -274,6 +334,6 @@ factory('parallaxHelper2',
     }
     return {
       createAnimator: createAnimator,
-      background:     createAnimator(-0.3, 150, -30, 50)
+      background:     createAnimator(-0.8, 150, -150)
     };
 });

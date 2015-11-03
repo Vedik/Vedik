@@ -223,6 +223,26 @@ exports.clubPost = function(req, res) {
 
             else 
             {
+              for(var i=0;i<req.body.creditType.length;i++)
+                {
+                  var users=req.body.creditUser[i];
+                  console.log(users);
+                  var newCredit =  new Credit({
+                    postId:newPost._id,
+                    credit:req.body.creditType[i]._id,
+                    creditedUsers:[]
+                  });
+
+                  for(var j=0;j<req.body.creditUser[i].length;j++){
+                    newCredit.creditedUsers.push({user:users[j]._id});
+                  }
+                  newCredit.save(function(err){
+                  if(err) return handleError(res,err);
+                  console.log('Credit added');
+                })
+
+                }
+
               console.log('post created');
 
                Club.findById(req.params.id,function (err,club){

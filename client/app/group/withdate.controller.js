@@ -49,6 +49,7 @@ $scope.bookingDate=function(post_id){
 
 
 
+
 /*********************************from angularjs datepicker************/
 
   
@@ -67,18 +68,7 @@ $scope.bookingDate=function(post_id){
   };
   $scope.toggleMin();
 
-  $scope.openED = function($event) {    //OpenEndDate
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.openedED = true;
-  };
-  $scope.openSD = function($event) {    //OpenStart Date
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.openedSD = true;
-  };
+  
 
   $scope.open = function($event) {    //OpenStart Date
     $event.preventDefault();

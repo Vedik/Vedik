@@ -77,11 +77,12 @@ angular.module('myAppApp')
                                     '<span class="thumb_trnsprnt"></span>'+
                                     '<span id="user_art_info">'+
                                         '<div id="a">'+
-                                            '<span style="bottom:20px;left:10px;position:absolute">{{content.imageId.description}}</span>'+
+                                            '<span style="bottom:20px;left:10px;position:absolute"></span>'+
                                         '</div>'+
                                     '</span>'+
                                 '</div>'+
                                 '<span id="post_time">'+
+                                    '<div style="padding:10px 0px;color:black">{{content.imageId.description}}</div>'+
                                     '<span id="respond_post">'+
                                         '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
@@ -115,12 +116,10 @@ angular.module('myAppApp')
                                     '</span>'+
                                     '<span class="thumb_trnsprnt"></span>'+
                                     '<span id="user_art_info">'+
-                                        '<div id="a">'+
-                                            '<span style="bottom:20px;left:10px;position:absolute">{{content.videoId.description}}</span>'+
-                                        '</div>'+
                                     '</span>'+
                                 '</div>'+
                                 '<span id="post_time">'+
+                                    '<div style="padding:10px 0px;color:black">{{content.videoId.description}}</div>'+
                                     '<span id="respond_post">'+
                                         '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
@@ -461,7 +460,7 @@ angular.module('myAppApp')
                                     '<span class="thumb_trnsprnt"></span>'+
                                     '<span id="user_art_info">'+
                                         '<div id="a">'+
-                                            '<div id="vid_data">{{content.imageId.description}}</div>'+
+                                            '<div id="vid_data">div>'+
                                             '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span>'+
                                         '</div>'+
                                     '</span>'+

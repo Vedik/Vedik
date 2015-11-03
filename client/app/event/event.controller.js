@@ -41,27 +41,38 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
 
-    $scope.videoSubmit = function (form){
-          $http.post('/api/videos/'+$scope.Id.clubId,{vidname:form.vidName,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,genres:form.genres,type:33,eventId:$scope.eventId,vedik:form.vedik}).success(function (response){
-            console.log(response);
-            $scope.form={};
-        })
-   };
+    $scope.creditType=[];
+      $scope.creditUser=[];
+    $scope.creditType[0]='';
+      $scope.creditUser[0]=[];
+    
+    var creditNum=0;
+    $scope.addCredit= function (){
+      console.log($scope.creditType);
+     
+      creditNum++;
+      console.log(creditNum);
+      $scope.creditType[creditNum]='';
+      $scope.creditUser[creditNum]=[];
+    }
 
-    $scope.imageSubmit = function (form){
-        console.log('form.vedik');
-          $http.post('/api/images/'+$scope.Id.clubId,{imgName:form.imgName,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,type:32,eventId:$scope.eventId}).success(function (response){
-            console.log(response);
-            $scope.form={};
-            console.log(form.imgName);
-        })
-   }
+    $scope.getSuggestionsForNames = function (query){
+      return $http.get('/api/users/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
+    };
 
-    $scope.postSubmit = function (form){
-          $http.post('/api/articles/'+$scope.Id.clubId,{articleName:form.articleName,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,type:31,eventId:$scope.eventId}).success(function (response){
-            console.log(response);
-            $scope.form={};
-        })
+    $scope.getSuggestionsForCredits = function (query){
+      return $http.get('/api/creditDets/search/'+query).success(function (response) {
+        console.log(response);
+
+        return response;
+      });
+    };
+
+   $scope.creditsSubmit = function (){
+      console.log($scope.creditType,$scope.creditUser);
    }
 
     $scope.loadTags = function(query) {
@@ -69,8 +80,62 @@ angular.module('myAppApp')
       return $http.get('/api/stages/tagingStage/'+query).success(function (response){
           console.log(response);
           return response;
+
       });
 
     };
+
+    $scope.searchText    = null;
+    $scope.querySearch   = querySearch;
+
+   function querySearch (query,index) {
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+              
+              return response.data;
+            });
+    }
+
+
+  
+   $scope.type=31;
+
+   $scope.setType= function(type){
+      if(type==1){
+          $scope.type=31;
+
+      }
+      else if(type==2){
+          $scope.type=32;
+      }
+      else if(type==3){
+          $scope.type=33;
+      }
+      
+   }
+
+   $scope.postSubmit = function (form){
+      if($scope.type==31){
+           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+      }
+      else if($scope.type==32){
+           $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+            console.log(response);
+            $scope.form={};
+            console.log(form.imgName);
+        })
+      }
+      else if($scope.type==33){
+          $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+      }
+          
+   };
+
 
   });

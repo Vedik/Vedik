@@ -76,6 +76,7 @@
             }
             #HOF_div    ul  {
                 padding: 0px;
+                margin: 0px;
             }
             #upload_btn    ul  {
                 padding: 0px;
@@ -160,8 +161,8 @@
                 border: 0px;
             }               
             #HOF_display    {
-                position: absolute;
-                top: 10%;
+                position: fixed;
+                top: 80px;
                 padding: 0px;
                 left: 30%;
                 max-width: 60%;
@@ -175,11 +176,14 @@
                 line-height: 25px;
                 letter-spacing: 2px;
                 font-size: 14px;
-                display: none;
+                display: block;
+                z-index: 1;
                 word-wrap: break-word;
 
                 
             }
+            
+            
             #upld_display {
                 display: none;
                 color: rgba(255,255,255,0.7);

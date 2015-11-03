@@ -54,7 +54,16 @@
 					</div>
 					<div id="main_stage" class="col-md-8">
 									
-				             			<div ng-include="'app/uploadPortal/uploadPortal.html'"></div>									
+				             			<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-6">
+											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even">
+												
+											</content-item>
+										</div>
+										<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-6">
+											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd">
+												
+											</content-item>
+										</div>										
 										
 											<div class="img_div thumbs_wrap col-md-12">
 										<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">

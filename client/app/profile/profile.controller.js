@@ -1,4 +1,4 @@
-var creditaaa=[];
+
 'use strict';
 
 angular.module('myAppApp')
@@ -170,6 +170,17 @@ angular.module('myAppApp')
 
     };
 
+    $scope.searchText    = null;
+    $scope.querySearch   = querySearch;
+
+   function querySearch (query,index) {
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+              
+              return response.data;
+            });
+    }
+
 
    /*$scope.getVideoDetails = function (videoId){
       console.log(videoId);
@@ -191,14 +202,14 @@ angular.module('myAppApp')
    $scope.type=11;
 
    $scope.setType= function(type){
-      if(type==11){
+      if(type==1){
           $scope.type=11;
 
       }
-      else if(type==12){
+      else if(type==2){
           $scope.type=12;
       }
-      else if(type==13){
+      else if(type==3){
           $scope.type=13;
       }
       
@@ -292,16 +303,7 @@ angular.module('myAppApp')
    	
    };
 
-    $scope.searchText    = null;
-    $scope.querySearch   = querySearch;
-
-   function querySearch (query,index) {
-      return $http.get('/api/creditDets/search/'+query).then(function(response){
-              console.log(response);
-              
-              return response.data;
-            });
-    }
+    
 
    
     

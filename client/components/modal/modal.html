@@ -87,58 +87,71 @@
       <!-- Modal content-->
      
         
-        <div class="modal-body img_modal-body centric glassy">
+        <div class="modal-body img_modal-body glassy col-md-10" style="margin:50px 8.3%;border:2px solid white" >
         	<p>
-        		Create Event
+        		<h3 class="centric" >Create Event</h2>
         		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
         	</p>
-        	<form name="form" ng-submit="createEvent(form)" ng-model="form" style="color:black">
-        		<div class="form-group">
-	          		<input type="text" ng-model="form.name" placeholder="Event Name" class="form-control">
-	          	</div>
-	          	<div class="form-group">
-	          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true"></textarea>
-	          	</div>
-	          	<div class="form-group">
-	          		Start Date
-		          	<div ng-controller="DatepickerDemoCtrl">
-		          		<div class="col-md-6 datepckr">
-				            <p class="input-group">
-					            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dtSD" is-open="openedSD" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
-								<span class="input-group-btn">
-								    <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-								</span>
-							</p>
-						</div> 
+        	<div class="col-md-6" style="border-right:2px solid white;padding:20px">
+	        	<form name="form" ng-submit="createEvent(form)" ng-model="form" style="color:black">
+	        		<div class="form-group">
+		          		<input type="text" ng-model="form.name" placeholder="Event Name" class="form-control">
+		          	</div>
+		          	<div class="form-group">
+		          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true"></textarea>
+		          	</div>
+		          	<div class="form-group">
+		          		<input type="text" ng-model="form.location" placeholder="Event Location" class="form-control">
+		          	</div>
+		          	<div class="form-group">
+		          		<span style="color:white">Start Date</span>
+			          	<div >
+			          		<div class="col-md-6 datepckr">
+					            <p class="input-group">
+						            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.dtSD" is-open="openedSD" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
+									<span class="input-group-btn">
+									    <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+									</span>
+								</p>
+							</div> 
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-	          		End Date
-	          		<div ng-controller="DatepickerDemoCtrl">
-		          		<div class="col-md-6 datepckr">
-				            <p class="input-group">
-					            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dtED" is-open="openedED" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
-								<span class="input-group-btn">
-								    <button type="button" class="btn btn-default" ng-click="openED($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-								</span>
-							</p>
-						</div> 
+					<br/>
+					<br/>
+					<div class="form-group">
+		          		<span style="color:white">End Date</span>
+		          		<div >
+			          		<div class="col-md-6 datepckr">
+					            <p class="input-group">
+						            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.dtED" is-open="openedED" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
+									<span class="input-group-btn">
+									    <button type="button" class="btn btn-default" ng-click="openED($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+									</span>
+								</p>
+							</div> 
+						</div>
 					</div>
-				</div>
-				<div class="form-group">	
-					<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
-				</div>
-				<div class="form-group">
-					<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-     			      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-				    </tags-input>
-				</div>
-
-	         	<button type="submit" class="b2w">Submit</button>
-	         </form>
+					<br/>
+					<br/>
+					<!-- <div class="form-group">	
+						<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category">
+					</div> -->
+					<div class="form-group">
+						<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+	     			      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+					    </tags-input>
+					</div>
+					<br/>
+		         	<button type="submit" class="b2w">Submit</button>
+		         </form>
+		    </div>
+		    <div class="col-md-6" style="padding:20px">
+	    		<div class="form-group">
+	          		<input type="text" ng-model="form.galPic" placeholder="Event Cover" class="form-control">
+	          	</div>
+	          	<img src="{{form.galPic}}" width="100%" height="auto">
+		    </div>
         </div>
-        
-      </div>
       
     </div>
   </div>

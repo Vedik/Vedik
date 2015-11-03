@@ -74,8 +74,9 @@
 		position: absolute;
 		right: 5px;
 		top: 5px;
-		color: white;
+		color: black;
 		z-index: 2;
+		text-shadow: 1px 2px 1px white;
 
 	}
 	.modal 	{
@@ -112,7 +113,7 @@
 	
 	}
 	.play img	{
-		width: 5%;
+		width: 10%;
 		height:14%;
 		position: absolute;
 		bottom: 10%;
@@ -245,9 +246,7 @@
      	white-space: nowrap;
      }
 
-     .a {
-     	
-     }
+     
      #wrapper {
      	position: relative;
      }
