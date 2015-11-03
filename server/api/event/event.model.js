@@ -13,6 +13,7 @@ var EventSchema = new Schema({
   location:String,
   eventCover:String,
   vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
+  attending:[{user:{type:Schema.Types.ObjectId,ref:'User'}}]
 });
 
 module.exports = mongoose.model('Event', EventSchema);

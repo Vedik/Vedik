@@ -208,6 +208,34 @@ angular.module('myAppApp')
                                             '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
                                     '</span>'   +                                    
                                 '</div>'    +
+                            '</div>';
+    var postTemplate = '<div>'   +
+                                '<div class="post_div" style="width:{{width}}%">'  +
+                                    '<div class="text_type_post" id="article">' +
+                                        '<a href="#">'  +
+                                            '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
+                                        '</a>'  +
+                                        '</br>{{content.articleId.description}}</br></br>'  +
+                                        '<div>' +
+                                            '<span>by<a href="#"> {{content.uploader.user.name}}</a></span>'  +                                            
+                                        '</div>'    +
+                                    '</div>'    +
+                                    '<span id="post_time">'+
+                                            '<span id="respond_post">'+
+                                                
+                                            '</span>'+
+                                            '<div class="dropdown">'+
+                                                '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                                '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                      
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+  
+                                                '</ul>'+
+                                            '</div>'+
+                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                    '</span>'   +                                    
+                                '</div>'    +
                             '</div>';                      
     var getTemplate = function(contentType) {
         var template = '';
@@ -229,6 +257,15 @@ angular.module('myAppApp')
                 template = imageTemplate;
                 break;
             case 23:
+                template = videoTemplate;
+                break;
+            case 31:
+                template = postTemplate;
+                break;
+            case 32:
+                template = imageTemplate;
+                break;
+            case 33:
                 template = videoTemplate;
                 break;
             case 7:

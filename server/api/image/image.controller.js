@@ -162,18 +162,7 @@ exports.clubPost = function(req, res) {
     b[i]=a[i]._id;
   };
   
-  var type;
-  var eventId;
-  if(req.body.type)
-  {
-      type=req.body.type;
-      eventId=req.body.eventId;
-  }
-  else
-  {
-      type=22;
-      
-  }
+ 
  
   var newImage = new Image({
     imgName:req.body.imgName,
@@ -191,7 +180,7 @@ exports.clubPost = function(req, res) {
          
           var newPost = new Post({
             imageId: newImage._id,
-            type:type,
+            type:22,
             createdOn:Date.now(),
             uploader:{user:req.user._id},
             view_count:0,
@@ -202,12 +191,6 @@ exports.clubPost = function(req, res) {
             
           });
 
-          if(eventId)
-          {
-              newPost.uploaderClub=req.params.id;
-              newPost.eventId=eventId;
-          }
-          else
               newPost.uploaderClub=req.params.id;
             
           for(i=0;i<b.length;i++)
@@ -279,6 +262,98 @@ exports.clubPost = function(req, res) {
 
             }
           });
+
+          
+          return res.json(200,newImage);
+        }
+    
+    });
+};
+
+exports.eventPost = function(req, res) {
+  console.log(req.params.id);
+  /*Video.create(req.body, function(err, video) {
+    if(err) { return handleError(res, err); }
+    return res.json(201, video);
+  });*/
+  
+  
+
+ 
+  var newImage = new Image({
+    imgName:req.body.imgName,
+    picUrl:req.body.picUrl,
+    description:req.body.description
+  });
+ 
+  newImage.save(function (err){
+ 
+    if(err) {return handleError(res, err); }
+    else 
+    {  
+         
+      var newPost = new Post({
+        imageId: newImage._id,
+        type:32,
+        createdOn:Date.now(),
+        uploader:{user:req.user._id},
+        ratings:[],
+        like:[],
+        uploaderClub:req.params.id,
+        eventId:req.body.eventId
+      });
+
+        
+      
+         
+
+         
+            
+     console.log(req.params.id);     
+      newPost.save(function (err)
+      {
+        if(err) {console.log(req.params.id); return handleError(res, err);}
+
+        else 
+        {
+          
+
+          console.log('post created');
+
+           Club.findById(req.params.id,function (err,club){
+                if(err) { return handleError(res, err); }
+            })
+            .populate('subscribed_users.user')
+            .exec(function(err,club){
+                if (err) return handleError(err);
+              for(var i=0;i<club.subscribed_users.length;i++)
+              {
+                  console.log(club.subscribed_users[i].user._id);
+                  if(club.subscribed_users[i].user._id.equals(req.user._id))
+                  {
+                    console.log('user');
+                  }
+                  else
+                  {
+                    club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                    club.subscribed_users[i].user.save(function (error){
+                      if(error){
+                        return handleError(res,err);
+                      }
+                      else
+                      {
+                         console.log('add unseen notif to');
+                      }
+                   
+                    });
+                  }
+              }
+             
+              
+            });
+
+        }
+      } );
 
           
           return res.json(200,newImage);

@@ -36,8 +36,21 @@ body {
             box-shaddow:0px 5px 10px BLACK;
             position:fixed;
             top:0px;
-            z-index: 1000;
+            z-index: 10000;
         }
+
+        .top_logo_sec {
+            height: 45px;            
+            width:100%;
+            background-color: black !important;
+            background-size:10px 100%;
+            box-sizing:border-box;
+            box-shaddow:0px 5px 10px BLACK;
+            position:fixed;
+            top:10px;
+            z-index: 10000;
+        }
+
         #hidden {
             height:45px;
             position: relative;

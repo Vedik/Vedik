@@ -85,6 +85,10 @@
    	}
    	.e_host	{
    		font-size: 14px;
-   		color: black;
+   		color: white;
    		opacity: 0.5;
+   	}
+   	.light_text_shadow{
+   		color: white;
+   		text-shadow:1px 1px 2px grey, -1px -1px 2px black;
    	}

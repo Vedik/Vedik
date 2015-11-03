@@ -7,7 +7,9 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/club/:clubId', controller.clubEvents);
-router.get('/:id', controller.show);
+router.get('/:id', auth.isAuthenticated(), controller.show);
+router.post('/attend/:id',auth.isAuthenticated(),controller.addAttend);
+router.delete('/attend/:id',auth.isAuthenticated(),controller.unAttend);
 router.post('/:id', auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

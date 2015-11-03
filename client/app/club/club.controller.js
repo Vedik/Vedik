@@ -4,7 +4,7 @@ angular.module('myAppApp')
   .controller('ClubCtrl', function ($scope,$location,Auth, $state,User,$http,$interval,ClubEventService) {
     
 
-    $scope.message = 'Hello';
+    $scope.club = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/club/')[1];
     console.log(id);
@@ -138,8 +138,23 @@ angular.module('myAppApp')
           
    };
 
+  
 
-   $scope.openED = function($event) {    //OpenEndDate
+   $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  // $scope.disabled = function(date, mode) {
+  //   return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  // };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.openED = function($event) {    //OpenEndDate
     $event.preventDefault();
     $event.stopPropagation();
 
@@ -152,22 +167,22 @@ angular.module('myAppApp')
       $scope.openedSD = true;
     };
 
-    $scope.dateOptions = {
+  
+
+  $scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1
-    };
+  };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
-     
-  $scope.testDate = function(){
-    console.log(form.dtSD,form.dtED);
-  }
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+
 
    $scope.createEvent = function (form){
           $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
             console.log(response);
-            $scope.form={};
+            $state.go('event',{id:response._id});
+
         })
    }
 

@@ -174,7 +174,7 @@
 		height: 200px;
 	}
 	#article	{
-		min-height: 200px;
+		min-height: auto;
 	}
 
 	#event_det div {

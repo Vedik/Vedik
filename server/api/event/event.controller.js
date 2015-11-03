@@ -31,9 +31,20 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
 
     if(!event) { return res.send(404); }
+    var attending=false;
+    for(var i=0; i<event.attending.length;i++)
+    {
+        if(event.attending[i].user.equals(req.user._id)){
+
+          attending=true;
+          break;
+        }
+    }
+      
+   
 
     console.log(event);
-    return res.json(event);
+    return res.json({event:event,attending:attending});
    
   });
 };
@@ -104,8 +115,40 @@ exports.create = function(req, res) {
     
     });
 };
-
-
+exports.addAttend = function(req, res) {
+  Event.findById(req.params.id,function (err,event){
+    if(err) return handleError(res,err);
+    event.attending.push({user:req.user._id});
+      event.save(function (err) {
+        if(err) return handleError(res, err);
+        return res.json(event.attending.length);
+      })
+  })
+};
+exports.unAttend = function (req,res){
+  Event.findById(req.params.id,function (err,event){
+    if(err){
+      return handleError(res,err);
+    }
+    if(!event) { return res.send(404); }
+    var i =0;
+    for(;i<event.attending.length;i++){
+      if(event.attending[i].user.equals(req.user._id)){
+        event.attending[i].remove(function (err){
+          if(err){ return handleError(res,err);}
+          else{
+            event.save(function (err){
+              if(err){ return handleError(res, err);}
+              else {
+                return res.json(event.attending.length);
+              }
+            });
+          }
+        })
+      }
+    } 
+  });
+};
 // Updates an existing event in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }

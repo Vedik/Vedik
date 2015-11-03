@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Post = require('./post.model');
 var User = require('../user/user.model');
+var Credit = require('../credit/credit.model');
 // Get list of posts
 exports.index = function(req, res) {
   console.log('err');
@@ -147,18 +148,29 @@ exports.showForUser = function(req, res) {
   var query = {};
 
   query['uploader.' + 'user'] = user_id;
-  Post.find(query,function (err, posts) {
+  Credit.find( { creditedUsers: { $elemMatch: { user:user_id } } },function (err, posts) {
     if(err) { return handleError(res, err); }
-    })
-  .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId')
-  
-  .exec(function (err, posts){
-      if (err) return handleError(err);
-     
-      console.log('er12');
+        var postId=[];
+          for(var i=0;i<posts.length;i++){
+            postId[i]=posts[i].postId;
+          }
+            console.log(postId);
+    
+  Post.find({
+                '_id': { $in: postId}
+                      },function (err, posts) {
+              if(err) {console.log('dddddddd'); return handleError(res, err); }
+              })
+      .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId')
       
-      return res.json(posts);
-  })
+      .exec(function (err, posts){
+          if (err) return handleError(err);
+     
+          console.log('er12');
+          
+          return res.json(posts);
+      })
+    })
 }
 };
 
@@ -167,7 +179,7 @@ exports.showForClub = function(req, res) {
    var club_id = req.params.id;
   var query = {};
   
-  Post.find({uploaderClub:club_id},function (err, posts) {
+  Post.find({$and : [{uploaderClub:club_id},{$or : [{type:21},{type:22},{type:23},{type:30}]}]},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
   .populate('articleId videoId imageId like uploaderClub eventId')
@@ -186,7 +198,7 @@ exports.showForEvent = function(req, res) {
    var event_id = req.params.id;
   var query = {};
   query['eventId'] = event_id;
-  Post.find(query,function (err, posts) {
+  Post.find({eventId:req.params.id},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
   .populate('articleId videoId imageId like uploaderClub eventId')

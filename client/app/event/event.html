@@ -1,7 +1,10 @@
+<!--***********************Image & Video view Modal********************-->
 
+<div ng-include="'components/modal/modal.html'"></div>
+<!--******************************************************************-->
 
-<div ng-controller="EventCtrl">
-  <div ng-include="'components/navbar/navbar.html'" ng-if="navbar"></div>
+<div ng-controller="EventCtrl" id="for_blur">
+  <div ng-include="'components/navbar/navbar.html'" ></div>
   <div id="nav_fade">
     <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="250px">
   </div>
@@ -21,10 +24,17 @@
     <div class="calign" id="event_det_wrapper">
       <span class="e_name">{{event.name}}</span>
       <hr></hr>
-      <a href="/club/{{event.club._id}}"><span class="e_host">{{event.club.name}}</span></a>
-      <br><br>
-      <span class="glyphicon glyphicon-map-marker"> {{event.location}}</span>
-      <span class="glyphicon glyphicon-time"> {{event.startTime}}-{{event.endTime}}</span>
+      <div class="light_text_shadow">
+          <a href="/club/{{event.club._id}}"><span class="e_host">{{event.club.name}}</span></a>
+          <br><br>
+          <span class="glyphicon glyphicon-map-marker">{{event.location}} </span>
+          <span class="glyphicon glyphicon-time">{{event.startDate}}-{{event.endDate}}</span><br><br>
+          <span>
+            <button type="button" ng-click="addAttend()" class="w2g" ng-hide="attending">Attend</button>
+            <button type="button" ng-click="unAttend()" class="w2g" ng-show="attending">You are going</button>
+            <br><span style="font-size:10px;text-align:left">{{attendingNum}} going</span>
+          </span>
+      </div>
     </div>
   </div>
   
@@ -36,10 +46,29 @@
         </div>
       </div>
     </nav>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        $(window).scroll(function () {
+            //if you hard code, then use console
+            //.log to determine when you want the 
+            //nav bar to stick. 
+            var height=$(window).outerHeight(); 
+            console.log($(window).scrollTop())
+          if ($(window).scrollTop() > (height-45)) {
+            $('#navbar_mdl').addClass('navbar_sec_fixed');
+          }
+          if ($(window).scrollTop() < (height-44)) {
+            $('#navbar_mdl').removeClass('navbar_sec_fixed');
+          }
+        });
+      });
+    </script>
 
     <div class="col-md-6" id="posts">
+      <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ></content-item>
 
-      <div class="awarding_div">
+      <!-- <div class="awarding_div">
 
         <div id="border">
             <div id="certif_icon"><img src="assets/images/gold.png"></div>
@@ -83,7 +112,7 @@
             </div>
                              
         </div>
-      </div>
+      </div> -->
 
 
              
@@ -91,15 +120,20 @@
               <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ></content-item>
 
     </div>
-    <div class="col-md-6" style="padding:10px 20px 10px 10px">
+    <div class="col-md-6" style="padding:10px 20px 10px 10px  ">
         <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
             <h4 style="color:white">Annouce<hr></h4>
             <div >
-              <form name="form" ng-submit="postSubmit(form)" ng-model="form">
+              <ul class="nav nav-tabs" style="width:40%;">
+                <li  class="active"><a href="#article_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Post</a></li>               
+                <li ><a href="#image_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
+                <li ><a href="#video_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
+              </ul>
+              <form name="form"  ng-model="form">
                   <div class="tab-content">
                       <div class="tab-pane fade in active" id="upload_form2">
                     
-                        <div id="upload_wrapper_left">
+                        <div class="col-md-12">
                           <div class="form-group">
                         <input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Name">
                       </div>
@@ -107,40 +141,35 @@
                         <textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
                           </textarea>                         
                                     
-                      </div>
+                      
                                             
                       
-                      <a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+                      
                         </div>
-                        <ul class="nav nav-tabs" style="width:40%;position:absolute;bottom:5px;right:0px">
-                            <li  class="active" ng-click="setType(1)"><a href="#article_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Article</a></li>               
-                            <li ng-click="setType(2)"><a href="#image_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
-                            <li ng-click="setType(3)"><a href="#video_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
-                          </ul>
-                        <div id="upload_wrapper_right">
+                        
+                      
                           
                           <div class="tab-content">
                             <div id="article_up" class="tab-pane fade in active">
-                              <div class="form-group">
-                            <textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
-                              </textarea>           
-                          </div>
-                        </div>
+                                <button type="submit" class="b2w" ng-click="postSubmit()">Submit</button>
+                            </div>
                         <div id="image_up" class="tab-pane fade">
-                              <div class="form-group">  
-                            <input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-                          </div>
-                          <img src="{{form.picUrl}}" width="100%" height="auto">
+                            <div class="form-group">  
+                              <input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+                            </div>
+                            <img src="{{form.picUrl}}" width="100%" height="auto">
+                            <button type="submit" class="b2w" ng-click="imageSubmit()">Submit</button>
                         </div>
                         <div id="video_up" class="tab-pane fade">
-                              <div class="form-group">
+                            <div class="form-group">
                                         
-                            <input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
-                          </div>
-                          <div class="form-group">              
-                            <input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
-                          </div>
-                          <img src="{{form.picUrl}}" width="100%" height="auto">
+                              <input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+                            </div>
+                            <div class="form-group">              
+                              <input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+                            </div>
+                            <img src="{{form.posterUrl}}" width="100%" height="auto">
+                            <button type="submit" class="b2w" ng-click="videoSubmit()">Submit</button>
                         </div>
                       </div>
                       
@@ -149,7 +178,7 @@
                         </div>
 
                     </div>
-                  <div id="credits2" class="tab-pane fade" style="background:white">
+                  <!-- <div id="credits2" class="tab-pane fade" style="background:white">
                         
                     <table>
                         <tr>
@@ -181,11 +210,11 @@
                                     <md-item-template>
                                       <span md-highlight-text="searchText">{{item.creditDetail}}</span>
                                     </md-item-template>
-                                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                                    <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
                                       <div ng-message="required">You <b>must</b> have a favorite state.</div>
                                       <div ng-message="minlength">Your entry is not long enough.</div>
                                       <div ng-message="maxlength">Your entry is too long.</div>
-                                    </div>-->
+                                    </div>
 
                                   </md-autocomplete>
                                 </div>
@@ -216,7 +245,7 @@
                         </div>
 
                                     
-                    </div>
+                    </div> -->
                   </div>
                 </form>
             </div>

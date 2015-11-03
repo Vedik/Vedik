@@ -509,3 +509,10 @@
     position: absolute;
     left: 19px;
 }
+
+.navbar_sec_fixed {
+    top: 45px;
+    z-index: 1000;
+  position: fixed;
+    width: 100%;
+}

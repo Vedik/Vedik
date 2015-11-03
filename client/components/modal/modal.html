@@ -87,7 +87,7 @@
       <!-- Modal content-->
      
         
-        <div class="modal-body img_modal-body glassy col-md-10" style="margin:50px 8.3%;border:2px solid white" >
+        <div class="modal-body img_modal-body glassy col-md-10" style="margin:50px 8.3%;border:2px solid white" ng-if="club">
         	<p>
         		<h3 class="centric" >Create Event</h2>
         		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
@@ -106,7 +106,7 @@
 		          	<div class="form-group">
 		          		<span style="color:white">Start Date</span>
 			          	<div >
-			          		<div class="col-md-6 datepckr">
+			          		<div class="col-md-6 datepckr" ng-controller="DatepickerDemoCtrl">
 					            <p class="input-group">
 						            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.dtSD" is-open="openedSD" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
 									<span class="input-group-btn">
@@ -121,7 +121,7 @@
 					<div class="form-group">
 		          		<span style="color:white">End Date</span>
 		          		<div >
-			          		<div class="col-md-6 datepckr">
+			          		<div class="col-md-6 datepckr" ng-controller="ClubCtrl">
 					            <p class="input-group">
 						            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.dtED" is-open="openedED" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
 									<span class="input-group-btn">

@@ -166,20 +166,8 @@ exports.clubPost = function(req, res) {
   console.log(req.params.id);
   console.log(req.body.creditType,req.body.creditUser);
   var vidUrl=req.body.vidurl;
-  var a = vidUrl.split('watch?v=');
-  
-  var type;
-  var eventId;
-  if(req.body.type)
-  {
-      type=req.body.type;
-      eventId=req.body.eventId;
-  }
-  else
-  {
-      type=23;
-      
-  }
+  var vidCode = vidUrl.split('watch?v=');
+
  
 
   var c=req.body.vedik;
@@ -189,10 +177,10 @@ exports.clubPost = function(req, res) {
   {
     b[i]=c[i]._id;
   };
-    console.log(b);
+  
   var newvideo = new Video({
     vidname:req.body.vidname,
-    vidurl:a[1],
+    vidurl:vidCode[1],
     description:req.body.description,
     posterurl:req.body.posterurl,
     
@@ -208,29 +196,131 @@ console.log(newvideo);
           console.log('12');
           var newPost = new Post({
             videoId: newvideo._id,
-            type:type,
+            type:23,
             tags:req.body.genres,
-            uploader:{user:req.user._id}, //club:req.params.id},
-           
+            uploader:{user:req.user._id}, //club:req.params.id},           
             ratings:[],
-            rating:0,
-            view_count:0,
+            rating:0,          
             like:[],
-            createdOn:Date.now()
+            createdOn:Date.now(),
+            uploaderClub:req.params.id
           });
           
-          if(eventId)
-          {
-              newPost.uploaderClub=req.params.id;
-              newPost.eventId=eventId;
-          }
-          else
-              newPost.uploaderClub=req.params.id;
+          
 
           for(var i=0;i<b.length;i++)
           {
             newPost.vedik.push({vedik:b[i]});
           }
+          console.log('1');
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else 
+              {
+                for(var i=0;i<req.body.creditType.length;i++)
+                {
+                  var users=req.body.creditUser[i];
+                  console.log(users);
+                  var newCredit =  new Credit({
+                    postId:newPost._id,
+                    credit:req.body.creditType[i]._id,
+                    creditedUsers:[]
+                  });
+
+                  for(var j=0;j<req.body.creditUser[i].length;j++){
+                    newCredit.creditedUsers.push({user:users[j]._id});
+                  }
+                  newCredit.save(function(err){
+                  if(err) return handleError(res,err);
+                  console.log('Credit added');
+                })
+
+                }
+
+                console.log('post created');
+
+                Club.findById(req.params.id,function (err,club){
+                    if(err) { return handleError(res, err); }
+                })
+                .populate('subscribed_users.user')
+                .exec(function(err,club){
+                    if (err) return handleError(err);
+                  for(var i=0;i<club.subscribed_users.length;i++)
+                  {
+                      console.log(club.subscribed_users[i].user._id);
+                      if(club.subscribed_users[i].user._id.equals(req.user._id))
+                      {
+                        console.log('user');
+                      }
+                      else
+                      {
+                        club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        club.subscribed_users[i].user.save(function (error){
+                          if(error){
+                            return handleError(res,err);
+                          }
+                          else
+                          {
+                             console.log('add unseen notif to');
+                          }
+                       
+                        });
+                      }
+                  }
+                 
+                  
+                });
+                
+              }
+          });
+
+          
+          return res.json(200,newvideo);
+        }
+    
+    });
+};
+
+
+exports.eventPost = function(req, res) {
+  console.log(req.params.id);
+
+  var vidUrl=req.body.vidurl;
+  var vidCode = vidUrl.split('watch?v=');
+  
+ 
+ 
+
+  
+   
+  var newvideo = new Video({
+    vidname:req.body.vidname,
+    vidurl:vidCode[1],
+    description:req.body.description,
+    posterurl:req.body.posterurl,
+    
+  });
+
+ 
+console.log(newvideo);
+  newvideo.save(function (err){
+    console.log('123');
+    if(err) return handleError(res, err);
+    else {
+        
+          console.log('12');
+          var newPost = new Post({
+            videoId: newvideo._id,
+            type:33,
+            uploader:{user:req.user._id}, //club:req.params.id},
+            
+            like:[],
+            createdOn:Date.now(),
+            uploaderClub:req.params.id,
+            eventId:req.body.eventId
+          });
+          
+         
           console.log('1');
           newPost.save(function(err){
             if(err) return handleError(res,err);
