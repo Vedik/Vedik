@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Post = require('./post.model');
 var User = require('../user/user.model');
 var Credit = require('../credit/credit.model');
+
 // Get list of posts
 exports.index = function(req, res) {
   console.log('err');
@@ -161,7 +162,7 @@ exports.showForUser = function(req, res) {
                       },function (err, posts) {
               if(err) {console.log('dddddddd'); return handleError(res, err); }
               })
-      .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId')
+      .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId comments.comment')
       
       .exec(function (err, posts){
           if (err) return handleError(err);
@@ -182,7 +183,7 @@ exports.showForClub = function(req, res) {
   Post.find({$and : [{uploaderClub:club_id},{$or : [{type:21},{type:22},{type:23},{type:30}]}]},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploaderClub eventId')
+  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -201,7 +202,7 @@ exports.showForEvent = function(req, res) {
   Post.find({eventId:req.params.id},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like uploaderClub eventId')
+  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -225,7 +226,7 @@ exports.showForStage = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploaderClub uploader.user event')
+  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -250,7 +251,7 @@ exports.showStageForUser = function(req, res) {
      }
      console.log(posts+"dfggf")
     })
-  .populate('articleId videoId imageId like uploaderClub uploader.user event')
+  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
   
   .exec(function (err, posts){
       if (err) return handleError(err);

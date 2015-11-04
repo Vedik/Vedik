@@ -11,6 +11,21 @@ exports.index = function(req, res) {
   });
 };
 
+exports.videoCredits = function(req, res) {
+  Credit.find({postId:req.params.id},function (err, credits) {
+    if(err) { return handleError(res, err); }
+
+   
+  })
+  .populate('credit creditedUsers.user')
+  
+  .exec(function (err, credits){
+      if (err) return handleError(err);
+
+       return res.json(200, credits);
+    });
+};
+
 // Get a single credit
 exports.show = function(req, res) {
   Credit.findById(req.params.id, function (err, credit) {

@@ -6,6 +6,7 @@ var controller = require('./credit.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/video/:id', controller.videoCredits);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

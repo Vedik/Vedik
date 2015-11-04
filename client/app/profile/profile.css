@@ -1,8 +1,12 @@
             .box_shadow_dwn {
                 box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
+                background-color: white !important;
+                border-radius: 0px !important;
+                border: 0px !important;
             }
             .box_shadow_up {
                 box-shadow: -2px -2px 5px 0px rgba(0, 0, 0, 0.16), 0px -2px 10px 0px rgba(0, 0, 0, 0.12);
+                background-color: white;
             }
             #banner {
                     margin:0px;
@@ -45,7 +49,11 @@
             }
             #infodiv    {
                 position: static;
-                
+                color: #337AB7;
+                padding: 5px 20px 10px;
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 1px;             
                 
             }
             #info   {
@@ -117,15 +125,20 @@
                 border: 1px solid #247ba0
             }
             .w2b    {
-                background-color: rgba(255,255,255,0.8);
+                background-color: rgba(255,255,255,0.8) !important;
                 padding: 5px 10px;
                 border: 0px;
                 color: black;
                 border-radius: 0px;
+                -webkit-transition: all 0.5s ease;
+                     -moz-transition: all 0.5s ease;
+                       -o-transition: all 0.5s ease;
+                      -ms-transition: all 0.5s ease;
+                          transition: all 0.5s ease;
 
             }
             .w2b:hover    {
-                background-color: #247ba0;
+                background-color: #247ba0 !important;
                 color: white;
                 
                 border: 0px;
@@ -135,8 +148,13 @@
                 background-color: rgba(255,255,255,0.8);
                 padding: 5px 10px;
                 border: 0px;
-                color: black;
+                color: #337AB7;
                 border-radius: 0px;
+                -webkit-transition: all 0.5s ease;
+                     -moz-transition: all 0.5s ease;
+                       -o-transition: all 0.5s ease;
+                      -ms-transition: all 0.5s ease;
+                          transition: all 0.5s ease;
 
             }
             .w2g:hover    {

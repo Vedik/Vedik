@@ -80,17 +80,17 @@
               img#video_play {
                 display: block;
                 height: auto;
-                width: 70%;
-                left:15%;
+                width: 60%;
+                left:20%;
                 position: relative;
               }
               iframe {
                 height: 100%;
-                left: 15%;
+                left: 20%;
                 top:0px;
                 position: absolute;
                 
-                width: 70%;
+                width: 60%;
                 margin:0% auto;
                 box-shadow: 1px 1px 10px black;
               }

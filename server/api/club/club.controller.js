@@ -71,7 +71,7 @@ exports.create = function(req, res) {
     posts:[],
     admin:req.user._id,
     subscribed_users:[],
-    stage_for:[],
+    vedik:[],
     events:[]
   })
   newClub.save(function (err){
@@ -86,26 +86,16 @@ exports.create = function(req, res) {
 };
 
 exports.editProfile = function (req, res) {
-  var userId = req.user._id;
-  var type=req.params.type;
+  var clubId = req.params.id;
   
-  console.log(req.body.editProfile);
-  console.log(req.params.type);
+  console.log('editProfile');
 
-  Club.findById(userId, function (err,club){
+  Club.findById(clubId, function (err,club){
 
-    if(type==1)
-    {
-     club.name=req.body.editProfile; 
-    }
-    else if (type==2)
-    {
-      club.about=req.body.editProfile;
-    }
-    else if (type==3)
-    {
-      club.galleryPic=req.body.editProfile;
-    }
+    club.name= req.body.name;
+    club.galleryPic=req.body.galleryPic;
+    club.about=req.body.about;
+    
     
     club.save(function (err) {
       if (err) { return handleError(res, err); }

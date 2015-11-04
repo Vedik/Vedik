@@ -1,6 +1,7 @@
 <!--***********************Image & Video view Modal********************-->
 
 <div ng-include="'components/modal/modal.html'"></div>
+<div ng-include="'components/jqscripts/jqscripts.html'"></div>
 <!--******************************************************************-->
 
 
@@ -15,22 +16,23 @@
             	<div id="pro_pic">
             		<div id="pro_pic_wrapper" >
             			<div ng-controller="ParallaxEff">
-            				<img src="{{GalleryPic}}" style="width:100%;height:100%;z-index:0;position:relative" alt="" du-parallax y="background" ></img>
+            				<img src="{{club.galleryPic}}" style="width:100%;height:auto;z-index:0;position:relative;margin: -10% 0px;" alt="" du-parallax y="background" id="gal_pic"></img>
             			</div>
            				
-           				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div>
+           				
 
            				<script>
-					  	$(document).ready(function(){
-					   		$("#gal_pic_edit").click(function(){
-								var windowHeight= $(window).height();
-								var modalHeight= $(".modal_center").innerHeight;
-								var margin= (windowHeight*25)/100;
+					 //  	$(document).ready(function(){
+					 //   		$("#gal_pic_edit").click(function(){
+						// 		var windowHeight= $(window).height();
+						// 		var modalHeight= $(".modal_center").innerHeight;
+						// 		var margin= (windowHeight*25)/100;
 									
-								$(".glassy").css("border", "5 solid black");
-							});
-						});
+						// 		$(".glassy").css("border", "5 solid black");
+						// 	});
+						// });
 						</script>
+
            			</div>
 	            	<div id="stages_list">
 	            		
@@ -39,26 +41,19 @@
 
 		            <div id="user_profile" class="col-md-3 ">
 			            <div>
-			                <span>
-			                	<span ng-click="edit.name=true" ng-hide="edit.name && user.name==loggedInUser.name" id="pro_name">{{club.name}}</span>
-			                	<div ng-show="edit.name && user.name==loggedInUser.name">
-			                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
-			                			<input type="text" value="{{user.name}}" ng-model="form.name" autofocus>
-			                			<br>
-			                			<button type="submit" class="w2b">Save</button> 
-			                			<button type="button" ng-click="edit.name=false" class="w2b">Cancel</button>
-			                		</form>
-			                	</div>
+			                <span id="user_profile_wrapper">
+			                	<span id="pro_name">{{club.name}}</span>			                	
 			                </span>
 			            </div>
 			        
 			        	<div id="infodiv">
-			            	<span id="info">Director Editor Screenwriter</br></span>
-			            	<span id="info">9th Feb 1996</span>
+			            	
 			            	<span ng-if="club.admin!=loggedInUser._id">
-				            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
-								<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
+				            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2g">Follow</button>
+								<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2g">Following</button>
+
 							</span>
+							<span ng-if="club.admin==loggedInUser._id">{{club.subscribed_users.length}} Following</span>
 			            </div>
 
 		        	</div>
@@ -73,30 +68,15 @@
 
 		        		<span id="about_user" class="tab-pane fade">
 		        			
-		        			<h4>About<hr></hr></h4>
+		        			<h4>About<hr/></h4>
 		        			
 							<span>
-			                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
+			                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{club.about}}</span>
 			                	<div ng-show="edit.about && user.name==loggedInUser.name">
 			                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
-			                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='Auto-Expanding Textarea' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
+			                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='Auto-Expanding Textarea' id="textarea" style="width:100%" value="{{club.about}}" ng-model="form.about" data-bind="hasfocus: true">
 			                			</textarea>
-			                			<script >
-			                				$(document)
-										    .one('focus.textarea', '.autoExpand', function(){
-										        var savedValue = this.value;
-										        this.value = '';
-										        this.baseScrollHeight = this.scrollHeight;
-										        this.value = savedValue;
-										    })
-										    .on('input.textarea', '.autoExpand', function(){
-										        var minRows = this.getAttribute('data-min-rows')|0,
-										            rows;
-										        this.rows = minRows;
-										        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 32);
-										        this.rows = minRows + rows;
-										    });
-			                			</script>
+			                			
 			                			
 			                			<br>
 			                			<button type="submit" class="w2b">Save</button> 
@@ -106,7 +86,7 @@
 			                </span>
 						</span>
 		        		<span id="HOF" class="tab-pane fade">
-		        			<h4>Hall of Fame<hr></hr></h4>
+		        			<h4>Hall of Fame<hr/></h4>
 		        			Actor
 		        		</span>
 		        		<div ng-include="'app/uploadPortal/uploadPortal.html'" id="upload_form0" class="tab-pane fade"></div>
@@ -119,43 +99,42 @@
 					        </md-button>
 			        	</div>
 		        	</a>
-		        		
 		        	
-		        	
+					<span class="settings" ng-show="club.admin==loggedInUser._id">                                         
+					  <div class="dropdown">
+					  	<md-button class="md-fab dropdown-toggle" aria-label="Eat cake" data-toggle="dropdown">
+					    	<span class="glyphicon glyphicon-cog"></span>
+					    <span class="caret"></span></button>       					    
+					    </md-button>
+					    <md-whiteframe class="md-whiteframe-3dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
+						    
+						</md-whiteframe>
+					    
+					    <ul class="dropdown-menu box_shadow_dwn  dropdown-menu-right">
+					      <li><a href="#">Manage Admins</a></li>
+					      <li><a  class="btn btn-info btn-lg b2w" data-toggle="modal" data-target="#editClub" >Edit Page</a></li>
+					      
+					    </ul>
+					  </div>
+					</span>		        	
 	        	</div>
 	        
 
 	                                               
 				<!--***************************users content, videos etc**********************-->
 				 <div id="user_hist_div1" class="thumbs_wrap col-md-12">
-				 	<div id="stages_list" class="box_shadow_up">
+				 	<div id="stages_list" class="box_shadow_up club_nav">
 	            		<ul class="nav nav-tabs">
 	            			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>  
 						  	<li ng-repeat="stageList in stageList" ng-click="stageDiv(stageList.id)"><a data-toggle="tab" href="#{{stageList.id}}">{{stageList.name}}</a></li>
-						  	<li><button ng-show="club.admin==loggedInUser._id" type="button" class="btn btn-info btn-lg b2w" data-toggle="modal" data-target="#event" > Create Event</button></li>
+						  	<li><a ng-show="club.admin==loggedInUser._id" type="button" class="" data-toggle="modal" data-target="#event" > Create Event</a></li>
 						</ul>
 					</div>
-					<script type="text/javascript">
-				      $(document).ready(function() {
+					
 
-				        $(window).scroll(function () {
-				            //if you hard code, then use console
-				            //.log to determine when you want the 
-				            //nav bar to stick. 
-				            var height=$(window).outerHeight(); 
-				            console.log($(window).scrollTop())
-				          if ($(window).scrollTop() > (height-45)) {
-				            $('#stages_list').addClass('navbar_sec_fixed');
-				          }
-				          if ($(window).scrollTop() < (height-44)) {
-				            $('#stages_list').removeClass('navbar_sec_fixed');
-				          }
-				        });
-				      });
-				    </script>
 				 	<div class="col-md-2" id="clubs_list">
-						<div id="clubs_list_wrap">
-							<p style="font-size:13px;color:white">Events</p>						
+						<div id="clubs_list_wrap" class="box_shadow_dwn">
+							<div id="list_heading" ><span class="glyphicon glyphicon-tasks" style="padding:3px 3px 3px 0px" ></span>Events</div>						
 								
 							<span ng-repeat="eventsList in eventsList">
 								<a data-toggle="tab" href="/event/{{eventsList._id}}">

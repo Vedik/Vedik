@@ -34,153 +34,51 @@
 
 		<div class="tab-content ">
 			<div id="booked_display" class="tab-pane fade in active" style="min-height:100%">
-				<div style="margin:10px 50px">
-					<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" class="col-md-4" id="das">
-						
-					</content-item>
+				<div>
+					
+					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-5" style="padding:10px 50px">
+						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even" id="das">
+							
+						</content-item>
+					</div>
+					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-5"style="padding:10px 50px">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" id="das">
+							
+						</content-item>
+					</div>	
+					<div class="box_shadow_dwn col-md-2" style="height:300px;margin:30px 0px;padding:10px" >On going events and upcoming</div>
 				</div>
 			</div>
 
 		
 	<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 			<div id="stage" class="tab-pane fade">
-					<div class="col-md-2" id="clubs_list">
-						<div id="clubs_list_wrap">
-							<p style="font-size:13px;color:white">Clubs</p>
-							<a href="/club/{{clubsList._id}}" ng-repeat="clubsList in clubsList">
-							<button type="button" class="btn btn-info btn-lg w2b col-md-12" style="font-size:12px;margin:0px 0px;padding:4px 10px;text-align:left">{{clubsList.name}}</button>
-							</a>
-						</div>
+				<div class="col-md-2" id="clubs_list">
+					<div id="clubs_list_wrap" class="box_shadow_dwn">
+						<p id="list_heading">Clubs</p>
+						<a href="/club/{{clubsList._id}}" ng-repeat="clubsList in clubsList">
+						<button type="button" class="btn btn-info btn-lg w2b col-md-12" style="font-size:12px;margin:0px 0px;padding:4px 10px;text-align:left">{{clubsList.name}}</button>
+						</a>
 					</div>
-					<div id="main_stage" class="col-md-8">
-									
-				             			<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-6">
-											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even">
-												
-											</content-item>
-										</div>
-										<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-6">
-											<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd">
-												
-											</content-item>
-										</div>										
-										
-											<div class="img_div thumbs_wrap col-md-12">
-										<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-											<img src="https://iso.500px.com/wp-content/uploads/2014/04/20482.jpg" id="img_post">
-											<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-											<span id="img_name">Gorgeous Tamanna</span>
-
-											
-														<span class="thumb_trnsprnt">
-														</span>
-														<span id="user_art_info">
-															<div id="a">
-															<span id="vid_data">{{video.video.vidname}}</span>
-														<!--	<div id="vid_data">{{video.video.description}}</div>-->
-															<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-															</div>
-														</span>		
-										</div>
-									</div>
-
-									
-
-
-									<div class="img_div thumbs_wrap col-md-12"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(10px)'">
-										<div class="col-md-6" id="event_det">
-											<a href="#"><span id="event_post_heading">Media Club</span></a><br> We is organising a <a href="#">Photowalk</a> at <a href="#">6:00 am</a>on <a href="#">Sunday 2nd August 2015</a>,<a href="#">Elite Beach</a>
-											<br><br><br>
-											<div>
-												<p><a href="#"> 102</a> People are attending so far</p>
-												<button class="b2w"  id="respond_post"><img src="http://www.clker.com/cliparts/E/1/x/w/P/P/walking-man-black-hi.png" width="7px" height="15px"> Attend</button>
-												<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
-
-											</div> 
-										</div>
-										<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
-											<img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">
-											<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-											<span id="img_name">Spinning Ball</span>
-											<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png" id="play">	
-
-											
-														<span class="thumb_trnsprnt">
-														</span>
-														<span id="user_art_info">
-															<div id="a">
-															<span id="vid_data">{{video.video.vidname}}</span>
-														<!--	<div id="vid_data">{{video.video.description}}</div>-->
-															<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-															</div>
-														</span>		
-										</div>
-									<!--	<div class="col-md-6 thumbs_wrap thumbs_in" id="post_view">
-										dfgfhm,<br>
-										sdfdgf<br>dssfv
-										</div>-->
-									</div>
-
-									<div class="img_div thumbs_wrap col-md-12">
-										<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-											<img src="http://ddwqcu8pss-flywheel.netdna-ssl.com/wp-content/uploads/2013/10/shutterstock_129313271.jpg" id="img_post">
-											<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-											<span id="img_name">Gorgeous Tamanna</span>
-
-											
-														<span class="thumb_trnsprnt">
-														</span>
-														<span id="user_art_info">
-															<div id="a">
-															<span id="vid_data">{{video.video.vidname}}</span>
-														<!--	<div id="vid_data">{{video.video.description}}</div>-->
-															<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-															</div>
-														</span>		
-										</div>
-									</div>
-
-										<br>	
-									<div class="img_div thumbs_wrap col-md-6">
-										<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-											<img src="Pro_pic/tamanna.jpg" id="img_post">
-											<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-											<span id="img_name">Gorgeous Tamanna</span>
-
-											
-														<span class="thumb_trnsprnt">
-														</span>
-														<span id="user_art_info">
-															<div id="a">
-															<span id="vid_data">{{video.video.vidname}}</span>
-														<!--	<div id="vid_data">{{video.video.description}}</div>-->
-															<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-															</div>
-														</span>		
-										</div>
-									</div>
-									<div class="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(40px)'">
-										<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-											<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
-											<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-											<span id="img_name">Spinning Ball		</span>
-
-											
-														<span class="thumb_trnsprnt">
-														</span>
-														<span id="user_art_info">
-															<div id="a">
-															<span id="vid_data">{{video.video.vidname}}</span>
-														<!--	<div id="vid_data">{{video.video.description}}</div>-->
-															<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-															</div>
-														</span>		
-										</div>
-									</div>		
-								</div>					
-				<div class="col-md-2" id="groups_list">
-					<div id="clubs_list_wrap"><h3>Groups showup if you logged in</h3></div>
 				</div>
+				<div id="main_stage" class="col-md-8">
+								
+         			<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-6">
+						<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even">
+							
+						</content-item>
+					</div>
+					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-6">
+						<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd">
+							
+						</content-item>
+					</div>										
+						
+							
+				</div>					
+				<!-- <div class="col-md-2" id="groups_list">
+					<div id="clubs_list_wrap"><h3>Groups showup if you logged in</h3></div>
+				</div> -->
 
 	<!--This div for displaying the genres,, u click on one of these, the data in the above div changes accordingly and populates the videos to be displayed that day in that genre   -->
 			<!--<div class="col-md-" id="genres">

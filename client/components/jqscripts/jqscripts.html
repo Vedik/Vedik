@@ -1,0 +1,56 @@
+<!--galpic script-->
+<script>
+    $(document).ready(function(){
+        
+            $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
+            $("#pro_pic").css({"height": $(window).height()+'px'});
+      });
+    $(window).resize(function(){
+        
+            $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
+            $("#pro_pic").css({"height": $(window).height()+'px'});
+      });
+</script>
+
+<!--Textarea script-->
+<script >
+	$(document)
+    .one('focus.textarea', '.autoExpand', function(){
+        var savedValue = this.value;
+        this.value = '';
+        this.baseScrollHeight = this.scrollHeight;
+        this.value = savedValue;
+    })
+    .on('input.textarea', '.autoExpand', function(){
+        var minRows = this.getAttribute('data-min-rows')|0,
+            rows;
+        this.rows = minRows;
+        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 32);
+        this.rows = minRows + rows;
+    });
+</script>
+
+<!-- fix secondary nav bar in club-->
+<script>
+  $(document).ready(function() {
+
+    $(window).scroll(function () {
+        //if you hard code, then use console
+        //.log to determine when you want the 
+        //nav bar to stick. 
+        var trueHeight=$(window).outerHeight();
+        var height;
+        if(trueHeight>500)
+        	height=trueHeight;
+        else 
+        	height=500;
+        console.log($(window).scrollTop())
+      if ($(window).scrollTop() > (height-45)) {
+        $('.club_nav').addClass('navbar_sec_fixed');
+      }
+      if ($(window).scrollTop() < (height-44)) {
+        $('.club_nav').removeClass('navbar_sec_fixed');
+      }
+    });
+  });
+</script>

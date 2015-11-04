@@ -87,7 +87,7 @@
       <!-- Modal content-->
      
         
-        <div class="modal-body img_modal-body glassy col-md-10" style="margin:50px 8.3%;border:2px solid white" ng-if="club">
+        <div class="modal-body img_modal-body glassy_thick col-md-10" style="margin:50px 8.3%;border:2px solid white" ng-if="club">
         	<p>
         		<h3 class="centric" >Create Event</h2>
         		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
@@ -142,7 +142,7 @@
 					    </tags-input>
 					</div>
 					<br/>
-		         	<button type="submit" class="b2w">Submit</button>
+		         	<button type="submit" class="b2w">Create</button>
 		         </form>
 		    </div>
 		    <div class="col-md-6" style="padding:20px">
@@ -155,9 +155,52 @@
       
     </div>
   </div>
+<!--**************************** Edit club data**************************************-->
+
+<div class="modal img_modal fade" id="editClub" role="dialog">
+    <div class="modal-dialog img_modal-dialog" id="modal-center">
+    
+      <!-- Modal content-->
+     
+        
+        <div class="modal-body img_modal-body glassy_thick col-md-10" style="margin:50px 8.3%;border:2px solid white" ng-if="club">
+        	<p>
+        		<h3 class="centric" >Edit Details</h2>
+        		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
+        	</p>
+        	<form name="form" ng-submit="editClub(club)" ng-model="form" style="color:black">
+        		<div class="col-md-6" style="border-right:2px solid white;padding:20px">
+	        	
+	        		<div class="form-group">
+		          		<input type="text" ng-model="club.name" placeholder="Club Name" class="form-control">
+		          	</div>
+		          	<div class="form-group">
+		          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='About' id="textarea" style="width:100%" ng-model="club.about" data-bind="hasfocus: true"></textarea>
+		          	</div>
+					<div class="form-group">
+						<tags-input ng-model="club.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+	     			      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+					    </tags-input>
+					</div>
+					<br/>	         	
+		         
+		    	</div>
+			    <div class="col-md-6" style="padding:20px">
+		    		<div class="form-group">
+		          		<input type="text" ng-model="club.galleryPic" placeholder="Event Cover" class="form-control">
+		          	</div>
+		          	<img src="{{club.galleryPic}}" width="100%" height="auto">
+			    </div>
+			    <button type="submit" class="b2w">Save</button>
+		    </form>
+        </div>
+      
+    </div>
+  </div>
+
 
   	
-
+<!--**********************************************************************************************-->
   			<div ng-controller="DatepickerDemoCtrl">
   					 <div class="modal img_modal fade" id="date_picker" role="dialog">
 						    <div class="modal-dialog img_modal-dialog" id="modal-center">
@@ -579,6 +622,7 @@
         	  </div>		
 			  <ul class="nav nav-tabs">			  	
 			    <li><a data-toggle="tab" href="#img_description">Description</a></li>
+			    <li><a data-toggle="tab" href="#img_credits">Credits</a></li>
 			    <li class="active"><a data-toggle="tab" href="#img_comments">Comments</a></li>
 			  </ul>
 
@@ -586,13 +630,71 @@
 			    
 			    <div id="img_description" class="tab-pane fade">
 			      <h3>Description</h3>
-			      <p>Image description goes here</p>
+			      <p>{{image.imageId.description}}</p>
+			    </div>
+			    <div id="img_credits" class="tab-pane fade">
+			       <h3>Credits<hr></hr></h3>
+			       <table>
+			       		<tr ng-repeat="credit in credit">
+			       			<td style="width:25%">
+			       				<div  layout="column" ng-cloak>
+								  <md-content class="md-padding" layout="column">
+				       				<md-chips>
+				       				<md-chip >{{credit.credit.creditDetail}}</md-chip>
+				       				</md-chips>
+				       				</md-content>
+								</div>
+			       			</td>
+			       			<td>					       				
+								<div  layout="column" ng-cloak>
+								  <md-content class="md-padding" layout="column">
+								    <md-chips ng-repeat="creditedUsers in credit.creditedUsers">
+								      <md-chip>{{creditedUsers.user.name}}</md-chip>									     
+								    </md-chips>											   
+								  </md-content>
+								</div>
+			       			</td>
+			       		</tr>
+			       </table>
 			    </div>
 			    <div id="img_comments" class="tab-pane fade in active">
-			      <h3>Comments</h3>
-			      <p>Comments go here</p>
+			      <div>
+                        <div>
+                            <h4>Leave a Comment:</h4>
+                            <form name="myForm" ng-submit="submitComment()" class="form" novalidate> 
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <ul id="comments_list">
+                            <li ng-repeat="comment in image.comments" >
+                                
+                                <div class="thumbs_wrap comments">
+                                	<md-list-item class="md-2-line">
+								      <img ng-src="https://wallpaperscraft.com/image/zac_efron_boy_cute_face_smile_long_hair_8755_1600x1200.jpg" class="md-avatar" alt="userPic" />
+								        <div class="md-list-item-text">
+								          <h3>{{comment.comment.commentPutter}}</h3>
+								          <p>{{comment.comment.commentData}}</p>
+								        </div>
+								      </md-list-item>
+                              
+                                    <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
+                                    	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+                                    	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span>
+                                    </span>
+                                    <div class="form-group" ng-show="toggleVal">
+                                       	<textarea class="form-control" rows="3" ng-model="editData"></textarea>
+                                       	<button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 			    </div>
 			  </div>
+			  <div style="height:200px;width:100%"></div>
 
 
 		</div>
@@ -715,7 +817,7 @@
 
 		
 	
-
+			
 
 			<div id="video">
 				<button type="button" class="close img_close" ng-click="cancel()">&times;</button>
@@ -733,77 +835,103 @@
     		</div>
 
     		<div class="stage col-md-9"  id="vid_stuff">
-            	<div class="content">
-            	<!--Crew and cast-->
+            	<!--<div class="content">
+            	<!--Crew and cast--
                 	<div id="credits" >
-                	<!--credits start-->              
+                	<!--credits start--              
                                            
                     </div>
                     
                    
-                <!--credits end-->
+                <!--credits end--
 
                
-                </div>
+                </div>-->
 
                 <div class="col-md-12">
-	       	
-					  <ul class="nav nav-tabs"> 					    
-					    <li class="active"><a data-toggle="tab" href="#best_parts">Best part</a></li>
-					    <li><a data-toggle="tab" href="#commentss">Comments</a></li>
-					    <li><a data-toggle="tab" href="#reviewss">Reviews</a></li>
-					  </ul>
+	       			<ul class="nav nav-tabs" style="position:fixed;bottom:0px"> 					    
+					   <li><a data-toggle="tab" href="#vid_description">Description</a></li>
+					   <li><a data-toggle="tab" href="#vid_credits">Credits</a></li>
+					   <li class="active"><a data-toggle="tab" href="#vid_comments">Comments</a></li>
+					   <li><a data-toggle="tab" href="#vid_reviews">Reviews</a></li>
+				    </ul>
+					  
 
-					  <div class="tab-content">
-					  	<div id="best_parts" class="tab-pane fade in active">
-					       <h3>Best part<hr></hr></h3>
-					    </div>
-					    
-					    <div id="commentss" class="tab-pane fade">
-					      <div>
-	                            <div>
-	                                <h4>Leave a Comment:</h4>
-	                                <form name="myForm" ng-submit="submitComment()" class="form" novalidate> 
-	                                    <div class="form-group">
-	                                        <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
-	                                    </div>
-	                                    <button type="submit" class="btn btn-primary">Submit</button>
-	                                </form>
-	                            </div>
-	                            <ul id="comments_list">
-	                                <li ng-repeat="comment in video.comments" >
-	                                    
-	                                    <div class="thumbs_wrap comments">
-	                                    
-	                                        <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
-	                                        <span class="commenter">
-	                                        	{{comment.comment.commentPutter}}
-	                                        </span>
-	                                     	<span>
-	                                     	 	
-	                                     	</span>
-	                                        <span id="comment_data">
-	                                        	{{comment.comment.commentData}}
-	                                        </span>
-	                                        <br/>
-	                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
-	                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
-	                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="toggleVal=!toggleVal><a href="#">Edit</a></span>
-	                                        </span>
-	                                        <div class="form-group" ng-show="toggleVal">
-	                                           	<textarea class="form-control" rows="3" ng-model="editData"></textarea>
-	                                           	<button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
-	                                        </div>
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </div>
-					    </div>
-					    
-					    <div id="reviewss" class="tab-pane fade">
-					      <h2>Reviews<hr></hr></h2>
+					  <div style="padding:10px 20px">
+					  	<div class="tab-content">
+						  	<div id="vid_description" class="tab-pane fade">
+						       <h3>Description<hr></hr></h3>
+						       <p>{{video.videoId.description}}</p>
+						    </div>
+						    <div id="vid_credits" class="tab-pane fade">
+						       <h3>Credits<hr></hr></h3>
+						       <table>
+						       		<tr ng-repeat="credit in credit">
+						       			<td style="width:25%">
+						       				<div  layout="column" ng-cloak>
+											  <md-content class="md-padding" layout="column">
+							       				<md-chips>
+							       				<md-chip >{{credit.credit.creditDetail}}</md-chip>
+							       				</md-chips>
+							       				</md-content>
+											</div>
+						       			</td>
+						       			<td>					       				
+											<div  layout="column" ng-cloak>
+											  <md-content class="md-padding" layout="column">
+											    <md-chips ng-repeat="creditedUsers in credit.creditedUsers">
+											      <md-chip>{{creditedUsers.user.name}}</md-chip>									     
+											    </md-chips>											   
+											  </md-content>
+											</div>
+						       			</td>
+						       		</tr>
+						       </table>
+						    </div>
+						    
+						    <div id="vid_comments" class="tab-pane fade  in active">
+						      <div>
+		                            <div>
+		                                <h4>Leave a Comment:</h4>
+		                                <form name="myForm" ng-submit="submitComment()" class="form" novalidate> 
+		                                    <div class="form-group">
+		                                        <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
+		                                    </div>
+		                                    <button type="submit" class="btn btn-primary">Submit</button>
+		                                </form>
+		                            </div>
+		                            <ul id="comments_list">
+		                                <li ng-repeat="comment in video.comments" >
+		                                    
+		                                    <div class="thumbs_wrap comments">
+		                                    	<md-list-item class="md-2-line">
+											      <img ng-src="https://wallpaperscraft.com/image/zac_efron_boy_cute_face_smile_long_hair_8755_1600x1200.jpg" class="md-avatar" alt="userPic" />
+											        <div class="md-list-item-text">
+											          <h3>{{comment.comment.commentPutter}}</h3>
+											          <p>{{comment.comment.commentData}}</p>
+											        </div>
+											      </md-list-item>
+		                                  
+		                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
+		                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+		                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span>
+		                                        </span>
+		                                        <div class="form-group" ng-show="toggleVal">
+		                                           	<textarea class="form-control" rows="3" ng-model="editData"></textarea>
+		                                           	<button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
+		                                        </div>
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </div>
+						    </div>
+						    
+						    <div id="vid_reviews" class="tab-pane fade">
+						      <h2>Reviews<hr></hr></h2>
+						    </div>
 					    </div>
 					  </div>
+					  <div style="height:200px;width:100%"></div>
 
 
 				</div>

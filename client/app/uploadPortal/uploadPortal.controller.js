@@ -90,10 +90,10 @@ angular.module('myAppApp')
                                     '</span>'+
                                     '<div class="dropdown">'+
                                         '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
-                                        '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
-                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
-                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
-                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                        '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                         '</ul>'+
                                     '</div>'+
                                     '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
@@ -127,10 +127,10 @@ angular.module('myAppApp')
                                     '</span>'+
                                     '<div class="dropdown">'+
                                         '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
-                                        '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
-                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
-                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" >Delete</a></li>'+
-                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                        '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                         '</ul>'+
                                     '</div>'+
                                     '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
@@ -156,11 +156,11 @@ angular.module('myAppApp')
                                             '</span>'+
                                             '<div class="dropdown">'+
                                                 '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
-                                                '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
-                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
-                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                       
-                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+  
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                 '</ul>'+
                                             '</div>'+
                                             '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
@@ -226,11 +226,11 @@ angular.module('myAppApp')
                                             '</span>'+
                                             '<div class="dropdown">'+
                                                 '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
-                                                '<ul class="dropdown-menu" role="menu" aria-labelledby="post_edit">'+
-                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>'+
-                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                       
-                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)">+HOF</a></li>'+  
+                                                      '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                 '</ul>'+
                                             '</div>'+
                                             '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
@@ -804,7 +804,7 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
   $scope.vidCode=vidCode;
  
     $scope.video = videoPost;
-
+    console.log($scope.video);
 
   $scope.ratingArray = ratingArray;
   $scope.rate=$scope.ratingArray.ratingValue;
@@ -838,6 +838,13 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
             console.log($scope.votes+$scope.rating);
   });
 };
+    
+        $http.get('/api/credits/video/'+$scope.video._id).success(function(response){
+            console.log(response);
+            $scope.credit=response;
+           
+        });
+    
 
   /*$scope.rating1 = 5;
   $scope.rateFunction = function(rating) {
@@ -860,7 +867,9 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
         $http.post('/api/comments/',{commentData:$scope.commentData,postId:$scope.video._id}).success(function (response){
           $scope.commentData='';
           console.log(response);
-          refresh();
+          var length=$scope.video.comments.length;
+          $scope.video.comments[length].comment=angular.copy(response);
+          console.log()
         });
       }
     }
@@ -890,14 +899,13 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
 
   $scope.cancel = function () {
     console.log('clsing modal');
-    $document.getElementById('for_blur').style.filter = 
-            'blur(0px)';
+    
     $modalInstance.dismiss('cancel');
 
   };
 });
 
-angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,imagePost,ratingArray,height,$http){
+angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,$modalInstance,imagePost,ratingArray,height,$http,Auth){
   console.log('hello');
    $scope.ok = function () {
         $modalInstance.close($scope.selected.item);
@@ -907,7 +915,8 @@ angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,
     $scope.img_viewed = {
         'height': getHeight()+"px"
     };
-
+    $scope.user = Auth.getCurrentUser;
+    console.log($scope.user().name);
    
     $scope.ratingArray = ratingArray;
       $scope.rate=$scope.ratingArray.ratingValue;
@@ -949,6 +958,42 @@ angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,
     function getWidth() {
             return (100);
         }
+
+    $http.get('/api/credits/video/'+$scope.image._id).success(function(response){
+            console.log(response);
+            $scope.credit=response;
+           
+        });
+
+    $scope.submitComment = function (){
+      if($scope.commentData===undefined){
+
+      }
+      else {
+        console.log($scope.commentData);
+        $http.post('/api/comments/',{commentData:$scope.commentData,postId:$scope.image._id}).success(function (response){
+          $scope.commentData='';
+          console.log(response);
+          var length=$scope.image.comments.length;
+          $scope.image.comments[length].comment=angular.copy(response);
+          console.log()
+        });
+      }
+    }
+
+    $scope.delete = function (id){
+      $http.delete('/api/comments/'+id).success(function (response){
+        console.log(response);
+        refresh();
+      });
+    }
+    $scope.edit = function (id,editData){
+      console.log(editData);
+      $http.put('/api/comments/'+id,{commentData:editData}).success(function (response){
+        console.log('the edited document is '+response);
+        refresh();
+      });
+    }
 
 
     $(document).keyup(function(e) {

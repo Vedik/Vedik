@@ -70,3 +70,16 @@ angular.module('myAppApp')
     }
   };
 });;
+
+
+
+(function () {
+  'use strict';
+  angular
+      .module('myAppApp')
+      .controller('DemoCtrl', DemoCtrl);
+  function DemoCtrl ($timeout, $q) {
+    this.chipText = 'Football';
+  }
+})();
+

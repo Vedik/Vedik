@@ -166,3 +166,11 @@ md-autocomplete[md-floating-label] {
 .inputdemoBasicUsage .md-datepicker-input-container {
   margin-left: 2px; }
 
+
+
+.chipsdemoStaticChips p.note {
+  font-size: 12px; }
+
+md-content{
+  background-color: rgba(255,255,255,0);
+}

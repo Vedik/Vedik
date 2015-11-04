@@ -16,22 +16,22 @@ angular.module('myAppApp')
       $scope.club = response.club;
       $scope.isFollowing = response.isFollowing;
 
-       if($scope.club.galleryPic)
+       if(!$scope.club.galleryPic)
         {
-          $scope.GalleryPic= $scope.club.galleryPic;
+          $scope.club.galleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
         }
     else
     {  
-         $scope.GalleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+         
     }
 
     if($scope.club.about)
         {
-          $scope.userAbout= $scope.club.about;
+          $scope.club.about= $scope.club.about;
         }
     else
     {  
-         $scope.userAbout = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+         $scope.club.about = "Write about the Club";
     }
 
       $scope.form={};
@@ -202,39 +202,21 @@ angular.module('myAppApp')
       });
     }
 
-    $scope.editGalleryPic = function (form){
-     $http.post('/api/clubs/galleryPic/',{galleryPic:form.galPicUrl}).success(function (response) {
-        
-        $scope.GalleryPic=form.galPicUrl;
-        console.log($scope.GalleryPic);
+   
 
-        })
-
-      }
-
-    $scope.editProfile = function (form,type){
-      $http.put('/api/clubs/editProfile/'+type,{editProfile:form}).success(function (response){
-        
+    $scope.editClub = function (club){
+      console.log('here');
+      $http.put('/api/clubs/'+id,{name:club.name,about:club.about,vedik:club.vedik,galleryPic:club.galleryPic}).success(function (response){
+        console.log('here2');
         $scope.club=response;
-        $scope.GalleryPic=$scope.club.galleryPic;
+        
         $scope.edit=false;         
-        $scope.userAbout=$scope.club.about;
-         console.log($scope.userAbout);
-        $route.reload();
+       
       })
 
     }
 
-    $scope.viewImage =function(imageId){
-    	console.log('s');
-    }
-
-    $scope.editAbout = function (){
-        $scope.formAbout=$scope.club.about;
-        $scope.editAbout=true;
-        console.log($scope.club.about);
-       
-    }
+    
 
      $scope.edit=false;
      
@@ -321,17 +303,9 @@ angular.module('myAppApp')
 ]);
 
 angular.module('myAppApp').
-  controller('ParallaxEff', function($scope, parallaxHelper2){
-    $scope.background = parallaxHelper2.createAnimator(-0.8, 150, -150);
-    $scope.invertColors = function(elementPosition) {
-      var factor = -0.4;
-      var pos = Math.min(Math.max(elementPosition.elemY*factor, 0), 255);
-      var bg = 255-pos;
-      return {
-        backgroundColor: 'rgb(' + bg + ', ' + bg + ', ' + bg + ')',
-        color: 'rgb(' + pos + ', ' + pos + ', ' + pos + ')'
-      };
-    }
+  controller('ParallaxEff', function($scope, parallaxHelper){
+    $scope.background = parallaxHelper.createAnimator(-0.3, 550, -500);
+    
 
 });
 
@@ -342,13 +316,14 @@ factory('parallaxHelper2',
     function createAnimator (factor, max, min, offset) {
       return function(params) {
         var delta = factor*((offset || 0) + params.elemY);
-        // if(angular.isNumber(max) && delta > max) return max;
-        // if(angular.isNumber(min) && delta < min) return min;
+        if(angular.isNumber(max) && delta > max) return max;
+        if(angular.isNumber(min) && delta < min) return min;
         return delta;
       };
     }
     return {
       createAnimator: createAnimator,
-      background:     createAnimator(-0.8, 150, -150)
+      background:     createAnimator(-0.3, 150, -30, 50)
     };
 });
+
