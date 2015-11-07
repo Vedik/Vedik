@@ -119,11 +119,14 @@
 					<br/>
 					<br/>
 					<div class="form-group">
-		          		<span style="color:white">End Date</span>
-		          		<div >
-			          		<div class="col-md-6 datepckr" ng-controller="ClubCtrl">
+						<md-checkbox ng-model="endDateTF" aria-label="Checkbox 1" style="color:white">
+				          Add an End Date?
+				        </md-checkbox>
+				        <div ng-show="endDateTF">
+		          			<span style="color:white">End Date</span><br>
+			          		<div class="col-md-6 datepckr" ng-controller="DatepickerDemoCtrl">
 					            <p class="input-group">
-						            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.dtED" is-open="openedED" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
+						            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.dtED" is-open="openedED" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="false" close-text="Close" style="height:34px" />
 									<span class="input-group-btn">
 									    <button type="button" class="btn btn-default" ng-click="openED($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 									</span>

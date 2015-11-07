@@ -6,7 +6,7 @@
 <div ng-controller="EventCtrl" id="for_blur">
   <div ng-include="'components/navbar/navbar.html'" ></div>
   <div id="nav_fade">
-    <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="250px">
+    <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="400px" style="opacity:1">
   </div>
 
   <div id="pro_pic" style="background:black;">
@@ -23,19 +23,21 @@
     
     <div class="calign" id="event_det_wrapper">
       <span class="e_name">{{event.name}}</span>
-      <hr></hr>
+      <hr/>
       <div class="light_text_shadow">
           <a href="/club/{{event.club._id}}"><span class="e_host">{{event.club.name}}</span></a>
           <br><br>
           <span class="glyphicon glyphicon-map-marker">{{event.location}} </span>
-          <span class="glyphicon glyphicon-time">{{event.startDate}}-{{event.endDate}}</span><br><br>
-          <span>
-            <button type="button" ng-click="addAttend()" class="w2g" ng-hide="attending">Attend</button>
-            <button type="button" ng-click="unAttend()" class="w2g" ng-show="attending">You are going</button>
-            <br><span style="font-size:10px;text-align:left">{{attendingNum}} going</span>
-          </span>
+          <span class="glyphicon glyphicon-time"> {{startDate}}<span ng-show="endDate">-{{endDate}}</span></span><br><br>
+          
       </div>
     </div>
+    <span style="position:absolute;bottom:20px;left:30px;z-index:100" class="box_shadow_dwn">
+        <md-button class="md-raised  md-primary" ng-click="addAttend()"  ng-hide="attending" style="margin:0px 0px 5px;border-radius:0px">Attend <span class="glyphicon glyphicon-plus"> </span></md-button>
+        <md-button class="md-raised" ng-click="unAttend()"  ng-show="attending" style="margin:0px 0px 5px">You are going</md-button>
+        <br><div style="font-size:10px;text-align:center">{{attendingNum}} going</div>
+            
+    </span>
   </div>
   
   <div class='posts_wrapper'>

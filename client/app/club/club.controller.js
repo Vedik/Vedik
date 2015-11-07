@@ -179,11 +179,24 @@ angular.module('myAppApp')
 
 
    $scope.createEvent = function (form){
-          $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
-            console.log(response);
-            $state.go('event',{id:response._id});
+          
+          if($scope.endDateTF){ //if there is end date
+              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
+                  console.log(response);
+                  $state.go('event',{id:response._id});
 
-        })
+              })
+          }
+          else
+          {
+              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
+                  console.log(response);
+                  $state.go('event',{id:response._id});
+
+              })
+          }
+      
+          
    }
 
    $scope.loadTags = function(query) {
@@ -205,7 +218,7 @@ angular.module('myAppApp')
    
 
     $scope.editClub = function (club){
-      console.log('here');
+      
       $http.put('/api/clubs/'+id,{name:club.name,about:club.about,vedik:club.vedik,galleryPic:club.galleryPic}).success(function (response){
         console.log('here2');
         $scope.club=response;

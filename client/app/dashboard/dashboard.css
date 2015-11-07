@@ -2,7 +2,8 @@
                 box-sizing: border-box; 
                 -moz-box-sizing: border-box; 
                 -webkit-box-sizing: border-box;
-                word-wrap:break-word;            }   
+                word-wrap:break-word; 
+                font-family:            }   
             .stage_btm_1 { 
                 position: fixed;
                 bottom: 50px; 
@@ -199,5 +200,24 @@
        
   
         #das {
-            padding: 10px 10px;
+            padding: 10px 20px;
+        }
+        #vedikites_title{
+            box-shadow: 1px 1px 2px grey;
+            background-color: grey;
+            position: relative;
+            float: left;
+            padding: 10px 40px 0px 130px;
+        }
+        #latest_tab{
+             padding: 20px 30px;   
+             float: left;
+             height: 78px;
+             background-color: white; 
+        }
+        #latest_tab a{
+            font-size: 30px;
+            width: 10%;
+           
+            
         }

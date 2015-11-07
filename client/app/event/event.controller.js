@@ -25,6 +25,22 @@ angular.module('myAppApp')
     	$scope.event=response.event;
       $scope.attending=response.attending;
       $scope.attendingNum=$scope.event.attending.length;
+      var date1 = new Date($scope.event.startDate);
+      console.log(date1);
+      var d = date1.getDate();
+      var m = date1.getMonth()+1;
+      var y = date1.getFullYear();
+      $scope.startDate=d+"/"+m+"/"+y;
+
+      if($scope.event.endDate){
+          var date2 = new Date($scope.event.endDate);
+          var d = date2.getDate();
+          var m = date2.getMonth()+1;
+          var y = date2.getFullYear();
+          $scope.endDate=d+"/"+m+"/"+y;
+      }
+      
+
     	
     });
 

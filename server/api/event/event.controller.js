@@ -51,7 +51,7 @@ exports.show = function(req, res) {
 
 // Creates a new event in the DB.
 exports.create = function(req, res) {
-   console.log(req.params.id);
+   console.log(req.params.endDate);
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
@@ -64,18 +64,33 @@ exports.create = function(req, res) {
   {
     b[i]=a[i]._id;
   }
-
-  var newEvent = new Event({
-    name:req.body.name,
-    description:req.body.description,
-    startDate:req.body.startDate,
-    endDate:req.body.endDate,
-    club:req.params.id,
-    user:req.user._id,
-    eventCover:req.body.eventCover,
-    location:req.body.location,
-    
-  });
+  if(req.body.endDate){
+      var newEvent = new Event({
+      name:req.body.name,
+      description:req.body.description,
+      startDate:req.body.startDate,
+      endDate:req.body.endDate,
+      club:req.params.id,
+      user:req.user._id,
+      eventCover:req.body.eventCover,
+      location:req.body.location,
+      
+    });
+  }
+  
+  else
+  {
+      var newEvent = new Event({
+        name:req.body.name,
+        description:req.body.description,
+        startDate:req.body.startDate,
+        club:req.params.id,
+        user:req.user._id,
+        eventCover:req.body.eventCover,
+        location:req.body.location,
+        
+      });
+  }
  
     for(i=0;i<b.length;i++)
     {
