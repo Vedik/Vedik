@@ -149,11 +149,11 @@ exports.showForUser = function(req, res) {
   var query = {};
 
   query['uploader.' + 'user'] = user_id;
-  Credit.find( { creditedUsers: { $elemMatch: { user:user_id } } },function (err, posts) {
+  Credit.find( { creditedUsers: { $elemMatch: { user:user_id } } },function (err, credits) {
     if(err) { return handleError(res, err); }
         var postId=[];
-          for(var i=0;i<posts.length;i++){
-            postId[i]=posts[i].postId;
+          for(var i=0;i<credits.length;i++){
+            postId[i]=credits[i].postId;
           }
             console.log(postId);
     
@@ -169,7 +169,7 @@ exports.showForUser = function(req, res) {
      
           console.log('er12');
           
-          return res.json(posts);
+          return res.json({posts:posts,credits:credits});
       })
     })
 }

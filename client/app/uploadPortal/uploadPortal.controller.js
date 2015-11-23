@@ -167,27 +167,31 @@ angular.module('myAppApp')
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
-    var eventClubTemplate ='<div>'   +
-                                '<div class="post_div col-md-12">'  +
-                                    '<div class="text_type_post" id="article">' +
-                                        '<a href="/event">'  +
-                                            '<span id="event_post_heading">{{content.eventId.name}}</span>'    +
-                                        '</a>'  +
-                                        '</br>{{content.eventId.description}}</br></br>'  +
-                                        '<div>' +
-                                            'by<a href="#"> {{content.uploader.club.name}}</a>'  +
-                                        '</div>'    +                                        
-                                    '</div>'    +
-                                     '<span id="post_time">'+
-                                                    '<span id="respond_post">'+
-                                                        '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
-                                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
-                                                        '{{postTime}}'+
-                                                    '</span>'+
-                                     '</span>'   +
-                                    '<span id="post_time">{{content.createdOn}}</span>'   +
-                                '</div>'    +
-                            '</div>';
+    var eventClubTemplate ='<div class="post_div thumbs_wrap col-md-12">'+
+                                    '<div class="col-md-6 text_type_post" id="event_det">'+
+                                        '<a href="#"><span id="event_post_heading">{{content.uploaderClub.name}}</span></a>'+
+                                        '<br> We is organising a <a href="#">{{content.eventId.name}}</a> '+
+                                        'at <a href="#">6:00 am</a>'+
+                                        'on <a href="#">Sunday 2nd August 2015</a>,'+
+                                        '<a href="#">Elite Beach</a>'+
+                                        '<br><br><br>'+
+                                        '<div>'+
+                                            '<p><a href="#"> {{content.eventId.attending.length}}</a> People are attending so far</p>'+
+                                            '<button class="b2w"  id="respond_post"><img src="http://www.clker.com/cliparts/E/1/x/w/P/P/walking-man-black-hi.png" width="7px" height="15px"> Attend</button>'+
+                                            '<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>'+
+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">'+
+                                     '  <img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">'+
+                                      '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>'+
+                                      '  <span id="img_name">Spinning Ball</span>'+
+                                            '<span class="thumb_trnsprnt">'+
+                                             '</span>'+
+                                                     
+                                    '</div>'+
+                                
+                                '</div>';
     var articleClubTemplate ='<div>'   +
                                 '<div class="post_div col-md-12">'  +
                                     '<div class="text_type_post" id="article">' +
@@ -236,7 +240,8 @@ angular.module('myAppApp')
                                             '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
                                     '</span>'   +                                    
                                 '</div>'    +
-                            '</div>';                      
+                            '</div>';   
+
     var getTemplate = function(contentType) {
         var template = '';
 
@@ -259,6 +264,9 @@ angular.module('myAppApp')
             case 23:
                 template = videoTemplate;
                 break;
+            case 30:
+                template = eventClubTemplate;
+                break;
             case 31:
                 template = postTemplate;
                 break;
@@ -267,10 +275,7 @@ angular.module('myAppApp')
                 break;
             case 33:
                 template = videoTemplate;
-                break;
-            case 7:
-                template = eventClubTemplate;
-                break;
+                break;            
             case 71:
                 template = articleClubTemplate;
                 break;
@@ -804,7 +809,10 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
   $scope.vidCode=vidCode;
  
     $scope.video = videoPost;
-    console.log($scope.video);
+    
+    var comments=[];
+    comments=angular.copy($scope.video.comments);
+    $scope.comments=comments;
 
   $scope.ratingArray = ratingArray;
   $scope.rate=$scope.ratingArray.ratingValue;
@@ -866,10 +874,13 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
         console.log($scope.commentData);
         $http.post('/api/comments/',{commentData:$scope.commentData,postId:$scope.video._id}).success(function (response){
           $scope.commentData='';
-          console.log(response);
-          var length=$scope.video.comments.length;
-          $scope.video.comments[length].comment=angular.copy(response);
-          console.log()
+          
+          var length=comments.length;
+          console.log(response,length);
+          var comment=angular.copy(response);
+          comments[length]={'comment':comment};
+          console.log(comments);
+          $scope.comments=comments;
         });
       }
     }
@@ -877,14 +888,20 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
     $scope.delete = function (id){
       $http.delete('/api/comments/'+id).success(function (response){
         console.log(response);
-        refresh();
+        comments.splice(index,1);
+        console.log(comments);
+        $scope.comments=comments;
+        
       });
     }
-    $scope.edit = function (id,editData){
+    $scope.edit = function (id,editData,index){
       console.log(editData);
       $http.put('/api/comments/'+id,{commentData:editData}).success(function (response){
-        console.log('the edited document is '+response);
-        refresh();
+        console.log(response);
+        var comment=angular.copy(response);
+          comments[index]={'comment':comment};
+          console.log(comments);
+          $scope.comments=comments;
       });
     }
 
@@ -899,6 +916,13 @@ angular.module('myAppApp').controller('ModalVideoInstanceCtrl',function ($scope,
 
   $scope.cancel = function () {
     console.log('clsing modal');
+    $(document).ready(function() {
+
+          
+            $("#for_blur").css("filter", 'blur(0px)'); 
+             
+        
+    });
     
     $modalInstance.dismiss('cancel');
 
@@ -915,6 +939,11 @@ angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,
     $scope.img_viewed = {
         'height': getHeight()+"px"
     };
+
+    var comments=[];
+    comments=angular.copy($scope.image.comments);
+    $scope.comments=comments;
+
     $scope.user = Auth.getCurrentUser;
     console.log($scope.user().name);
    
@@ -973,25 +1002,38 @@ angular.module('myAppApp').controller('ModalImageInstanceCtrl',function ($scope,
         console.log($scope.commentData);
         $http.post('/api/comments/',{commentData:$scope.commentData,postId:$scope.image._id}).success(function (response){
           $scope.commentData='';
-          console.log(response);
-          var length=$scope.image.comments.length;
-          $scope.image.comments[length].comment=angular.copy(response);
-          console.log()
+          
+           var length=comments.length;
+          console.log(response,length);
+          var comment=angular.copy(response);
+          comments[length]={'comment':comment};
+          console.log(comments);
+          $scope.comments=comments;
         });
       }
     }
 
-    $scope.delete = function (id){
+    $scope.delete = function (id,index){
       $http.delete('/api/comments/'+id).success(function (response){
         console.log(response);
-        refresh();
+        
+        
+        
+        comments.splice(index,1);
+        console.log(comments);
+        $scope.comments=comments;
+        
       });
     }
-    $scope.edit = function (id,editData){
+    $scope.edit = function (id,editData,index){
       console.log(editData);
       $http.put('/api/comments/'+id,{commentData:editData}).success(function (response){
-        console.log('the edited document is '+response);
-        refresh();
+        console.log(response);
+       
+          var comment=angular.copy(response);
+          comments[index]={'comment':comment};
+          console.log(comments);
+          $scope.comments=comments;
       });
     }
 

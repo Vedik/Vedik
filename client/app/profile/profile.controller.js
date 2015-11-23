@@ -51,7 +51,7 @@ angular.module('myAppApp')
   
     $http.get('/api/posts/user/'+id).success(function (response){
         console.log(response);
-        $scope.posts = response;
+        $scope.posts = response.posts;
         console.log($scope.posts);
     
 
@@ -89,6 +89,39 @@ angular.module('myAppApp')
     }
       console.log($scope.stageId);
       console.log($scope.stageList);
+
+      $scope.creditId=[];
+      
+      var x=0;
+      for(var i=0;i<$scope.posts.length;i++)
+      {
+        for(var j=0;j<$scope.posts[i].vedik.length;j++)
+        {
+            var z=0;
+            console.log($scope.posts[i].vedik);
+            for(var k=0;k<$scope.stageId.length;k++)
+            {
+                
+                
+                if($scope.stageId[k]==$scope.posts[i].vedik[j].vedik._id)
+                {
+                  z=1;
+                  console.log('sssssssssssssss1');
+                  break;
+                }
+                
+                  
+            }
+
+            if(z==0)
+                {
+                  $scope.stageId[x]=$scope.posts[i].vedik[j].vedik._id;
+                  $scope.stageList[x]={'name':$scope.posts[i].vedik[j].vedik.name, 'id':$scope.posts[i].vedik[j].vedik._id};
+                  x++; 
+                }
+            
+        }
+      }
   });
 
 

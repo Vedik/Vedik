@@ -1,29 +1,7 @@
-
+<div ng-include="'components/jqscripts/jqscripts.html'"></div>
 <div id="top_logo" ng-controller="NavbarCtrl">
 
-    <script type="text/javascript">
-      $(document).ready(function() {
-
-        $(window).scroll(function () {
-            //if you hard code, then use console
-            //.log to determine when you want the 
-            //nav bar to stick. 
-            var trueHeight=$(window).outerHeight();
-                    var height;
-                    if(trueHeight>500)
-                      height=trueHeight;
-                    else 
-                      height=500; 
-            console.log($(window).scrollTop())
-          if ($(window).scrollTop() > (height-45)) {
-            $('#top_logo').addClass('top_logo_sec');
-          }
-          if ($(window).scrollTop() < (height-44)) {
-            $('#top_logo').removeClass('top_logo_sec');
-          }
-        });
-      });
-    </script>
+    
 
     <div id="logo">
         <a href="/" id="_logo"><span>Vedik</span></a>
@@ -33,22 +11,30 @@
         <span class=" glyphicon glyphicon-search" style="position:absolute;top:16px;left:55px"></span>
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
         <div id="search_res">
-            <div ng-show="searchStage" id="search_res">{{vedik}}</div>
+            <md-toolbar class="md-theme-light" ng-show="searchStage">
+              <h5 class="md-toolbar-tools">{{vedik}}</h5>
+            </md-toolbar>
              <div ng-show="searchQuery" ng-repeat="obj in objsStage" id="search_res">
               <div id="indiv_res">
-                  <a href="/stage/{{obj._id}}" >{{obj.name}}</a>
+                  <a href="/stage/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
               </div>
             </div>
-            <div ng-show="searchUser" id="search_res">{{userList}}</div>
+
+            <md-toolbar class="md-theme-light" ng-show="searchUser">
+              <h5 class="md-toolbar-tools">{{userList}}</h5>
+            </md-toolbar>
             <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
               <div id="indiv_res">
-                  <a href="/profile/{{obj._id}}" >{{obj.name}}</a>
+                  <a href="/profile/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
               </div>
             </div>
-              <div ng-show="searchClub" id="search_res">{{club}}</div>
+
+            <md-toolbar class="md-theme-light" ng-show="searchClub">
+              <h5 class="md-toolbar-tools">{{club}}</h5>
+            </md-toolbar>
              <div ng-show="searchQuery" ng-repeat="obj in objsClub" id="search_res">
               <div id="indiv_res">
-                  <a href="/club/{{obj._id}}" >{{obj.name}}</a>
+                  <a href="/club/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
               </div>
             </div>
              <div ng-show="noResult" id="search_res">
@@ -61,20 +47,20 @@
     <div id="nav">
        
         <div class="dropdown" ng-if="isLoggedIn()">
-            <span class="dropdown-toggle" id="menu1">
-                <span id="caretid">
-                    <span class=" glyphicon glyphicon-th-large" ></span>
+            <span class="dropdown-toggle" >
+                <span id="caretid">                    
+                      
+                    <span class=" glyphicon glyphicon-th-large" ng-click="toggleRight()"></span>                    
                 </span>
             </span>
             <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
             <a href="/login" id="_logo" ng-hide="isLoggedIn()">Guest</a>       
             
-            <ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="menu1">
-                                     <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#"  ><li role="presentation">Settings</li></a></div>
-                                     <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#" ng-click="logout()" ><li role="presentation">Sign out</li></a></div>
+           <!--  <ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="menu1">
+                                     
                                      <div id="indiv_res"  ng-hide="isLoggedIn()"><a role="menuitem" tabindex="-1" href="/login" ><li role="presentation">Login</li></a></div>
                                      <div id="indiv_res" ng-hide="isLoggedIn()" ><a role="menuitem" tabindex="-1" href="/signup" ><li role="presentation">Signup</li></a></div>
-                                </ul>
+                                </ul> -->
          </div>
     </div>
 
@@ -121,6 +107,40 @@
               </div>
           </div>
 
+            <div  layout="column"  class="col-md-12" ng-controller="NavbarCtrl">
+                <section layout="row" flex>
+                 <!--  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+                    <md-toolbar class="md-theme-indigo">
+                      <h1 class="md-toolbar-tools">Sidenav Left</h1>
+                    </md-toolbar>
+                    <md-content layout-padding ng-controller="LeftCtrl">
+                      <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                        Close Sidenav Left
+                      </md-button>
+                      <p hide-md show-gt-md>
+                        This sidenav is locked open on your device. To go back to the default behavior,
+                        narrow your display.
+                      </p>
+                    </md-content>
+                  </md-sidenav> -->
+                  
+                  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" style="position:fixed;top:45px;left:0px" id="xxxx">
+                    <md-toolbar class="md-theme-light">
+                      <h1 class="md-toolbar-tools">{{getCurrentUser().name}}</h1>
+                    </md-toolbar>
+                    <md-content>
+                      
+                        <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#"  ><h5><span class="glyphicon glyphicon-cog"> Settings</span></h5></a></div>
+                        <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#" ng-click="logout()" ><h5><span class="glyphicon glyphicon-off"> Sign out</span></h5></a></div>
+                      
+                        
+                      <md-button ng-click="close()" class="md-primary">
+                        Close 
+                      </md-button>
+                    </md-content>
+                  </md-sidenav>
+                </section>
+              </div>
 
    
 </div>

@@ -127,7 +127,7 @@
 	            		<ul class="nav nav-tabs">
 	            			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>  
 						  	<li ng-repeat="stageList in stageList" ng-click="stageDiv(stageList.id)"><a data-toggle="tab" href="#{{stageList.id}}">{{stageList.name}}</a></li>
-						  	<li><a ng-show="club.admin==loggedInUser._id" type="button" class="" data-toggle="modal" data-target="#event" > Create Event</a></li>
+						  	<li><a ng-show="club.admin==loggedInUser._id" type="button" class="" data-toggle="modal" data-target="#event" onclick="document.getElementById('for_blur').style.filter = 'blur(10px)'"> Create Event</a></li>
 						</ul>
 					</div>
 					

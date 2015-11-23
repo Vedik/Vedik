@@ -71,7 +71,7 @@
 				        	<div id="infodiv">
 
 				            	<!--<span id="info">Director Editor Screenwriter</br></span>-->
-				            	<button  type="button" class="btn btn-info btn-lg w2b" data-toggle="modal" data-target="#upload" style="font-size:12px"><img src="http://www.yoga-singles.com/wp-content/uploads/2014/08/Namaste_Hands.png" width="20px" height="auto"></span>Respect</button>
+				            	<span style="font-size:12px">_/\_ Respect</span>
 				            	<span ng-if="user._id!=loggedInUser._id">
 					            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
 									<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
@@ -115,7 +115,7 @@
 		        		<span id="HOF" class="tab-pane fade">
 		        			<h4>Hall of Fame<hr></hr></h4>
 
-		        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" ng-style="margin:5px;width:50%;float:left" class="col-md-6">
+		        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px;width:50%;float:left" class="col-md-6">
 													
 							</content-item>
 		        		</span>

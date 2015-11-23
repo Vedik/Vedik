@@ -604,7 +604,7 @@
 
 <script type="text/ng-template" id="myModalImage.html">
 	<div id="img_view" >
-      	<button type="button" class="close img_close" ng-click="cancel()">&times;</button>
+      	<button type="button" class="close img_close" ng-click="cancel()" style="font-size:40px;color:white">&times;</button>
       	<div id="wrapper">
 	      	<div id="img_viewed">
 	        	<img src="{{image.imageId.picUrl}}"	width="100%" >
@@ -672,25 +672,27 @@
                             </form>
                         </div>
                         <ul id="comments_list">
-                            <li ng-repeat="comment in image.comments" >
+                            <li ng-repeat="comment in comments" >
                                 
                                 <div class="thumbs_wrap comments">
                                 	<md-list-item class="md-2-line">
 								      <img ng-src="https://wallpaperscraft.com/image/zac_efron_boy_cute_face_smile_long_hair_8755_1600x1200.jpg" class="md-avatar" alt="userPic" />
 								        <div class="md-list-item-text">
 								          <h3>{{comment.comment.commentPutter}}</h3>
-								          <p>{{comment.comment.commentData}}</p>
+								          <p ng-show="!toggleVal">{{comment.comment.commentData}}</p>
+								          <div class="form-group" ng-show="toggleVal">
+	                                       	<textarea class="form-control autoExpand" data-min-rows="1" rows="1" ng-model="editData" value="{{comment.comment.commentData}}"></textarea>
+	                                       	<span  ng-click="edit(comment.comment._id,editData,$index)" style="font-size:11px">Save</button>
+	                                       	<button class="btn btn-default" ng-click="toggleVal=!toggleVal" style="font-size:11px">Cancel</button>
+	                                    </div>
 								        </div>
 								      </md-list-item>
                               
                                     <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
-                                    	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
+                                    	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id,$index)"><a href="#">Delete</a></span>
                                     	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span>
                                     </span>
-                                    <div class="form-group" ng-show="toggleVal">
-                                       	<textarea class="form-control" rows="3" ng-model="editData"></textarea>
-                                       	<button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
-                                    </div>
+                                    
                                 </div>
                             </li>
                         </ul>
@@ -823,7 +825,7 @@
 			
 
 			<div id="video">
-				<button type="button" class="close img_close" ng-click="cancel()">&times;</button>
+				<button type="button" class="close img_close" ng-click="cancel()" style="font-size:40px;color:white">&times;</button>
         		<div class="wrapper">
          			<img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
          			<div my-youtube code='vidCode'></div>         
@@ -904,14 +906,19 @@
 		                                </form>
 		                            </div>
 		                            <ul id="comments_list">
-		                                <li ng-repeat="comment in video.comments" >
+		                                <li ng-repeat="comment in comments" >
 		                                    
 		                                    <div class="thumbs_wrap comments">
 		                                    	<md-list-item class="md-2-line">
 											      <img ng-src="https://wallpaperscraft.com/image/zac_efron_boy_cute_face_smile_long_hair_8755_1600x1200.jpg" class="md-avatar" alt="userPic" />
 											        <div class="md-list-item-text">
 											          <h3>{{comment.comment.commentPutter}}</h3>
-											          <p>{{comment.comment.commentData}}</p>
+											          <p ng-show="!toggleVal">{{comment.comment.commentData}}</p>
+											          <div class="form-group" ng-show="toggleVal">
+				                                       	<textarea class="form-control autoExpand" data-min-rows="1" rows="1" ng-model="editData" value="{{comment.comment.commentData}}"></textarea>
+				                                       	<span  ng-click="edit(comment.comment._id,editData,$index)" style="font-size:11px">Save</span>
+				                                       	<span  ng-click="toggleVal=!toggleVal" style="font-size:11px">Cancel</span>
+				                                      </div>
 											        </div>
 											      </md-list-item>
 		                                  
@@ -919,10 +926,7 @@
 		                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
 		                                        	<span  ng-show="comment.comment.commentPutter===user().name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span>
 		                                        </span>
-		                                        <div class="form-group" ng-show="toggleVal">
-		                                           	<textarea class="form-control" rows="3" ng-model="editData"></textarea>
-		                                           	<button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
-		                                        </div>
+		                                        
 		                                    </div>
 		                                </li>
 		                            </ul>

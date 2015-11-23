@@ -10,8 +10,8 @@ angular.module('myAppApp')
     $scope.limit = 3;
     $scope.user = Auth.getCurrentUser();
     $scope.val=true;
-
-  
+    $scope.todaysVedik="true";
+    
 
     
 
@@ -46,4 +46,4 @@ angular.module('myAppApp')
 
     });
   })
-
+;
