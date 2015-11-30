@@ -312,8 +312,7 @@ console.log(newvideo);
           var newPost = new Post({
             videoId: newvideo._id,
             type:33,
-            uploader:{user:req.user._id}, //club:req.params.id},
-            
+            uploader:{user:req.user._id}, 
             like:[],
             createdOn:Date.now(),
             uploaderClub:req.params.id,
@@ -322,7 +321,7 @@ console.log(newvideo);
           
          
           console.log('1');
-          newPost.save(function(err){
+          newPost.save(function (err){
             if(err) return handleError(res,err);
             else 
               {

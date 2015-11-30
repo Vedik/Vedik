@@ -25,7 +25,7 @@
 	.img_div_wrap	{
 		padding: 0px;
 
-		box-shadow: 1px 1px 5px grey;
+		
 		height: 200px;
 			}
 	.notif_div_wrap	{
@@ -44,7 +44,7 @@
 	}
 	.post_div	{
 		position: relative;
-		padding: 5px 5px;
+		padding: 20px 10px;
 		
 		/*margin: 30px 0px;*/
 		float: left;
@@ -151,9 +151,9 @@
 		float: right;
 	}
 	.text_type_post	{
-		background-color: rgba(230,230,230,1);
+		background-color: white;
 		padding: 10px 10px 0px 10px;
-		box-shadow: 1px 1px 5px grey;
+		
 		font-family: arial;
 		letter-spacing: 1px;
 		font-size: 13px;		
@@ -171,13 +171,13 @@
 
 	}
 	#event_det	{
-		height: 200px;
+		height: auto;
 	}
 	#article	{
 		min-height: auto;
 	}
 
-	#event_det div {
+	/*#event_det div {
 		color: black;
 		font-size: 10px;
 		position: absolute;
@@ -185,13 +185,14 @@
 		padding: 5px;
 		width: 100%;
 
-	}
+	}*/
 	#post_time	{
 		color: grey;
 		width: 100%;
 		padding: 5px 10px 5px 10px;
 		float: left;
-		background-color: rgba(230,230,230,1);
+		background-color: white;
+		
 	}
 	#event_post_heading	{
 		font-size: 25px;
@@ -253,7 +254,13 @@
      	white-space: nowrap;
      }
 
-     
+     .CRicon{
+     	position: absolute;
+     	top: 5px;
+     	right:0px;
+     	width: 35px;
+     	height: auto;
+     }
      #wrapper {
      	position: relative;
      }
@@ -263,4 +270,24 @@
      }
      #img_view 	{
      	padding: 10px 0px;
+     }
+
+     .colorg{
+     	color: rgba(0,0,0,0.6);
+     }
+     .colorw{
+     	color: white;
+     }
+     .sizeten{
+     	font-size: 10px;
+     	
+     }
+     .lh20{
+     	line-height: 20px;
+     }
+     .lh15{
+     	line-height: 15px;
+     }
+     .cursorp{
+     	cursor: pointer;
      }

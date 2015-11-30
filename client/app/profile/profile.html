@@ -6,18 +6,119 @@
 
 <div ng-controller="ProfileCtrl" id="for_blur">
 	<div ng-include="'components/navbar/navbar.html'"></div>
-	<div id="nav_fade">
+	<div id="hidden"></div>
+	<!-- <div id="nav_fade">
 	  <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="200px">
-	</div>
+	</div> -->
 	
 
             <div id="profile">
             <!--user pic and info goes here-->
             	<div id="pro_pic">
             		
-            		<div id="pro_pic_wrapper" >
+            		<div id="pro_pic_wrapper">
             			<div ng-controller="ParallaxEff">
-	        				<img src="{{GalleryPic}}" style="width:100%;height:100%;z-index:0;position:relative" alt="" du-parallax y="background" ></img>
+	        				<img src="{{GalleryPic}}" style="width:100%;height:100%;z-index:0;position:relative" alt="" du-parallax y="background" >
+	        				<div id="HOF_display" class="tab-content colorw">
+				        		<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
+
+				        		<span id="about_user" class="tab-pane fade ">
+				        			
+				        			<h4>About<hr></hr></h4>
+				        			
+									<span>
+					                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
+					                	<div ng-show="edit.about && user.name==loggedInUser.name">
+					                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
+					                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='About' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
+					                			</textarea>
+					                			
+					                			
+					                			<br>
+					                			<button type="submit" class="w2b">Save</button> 
+					                			<button type="button" ng-click="edit.about=false" class="w2b">Cancel</button>
+					                		</form>
+					                	</div>
+					                </span>
+								</span>
+				        		<span id="HOF" class="tab-pane fade">
+				        			<h4>Hall of Fame<hr></hr></h4>
+
+				        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px;width:50%;float:left" class="col-md-6">
+															
+									</content-item>
+				        		</span>
+								<div ng-include="'app/uploadPortal/uploadPortal.html'" id="upload_form" class="tab-pane fade thumbs_wrap"></div>
+				        		
+
+									<!--<div class="tab-pane fade in active" id="upload_form2">
+						        		<div class="tab-content">
+							        		<span id="articlee_up" class="tab-pane fade">
+							        			<h3>Add your Article here</h3>					
+													
+													<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+							        		</span>
+							        		<span id="imagee_up" class="tab-pane fade">
+							        			<h3>Add your Image here</h3>
+																
+												<div class="form-group">
+													<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+												</div>
+												<div class="form-group">	
+													<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+												</div>
+												<div class="form-group">	
+													<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
+												</div>
+												<div class="form-group">
+													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+												    </tags-input>
+												</div>
+												<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+							        		</span>
+							        		<span id="videoe_up" class="tab-pane fade">
+													<h3>Add your Video here</h3>
+																		
+														<div class="form-group">
+																		
+															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
+														</div>
+														<div class="form-group">
+																			
+															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+														</div>
+														<div class="form-group">
+																				
+															<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+														</div>
+														<div class="form-group"> <!-- Put text area --
+															<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+								                			</textarea>													
+																		
+														</div>
+														<div>
+															<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+														    </tags-input>
+														</div>
+																	
+														<div>
+															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+														    </tags-input>
+														</div>
+														<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+							        		</span>
+							        	</div>
+						        	</div>-->
+						        	
+					        	
+				        	</div>
 	        			</div>
 	           				
            				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div>
@@ -33,170 +134,85 @@
 							});
 						});
 						</script>
-						  <script>
-			                $(document).ready(function(){
+						<script>
+			               $(document).ready(function(){
 			                    
 			                        $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
-			                        $("#pro_pic").css({"height": $(window).height()+'px'});
+			                        $("#pro_pic").css({"height": ($(window).height()-65)+'px'});
 			                  });
-			              </script>
+			            </script>
            			</div>
 	            	
 
-		            <div id="user_profile" class="col-md-3 ">
-		            	<div class="thumbs_wrap">
-		            		<img src="{{ProfilePic}}" width="auto" height="106px" id="dp">
+		            <div id="user_profile" >
+		            	<div>
+			            	<div class="thumbs_wrap">
+			            		<img src="{{ProfilePic}}" width="auto" height="106px" id="dp">
 
-		            		<div id="dp_edit" data-toggle="modal" data-target="#dp_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name">
-		            			<a href=""><u>
-		            				<img src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-document-edit-icon.png" width="20px" height="20px">
-		            			</u></a>
-		            		</div>
-		            	</div>
-		            	<div class="thumbs_wrap" id="user_profile_wrapper">
-				            <div>
-				                <span>
-				                	<span ng-click="edit.name=true" ng-hide="edit.name && user.name==loggedInUser.name" id="pro_name">{{user.name}}</span>
-				                	<div ng-show="edit.name && user.name==loggedInUser.name">
-				                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
-				                			<input type="text" value="{{user.name}}" ng-model="form.name" autofocus>
-				                			<br>
-				                			<button type="submit" class="w2b">Save</button> 
-				                			<button type="button" ng-click="edit.name=false" class="w2b">Cancel</button>
-				                		</form>
-				                	</div>
-				                </span>
-				            </div>
-				        
-				        	<div id="infodiv">
+			            		<!-- <div id="dp_edit" data-toggle="modal" data-target="#dp_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name">
+			            			<a href=""><u>
+			            				<img src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-document-edit-icon.png" width="20px" height="20px">
+			            			</u></a>
+			            		</div> -->
+			            	</div>
+		            		<div >
+					            <div class="thumbs_wrap" id="user_profile_wrapper">
+					                <span>
+					                	<p ng-click="edit.name=true" ng-hide="edit.name && user.name==loggedInUser.name" id="pro_name">{{user.name}}</p>
+					                	<!-- <div ng-show="edit.name && user.name==loggedInUser.name">
+					                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
+					                			<input type="text" value="{{user.name}}" ng-model="form.name" autofocus>
+					                			<br>
+					                			<button type="submit" class="w2b">Save</button> 
+					                			<button type="button" ng-click="edit.name=false" class="w2b">Cancel</button>
+					                		</form>
+					                	</div> -->
+					                </span>
+					            
+					        
+						        	<div id="infodiv">
 
-				            	<!--<span id="info">Director Editor Screenwriter</br></span>-->
-				            	<span style="font-size:12px">_/\_ Respect</span>
-				            	<span ng-if="user._id!=loggedInUser._id">
-					            	<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
-									<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
-								</span>
-				            </div>
+						            	<!--<span id="info">Director Editor Screenwriter</br></span>-->
+						            	<span style="font-size:12px" class="btnbdr">_/\_ Respect</span>
+						            	<!-- <span ng-if="user._id!=loggedInUser._id">
+							            	<button  ng-click="follow()" class="w2b">{{followStatus}}</button>
+											<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
+										</span> -->
+						            </div>
+					            </div>
+
+				        	</div>
 				        </div>
+				        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-		        	</div>
-		        	<div id="HOF_div" onclick="document.getElementById('HOF_display').style.display = 'block'">
-		        		<ul>
-		        			<a href="#about_user" data-toggle="tab"><li><span class="glyphicon glyphicon-user"></span> About</li></a>
-		        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Hall of Fame</li></a>
-		        			
-		        			 
-		        		</ul>
+				        <div id="HOF_div" onclick="document.getElementById('HOF_display').style.display = 'block'">
+			        		<ul>
+			        			<a href="#about_user" data-toggle="tab"><li><span class="glyphicon glyphicon-user"></span> About</li></a>
+			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Hall of Fame</li></a>
+			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Edit Profile</li></a>
+			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Settings</li></a>
+			        			<a href="#upload_form" data-toggle="tab">
+					        		<button type="button" id="uploadNew">+</button>
+						        </a>		        			
+			        			 
+			        		</ul>
+			        	</div>
+			        	
+			        	
+			        	
+
 		        	</div>
 		        	
+		        	
 
-		        	<div id="HOF_display" class="tab-content">
-		        		<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
-
-		        		<span id="about_user" class="tab-pane fade">
-		        			
-		        			<h4>About<hr></hr></h4>
-		        			
-							<span>
-			                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
-			                	<div ng-show="edit.about && user.name==loggedInUser.name">
-			                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
-			                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='About' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
-			                			</textarea>
-			                			
-			                			
-			                			<br>
-			                			<button type="submit" class="w2b">Save</button> 
-			                			<button type="button" ng-click="edit.about=false" class="w2b">Cancel</button>
-			                		</form>
-			                	</div>
-			                </span>
-						</span>
-		        		<span id="HOF" class="tab-pane fade">
-		        			<h4>Hall of Fame<hr></hr></h4>
-
-		        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px;width:50%;float:left" class="col-md-6">
-													
-							</content-item>
-		        		</span>
-						<div ng-include="'app/uploadPortal/uploadPortal.html'" id="upload_form0" class="tab-pane fade"></div>
-		        		
-
-							<!--<div class="tab-pane fade in active" id="upload_form2">
-				        		<div class="tab-content">
-					        		<span id="articlee_up" class="tab-pane fade">
-					        			<h3>Add your Article here</h3>					
-											
-											<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-					        		</span>
-					        		<span id="imagee_up" class="tab-pane fade">
-					        			<h3>Add your Image here</h3>
-														
-										<div class="form-group">
-											<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-										</div>
-										<div class="form-group">	
-											<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-										</div>
-										<div class="form-group">	
-											<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
-										</div>
-										<div class="form-group">
-											<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-										        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-										    </tags-input>
-										</div>
-										<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-					        		</span>
-					        		<span id="videoe_up" class="tab-pane fade">
-											<h3>Add your Video here</h3>
-																
-												<div class="form-group">
-																
-													<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
-												</div>
-												<div class="form-group">
-																	
-													<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
-												</div>
-												<div class="form-group">
-																		
-													<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
-												</div>
-												<div class="form-group"> <!-- Put text area --
-													<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
-						                			</textarea>													
-																
-												</div>
-												<div>
-													<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-
-												    </tags-input>
-												</div>
-															
-												<div>
-													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-												    </tags-input>
-												</div>
-												<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-					        		</span>
-					        	</div>
-				        	</div>-->
-				        	
-			        	
-		        	</div>
-		        	<a href="#upload_form0" data-toggle="tab" onclick="document.getElementById('HOF_display').style.display = 'block'">
+		        	
+		        	<!-- <a href="#upload_form0" data-toggle="tab" onclick="document.getElementById('HOF_display').style.display = 'block'">
 		        		<div id="upload_btn">
 			        		<md-button class="md-fab" aria-label="Eat cake">
 					            <span class="fab_plus">+</span>
 					        </md-button>
 			        	</div>
-		        	</a>
+		        	</a> -->
 		        	
 		        	
 		        	<!--<div id="upload_btn" onclick="document.getElementById('HOF_display').style.display = 'block'">
@@ -237,10 +253,10 @@
 					            else 
 					            	height=500;
 						      console.log($(window).scrollTop())
-						    if ($(window).scrollTop() > (height-45)) {
+						    if ($(window).scrollTop() > (height-65)) {
 						      $('#stages_list').addClass('navbar_sec_fixed');
 						    }
-						    if ($(window).scrollTop() < (height-44)) {
+						    if ($(window).scrollTop() < (height-64)) {
 						      $('#stages_list').removeClass('navbar_sec_fixed');
 						    }
 						  });

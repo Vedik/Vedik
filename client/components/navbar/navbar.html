@@ -8,7 +8,7 @@
     </div>
     
     <div id="search" ng-show="isLoggedIn()">
-        <span class=" glyphicon glyphicon-search" style="position:absolute;top:16px;left:55px"></span>
+        <span class=" glyphicon glyphicon-search" style="position:absolute;top:26px;left:55px"></span>
         <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
         <div id="search_res">
             <md-toolbar class="md-theme-light" ng-show="searchStage">
@@ -66,8 +66,8 @@
 
          <div class="container" ng-show="isLoggedIn()">                                         
               <div style="position:relative;width:300px;margin:0px 20px">
-                <button class="btn btn-primary" type="button" style="margin:6.5px 0px;background:none;border:0px"  ng-click="showNotif=!showNotif">
-                  <span class="glyphicon glyphicon-envelope" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
+                <button class="btn btn-primary" type="button" style="margin:18px 0px;background:none;border:0px"  ng-click="showNotif=!showNotif">
+                  <span class="glyphicon glyphicon-bell" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
                 </button>
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
@@ -124,7 +124,7 @@
                     </md-content>
                   </md-sidenav> -->
                   
-                  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" style="position:fixed;top:45px;left:0px" id="xxxx">
+                  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" style="position:fixed;top:65px;left:0px" id="xxxx">
                     <md-toolbar class="md-theme-light">
                       <h1 class="md-toolbar-tools">{{getCurrentUser().name}}</h1>
                     </md-toolbar>

@@ -11,6 +11,13 @@ angular.module('myAppApp')
     $http.get('/api/users/'+id).success(function (response){
       $scope.user = response.user;
          $scope.isFollowing = response.isFollowing;
+         if($scope.isFollowing){
+            $scope.followStatus="Following";
+         }
+         else
+         {
+             $scope.followStatus="Follow";
+         }
        if($scope.user.galleryPic)
         {
           $scope.GalleryPic= $scope.user.galleryPic;
@@ -131,21 +138,30 @@ angular.module('myAppApp')
 
     
     $scope.follow = function(){
-        $http.get('/api/users/'+id+'/addSubscriber').success(function (response){
+      if($scope.isFollowing==false)
+      {
+          $http.get('/api/users/'+id+'/addSubscriber').success(function (response){
             console.log(response);
             if(response.added==true){
                 $scope.isFollowing = true;
+                $scope.followStatus="Following";
             }
         });
-    }
-    $scope.unfollow = function(){
-        $http.delete('/api/users/'+id+'/deleteSubscriber').success(function (response){
+      }        
+      else
+      {
+          $http.delete('/api/users/'+id+'/deleteSubscriber').success(function (response){
             console.log(response);
             if(response.removed==true){
                 $scope.isFollowing = false;
+                $scope.followStatus="Follow";
             }
         });
+      }
+        
     }
+    
+    $scope.creditsRadio="team";$scope.creditsRadioB=true;
 
     $scope.stageDiv = function (id){
 
@@ -198,6 +214,16 @@ angular.module('myAppApp')
       return $http.get('/api/stages/tagingStage/'+query).success(function (response){
           console.log(response);
           return response;
+
+      });
+
+    };
+
+    $scope.loadCredit = function(query) {
+
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+          return response.data;
 
       });
 

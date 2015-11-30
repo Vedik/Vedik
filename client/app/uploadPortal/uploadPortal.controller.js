@@ -114,6 +114,9 @@ angular.module('myAppApp')
                                     '<span class="play">'+
                                         '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
                                     '</span>'+
+                                    '<span >'+
+                                        '<img src="assets/images/copyright.png" class="CRicon">'+
+                                    '</span>'+
                                     '<span class="thumb_trnsprnt"></span>'+
                                     '<span id="user_art_info">'+
                                     '</span>'+
@@ -168,28 +171,57 @@ angular.module('myAppApp')
                                 '</div>'    +
                             '</div>';
     var eventClubTemplate ='<div class="post_div thumbs_wrap col-md-12">'+
-                                    '<div class="col-md-6 text_type_post" id="event_det">'+
-                                        '<a href="#"><span id="event_post_heading">{{content.uploaderClub.name}}</span></a>'+
-                                        '<br> We is organising a <a href="#">{{content.eventId.name}}</a> '+
-                                        'at <a href="#">6:00 am</a>'+
-                                        'on <a href="#">Sunday 2nd August 2015</a>,'+
-                                        '<a href="#">Elite Beach</a>'+
-                                        '<br><br><br>'+
-                                        '<div>'+
-                                            '<p><a href="#"> {{content.eventId.attending.length}}</a> People are attending so far</p>'+
-                                            '<button class="b2w"  id="respond_post"><img src="http://www.clker.com/cliparts/E/1/x/w/P/P/walking-man-black-hi.png" width="7px" height="15px"> Attend</button>'+
-                                            '<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>'+
-
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">'+
+                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">'+
                                      '  <img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">'+
                                       '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>'+
-                                      '  <span id="img_name">Spinning Ball</span>'+
+                                      '  <span id="img_name">{{content.eventId.name}}</span>'+
                                             '<span class="thumb_trnsprnt">'+
                                              '</span>'+
                                                      
                                     '</div>'+
+                                    '<div class="col-md-12 text_type_post" id="event_det">'+
+                                        '<a href="/event/{{content.eventId._id}}"><span id="event_post_heading">{{content.eventId.name}}</span></a>'+
+                                        '<br/>'+
+                                        '<span class="col-md-9">'+
+                                            '<a href="/club/{{content.uploaderClub._id}}">{{content.uploaderClub.name}}</a>'+
+                                            '<span class="colorg sizeten lh20">'+
+                                                '<br/><span class="glyphicon glyphicon-time"> {{content.eventId.startDate}} </span>'+
+                                                '<span class="glyphicon glyphicon-map-marker">{{content.eventId.location}} </span>'+
+                                                '<br> {{content.eventId.description}} '+
+                                            '</span>'+
+                                        '</span>'+
+                                        '<div class="col-md-3 ">'+
+                                            '<p class="list_heading centric lh15 cursor">'+
+                                                'Attend'+
+                                                '<br><span class="colorg sizeten ">{{content.eventId.attending.length}} said going</span>'+
+                                            '</p>'+
+                                        '</div>  '+
+                                        '<br><br><br>'+
+                                        
+                                    '</div>'+
+                                    '<span id="post_time">'+
+                                        '<div style="padding:10px 0px;color:black">{{content.videoId.description}}</div>'+
+                                        '<span id="respond_post">'+
+                                            '<span id="respond_post" ng-hide="likingName" ng-click="like(content._id)">'  +
+                                                '<a href="#">'   +
+                                                    '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Like'  +
+                                                '</a>'  +
+                                            '</span>'   +
+                                            '<span id="respond_post" ng-show="likingName" ng-click="unlike(content._id)">'    +
+                                                '<a href="#"><img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Unlike</a>'    +
+                                            '</span>'   +
+                                        '</span>'+
+                                        '<div class="dropdown">'+
+                                            '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                            '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                            '</ul>'+
+                                        '</div>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                    '</span>'+
+                                    
                                 
                                 '</div>';
     var articleClubTemplate ='<div>'   +
@@ -358,7 +390,16 @@ angular.module('myAppApp')
                                  
             });
 
-        
+        if(scope.content.type==30)
+        {
+            var postIdLike=scope.content._id;
+            var likingName='liking'+postIdLike;
+            console.log(likingName);
+            $http.get('/api/posts/likeInfo/'+postIdLike).success(function (response){
+                scope.likingName=response;
+                console.log(scope.likingName);
+            });
+        }
 
         scope.like = function(postId){
             $http.get('/api/posts/'+postId+'/like').success(function (response){

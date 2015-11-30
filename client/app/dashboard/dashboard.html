@@ -35,36 +35,49 @@
 
 
 
+		<div class="col-md-12" id="tagline_box">
+			<p>Because Everyone needs<br>a Stage</p>
+		</div>
+		<div class="col-md-12"> 
+			
+			<div class="col-md-9"  >
+				
+					<div  id="vedikites_title" >
 
-
+						<span class="floatL" style="font-size:20px">IIT Madras' Vedik</span>
+						<ul class="nav nav-tabs floatL">
+						    <li class="btnbg rlmargin"><a data-toggle="tab" href="#booked_display">On Stage</a></li>
+						    <li class="btnbg rlmargin"><a data-toggle="tab" href="#stage">Latest</a></li>
+						    
+						</ul>
+						<br/>		
+						<hr/>
+					</div>
+				
+			</div>
+			<!-- <div  class="col-md-3" ng-click="todaysVedik=false"><a data-toggle="tab" href="#stage"><div  id="latest_tab">IITM Latest</div></a></div> -->
+		</div>
+		<script>
+			
+		</script>
 
 		
 		
 
 		<div class="tab-content col-md-12">
 			<div id="booked_display" class="tab-pane fade in active" style="min-height:100%;padding:20px 0px">
-				<div class="col-md-12"> 
-					<div class="col-md-9"  >
-						<a data-toggle="tab" href="#booked_display">
-							<div  id="vedikites_title" >			
-								<img src="/assets/images/todaysVedik.png" class="active">
-								<hr/>
-							</div>
-						</a>
-					</div>
-					<div  class="col-md-3" ng-click="todaysVedik=false"><a data-toggle="tab" href="#stage"><div  id="latest_tab">IITM Latest</div></a></div>
-				</div>
+				
 				<div>
 					<div class="col-md-1"></div>					
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4" style="padding:0px 20px 30px 0px;border-right:2px solid grey">
+					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4" style="padding:0px 20px 30px 0px;border-right:2px solid #fff">
 						<div style="">
-						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even" id="das">
+						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even" >
 							
 						</content-item>
 						</div>
 					</div>
 					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 0px 30px 20px ">
-						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" id="das">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" >
 							
 						</content-item>
 					</div>	
@@ -82,7 +95,7 @@
 		
 	<!--This div for displaying the stage-holders that day( the videos booked for that day)  -->
 			<div id="stage" class="tab-pane fade">
-				<div class="col-md-12"> 
+				<!-- <div class="col-md-12"> 
 					<div class="col-md-9"  ng-click="todaysVedik=true">
 						<a data-toggle="tab" href="#stage">
 							<div  id="vedikites_title" >			
@@ -92,12 +105,12 @@
 						</a>
 					</div>
 					<div  class="col-md-3" ng-click="todaysVedik=false"><a data-toggle="tab" href="#booked_display"><div  id="latest_tab">Today's Vedik</div></a></div>
-				</div>
+				</div> -->
 				<div class="col-md-2" id="clubs_list">
 					<div id="clubs_list_wrap" class="box_shadow_dwn">
-						<p class="list_heading">Clubs</p>
+						<div class="list_heading col-md-12">Clubs</div>
 						<a href="/club/{{clubsList._id}}" ng-repeat="clubsList in clubsList">
-							<button type="button" class="btn btn-info btn-lg w2b col-md-12" style="font-size:12px;margin:0px 0px;padding:4px 10px;text-align:left">{{clubsList.name}}</button>
+							<button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" >{{clubsList.name}}</button>
 						</a>
 					</div>
 				</div>
@@ -128,11 +141,12 @@
 					</li>
 				</ul>
 			</div>-->
+			</div>
+			
 		</div>
 		<div class="col-md-12" style="background:grey;height:200px">
 				About<br/>
 				Team
-		</div>
 		</div>
 
 		

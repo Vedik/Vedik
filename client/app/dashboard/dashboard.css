@@ -4,7 +4,7 @@
                 -webkit-box-sizing: border-box;
                 word-wrap:break-word; 
                 font-family:            }   
-            .stage_btm_1 { 
+            /*.stage_btm_1 { 
                 position: fixed;
                 bottom: 50px; 
                 height: 0px; 
@@ -14,7 +14,7 @@
                 border-left: 150px solid transparent; 
                 border-right: 150px solid transparent; 
             }
-      /*      .stage_btm_2 { 
+            .stage_btm_2 { 
                 position: fixed;
                 bottom: 50px; 
                 height: 0px; 
@@ -24,7 +24,7 @@
                 border-left: 50px solid transparent; 
                 border-right: 50px solid transparent; 
                 z-index: 1;
-            }*/ 
+            } 
             .stage_btm_frnt { 
                 position: fixed;
                 bottom: 0px; 
@@ -36,10 +36,10 @@
                /* border-left: 40px solid transparent; 
                 border-right: 40px solid transparent; */
                 z-index: 1;
-            }
+            }*/
             #unknown    {
             background-color:rgba(0,0,0,0.3);
-            height:55px;
+            height:65px;
             text-align:center;
             vertical-align: middle;
             font-size: 25px;
@@ -52,7 +52,7 @@
             margin: 0px;
             width: 100%;
             /*background-color: white;*/
-            background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");          
+            background:rgb( 221, 221, 221 );          
            padding: 0px;
            background-repeat: repeat;   
     }
@@ -60,6 +60,35 @@
             background-color: rgba(0,0,0,0);         
 
         }
+        #tagline_box{
+            height: 150px;
+            background-color: white;
+            color: grey;
+            font-family: "Times new roman";
+            padding: 40px 9.5%;
+            font-size: 30px;
+            line-height: 40px;
+        }
+        .btnbg a {
+            padding: 5px 15px !important;
+            border-radius: 15px !important;
+            background-color: white !important;
+            border:none !important;
+        }
+        .btnbdr  {
+            padding: 5px 15px !important;
+            border-radius: 15px !important;
+            background-color: none !important;
+            
+            border: 1px solid blue;
+        }
+        .rlmargin{
+            margin: 0px 20px;
+        }
+        .floatL{
+            float: left;
+        }
+
         #clubs_list {
             padding: 10px;
             
@@ -147,6 +176,7 @@
             display:block;
         }
         
+        
         #dashbrd_cntnt  {
             text-align: center;
             height: 600px;
@@ -199,18 +229,16 @@
         }   
        
   
-        #das {
-            padding: 10px 20px;
-        }
+        
         #vedikites_title{
             
 
             background-color: none;
             position: relative;
             float: left;
-            height: 200px;
+            height: 60px;
             margin: 0px 0px 40px 0px;
-            padding: 70px 40px 0px 130px;
+            padding: 20px 40px 0px 130px;
             width: 100%;
         }
         #latest_tab{

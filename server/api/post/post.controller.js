@@ -69,7 +69,7 @@ exports.hof = function(req, res) {
 
 exports.likeInfo = function(req, res) {
   console.log('err4567');
-  Post.findOne({ $or: [ { articleId:req.params.postIdLike }, { videoId:req.params.postIdLike }, { imageId:req.params.postIdLike }, { eventId:req.params.postIdLike } ] },function (err, posts) {
+  Post.findById(postIdLike,function (err, posts) {
     if(err) { return handleError(res, err); }
     })
   .populate('like')

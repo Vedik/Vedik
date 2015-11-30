@@ -40,7 +40,7 @@ exports.index = function(req, res) {
                       },function (err, posts) {
               if(err) { return handleError(res, err); }
               })
-            .populate('articleId videoId imageId uploader.user uploader.club eventId comments.comment')
+            .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment like.like')
             
             .exec(function (err, posts){
                 if (err) return handleError(err);
