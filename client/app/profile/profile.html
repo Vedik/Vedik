@@ -16,9 +16,9 @@
             <!--user pic and info goes here-->
             	<div id="pro_pic">
             		
-            		<div id="pro_pic_wrapper">
-            			<div ng-controller="ParallaxEff">
-	        				<img src="{{GalleryPic}}" style="width:100%;height:100%;z-index:0;position:relative" alt="" du-parallax y="background" >
+            		<div id="pro_pic_wrapper" style="padding:10px">
+            			<div >
+	        				<img src="{{user.galleryPic}}" style="width:100%;height:100%;z-index:0;position:relative;" alt="" id="gal_pic" >
 	        				<div id="HOF_display" class="tab-content colorw">
 				        		<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
 
@@ -137,7 +137,7 @@
 						<script>
 			               $(document).ready(function(){
 			                    
-			                        $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+$(window).height()+'px,0px)'});
+			                        $("#gal_pic").css({"clip": 'rect(0px,'+$(window).width()+'px,'+($(window).height()-85)+'px,0px)'});
 			                        $("#pro_pic").css({"height": ($(window).height()-65)+'px'});
 			                  });
 			            </script>
@@ -147,7 +147,7 @@
 		            <div id="user_profile" >
 		            	<div>
 			            	<div class="thumbs_wrap">
-			            		<img src="{{ProfilePic}}" width="auto" height="106px" id="dp">
+			            		<img src="{{user.proPic}}" width="auto" height="106px" id="dp">
 
 			            		<!-- <div id="dp_edit" data-toggle="modal" data-target="#dp_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name">
 			            			<a href=""><u>
@@ -189,8 +189,9 @@
 			        		<ul>
 			        			<a href="#about_user" data-toggle="tab"><li><span class="glyphicon glyphicon-user"></span> About</li></a>
 			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Hall of Fame</li></a>
-			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Edit Profile</li></a>
+			        			<a href="#HOF" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><li><span class="glyphicon glyphicon-education"></span> Edit Profile</li></a>
 			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Settings</li></a>
+			        			
 			        			<a href="#upload_form" data-toggle="tab">
 					        		<button type="button" id="uploadNew">+</button>
 						        </a>		        			

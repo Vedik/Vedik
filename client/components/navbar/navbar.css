@@ -165,7 +165,7 @@ li:hover#nav_li, li:active#nav_li{
     background-color:#ffde00;
     color:black;
 }
-.form-control   {
+#search .form-control   {
     width:400px;
     height:25px;
     padding:4px 10px;

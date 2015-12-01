@@ -10,6 +10,9 @@ angular.module('myAppApp', [
   'ngTagsInput',
   'ngMaterial',
   'ngMessages',
+  'duParallax',
+  'ngAnimate',
+  
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

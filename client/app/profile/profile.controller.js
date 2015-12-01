@@ -20,31 +20,25 @@ angular.module('myAppApp')
          }
        if($scope.user.galleryPic)
         {
-          $scope.GalleryPic= $scope.user.galleryPic;
+          $scope.user.galleryPic= $scope.user.galleryPic;
         }
     else
     {  
-         $scope.GalleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+         $scope.user.galleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
     }
 
-    if($scope.user.proPic)
+    if(!$scope.user.proPic)
         {
-          $scope.ProfilePic= $scope.user.proPic;
-        }
-    else
-    {  
-         $scope.ProfilePic = "http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
-    }
+         $scope.user.proPic = "http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
+      }
+      
+         
 
-    if($scope.user.about)
+    if(!$scope.user.about)
         {
-          $scope.userAbout= $scope.user.about;
+          $scope.user.about = "Write something about your self!";
         }
-    else
-    {  
-         $scope.userAbout = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
-    }
-
+   
       $scope.form={};
        $scope.form.about=$scope.user.about;
        console.log($scope.form.about);  
@@ -320,24 +314,19 @@ angular.module('myAppApp')
 
       }
 
-    $scope.editProfile = function (form,type){
-      $http.post('/api/users/editProfile/'+type,{editProfile:form}).success(function (response){
+    $scope.editProfile = function (form){
+      $http.post('/api/users/editProfile',{name:form.name,about:form.about,proPic:form.proPic,galleryPic:form.galleryPic}).success(function (response){
         
         $scope.user=response;
-        $scope.GalleryPic=$scope.user.galleryPic;
-        $scope.edit=false;
-        $scope.ProfilePic=$scope.user.proPic;         
-        $scope.userAbout=$scope.user.about;
-        $scope.modal="modal";
-         console.log($scope.userAbout);
-        $scope.$apply();
+        
+        
       })
 
     }
 
-    $scope.displayProPic = function(url){
-        $scope.ProfilePic=url;
-    }
+    // $scope.displayProPic = function(url){
+    //     $scope.ProfilePic=url;
+    // }
 
     $scope.editAbout = function (){
         $scope.formAbout=$scope.user.about;

@@ -18,7 +18,7 @@ router.post('/', controller.create);
 router.post('/addHOF/:postId',auth.isAuthenticated(), controller.addHOF);
 
 //router.post('/galleryPic/', auth.isAuthenticated(), controller.galPicChange);
-router.post('/editProfile/:type', auth.isAuthenticated(), controller.editProfile);
+router.post('/editProfile', auth.isAuthenticated(), controller.editProfile);
 router.get('/search/:searchQuery', controller.search);
 router.get('/:id',auth.isAuthenticated(), controller.showUser);
 

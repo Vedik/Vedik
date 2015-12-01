@@ -82,6 +82,7 @@
 	.modal 	{
 		-webkit-filter: blur(0px);
   		filter: blur(0px);
+  		margin: 40px auto;
 	}
 	.modal-dialog	{
 		width:auto;
@@ -95,7 +96,7 @@
 		border: 0px;
 	}
 	.modal-body	{
-		padding: 0px;
+		padding: 10px;
 	}
 	.modal-body #img_viewed	{
 		box-shadow: 0px 20px 50px #000;
@@ -207,7 +208,7 @@
 	.glassy	{
 		color: rgba(255,255,255,0.7);
 		padding: 10px;
-		background-color: rgba(255,255,255,0.05);	
+		background-color: rgba(255,255,255,1);	
 
 	}
 	.glassy_thick	{
@@ -272,22 +273,42 @@
      	padding: 10px 0px;
      }
 
+     /*font colors*/
      .colorg{
      	color: rgba(0,0,0,0.6);
      }
      .colorw{
      	color: white;
      }
+     .colorb{
+     	color: rgb(19,19,19);
+     }
+     .colorbl{
+     	color: rgb(1,192,255);
+     }
+     /*background (bg) color*/
+     .bgb{
+     	background-color: rgb(19,19,19);
+     }
+     .bgw{
+     	background-color: white;
+     }
+     .bgbl{
+     	background-color: rgb(1,192,255);
+     }
+     /*font size*/
      .sizeten{
      	font-size: 10px;
-     	
+     /*line height*/	
      }
      .lh20{
      	line-height: 20px;
      }
+
      .lh15{
      	line-height: 15px;
      }
+     /*coursor pointer*/
      .cursorp{
      	cursor: pointer;
      }

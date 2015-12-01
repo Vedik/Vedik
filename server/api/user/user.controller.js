@@ -69,29 +69,19 @@ exports.addHOF = function (req, res, next) {
 
 exports.editProfile = function (req, res) {
   var userId = req.user._id;
-  var type=req.params.type;
   
-  console.log(req.body.editProfile);
-  console.log(req.params.type);
 
   User.findById(userId, function (err,user){
 
-    if(type==1)
-    {
-     user.name=req.body.editProfile; 
-    }
-    else if (type==2)
-    {
-      user.about=req.body.editProfile;
-    }
-    else if (type==3)
-    {
-      user.galleryPic=req.body.editProfile;
-    }
-    else if(type==4)
-    {
-      user.proPic=req.body.editProfile;
-    }
+    
+    user.name=req.body.name; 
+    
+    user.about=req.body.about;
+    
+    user.galleryPic=req.body.galleryPic;
+    
+    user.proPic=req.body.proPic;
+    
     
     user.save(function (err) {
       if (err) { return handleError(res, err); }
