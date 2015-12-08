@@ -3,7 +3,7 @@
 <div ng-include="'components/modal/modal.html'"></div>
 <!--******************************************************************-->
 
-<div ng-controller="CompetitionCtrl" id="for_blur">
+<div ng-controller="CompetitionCtrl" id="for_blur" layout-fill="" layout="column" ng-cloak="">
   <div ng-include="'components/navbar/navbar.html'" ></div>
   <div id="nav_fade">
     <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="400px" style="opacity:1">
@@ -37,9 +37,10 @@
         <p data-toggle="modal" data-target="#broadcast" onclick="document.getElementById('for_blur').style.filter = 'blur(10px)'">Broadcast</p>
         <p>FAQ</p>
         <div class="col-md-12">
-            <md-button class=" md-primary" ng-click="addAttend()"  ng-hide="attending" style="margin:0px 0px 5px;border-radius:0px"><span ng-show="!event.regReq">Attend</span><span ng-show="event.regReq">Register</span> <span class="glyphicon glyphicon-plus"> </span></md-button>
+            <md-button class=" md-primary lh15" ng-click="addAttend()"  ng-hide="attending" style="margin:0px 0px 5px;border-radius:0px">Register Now <span class="glyphicon glyphicon-plus"> </span><br/><span style="font-size:9px">Submit Entry Later</span> </md-button><br/>
+            <md-button class=" md-primary" ng-click="addAttend()"  ng-hide="attending" style="margin:0px 0px 5px;border-radius:0px">Register and Submit Now <span class="glyphicon glyphicon-plus"> </span></md-button>
             <md-button  ng-click="unAttend()"  ng-show="attending" style="margin:0px 0px 5px"><span ng-show="!event.regReq">You are going</span><span ng-show="event.regReq">Registed</span></md-button>
-            <br><div style="font-size:10px;text-align:center">{{attendingNum}} going</div>
+            <br><div style="font-size:10px;text-align:center">{{attendingNum}} Entries</div>
             <div class="sizeten colorg" ng-show="event.regReq">*Registration Required</div>
         </div>
         

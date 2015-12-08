@@ -308,6 +308,9 @@
      .lh15{
      	line-height: 15px;
      }
+     .lh10{
+     	line-height: 10px;
+     }
      /*coursor pointer*/
      .cursorp{
      	cursor: pointer;

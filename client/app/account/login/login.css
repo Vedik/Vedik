@@ -38,7 +38,19 @@
   
 }
 #login_wrapper{
-  padding: 10px 100px;
+  padding: 10px 50px;
   border-right: 1px solid grey;
 
+}
+#login #logob{
+  padding: 40px 100px 10px;
+  font-size: 50px;
+  color:rgb(23,23,23) 
+}
+
+#login .row{
+  border:1px solid rgba(0,0,0,0.1);
+  margin: 0px 0px 20px 0px;
+  border-radius: 20px;
+  padding: 20px 30px;
 }

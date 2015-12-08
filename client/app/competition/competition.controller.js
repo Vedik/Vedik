@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('CompetitionCtrl', function ($scope,$state,  $location,Auth,$http) {
+  .controller('CompetitionCtrl', function ($scope,$state,  $mdToast,$location,Auth,$http) {
     $scope.message = 'Hello';
      $scope.user = Auth.getCurrentUser;
    
@@ -123,7 +123,12 @@ angular.module('myAppApp')
             });
     }
 
-
+$mdToast.show(
+      $mdToast.simple()
+        .textContent('Simple Toast!')
+        
+        .hideDelay(3000)
+    );
   
    
 
@@ -139,6 +144,12 @@ angular.module('myAppApp')
         console.log(response);
         $scope.posts.push(response);
         console.log($scope.posts);
+
+        $mdToast.show(
+      	$mdToast.simple()
+        .textContent('Announcement Made!')
+        .hideDelay(3000)
+    	);
        
       
         });
