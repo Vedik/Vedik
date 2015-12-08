@@ -3,7 +3,7 @@
 <div ng-include="'components/modal/modal.html'"></div>
 <!--******************************************************************-->
 
-<div ng-controller="EventCtrl" id="for_blur">
+<div ng-controller="CompetitionCtrl" id="for_blur">
   <div ng-include="'components/navbar/navbar.html'" ></div>
   <div id="nav_fade">
     <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="400px" style="opacity:1">
@@ -139,9 +139,9 @@
             <h4 style="color:white">Annouce<hr></h4>
             <div >
               <ul class="nav nav-tabs" style="width:40%;">
-                <li  class="active"><a href="#Earticle_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Post</a></li>               
-                <li ><a href="#Eimage_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
-                <li ><a href="#Evideo_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
+                <li  class="active"><a href="#Carticle_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Post</a></li>               
+                <li ><a href="#Cimage_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
+                <li ><a href="#Cvideo_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
               </ul>
               <form name="form"  ng-model="form">
                   <div class="tab-content">
@@ -163,18 +163,18 @@
                         
                       
                           
-                      <div class="tab-content">
-                            <div id="Earticle_up" class="tab-pane fade in active">
+                          <div class="tab-content">
+                            <div id="Carticle_up" class="tab-pane fade in active">
                                 <button type="submit" class="b2w" ng-click="postSubmit()">Submit</button>
                             </div>
-                        <div id="Eimage_up" class="tab-pane fade">
+                        <div id="Cimage_up" class="tab-pane fade">
                             <div class="form-group">  
                               <input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
                             </div>
                             <img src="{{form.picUrl}}" width="100%" height="auto">
                             <button type="submit" class="b2w" ng-click="imageSubmit()">Submit</button>
                         </div>
-                        <div id="Evideo_up" class="tab-pane fade">
+                        <div id="Cvideo_up" class="tab-pane fade">
                             <div class="form-group">
                                         
                               <input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">

@@ -25,6 +25,21 @@ exports.videoCredits = function(req, res) {
        return res.json(200, credits);
     });
 };
+exports.Credits = function(req, res) {
+
+ Credit.find({ $and: [ { creditedUsers: { $elemMatch: { user:req.params.id } } }, {postId:req.params.postId} ] },function (err, credits) {
+    if(err) { return handleError(res, err); }
+
+   
+  })
+  .populate('credit')
+  
+  .exec(function (err, credits){
+      if (err) return handleError(err);
+        console.log(credits);
+       return res.json(200, credits);
+    });
+};
 
 // Get a single credit
 exports.show = function(req, res) {

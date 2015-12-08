@@ -84,7 +84,7 @@
                 left:20%;
                 position: relative;
               }
-              iframe {
+              #video iframe {
                 height: 100%;
                 left: 20%;
                 top:0px;

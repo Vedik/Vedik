@@ -345,9 +345,20 @@ exports.eventPost = function(req, res) {
 
             }
           });
-
+           //  console.log(newArticle._id,"ss");
+           // Post
+           //  .findOne({articleId:newArticle._id})
+           //  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
+  
+           //  .exec(function (err, post){
+           //      if (err) return handleError(err);
+               
+           //      console.log(post);
+                
+           //      return res.json(post);
+           //  })
           
-          return res.json(200,newArticle);
+           return res.json(200,newPost);
         }
     
     });

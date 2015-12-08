@@ -52,6 +52,28 @@
    		position: absolute;
 
    	}
+    #gal_pic{
+     -webkit-transition: all 10s ease;
+                     -moz-transition: all 10s ease;
+                       -o-transition: all 0.5s ease;
+                      -ms-transition: all 5s ease;
+                          transition: all 15s ease; 
+
+                        -webkit-transform: scale( 1 );
+                        -moz-transform: scale( 1 );
+                        -o-transform: scale( 1 );
+                        -ms-transform: scale( 1 );
+                        transform: scale( 1 );
+    
+    }
+    #gal_pic:hover{
+      -webkit-transform: scale( 1.1 );
+      -moz-transform: scale( 1 );
+      -o-transform: scale( 1 );
+      -ms-transform: scale( 1 );
+      transform: scale( 1.1 );
+        
+    }
    	.posts_wrapper	{
    		background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
         width: 100%;
@@ -78,6 +100,7 @@
    		text-align: center;
    		z-index: 1;
    	}
+
    	.e_name	{
    		font-size: 40px;
    		color: white;
@@ -88,6 +111,38 @@
    		color: white;
    		opacity: 0.9;
    	}
+    #event_menu{
+      position: absolute;
+      right:30px;
+      top: 150px;
+      z-index: 100;
+      border:2px solid white;
+      background-color: rgba(0,0,0,0);
+      color: white;
+      min-width: 15%;
+
+    }
+    #event_menu p{
+      padding: 10px 10px;
+      margin: 0px;
+      -webkit-transition: all 0.5s ease;
+                     -moz-transition: all 0.5s ease;
+                       -o-transition: all 0.5s ease;
+                      -ms-transition: all 0.5s ease;
+                          transition: all 0.5s ease;
+
+    }
+    #event_menu p:hover{
+    
+      background-color: rgba(255,255,255,0.1);
+      cursor: pointer;
+    }
+    #event_menu div{
+      padding: 5px 10px;
+      background-color: white;
+      color: black;
+      text-align: center;
+    }
    	.light_text_shadow{
    		color: white;
    		text-shadow:1px 1px 2px grey, -1px -1px 2px black;

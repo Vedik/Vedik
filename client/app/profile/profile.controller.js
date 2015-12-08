@@ -8,8 +8,9 @@ angular.module('myAppApp')
     var id = $location.url().split('/profile/')[1];
     console.log(id);
     $scope.abcd="1234";
-    $http.get('/api/users/'+id).success(function (response){
-      $scope.user = response.user;
+    $http.get('/api/users/'+id).then(function (response){
+     
+      $scope.user = response.data.user;
          $scope.isFollowing = response.isFollowing;
          if($scope.isFollowing){
             $scope.followStatus="Following";
@@ -18,19 +19,20 @@ angular.module('myAppApp')
          {
              $scope.followStatus="Follow";
          }
+
        if($scope.user.galleryPic)
         {
           $scope.user.galleryPic= $scope.user.galleryPic;
         }
-    else
-    {  
-         $scope.user.galleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
-    }
+        else
+        {  
+             $scope.user.galleryPic = "http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+        }
 
-    if(!$scope.user.proPic)
-        {
-         $scope.user.proPic = "http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
-      }
+      if(!$scope.user.proPic)
+          {
+           $scope.user.proPic = "http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
+        }
       
          
 
@@ -42,7 +44,16 @@ angular.module('myAppApp')
       $scope.form={};
        $scope.form.about=$scope.user.about;
        console.log($scope.form.about);  
+    })
+      .catch( function(err){
+        console.log(err);
+                   if(err){
+        $location.path('/dashboard/');
+      }
     });
+
+
+
     console.log($scope.user);
     $scope.isLoggedIn = Auth.isLoggedIn;
     console.log($scope.isLoggedIn()+" is isLoggedIn");
@@ -124,6 +135,17 @@ angular.module('myAppApp')
         }
       }
   });
+  
+    $scope.credits=[];
+    $scope.getCredit = function(index,postId){
+      
+      $http.get('api/credits/credit/'+postId+'/'+id).success(function (response){
+          $scope.credits[index]=angular.copy(response);
+         
+        
+      })
+
+    }
 
 
      $http.get('/api/posts/hof/'+id).success(function (response){

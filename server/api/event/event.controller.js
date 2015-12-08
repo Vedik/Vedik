@@ -23,10 +23,11 @@ exports.clubEvents = function(req, res) {
 // Get a single event
 exports.show = function(req, res) {
   console.log('req.params.id');
-  Event.findById(req.params.id, function (err, event) {
+ console.log('req.params.id');console.log('req.params.id');console.log('req.params.id');
+    Event.findById(req.params.id, function (err, event) {
     if(err) { return handleError(res, err); }
   })
-  .populate('user club')
+  .populate('user club attending.user')
   .exec(function (err,event){
     if(err) { return handleError(res, err); }
 
@@ -34,7 +35,7 @@ exports.show = function(req, res) {
     var attending=false;
     for(var i=0; i<event.attending.length;i++)
     {
-        if(event.attending[i].user.equals(req.user._id)){
+        if(event.attending[i].user._id.equals(req.user._id)){
 
           attending=true;
           break;
@@ -43,7 +44,8 @@ exports.show = function(req, res) {
       
    
 
-    console.log(event);
+ 
+    console.log(event,attending);
     return res.json({event:event,attending:attending});
    
   });
@@ -51,7 +53,7 @@ exports.show = function(req, res) {
 
 // Creates a new event in the DB.
 exports.create = function(req, res) {
-   console.log(req.params.endDate);
+ 
   /*Video.create(req.body, function(err, video) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
@@ -74,9 +76,13 @@ exports.create = function(req, res) {
       user:req.user._id,
       eventCover:req.body.eventCover,
       location:req.body.location,
-      
+      regReq:req.body.regReq,
+      comp:req.body.comp,
+      subOnl:req.body.subOnl,
+      subType:req.body.subType,
     });
   }
+  
   
   else
   {
@@ -88,6 +94,10 @@ exports.create = function(req, res) {
         user:req.user._id,
         eventCover:req.body.eventCover,
         location:req.body.location,
+        regReq:req.body.regReq,
+        comp:req.body.comp,
+        subOnl:req.body.subOnl,
+        subType:req.body.subType,
         
       });
   }
@@ -130,17 +140,36 @@ exports.create = function(req, res) {
     
     });
 };
+exports.attendInfo = function(req, res) {
+  Event.findById(req.params.id,function (err,event){
+    if(err) return handleError(res,err);
+    var attending=false;
+    for(var i=0; i<event.attending.length;i++)
+    {
+        console.log(event.attending);
+        if(event.attending[i].user.equals(req.user._id)){
+
+          attending=true;
+          break;
+        }
+    }
+    return res.json(attending);
+  })
+};
 exports.addAttend = function(req, res) {
+  console.log(req.params.id);
   Event.findById(req.params.id,function (err,event){
     if(err) return handleError(res,err);
     event.attending.push({user:req.user._id});
       event.save(function (err) {
+        console.log(event.attending);
         if(err) return handleError(res, err);
         return res.json(event.attending.length);
       })
   })
 };
 exports.unAttend = function (req,res){
+  console.log(req.params.id);
   Event.findById(req.params.id,function (err,event){
     if(err){
       return handleError(res,err);
@@ -155,6 +184,7 @@ exports.unAttend = function (req,res){
             event.save(function (err){
               if(err){ return handleError(res, err);}
               else {
+                console.log(event.attending);
                 return res.json(event.attending.length);
               }
             });

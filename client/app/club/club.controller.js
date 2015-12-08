@@ -177,22 +177,29 @@ angular.module('myAppApp')
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
 
-
+    $scope.regReq=false;
+    $scope.comp=false;
+    $scope.subOnl=false;
+    $scope.endDateTF=false;
+    
+    $scope.endDate=function(){
+      $scope.endDateTF=!$scope.endDateTF;
+      console.log($scope.endDateTF);
+    }
    $scope.createEvent = function (form){
           
           if($scope.endDateTF){ //if there is end date
-              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
+              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
                   console.log(response);
-                  $state.go('event',{id:response._id});
+                  $location.path('/event/'+response._id);
 
               })
           }
           else
           {
-              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic}).success(function (response){
+              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
                   console.log(response);
-                  $state.go('event',{id:response._id});
-
+                  $location.path('/event/'+response._id);
               })
           }
       

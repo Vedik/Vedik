@@ -12,6 +12,10 @@ var EventSchema = new Schema({
   user:{type:Schema.Types.ObjectId, ref:'User'},
   location:String,
   eventCover:String,
+  regReq:Boolean,
+  comp:Boolean,
+  subOnl:Boolean,
+  subType:String,
   vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
   attending:[{user:{type:Schema.Types.ObjectId,ref:'User'}}]
 });

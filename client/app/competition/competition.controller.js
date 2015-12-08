@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('EventCtrl', function ($scope,$state,  $location,Auth,$http) {
+  .controller('CompetitionCtrl', function ($scope,$state,  $location,Auth,$http) {
     $scope.message = 'Hello';
      $scope.user = Auth.getCurrentUser;
    
@@ -11,8 +11,9 @@ angular.module('myAppApp')
 	
 
    
-    	var id = $location.url().split('/event/')[1];
-    	console.log($location.url().split('/event/')[1]);
+    	var id2 = $location.url().split('/competition/')[1];
+    	var id= id2.split('#')[0];
+    	console.log(id);
     	
     	
     
@@ -21,10 +22,11 @@ angular.module('myAppApp')
 
     
     $http.get('/api/events/'+id).success(function (response){
-    	console.log(response);
-    	$scope.event=response.event;
+      console.log(response);
+      $scope.event=response.event;
       $scope.attending=response.attending;
       $scope.attendingNum=$scope.event.attending.length;
+
       var date1 = new Date($scope.event.startDate);
       console.log(date1);
       var d = date1.getDate();
@@ -32,7 +34,8 @@ angular.module('myAppApp')
       var y = date1.getFullYear();
       $scope.startDate=d+"/"+m+"/"+y;
 
-      if($scope.event.endDate){
+      if($scope.event.endDate)
+      {
           var date2 = new Date($scope.event.endDate);
           var d = date2.getDate();
           var m = date2.getMonth()+1;
@@ -128,9 +131,16 @@ angular.module('myAppApp')
      
        $http.post('/api/articles/event/'+$scope.event.club._id,{articleName:$scope.form.name,eventId:id,description:$scope.form.description}).success(function (response){
         console.log(response);
+        response.articleId={articleName:$scope.form.name,description:$scope.form.description};
+        response.uploader={user:{name:$scope.user().name}};
         $scope.form={};
+        
+        
+        console.log(response);
         $scope.posts.push(response);
         console.log($scope.posts);
+       
+      
         });
       
           
@@ -172,76 +182,4 @@ angular.module('myAppApp')
       });
    };
 
-});
-
-angular.module('myAppApp')
-
-.controller('AppCtrl', function($scope, $mdToast, $document) {
-  var last = {
-      bottom: false,
-      top: true,
-      left: false,
-      right: true
-    };
-
-  $scope.toastPosition = angular.extend({},last);
-
-  $scope.getToastPosition = function() {
-    sanitizePosition();
-
-    return Object.keys($scope.toastPosition)
-      .filter(function(pos) { return $scope.toastPosition[pos]; })
-      .join(' ');
-  };
-
-  function sanitizePosition() {
-    var current = $scope.toastPosition;
-
-    if ( current.bottom && last.top ) current.top = false;
-    if ( current.top && last.bottom ) current.bottom = false;
-    if ( current.right && last.left ) current.left = false;
-    if ( current.left && last.right ) current.right = false;
-
-    last = angular.extend({},current);
-  }
-
-  $scope.showCustomToast = function() {
-    $mdToast.show({
-      controller: 'ToastCtrl',
-      templateUrl: 'toast-template.html',
-      parent : $document[0].querySelector('#toastBounds'),
-      hideDelay: 6000,
-      position: $scope.getToastPosition()
-    });
-  };
-
-  $scope.showSimpleToast = function() {
-    $mdToast.show(
-      $mdToast.simple()
-        .textContent('Simple Toast!')
-        .position($scope.getToastPosition())
-        .hideDelay(3000)
-    );
-  };
-
-  $scope.showActionToast = function() {
-    var toast = $mdToast.simple()
-          .textContent('Action Toast!')
-          .action('OK')
-          .highlightAction(false)
-          .position($scope.getToastPosition());
-
-    $mdToast.show(toast).then(function(response) {
-      if ( response == 'ok' ) {
-        alert('You clicked \'OK\'.');
-      }
-    });
-  };
-
-})
-
-.controller('ToastCtrl', function($scope, $mdToast) {
-  $scope.closeToast = function() {
-    $mdToast.hide();
-  };
 });

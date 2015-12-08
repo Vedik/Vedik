@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/club/:clubId', controller.clubEvents);
 router.get('/:id', auth.isAuthenticated(), controller.show);
+router.get('/attendInfo/:id', auth.isAuthenticated(), controller.attendInfo);
 router.post('/attend/:id',auth.isAuthenticated(),controller.addAttend);
 router.delete('/attend/:id',auth.isAuthenticated(),controller.unAttend);
 router.post('/:id', auth.isAuthenticated(), controller.create);

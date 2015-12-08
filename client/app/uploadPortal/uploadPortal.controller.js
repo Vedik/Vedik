@@ -1,5 +1,5 @@
 //global variable
-var ranX, ranY=0;
+var ranX, ranY=0,attendArray=[],likeArray=[];
 
 'use strict';
 
@@ -172,7 +172,7 @@ angular.module('myAppApp')
                             '</div>';
     var eventClubTemplate ='<div class="post_div thumbs_wrap col-md-12">'+
                                     '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">'+
-                                     '  <img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">'+
+                                     '  <img src="{{content.imageId.picUrl}}" id="img_post">'+
                                       '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>'+
                                       '  <span id="img_name">{{content.eventId.name}}</span>'+
                                             '<span class="thumb_trnsprnt">'+
@@ -191,9 +191,9 @@ angular.module('myAppApp')
                                             '</span>'+
                                         '</span>'+
                                         '<div class="col-md-3 ">'+
-                                            '<p class="list_heading centric lh15 cursor">'+
-                                                'Attend'+
-                                                '<br><span class="colorg sizeten ">{{content.eventId.attending.length}} said going</span>'+
+                                            '<p class="list_heading centric lh15 cursor" ng-click="attending()">'+
+                                                '{{attend}}'+
+                                                '<br><span class="colorg sizeten ">{{attendNum}} said going</span>'+
                                             '</p>'+
                                         '</div>  '+
                                         '<br><br><br>'+
@@ -202,14 +202,12 @@ angular.module('myAppApp')
                                     '<span id="post_time">'+
                                         '<div style="padding:10px 0px;color:black">{{content.videoId.description}}</div>'+
                                         '<span id="respond_post">'+
-                                            '<span id="respond_post" ng-hide="likingName" ng-click="like(content._id)">'  +
+                                            '<span id="respond_post"  ng-click="likey(content._id)">'  +
                                                 '<a href="#">'   +
-                                                    '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Like'  +
+                                                    '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                                 '</a>'  +
                                             '</span>'   +
-                                            '<span id="respond_post" ng-show="likingName" ng-click="unlike(content._id)">'    +
-                                                '<a href="#"><img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{content.like.length}} Unlike</a>'    +
-                                            '</span>'   +
+                                           
                                         '</span>'+
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
@@ -245,7 +243,7 @@ angular.module('myAppApp')
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
-    var postTemplate = '<div>'   +
+    var postBTemplate = '<div>'   +
                                 '<div class="post_div" style="width:{{width}}%">'  +
                                     '<div class="text_type_post" id="article">' +
                                         '<a href="#">'  +
@@ -257,9 +255,14 @@ angular.module('myAppApp')
                                         '</div>'    +
                                     '</div>'    +
                                     '<span id="post_time">'+
-                                            '<span id="respond_post">'+
+                                            
+                                             '<span id="respond_post"  ng-click="likey(content._id)">'  +
+                                                '<a href="#">'   +
+                                                    '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
+                                                '</a>'  +
+                                            '</span>'   +
                                                 
-                                            '</span>'+
+                                           
                                             '<div class="dropdown">'+
                                                 '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                 '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
@@ -272,7 +275,84 @@ angular.module('myAppApp')
                                             '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
                                     '</span>'   +                                    
                                 '</div>'    +
-                            '</div>';   
+                            '</div>';
+    var imageBTemplate = '<div>'+
+                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
+                                '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                    '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                                    '<span>'+
+                                        '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
+                                    '</span>'+
+                                    '<span id="img_name">'+
+                                        '{{content.imageId.imgName}}'+                                    
+                                        '<span style="font-size:12px"> by {{content.uploader.user.name}}</span>'+
+                                    '</span>'+
+                                    '<span class="thumb_trnsprnt"></span>'+
+                                    '<span id="user_art_info">'+
+                                        '<div id="a">'+
+                                            '<span style="bottom:20px;left:10px;position:absolute"></span>'+
+                                        '</div>'+
+                                    '</span>'+
+                                '</div>'+
+                                '<span id="post_time">'+
+                                    '<div style="padding:10px 0px;color:black">{{content.imageId.description}}</div>'+
+                                     '<span id="respond_post"  ng-click="likey(content._id)">'  +
+                                        '<a href="#">'   +
+                                            '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
+                                        '</a>'  +
+                                    '</span>'   +
+                                    '<div class="dropdown">'+
+                                        '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                        '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                        '</ul>'+
+                                    '</div>'+
+                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                    '</span>'+
+                            '</div>'+                            
+                        '</div>';
+    var videoBTemplate = '<div  ng-click=blur()>' +
+                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
+                               '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                    '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+                                    '<span>'+
+                                        '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
+                                    '</span>'+
+                                    '<span id="img_name">'+
+                                        '{{content.videoId.vidname}}'+                                    
+                                        '<span style="font-size:12px"> by {{content.uploader.user.name}} </span>'+
+                                    '</span>'+
+                                    '<span class="play">'+
+                                        '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
+                                    '</span>'+
+                                    '<span >'+
+                                        '<img src="assets/images/copyright.png" class="CRicon">'+
+                                    '</span>'+
+                                    '<span class="thumb_trnsprnt"></span>'+
+                                    '<span id="user_art_info">'+
+                                    '</span>'+
+                                '</div>'+
+                                '<span id="post_time">'+
+                                    '<div style="padding:10px 0px;color:black">{{content.videoId.description}}</div>'+
+                                     '<span id="respond_post"  ng-click="likey(content._id)">'  +
+                                        '<a href="#">'   +
+                                            '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
+                                        '</a>'  +
+                                    '</span>'   +
+                                    '<div class="dropdown">'+
+                                        '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
+                                        '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
+                                              '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                        '</ul>'+
+                                    '</div>'+
+                                    '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                '</span>'+
+                            '</div>'+
+                        '</div>';   
 
     var getTemplate = function(contentType) {
         var template = '';
@@ -296,17 +376,17 @@ angular.module('myAppApp')
             case 23:
                 template = videoTemplate;
                 break;
-            case 30:
+            case 42:
                 template = eventClubTemplate;
                 break;
             case 31:
-                template = postTemplate;
+                template = postBTemplate;
                 break;
             case 32:
-                template = imageTemplate;
+                template = imageBTemplate;
                 break;
             case 33:
-                template = videoTemplate;
+                template = videoBTemplate;
                 break;            
             case 71:
                 template = articleClubTemplate;
@@ -338,7 +418,7 @@ angular.module('myAppApp')
                 if(ranY==1){
                 scope.width=50;
                 ranY=0;
-                console.log(ranX,ranY,50);
+               // console.log(ranX,ranY,50);
                 }
                 else{
 
@@ -354,7 +434,7 @@ angular.module('myAppApp')
                     {
                         scope.width=100;
                         ranY=0; 
-                        console.log(ranX,ranY,100);
+                        //console.log(ranX,ranY,100);
                     }
             }
           }
@@ -375,7 +455,7 @@ angular.module('myAppApp')
             var ratingName='rating'+postIdRating;
             $http.get('/api/posts/ratingInfo/'+postIdRating).success(function (response){
                 scope.ratingName=response;
-                console.log(scope.ratingName);
+                //console.log(scope.ratingName);
                 scope.ratingHalf=scope.content.rating/2;
                 var roundedRating=Math.round(scope.ratingHalf);
                 
@@ -390,25 +470,100 @@ angular.module('myAppApp')
                                  
             });
 
-        if(scope.content.type==30)
-        {
-            var postIdLike=scope.content._id;
-            var likingName='liking'+postIdLike;
-            console.log(likingName);
-            $http.get('/api/posts/likeInfo/'+postIdLike).success(function (response){
-                scope.likingName=response;
-                console.log(scope.likingName);
-            });
-        }
+        // scope.attendArray=angular.copy(attendArray);
+         
+            if(scope.content.type==42 )
+            {
+                var id = scope.content.eventId._id;
 
-        scope.like = function(postId){
-            $http.get('/api/posts/'+postId+'/like').success(function (response){
-                console.log(response);
-                var likingName='liking'+postId;
-                scope.content.like.length=response;
-                scope.likingName = true;
+                var eventAttend=id;
+                console.log(eventAttend);
+                $http.get('/api/events/attendInfo/'+id).success(function (response){
+                    attendArray[scope.index]={eventAttend:response,num:scope.content.eventId.attending.length};
+                    // console.log(scope.eventAttend);
+                    
+                    // attendArray[scope.index]={;
+                    scope.attendNum=attendArray[scope.index].num;
+                    console.log(attendArray);
+                    if(attendArray[scope.index].eventAttend)
+                    {
+                        scope.attend="Attending";
+                    }
+                    else{
+                        scope.attend="Attend";
+                    }
+                });
+            }
+        
+        
+            scope.attending = function (index){
                 
-            });
+               var id=scope.content.eventId._id; 
+               console.log(attendArray);
+               if(attendArray[scope.index].eventAttend){
+                    $http.delete('/api/events/attend/'+id).success(function (response){
+                      attendArray[scope.index]={eventAttend:false,num:response};
+                      // attendArray[scope.index]=response;
+                      console.log(response);
+                      scope.attendNum=attendArray[scope.index].num;
+                      scope.attend="Attend";
+                      console.log(attendArray);
+                  })
+               }  
+               else{
+                    $http.post('/api/events/attend/'+id).success(function (response){
+                      attendArray[scope.index]={eventAttend:true,num:response};
+                     // attendArray[scope.index]=response;
+                      console.log(response);
+                      scope.attendNum=attendArray[scope.index].num;
+                      scope.attend="Attending";
+                      console.log(attendArray);
+                  })
+               } 
+
+                  
+            }
+            
+            if(scope.content.type==42 || scope.content.type==32 || scope.content.type==31 || scope.content.type==33)
+            {
+                console.log('hereasaaaa');
+                var postIdLike=scope.content._id;
+                
+                $http.get('/api/posts/likeInfo/'+postIdLike).success(function (response){
+                    likeArray[scope.index]={liking:response,num:scope.content.like.length};
+                    scope.likeNum=likeArray[scope.index].num;
+                    console.log(likeArray);
+                    
+                    if(response){
+                        scope.like="| You Like";
+                    }
+                    else
+                        scope.like="Like";
+                });
+            }
+        scope.likey = function(postId){
+            if(likeArray[scope.index].liking)
+            {
+                $http.delete('/api/posts/'+postId+'/unlike').success(function (response){
+                    console.log(response);
+                    likeArray[scope.index]={liking:false,num:response};
+                    scope.likeNum=likeArray[scope.index].num;
+                    scope.like="Like";
+                
+                });
+            }
+            else
+            {
+                $http.get('/api/posts/'+postId+'/like').success(function (response){
+                    console.log(response);
+                    likeArray[scope.index]={liking:true,num:response};
+                    scope.likeNum=likeArray[scope.index].num;
+                    scope.like="| You Like";
+                    
+                    
+                });
+            }
+            
         };
 
         function Ctrl2($scope, UploadPortalService) {
@@ -429,16 +584,7 @@ angular.module('myAppApp')
         }
         
 
-        scope.unlike = function(postId){
-            $http.delete('/api/posts/'+postId+'/unlike').success(function (response){
-                console.log(response);
-                var likingName='liking'+postId;
-                scope.content.like.length=response;
-                scope.likingName = false;
-                
-            });
-        };
-
+       
          scope.blur =function(){
             scope.for_blur = {
                 'filter': 'blur('+40+'px)'
@@ -527,7 +673,8 @@ angular.module('myAppApp')
         link: linker,
         scope: {
             content:'=',
-            random:'='
+            random:'=',
+            index:'='
         }
     };
 })

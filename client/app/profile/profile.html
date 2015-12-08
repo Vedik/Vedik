@@ -273,25 +273,37 @@
 									<span id="user_art" class="thumbs_wrap">
 										
 										
-										
 
-										<div class="tab-content">
-											<div id="home" class="tab-pane fade in active">
-												<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item">
+										<div class="tab-content" >
+											<div ng-repeat="item in posts | orderBy:'-createdOn'" class="thumbs_wrap col-md-12 tab-pane fade in active" ng-init="getCredit($index, item._id)">
+												<div style="padding: 0px 10px" class="col-md-12">
+													<div class="bgw col-md-12 colorb" style="padding: 5px 10px"> 
+														<img src="{{user.proPic}}" width="auto" height="20px" id="dp"> {{user.name}} as 
+														<span ng-repeat="credit in credits[$index]">{{credit.credit.creditDetail}} </span>
+													</div>
+												</div>
+										
+												
+												<content-item  content="item">
 													
 												</content-item>
 											</div>
+										
 
-											  <div  class="tab-pane fade" ng-repeat="stageDiv in stageList" id="{{stageDiv.id}}">
-											    <content-item ng-repeat="item in stageDivPosts | orderBy:'-createdOn' " content="item">
-													
-												</content-item>
-											  </div>
-
-											
-										</div>	
-											
-												
+											<div  class="tab-pane fade" ng-repeat="stageDiv in stageList" id="{{stageDiv.id}}">
+												<div ng-repeat="item in stageDivPosts | orderBy:'-createdOn' ">
+													<div style="padding: 0px 10px" class="col-md-12">
+														<div class="bgw col-md-12 colorb" style="padding: 5px 10px"> 
+															<img src="{{user.proPic}}" width="auto" height="20px" id="dp"> {{user.name}} as 
+															<span ng-repeat="credit in credits[$index]">{{credit.credit.creditDetail}}</span>
+														</div>
+													</div>
+												    <content-item  content="item">
+														
+													</content-item>
+												</div>
+											</div>
+										</div>												
 													
 												
 									</span>

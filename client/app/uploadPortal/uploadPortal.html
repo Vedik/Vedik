@@ -7,9 +7,9 @@
     			<div class="tab-content">
         			<div class="tab-pane fade in active" id="upload_form2">
         				<ul class="nav nav-tabs" style="width:100%">
-			        		<li  class="active" ng-click="setType(1)"><a href="#article_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Article</a></li>	        			
-			        		<li ng-click="setType(2)"><a href="#image_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
-			        		<li ng-click="setType(3)"><a href="#video_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
+			        		<li  class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Article</a></li>	        			
+			        		<li ng-click="setType(2)"><a href="#image_upl" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
+			        		<li ng-click="setType(3)"><a href="#video_upl" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
 			        	</ul>
     				
 	        			<div id="upload_wrapper_left">
@@ -39,22 +39,22 @@
 							<!-- <a href="#credits2" data-toggle="tab" class="b2w">Next</a> -->
 	        			</div>
 	        			
-	        			<div id="upload_wrapper_right">
+	        			<div id="upload_wrapper_right" >
 	        				
 	        				<div class="tab-content">
-	        					<div id="article_up" class="tab-pane fade in active">
+	        					<div id="article_upl" class="tab-pane fade in active">
 	        						<div class="form-group">
 										<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
 							    		</textarea>						
 									</div>
 								</div>
-								<div id="image_up" class="tab-pane fade">
+								<div id="image_upl" class="tab-pane fade">
 	        						<div class="form-group">	
 										<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
 									</div>
 									<img src="{{form.picUrl}}" width="100%" height="auto">
 								</div>
-								<div id="video_up" class="tab-pane fade">
+								<div id="video_upl" class="tab-pane fade ">
 	        						<div class="form-group">
 																
 										<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
@@ -64,7 +64,7 @@
 									</div>
 									<img src="{{form.picUrl}}" width="100%" height="auto">
 								</div>
-							</div>
+							</div>							
 							
 								
 			        		

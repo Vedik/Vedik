@@ -68,24 +68,18 @@ exports.hof = function(req, res) {
 
 
 exports.likeInfo = function(req, res) {
-  console.log('err4567');
-  Post.findById(postIdLike,function (err, posts) {
+  console.log('err456745665');
+  Post.findById(req.params.postIdLike,function (err, post) {
     if(err) { return handleError(res, err); }
-    })
-  .populate('like')
-  
-  .exec(function (err, post){
-      if (err) return handleError(err);
-
-      var i=0,j=0;
+     var i=0,j=0;
       
       var liking=false;
       console.log(post.like.length);
         {
+      
           for(j;j<post.like.length;j++)
           {
-            console.log(post.like[j].user);
-            console.log(req.user._id);
+            
              if(post.like[j].user.equals(req.user._id))
              {
                 
@@ -102,7 +96,8 @@ exports.likeInfo = function(req, res) {
       console.log(liking);
       
       return res.json(liking);
-  })
+    })
+  
 };
 
 exports.ratingInfo = function(req, res) {
@@ -306,7 +301,7 @@ var d = date.getFullYear();
   console.log(d+'d');*/
 
   console.log('dfsdfbv');
-  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId }, { eventId:req.params.postIdLike } ] },function (err,post){
+  Post.findById(req.params.postId,function (err,post){
     if(err){
       return handleError(res,err);
     }
@@ -317,14 +312,14 @@ var d = date.getFullYear();
         return handleError(res,err);
       }
       else{
-        console.log(post.like.length);
+      
         return res.json(post.like.length);
       }
     });  
   });
 };
 exports.unlike = function (req,res){
-  Post.findOne({ $or: [ { articleId:req.params.postId }, { videoId:req.params.postId }, { imageId:req.params.postId }, { eventId:req.params.postIdLike }  ] },function (err,post){
+  Post.findById(req.params.postId,function (err,post){
     if(err){
       return handleError(res,err);
     }

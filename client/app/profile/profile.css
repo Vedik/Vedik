@@ -250,7 +250,7 @@
                 background-color: none;
             }
 
-            .tags input{
+        /*    .tags input{
                 border-bottom: 0px !important;
                 color: black;
                 font-size: 12px !important;
@@ -266,7 +266,7 @@
                     border: 1px solid white !important;
                     box-shadow: 0px 1px 1px white inset !important;
             }
-
+*/
 
 
             .bootstrap .tags.focused {
@@ -280,10 +280,9 @@
                     
                     
             }
-            .form-group input   {
-                border-color: none;
-                border-style: solid;
-                border-bottom: 1px solid #0000ff !important;
+           /* .form-group input   {
+                
+                border:2px solid grey !important;
 
 
                      
@@ -300,10 +299,11 @@
                     border-top:0px white !important;
                     border-left:0px white !important;
                     border-right:0px white !important;
-                    border-bottom: 1px solid #0000ff !important;
+                    border-bottom: 2px solid #0000ff !important;
                     box-shadow: none;
                    
-            }
+  
+            }*/
             .upld_form  {
                 width: 100% !important;
                 
@@ -521,15 +521,15 @@
             #textarea{ 
             
   display:block;
-  box-sizing: padding-box;
+  box-sizing:border-box;
   overflow:hidden;
-
+  border: 2px solid grey !important;
   padding:10px;
   width:250px;
   font-size:14px;
   margin:0px auto;
   border-radius:0px;
-  border:0px;
+  
 }
 
     .form-control   {

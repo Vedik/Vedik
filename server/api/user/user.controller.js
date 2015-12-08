@@ -150,6 +150,12 @@ exports.changePassword = function(req, res, next) {
 
 exports.showUser = function(req, res, next) {
   var userId = req.params.id;
+  var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+  var checkId=checkForHexRegExp.test(userId);
+
+  console.log(checkId);
+  if(!checkId)
+   { return res.send(404); }
   /*User.findOne({
     _id: userId
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
@@ -157,14 +163,20 @@ exports.showUser = function(req, res, next) {
     if (!user) return res.json(401);
     res.json(user);
   });*/
-  User.findById(userId,'-salt -hashedPassword')
+  User.findById(userId,'-salt -hashedPassword',function (err,user){
+      if(err) return handleError(res,err);
+      console.log(user);
+      
+
+  })
   .populate('videos.video')
   .exec(function (err, user){
     if(err) {
       console.log(err);
       next(err);
     }
-    else {
+    if(!user)  { return res.send(404); }
+    
       var i=0;
       var isFollowing;
       for(;i<user.subscribed_users.length;i++){
@@ -179,7 +191,7 @@ exports.showUser = function(req, res, next) {
    
     return res.json({user:user,isFollowing:isFollowing});
 
-  }
+  
   });
 };
 
