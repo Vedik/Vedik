@@ -27,6 +27,7 @@
             }
             #dp {
                border-radius: 50%;
+               padding: 0px 5px 0px 0px;
 
             }
             #profile    {
@@ -224,20 +225,21 @@
                 padding: 15px;
                 background-color: white;
                 color: black;
+                box-shadow: 0px 0px 4px grey;
             }
             #upload_form li{
                 
             }
             #upload_wrapper_left{
-                width: 45%;
+                width: 30%;
                 float: left;
-                padding: 10px 10px;
-                border-right: 1px solid rgba(0,0,0,0.1);
+                padding: 20px 5px;
+                /*border-right: 1px solid rgba(0,0,0,0.1);*/
             }
             #upload_wrapper_right{
-                width: 55%;
+                width: 30%;
                 float: left;
-                padding: 10px 10px;
+                padding: 20px 5px;
                 position: relative;
 
             }
@@ -250,8 +252,8 @@
                 background-color: none;
             }
 
-        /*    .tags input{
-                border-bottom: 0px !important;
+        .tags input{
+                border:1px solid #ccc;
                 color: black;
                 font-size: 12px !important;
             }
@@ -266,7 +268,7 @@
                     border: 1px solid white !important;
                     box-shadow: 0px 1px 1px white inset !important;
             }
-*/
+
 
 
             .bootstrap .tags.focused {
@@ -420,10 +422,11 @@
                 
                 position: relative;
                 height: auto;
-                padding: 0px 0px 100px;
+                padding: 20px 20px 100px;
+                
             }
             #user_hist_div1  {
-                    background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+                background:rgba(0,0,0,0.1);
                 z-index: 100;
                 position: relative;
                  
@@ -523,17 +526,17 @@
   display:block;
   box-sizing:border-box;
   overflow:hidden;
-  border: 2px solid grey !important;
-  padding:10px;
+  border: 1px solid #ccc !important;
+  padding:7px 12px;
   width:250px;
-  font-size:14px;
+  font-size:12px;
   margin:0px auto;
   border-radius:0px;
   
 }
 
     .form-control   {
-        border: 0px;
+        border: 1px solid #ccc;
         border-radius: 0px;
         font-size: 12px;
     }

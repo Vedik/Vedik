@@ -123,12 +123,7 @@ angular.module('myAppApp')
             });
     }
 
-$mdToast.show(
-      $mdToast.simple()
-        .textContent('Simple Toast!')
-        
-        .hideDelay(3000)
-    );
+
   
    
 
@@ -145,11 +140,11 @@ $mdToast.show(
         $scope.posts.push(response);
         console.log($scope.posts);
 
-        $mdToast.show(
-      	$mdToast.simple()
-        .textContent('Announcement Made!')
-        .hideDelay(3000)
-    	);
+     //    $mdToast.show(
+     //  	$mdToast.simple()
+     //    .textContent('Announcement Made!')
+     //    .hideDelay(3000)
+    	// );
        
       
         });

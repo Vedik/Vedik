@@ -7,21 +7,26 @@
     			<div class="tab-content">
         			<div class="tab-pane fade in active" id="upload_form2">
         				<ul class="nav nav-tabs" style="width:100%">
-			        		<li  class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Article</a></li>	        			
-			        		<li ng-click="setType(2)"><a href="#image_upl" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Image</a></li>
-			        		<li ng-click="setType(3)"><a href="#video_upl" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px" ></span> Video</a></li>
+			        		<li  class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" ></span> Article</a></li>	        			
+			        		<li ng-click="setType(2)"><a href="#image_upl" data-toggle="tab"> Image</a></li>
+			        		<li ng-click="setType(3)"><a href="#video_upl" data-toggle="tab" >Video</a></li>
 			        	</ul>
     				
 	        			<div id="upload_wrapper_left">
-	        				<md-input-container flex>
+	        				<!-- <md-input-container >
 					          <label>First name</label>
-					          <input ng-model="form.name">
-					        </md-input-container>
-	        				<!-- <div class="form-group">
+					          <input ng-model="form.name" placeholder="Title">
+					        </md-input-container> -->
+	        				<div class="form-group">
 								<input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Name">
-							</div> -->
+							</div>
 							<div class="form-group">
-								<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+								<!-- <md-input-container class="md-block">
+							        <label>Description</label>
+							        <textarea ng-model="form.description" columns="1"  rows="1"></textarea>
+							     </md-input-container>
+								 -->
+								<textarea class='autoExpand form-control' rows='1' data-min-rows='1' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
 					    		</textarea>													
 														
 							</div>
@@ -44,7 +49,7 @@
 	        				<div class="tab-content">
 	        					<div id="article_upl" class="tab-pane fade in active">
 	        						<div class="form-group">
-										<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
+										<textarea class='autoExpand form-control' rows='7' data-min-rows='7' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
 							    		</textarea>						
 									</div>
 								</div>
