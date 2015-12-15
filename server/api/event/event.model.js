@@ -17,7 +17,9 @@ var EventSchema = new Schema({
   subOnl:Boolean,
   subType:String,
   vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
-  attending:[{user:{type:Schema.Types.ObjectId,ref:'User'}}]
+  attending:[{user:{type:Schema.Types.ObjectId,ref:'User'}}],
+  entries:[{entry:{type:Schema.Types.ObjectId,ref:'Entry'},user:{type:Schema.Types.ObjectId,ref:'User'}}]
 });
 
 module.exports = mongoose.model('Event', EventSchema);
+

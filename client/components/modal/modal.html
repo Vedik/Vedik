@@ -1,6 +1,6 @@
 <!--***************************Edit Gallerypic ********************************-->
 		<!-- Modal -->
-  <div class="modal img_modal fade col-md-7" id="gal_pic_modal" role="dialog">
+  <div class="modal img_modal fade col-md-7" id="editUser" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">
     
       <!-- Modal content-->
@@ -348,6 +348,32 @@
 </div>
 
 <!--***********Broadcast closes***************************************************************-->
+
+<!--*****************************Submit entry opens*******************************************-->
+<div class="modal img_modal fade col-md-7" id="submitEntry" role="dialog">
+    <div class="modal-dialog img_modal-dialog" id="modal-center">
+    
+      <!-- Modal content-->
+     
+     	<div class="modal-header bgw">
+	       <button type="button" class="close colorb" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">X</button>
+	       <h3 class="modal-title colorb">Submit Entry</h3>
+	    </div>
+        
+        <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw">
+
+		  <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
+
+		  	<form ng-submit="subEntry(entry)">            
+	            <input type="text" placeholder="Entry Link" ng-model="entry" style="width:50%"><br/><br/>
+	            <button type="submit" class="b2w">Submit</button>
+            </form>
+
+        </div>
+       </div>
+     </div>
+</div>
+<!--submit entry closes*********************************************************************-->
 
 <!--***********************************upload section******************************************-->
 	        								
@@ -1054,6 +1080,8 @@
 	           
   			</div>
 </script>
+
+
 
 
 

@@ -21,7 +21,7 @@ angular.module('myAppApp')
     
 
     
-    $http.get('/api/events/'+id).success(function (response){
+    $http.get('/api/events/comp/'+id).success(function (response){
       console.log(response);
       $scope.event=response.event;
       $scope.attending=response.attending;
@@ -55,18 +55,54 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
 
-    $scope.addAttend= function (){
-      $http.post('/api/events/attend/'+id).success(function (response){
-          $scope.attending=true;
-          $scope.attendingNum=response;
-      })
+    $scope.attend= function (){
+    	if(!$scope.attending){
+    		 $http.post('/api/events/attend/'+id).success(function (response){
+	          $scope.attending=true;
+	          $scope.attendingNum=response;
+	      })
+    	}
+	     
+    	else{
+    		$http.delete('/api/events/attend/'+id).success(function (response){
+	          $scope.attending=false;
+	          $scope.attendingNum=response;
+	      })
+    	}
+	      
     }
-    $scope.unAttend= function (){
-      $http.delete('/api/events/attend/'+id).success(function (response){
-          $scope.attending=false;
-          $scope.attendingNum=response;
-      })
+    $scope.subEntry= function (entry){
+      	$http.post('/api/events/subEntry/'+id,{entry:entry}).success(function (response){
+      		console.log('done');
+      		
+      	})
     }
+
+
+      
+      $scope.max = 10;
+     
+     
+      // if($scope.user()._id==$scope.event.user._id)
+      // {
+      		$scope.isReadonly = false;
+      // }
+      // else
+      // 		$scope.isReadonly=true;
+      
+
+     
+      $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+      }
+
+      $scope.ratePost = function(rate,entryId) {
+            $http.post('/api/entrys/'+entryId,{rating:rate}).success(function (response){
+            console.log(response);    
+           
+        });
+      };
 
     $scope.creditType=[];
       $scope.creditUser=[];
@@ -122,6 +158,7 @@ angular.module('myAppApp')
               return response.data;
             });
     }
+
 
 
   

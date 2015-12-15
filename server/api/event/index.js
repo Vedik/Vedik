@@ -7,10 +7,12 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/club/:clubId', controller.clubEvents);
-router.get('/:id', auth.isAuthenticated(), controller.show);
+router.get('/event/:id', auth.isAuthenticated(), controller.eventShow);
+router.get('/comp/:id', auth.isAuthenticated(), controller.compShow);
 router.get('/attendInfo/:id', auth.isAuthenticated(), controller.attendInfo);
 router.post('/attend/:id',auth.isAuthenticated(),controller.addAttend);
 router.delete('/attend/:id',auth.isAuthenticated(),controller.unAttend);
+router.post('/subEntry/:id',auth.isAuthenticated(),controller.subEntry);
 router.post('/:id', auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

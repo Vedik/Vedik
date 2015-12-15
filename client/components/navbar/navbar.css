@@ -38,12 +38,13 @@ body {
             position:fixed;
             top:0px;
             z-index: 1001;
+            box-shadow: 0px 1px 4px black;
         }
 
         .top_logo_sec {
             height: 45px;            
             width:100%;
-            background-color: black !important;
+            background-color: rgb(33,33,33);
             background-size:10px 100%;
             box-sizing:border-box;
             box-shaddow:0px 5px 10px BLACK;
@@ -62,11 +63,13 @@ body {
             color: rgb( 1, 182, 255 ) !important;
             text-decoration: none;
           /*  font-family:'Gill Sans MT';*/
-            float:right;
+            
             display:inline;
-            padding:16px 30px;
-            font-family: arial;
+            padding:5px 30px;
+            font-family: logo;
             letter-spacing: 0;
+            position: absolute;
+            right: 43.5%;
         }
         #logo a:visited{
             color: rgb( 1, 182, 255 ) !important;
@@ -194,6 +197,13 @@ li:hover#nav_li, li:active#nav_li{
     left: 60px;
     box-shadow: 1px 1px 5px grey;    
 }
+#notifDropDown .md-avatar{
+    width: 25px;
+    height: auto;
+}
+#notifDropDown li a {
+    padding:  0px;
+}
 #notifMenu {
     width: 145px;
     float: left;
@@ -221,4 +231,12 @@ li:hover#nav_li, li:active#nav_li{
     overflow-x:hidden;  
 }
 
+#logo img{
+    
+
+}
+@font-face {
+    font-family: logo;
+    src: url('assets/images/GreatVibes-Regular.woff');
+}
 

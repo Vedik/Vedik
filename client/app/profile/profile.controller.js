@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval) {
+  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval,$document) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     var id = $location.url().split('/profile/')[1];
@@ -340,6 +340,12 @@ angular.module('myAppApp')
       $http.post('/api/users/editProfile',{name:form.name,about:form.about,proPic:form.proPic,galleryPic:form.galleryPic}).success(function (response){
         
         $scope.user=response;
+         
+        $('#editUser').modal('hide');
+         
+        $('#for_blur').css('filter','blur(0px)');
+               
+       
         
         
       })

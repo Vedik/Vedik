@@ -4,7 +4,7 @@
     
 
     <div id="logo">
-        <a href="/" id="_logo"><span>Vedik</span></a>
+        <a href="/" id="_logo"><span><img src="/assets/images/logo3.png" width="120px" alt="Vedik Logo"></span></a>
     </div>
     
     <div id="search" ng-show="isLoggedIn()">
@@ -72,17 +72,25 @@
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
                         <ul class="nav nav-pills nav-stacked" id="notifMenu" >
-                            <a data-toggle="tab" href="#allNotifs" ><li class="active w2b"><b>All</b></li></a>
-                            <li style="padding:4px 0px 4px 0px"><b>Friends</b>
-                              <ul style="padding:0px">
-                                <a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName"><li style="padding:3px 0px 3px 10px" class="w2b">{{friend}}</li></a>
-                              </ul>
-                            </li>
-                            <li style="padding:0px 0px 4px 0px"><b>Clubs</b>
-                              <ul style="padding:0px"> 
-                                <a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName"><li style="padding:3px 0px 3px 10px" class="w2b">{{friend}}</li></a>
-                              </ul>
-                            </li>
+                            <li><a data-toggle="tab" href="#allNotifs" ><span  style="padding:10px">All</span></a></li>
+                         
+                            <li style="border-top:1px solid grey;border-bottom:1px solid grey"><span class="colorb">Friends</span></li>
+
+                            <li><a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName">
+                              <md-list-item >
+                                <img alt="img" ng-src="{{friend.proPic }}" class="md-avatar" />
+                                <p>{{friend.name }}</p>
+                              
+                            </a></li>
+                            
+                             <li style="border-top:1px solid grey;border-bottom:1px solid grey"><span class="colorb">Clubs</span></li>
+                             <li  ><a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName">
+                              <md-list-item > 
+                                {{friend}}
+                              </md-list-item>
+                              </a>
+                              </li>
+                            
                         </ul>
                     
                     

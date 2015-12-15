@@ -83,6 +83,7 @@
 		-webkit-filter: blur(0px);
   		filter: blur(0px);
   		margin: 40px auto 0px;
+  		overflow-y:auto;
 	}
 	.modal-dialog	{
 		width:auto;

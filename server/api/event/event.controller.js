@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Event = require('./event.model');
 var Post = require('../post/post.model');
+var Entry = require('../entry/entry.model');
 var User = require('../user/user.model');
 
 // Get list of events
@@ -21,13 +22,40 @@ exports.clubEvents = function(req, res) {
 };
 
 // Get a single event
-exports.show = function(req, res) {
+exports.eventShow = function(req, res) {
   console.log('req.params.id');
- console.log('req.params.id');console.log('req.params.id');console.log('req.params.id');
     Event.findById(req.params.id, function (err, event) {
     if(err) { return handleError(res, err); }
   })
-  .populate('user club attending.user')
+  .populate('user club attending.user ')
+  .exec(function (err,event){
+    if(err) { return handleError(res, err); }
+
+    if(!event) { return res.send(404); }
+    var attending=false;
+    for(var i=0; i<event.attending.length;i++)
+    {
+        if(event.attending[i].user._id.equals(req.user._id)){
+
+          attending=true;
+          break;
+        }
+    }
+      
+   
+
+ 
+    console.log(event,attending);
+    return res.json({event:event,attending:attending});
+   
+  });
+};
+exports.compShow = function(req, res) {
+  console.log('req.params.id');
+    Event.findById(req.params.id, function (err, event) {
+    if(err) { return handleError(res, err); }
+  })
+  .populate('user club attending.user entries.entry entries.user')
   .exec(function (err,event){
     if(err) { return handleError(res, err); }
 
@@ -193,6 +221,30 @@ exports.unAttend = function (req,res){
       }
     } 
   });
+};
+
+exports.subEntry = function(req, res) {
+  console.log(req.params.id);
+  Event.findById(req.params.id,function (err,event){
+    if(err) return handleError(res,err);
+
+    var newEntry= new Entry({
+      entry:req.body.entry,
+      user:req.user._id,
+      rating:0,
+      createdOn:Date.now(),
+    })
+    event.entries.push({entry:newEntry._id,user:req.user._id});
+    newEntry.save(function (err) {
+      if(err) return handleError(res, err);
+    })
+      event.save(function (err) {
+     
+        if(err) return handleError(res, err);
+        console.log('submited');
+        return res.json(event);
+      })
+  })
 };
 // Updates an existing event in the DB.
 exports.update = function(req, res) {

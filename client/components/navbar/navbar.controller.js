@@ -71,7 +71,7 @@ angular.module('myAppApp')
                 {
                   $scope.dummyId[x]=$scope.posts[i].uploader.user._id;
                   console.log($scope.dummyId[x]);
-                  $scope.dummyName[x]=$scope.posts[i].uploader.user.name;
+                  $scope.dummyName[x]={name:$scope.posts[i].uploader.user.name,proPic:$scope.posts[i].uploader.user.proPic};
                   x++;
                 }
               }
@@ -245,6 +245,6 @@ angular.module('myAppApp')
         .then(function () {
           $log.debug("close left is done");
         });
-    };
+  };
   
-  });
+});

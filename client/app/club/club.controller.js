@@ -230,8 +230,8 @@ angular.module('myAppApp')
         console.log('here2');
         $scope.club=response;
         
-        $scope.edit=false;         
-       
+        $scope.edit=false; 
+        
       })
 
     }

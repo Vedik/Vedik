@@ -20,7 +20,7 @@ angular.module('myAppApp')
     
 
     
-    $http.get('/api/events/'+id).success(function (response){
+    $http.get('/api/events/event/'+id).success(function (response){
     	console.log(response);
     	$scope.event=response.event;
       $scope.attending=response.attending;
@@ -205,15 +205,7 @@ angular.module('myAppApp')
     last = angular.extend({},current);
   }
 
-  $scope.showCustomToast = function() {
-    $mdToast.show({
-      controller: 'ToastCtrl',
-      templateUrl: 'toast-template.html',
-      parent : $document[0].querySelector('#toastBounds'),
-      hideDelay: 6000,
-      position: $scope.getToastPosition()
-    });
-  };
+  
 
   $scope.showSimpleToast = function() {
     $mdToast.show(
@@ -224,24 +216,6 @@ angular.module('myAppApp')
     );
   };
 
-  $scope.showActionToast = function() {
-    var toast = $mdToast.simple()
-          .textContent('Action Toast!')
-          .action('OK')
-          .highlightAction(false)
-          .position($scope.getToastPosition());
-
-    $mdToast.show(toast).then(function(response) {
-      if ( response == 'ok' ) {
-        alert('You clicked \'OK\'.');
-      }
-    });
-  };
-
+  
 })
 
-.controller('ToastCtrl', function($scope, $mdToast) {
-  $scope.closeToast = function() {
-    $mdToast.hide();
-  };
-});
