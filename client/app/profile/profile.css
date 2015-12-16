@@ -231,21 +231,24 @@
                 
             }
             #upload_wrapper_left{
-                width: 30%;
+                
                 float: left;
-                padding: 20px 5px;
+                padding: 20px 50px 20px 100px;
                 /*border-right: 1px solid rgba(0,0,0,0.1);*/
             }
             #upload_wrapper_right{
-                width: 70%;
+               
                 float: left;
-                padding: 20px 5px;
+                 padding: 20px 50px 20px 50px;
                 position: relative;
 
             }
             #upload_wrapper_right li {
-                width: 33%;
+            
                 float: left;
+            }
+            tags-input .tags .tag-item .remove-button{
+                padding: 3px 0px;
             }
             .active {
                 border:0px;

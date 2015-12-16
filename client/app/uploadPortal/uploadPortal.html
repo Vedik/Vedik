@@ -1,18 +1,24 @@
+<div ng-controller="UploadPortalCtrl">
+	<div ng-include="'components/navbar/navbar.html'"></div>
+	<div id="hidden"></div>	
+	<div style="padding:10px">	
 		
-
-		<div >
-			<h2>Add your Work</h2>
-			<hr/>
+		<div  class="thumbs_wrap col-md-12 ">
+			
+			<h3 style="text-align: center;font-family: "times new roman";">Upload your MasterPiece</h3>
+			
+			<div class="centric sizeten colorg">*Note: It is not necessary that uploader gets to see the uploaded work on his/her profile, it only appears if her/she is credited for it.</div>
+			<hr style="border: 1px solid white;" />
 			<form name="form" ng-submit="postSubmit(form)" ng-model="form">
     			<div class="tab-content">
         			<div class="tab-pane fade in active" id="upload_form2">
-        				<ul class="nav nav-tabs" style="width:100%">
-			        		<li  class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" ></span> Article</a></li>	        			
+        				<ul class="nav nav-tabs" style="width:100%;padding:0px 100px">
+			        		<li class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" >Article</a></li>	        			
 			        		<li ng-click="setType(2)"><a href="#image_upl" data-toggle="tab"> Image</a></li>
 			        		<li ng-click="setType(3)"><a href="#video_upl" data-toggle="tab" >Video</a></li>
 			        	</ul>
     				
-	        			<div id="upload_wrapper_left">
+	        			<div id="upload_wrapper_left" class="col-md-6">
 	        				<!-- <md-input-container >
 					          <label>First name</label>
 					          <input ng-model="form.name" placeholder="Title">
@@ -34,18 +40,8 @@
 								<tags-input ng-model="form.tags" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
 							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 							    </tags-input>
-							</div>	 -->											
-							<div>
-								<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-							    </tags-input>
-							</div>
-							
-							<!-- <a href="#credits2" data-toggle="tab" class="b2w">Next</a> -->
-	        			</div>
-	        			
-	        			<div id="upload_wrapper_right" >
-	        				<div class="col-md-5">
+							</div>	 -->
+							<div >
 		        				<div class="tab-content">
 		        					<div id="article_upl" class="tab-pane fade in active">
 		        						<div class="form-group">
@@ -70,8 +66,143 @@
 										<img src="{{form.picUrl}}" width="100%" height="auto">
 									</div>
 								</div>							
+							</div>											
+							<div>
+								<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+							    </tags-input>
 							</div>
-							<div class="col-md-7">
+							
+							<!-- <a href="#credits2" data-toggle="tab" class="b2w">Next</a> -->
+	        			</div>
+	        			
+	        			<div id="upload_wrapper_right" class="col-md-6">
+
+	        				<div class="col-md-12" name="myForm">
+
+			        			<p >Who worked for this?</p>
+
+			        				<md-radio-group ng-model="creditsRadio">
+								      <md-radio-button value="me" class="md-primary" style="width:20%;float:left" > Only Me/Club</md-radio-button>
+								      <md-radio-button value="team" style="width:20%;float:left"> We are a Team </md-radio-button>							      
+								    </md-radio-group>
+		        			
+								<br/>
+							</div>
+
+							<div class="col-md-12" ng-show="creditsRadio=='me'">
+								<md-input-container>
+							        <label>Upload As</label>
+							        <md-select ng-model="creditTo">
+							           <md-optgroup >
+							            <md-option ng-value="user().name" style="background: white;">Yourself</md-option>
+							          </md-optgroup>
+							          <md-optgroup label="Clubs">
+							            <md-option ng-value="club" ng-repeat="club in user().admin" style="background: white;">{{club}}</md-option>
+							          </md-optgroup>
+							        </md-select>
+							  		{{creditTo}}
+							      </md-input-container>
+								
+								<div>
+									<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+								        <auto-complete source="loadCredit($query)" max-results-to-show="10"></auto-complete>
+								    </tags-input>
+								</div>
+							</div>
+	    				
+							<div  class="col-md-12"  ng-show="creditsRadio=='team'">
+								    
+								<table>
+								   	<tr>
+								   		<th>Credit</th>
+								   		<th>User</th>
+								  	</tr>											    				
+								   	<tr ng-repeat="credit in creditType track by $index">
+								   		<td style="width:40%;verticle-align:top">
+			 					   			<div  layout="column" ng-cloak>
+
+											  <md-content class="md-padding">
+											    <form ng-submit="$event.preventDefault()" name="searchForm">
+											     
+											      <div layout-gt-sm="row">
+											        
+											        <md-autocomplete flex required
+											            md-input-name="autocompleteField"
+											            md-input-minlength="2"
+											            md-input-maxlength="18"
+											            md-no-cache="false"
+											            md-selected-item="creditType[$index]"
+											            md-search-text="searchText"
+											            md-items="item in querySearch(searchText,$index)"
+											            md-item-text="item.creditDetail"
+											            md-floating-label="Credit"
+											           
+											           	md-menu-class="autoCompleteDropDown"
+											           >
+											          <md-item-template>
+											            <span md-highlight-text="searchText">{{item.creditDetail}}</span>
+											          </md-item-template>
+											          <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+											            <div ng-message="required">You <b>must</b> have a favorite state.</div>
+											            <div ng-message="minlength">Your entry is not long enough.</div>
+											            <div ng-message="maxlength">Your entry is too long.</div>
+											          </div>-->
+
+											        </md-autocomplete>
+											      </div>
+											       </form>
+
+											  </md-content>
+											</div>
+															    			
+										</td>
+										<td style="width:60%;vertical-align: bottom;">
+											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag a Friend">
+												<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
+					      						</auto-complete>
+					    					</tags-input>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding:10px 0px" colspan="2">
+											<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+										</td>
+										
+									</tr>      							    			
+								</table>	
+								<div>
+											      			
+									
+					      		</div>
+					      		
+
+											      		
+					    	</div>
+					    	
+	        				
+						
+			        		
+	        			</div>
+	        			<div class="col-md-12" >
+				    		<button type="submit" class="w2g col-md-12">Submit</button>
+				    	
+				    	</div>
+	        			
+				    	
+				    	
+			    	</div>
+	    		</div>
+	    	</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+	<!-- <div class="col-md-7">
 								<div style="margin:0px 10px;border:1px solid #ccc" class="thumbs_wrap col-md-12">
                                 	<div class="post_div" style="width:100%">
                                     	<div class="text_type_post" id="article">
@@ -102,402 +233,4 @@
                                     	</span>                                   
                                 	</div>
                             	</div>
-							</div>
-								
-			        		
-	        			</div>
-	        			<div class="col-md-12" name="myForm">
-
-		        			<p >Who worked for this?</p>
-
-		        				<md-radio-group ng-model="creditsRadio">
-							      <md-radio-button value="me" class="md-primary" style="width:20%;float:left" > Only Me</md-radio-button>
-							      <md-radio-button value="team" style="width:20%;float:left"> We are a Team </md-radio-button>							      
-							    </md-radio-group>
-	        			
-							<br/>
-						</div>
-
-						<div class="col-md-12" ng-show="creditsRadio=='me'">
-							<div>
-								<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-							        <auto-complete source="loadCredit($query)" max-results-to-show="10"></auto-complete>
-							    </tags-input>
-							</div>
-						</div>
-    				
-						<div  class="col-md-12" style="background:white" ng-show="creditsRadio=='team'">
-							    
-							<table>
-							   	<tr>
-							   		<th>Credit</th>
-							   		<th>User</th>
-							  	</tr>											    				
-							   	<tr ng-repeat="credit in creditType track by $index">
-							   		<td style="width:50%;verticle-align:top">
-		 					   			<div  layout="column" ng-cloak>
-
-										  <md-content class="md-padding">
-										    <form ng-submit="$event.preventDefault()" name="searchForm">
-										     
-										      <div layout-gt-sm="row">
-										        
-										        <md-autocomplete flex required
-										            md-input-name="autocompleteField"
-										            md-input-minlength="2"
-										            md-input-maxlength="18"
-										            md-no-cache="false"
-										            md-selected-item="creditType[$index]"
-										            md-search-text="searchText"
-										            md-items="item in querySearch(searchText,$index)"
-										            md-item-text="item.creditDetail"
-										            md-floating-label="Credit"
-										           
-										           	md-menu-class="autoCompleteDropDown"
-										           >
-										          <md-item-template>
-										            <span md-highlight-text="searchText">{{item.creditDetail}}</span>
-										          </md-item-template>
-										          <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-										            <div ng-message="required">You <b>must</b> have a favorite state.</div>
-										            <div ng-message="minlength">Your entry is not long enough.</div>
-										            <div ng-message="maxlength">Your entry is too long.</div>
-										          </div>-->
-
-										        </md-autocomplete>
-										      </div>
-										       </form>
-
-										  </md-content>
-										</div>
-														    			
-									</td>
-									<td style="width:50%;vertical-align: bottom;">
-										<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" >
-											<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
-				      						</auto-complete>
-				    					</tags-input>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding:10px 0px" colspan="2">
-										<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
-									</td>
-									
-								</tr>      							    			
-							</table>	
-							<div>
-										      			
-								
-				      		</div>
-				      		
-
-										      		
-				    	</div>
-				    	<div class="col-md-12" style="background:white">
-				    		<button type="submit" class="b2w">Submit</button>
-				    		<div id="hidden"></div><div id="hidden"></div>
-				    	</div>
-				    	
-				    	
-			    	</div>
-	    		</div>
-	    	</form>
-		</div>
-
-
-<!-- <div ng-controller="UploadPortalCtrl" class="a" ng-class="for_blur">
-
-	
-		
-
-
-<div id="for_blur" class="thumbs_wrap col-md-12">
-		<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png"  ng-style="img_viewed">
-
-									<div class="img_div thumbs_wrap col-md-12" ng-click="blur()">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-										<img src="https://iso.500px.com/wp-content/uploads/2014/04/20482.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Gorgeous Tamannacccccccccccc</span>
-
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>--
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
-									</div>
-									<span id="post_time">
-										 <span id="respond_post">
-										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>
-										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
-										 </span>
-
-										 12:30 pm 8th August
-										 	<div ng-controller="DatepickerDemoCtrl">
-											<div class="col-md-6 datepckr">
-										            <p class="input-group">
-										              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2037-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
-										              <span class="input-group-btn">
-										                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-										              </span>
-										            </p>
-										        </div>
-										       </div> 
-									</span>
-								</div>
-
-								
-
--->
-								<!-- <div class="img_div thumbs_wrap col-md-12"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(10px)'">
-									<div class="col-md-6 text_type_post" id="event_det">
-										<a href="#"><span id="event_post_heading">Media Club</span></a><br> We is organising a <a href="#">Photowalk</a> at <a href="#">6:00 am</a>on <a href="#">Sunday 2nd August 2015</a>,<a href="#">Elite Beach</a>
-										<br><br><br>
-										<div>
-											<p><a href="#"> 102</a> People are attending so far</p>
-											<button class="b2w"  id="respond_post"><img src="http://www.clker.com/cliparts/E/1/x/w/P/P/walking-man-black-hi.png" width="7px" height="15px"> Attend</button>
-											<span id="respond_post"><a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
-
-										</div> 
-									</div>
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-6">
-										<img src="http://acnmaloosdigitalstudio.in/img/about/22.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Spinning Ball</span>
-											
-
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>--
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
-									</div>
-								
-								</div> -->
-								<!--
-
-
-								<div class="col-md-12">
-									<div class="text_type_post" id="article">
-										<a href="#"><span id="event_post_heading">Article Name</span></a><br> 
-										ContentContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of articlerticleContent of articleContent of articleContent of articleContent of articleContent of articleContent of article
-										<br><br><br>
-										<div>
-											<p>by<a href="#"> Uploader name</a></p>
-											
-											<span id="respond_post"><a href="#" ng-init="postId=posts.articleId._id"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a></span>
-
-										</div>
-									</div> 
-									<span id="post_time">12:30 pm 8th August</span>
-								</div>
-
-
-								<div class="img_div thumbs_wrap col-md-12">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-										<img src="http://ddwqcu8pss-flywheel.netdna-ssl.com/wp-content/uploads/2013/10/shutterstock_129313271.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Gorgeous Tamanna</span>
-
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>--
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
-									</div>
-								</div>
-
-									<br>	
-								<div class="img_div thumbs_wrap col-md-6">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-										<img src="Pro_pic/tamanna.jpg" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Gorgeous Tamanna</span>
-
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>--
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
-									</div>
-									<span id="post_time">
-										 <span id="respond_post">
-										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>
-										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
-										 </span>
-
-										 12:30 pm 8th August
-									</span>
-								</div>
-								<div class="img_div thumbs_wrap col-md-6"  data-toggle="modal" data-target="#img_view" onclick="document.getElementById('for_blur').style.filter = 'blur(40px)'">
-									<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">
-										<img src="http://www.mohitshrivastava.com/Mohit-Shrivastava-Photos/var/albums/Facebook/AwesomePhotography.jpg?m=1347505797" id="img_post">
-										<span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>
-										<span id="img_name">Spinning Ball		</span>
-
-										
-													<span class="thumb_trnsprnt">
-													</span>
-													<span id="user_art_info">
-														<div id="a">
-														<span id="vid_data">{{video.video.vidname}}</span>
-													<!--	<div id="vid_data">{{video.video.description}}</div>--
-														<span style="bottom:20px;left:10px;position:absolute">Views : {{video.video.view_count}}</span>
-														</div>
-													</span>		
-									</div>
-									<span id="post_time">
-										 <span id="respond_post">
-										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Like</a>
-										 		<a href="#"><img src="http://cadijordan.com/wp-content/uploads/2013/11/like3.png" width="20px" height="20px"> Comment</a>
-										 </span>
-
-										 12:30 pm 8th August
-									</span>
-								</div>
-</div>
-
- -->
-
-
-
-
-
-<!--
-
-			/*<div id="videoview" class="modal img_modal fade" role="dialog">
-<div class="centric">
-  <div class="modal-dialog img_modal-dialog">
-
-    <!-- Modal content
-   
-     
-        
-       
-   
-      <div class="modal-body img_modal-body">
-      <button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
-
-
-      <div ng-controller="ViewPageCtrl">
-    
-
-    <div  id="video">
-        <div class="wrapper">
-         <img src="http://www.solidbackgrounds.com/images/1280x720/1280x720-ghost-white-solid-color-background.jpg" alt="" id="video_play"/>
-         <iframe  src="https://www.youtube.com/embed/3p_R7K13-Fs" frameborder="0" allowfullscreen></iframe>
-            
-        </div>
-        <div class="content" id="title">
-            <span id="video_name">{{video.vidname}}</span>
-        </div>
-        <div simple ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
-    </div>
-      <!-- info, comments, reviews etc of video
-        <div class="stage col-md-9"  id="vid_stuff">
-            <div class="content">
-            <!--Crew and cast
-                <div id="credits" >
-                <!--credits start
-                
- 
-  
-                     
-                        
-                      
-                    </div>
-
-                   
-                <!--credits end-->
-
-               
-                </div>
-                <!--Best part, comments, review
-                <ul class="nav nav-tabs" id="view_page_tabs">
-                        <li class="active"><a data-toggle="tab" href="#best_part">Best Part</a></li>
-                        <li><a href="#comments" data-toggle="tab">Comments</a></li>
-                        <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
-                 </ul>
-
-                 <!--tab content
-                <div class="tab-content">
-                    <div id="best_part" class="tab-pane fade in active">
-                        <h3>Best part<hr></hr></h3>
-                    </div>
-                    <div id="comments" class="tab-pane fade">
-                        
-                        <div>
-                            <div>
-                                <h4>Leave a Comment:</h4>
-                                <form name="myForm" ng-submit="submit()" class="form" novalidate> 
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="auto" ng-model="commentData"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                            <ul id="comments_list">
-                                <li ng-repeat="comment in video.comments" >
-                                    
-                                    <div class="thumbs_wrap comments">
-                                    
-                                         <img src="http://www.infinitetechnologies.co.in/wp-content/uploads/2015/07/f3.jpg" width="70px" height="70px">
-                                        <span class="commenter">{{comment.comment.commentPutter}}</span>
-                                     <!--   <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="30px" width="100%" style="opacity:0.5;z-index:9;position:absolute"></span>
-                                        <span id="comment_data">{{comment.comment.commentData}}</span><br>
-                                        <span id="comment_time">{{comment.comment.datePosted | date:'medium'}}
-                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="delete(comment.comment._id)"><a href="#">Delete</a></span>
-                                        <span  ng-show="comment.comment.commentPutter===user.name" ng-click="toggleVal=!toggleVal"><a href="#">Edit</a></span></span>
-                                        <div class="form-group" ng-show="toggleVal">
-                                            <textarea class="form-control" rows="3" ng-model="editData"></textarea>
-                                            <button class="btn btn-default" ng-click="edit(comment.comment._id,editData)">Submit</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="reviews" class="tab-pane fade">
-                    <!--add review part here
-                        <h2>Reviews<hr></hr></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    
-</div>
-
-      </div>
-      
-    
-
-  </div>
-</div>
-</div>
-</div>
-	</script>-->
-
-</div>
-
+							</div> -->

@@ -95,7 +95,7 @@
 
 .bootstrap .autocomplete .suggestion-item.selected {
 	font-size: 12px;
-
+  width: 100% !important;
 
   color: #262626;
 

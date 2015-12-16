@@ -69,16 +69,27 @@ exports.create = function(req, res) {
     about:req.body.description,
     createdOn:Date.now(),
     posts:[],
-    admin:req.user._id,
+    
     subscribed_users:[],
     vedik:[],
     events:[]
   })
+
+  newClub.admin.push(req.user._id);
+
   newClub.save(function (err){
     if(err){
       return handleError(res,err);
     }
     else {
+
+      req.user.asAdmin.push(newClub._id);
+      req.user.save(function (err){
+        if(err){
+          return handleError(res,err);
+        }
+        console.log('added to user');
+      });
       console.log('The club is saved as \n'+newClub);
       res.json(newClub);
     }

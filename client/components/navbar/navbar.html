@@ -53,22 +53,19 @@
                     <span class=" glyphicon glyphicon-th-large" ng-click="toggleRight()"></span>                    
                 </span>
             </span>
-            <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>
-            <a href="/login" id="_logo" ng-hide="isLoggedIn()">Guest</a>       
-            
-           <!--  <ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="menu1">
-                                     
-                                     <div id="indiv_res"  ng-hide="isLoggedIn()"><a role="menuitem" tabindex="-1" href="/login" ><li role="presentation">Login</li></a></div>
-                                     <div id="indiv_res" ng-hide="isLoggedIn()" ><a role="menuitem" tabindex="-1" href="/signup" ><li role="presentation">Signup</li></a></div>
-                                </ul> -->
+            <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>       
          </div>
     </div>
 
-         <div class="container" ng-show="isLoggedIn()">                                         
-              <div style="position:relative;width:300px;margin:0px 20px">
-                <button class="btn btn-primary" type="button" style="margin:18px 0px;background:none;border:0px"  ng-click="showNotif=!showNotif">
+         <div class="container">                                         
+            <div style="position:relative;width:400px;margin:0px 20px">
+                
+                <button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  ng-click="showNotif=!showNotif">
                   <span class="glyphicon glyphicon-bell" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
                 </button>
+                <a href="/uploadPortal" style="color: white;"><button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  >
+                  <span style="font-size:12px;padding:2px">Upload</span></button></a>
+                
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
                         <ul class="nav nav-pills nav-stacked" id="notifMenu" >
@@ -111,9 +108,9 @@
                             </span>
                         </div>
                     </div>
-                </div>
-              </div>
+            </div>
           </div>
+</div>
 
             <div  layout="column"  class="col-md-12" ng-controller="NavbarCtrl">
                 <section layout="row" flex>

@@ -69,12 +69,23 @@ exports.compShow = function(req, res) {
           break;
         }
     }
+    var submitted=false;
+    console.log(event.entries);
+    for(var i=0; i<event.entries.length;i++)
+    {
+        if(!event.entries[i].user){console.log('jfj')}
+        else if(event.entries[i].user._id.equals(req.user._id)){
+
+          submitted=true;
+          break;
+        }
+    }
       
    
 
  
-    console.log(event,attending);
-    return res.json({event:event,attending:attending});
+    console.log(event,attending,submitted);
+    return res.json({event:event,submitted:submitted,attending:attending});
    
   });
 };
@@ -234,15 +245,19 @@ exports.subEntry = function(req, res) {
       rating:0,
       createdOn:Date.now(),
     })
+    console.log(req.body.attending);
     event.entries.push({entry:newEntry._id,user:req.user._id});
+    if(!req.body.attending){
+      event.attending.push({user:req.user._id});
+    }
     newEntry.save(function (err) {
       if(err) return handleError(res, err);
     })
       event.save(function (err) {
-     
+        var attending=true;
         if(err) return handleError(res, err);
-        console.log('submited');
-        return res.json(event);
+        console.log('submited'+attending);
+        return res.json({event:event,attending:attending});
       })
   })
 };

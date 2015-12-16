@@ -32,12 +32,12 @@ angular.module('myAppApp')
     console.log(bookingDate);
 
     
-     $http.get('/api/bookings/'+bookingDate).success(function (response){
-        console.log(response);
-        $scope.bookings = response;
-        $scope.posts=$scope.bookings.postId;
-        console.log($scope.bookings);
-    });
+    //  $http.get('/api/bookings/'+bookingDate).success(function (response){
+    //     console.log(response);
+    //     $scope.bookings = response;
+    //     $scope.posts=$scope.bookings.postId;
+    //     console.log($scope.bookings);
+    // });
 
      $http.get('/api/clubs/').success(function (response){
         console.log(response);

@@ -15,7 +15,7 @@ body {
             }
 .centric    {
     text-align:center;
-    font-size:15px;
+    
     margin:0% auto;
 }
 #nav_fade{
@@ -128,7 +128,7 @@ body {
         }
         a:link    {
             text-decoration:none;
-            color: #337AB7;
+
         }
         #indiv_res a:hover   {
             padding:15.5px 0px;
@@ -189,12 +189,13 @@ li:hover#nav_li, li:active#nav_li{
 
 }
 #notifDropDown {
-    width: 490px;
+    width: 575px;
     border: 0px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: white;
     z-index: 10000;
-    position: absolute;
-    left: 60px;
+    position: fixed;
+    left: 0px;
+    top: 65px;
     box-shadow: 1px 1px 5px grey;    
 }
 #notifDropDown .md-avatar{
@@ -204,10 +205,14 @@ li:hover#nav_li, li:active#nav_li{
 #notifDropDown li a {
     padding:  0px;
 }
+#notifDropDown #img_name{
+    color: rgba(0,0,0,0.8);
+    width: 100%;
+}
 #notifMenu {
     width: 145px;
     float: left;
-    border-right: 1px solid grey;
+    
     padding: 4px;
 
 }
@@ -223,7 +228,7 @@ li:hover#nav_li, li:active#nav_li{
 
 }
 #notifs {
-    width: 345px;
+    width: 430px;
     float: left;
     padding: 4px;
     max-height:500px;

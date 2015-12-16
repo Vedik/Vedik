@@ -8,7 +8,7 @@ angular.module('myAppApp')
   .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService,User) {
     $scope.message = 'Hello';
     $scope.submitted = false;
-    
+    $scope.user = Auth.getCurrentUser;
 
   
     $http.get('/api/posts/').success(function (response){
@@ -45,6 +45,131 @@ angular.module('myAppApp')
         }); 
     };
 
+
+
+    $scope.creditsRadio="team";$scope.creditsRadioB=true;
+
+    $scope.creditType=[];
+      $scope.creditUser=[];
+    $scope.creditType[0]='';
+      $scope.creditUser[0]=[];
+    
+    var creditNum=0;
+    $scope.addCredit= function (){
+      console.log($scope.creditType);
+     
+      creditNum++;
+      console.log(creditNum);
+      $scope.creditType[creditNum]='';
+      $scope.creditUser[creditNum]=[];
+    }
+
+    $scope.getSuggestionsForNames = function (query){
+      return $http.get('/api/users/search/'+query).success(function (response) {
+        console.log(response);
+        return response;
+      });
+    };
+
+    $scope.getSuggestionsForCredits = function (query){
+      return $http.get('/api/creditDets/search/'+query).success(function (response) {
+        console.log(response);
+
+        return response;
+      });
+    };
+
+   $scope.creditsSubmit = function (){
+      console.log($scope.creditType,$scope.creditUser);
+   }
+
+    $scope.loadTags = function(query) {
+
+      return $http.get('/api/stages/tagingStage/'+query).success(function (response){
+          console.log(response);
+          return response;
+
+      });
+
+    };
+
+    $scope.loadCredit = function(query) {
+        console.log('sa');
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+          return response.data;
+
+      });
+
+    };
+
+    $scope.searchText    = null;
+    $scope.querySearch   = querySearch;
+
+   function querySearch (query,index) {
+      return $http.get('/api/creditDets/search/'+query).then(function(response){
+              console.log(response);
+              
+              return response.data;
+            });
+    }
+
+
+   /*$scope.getVideoDetails = function (videoId){
+      console.log(videoId);
+      var a = videoId.split('watch?v=');
+      if(a[1])
+      {
+        var video_id='HfLZnE3fIyI';
+        var key='AIzaSyChm_agHP2KpiAIaoN8-s7EvnOxYeOSthQ';
+
+        /*$.getJSON('https://www.googleapis.com/youtube/v3/videos?id='+video_id+'&key='+key+'&part=snippet',function(data,status,xhr){
+            alert(data);
+            // data contains the JSON-Object below
+        });
+        $http.get('https://www.googleapis.com/youtube/v3/videos?id='+video_id+'&key='+key+'&part=snippet').success(function (response){
+          console.log(response);
+        })
+      }
+   }*/
+   $scope.type=11;
+
+   $scope.setType= function(type){
+      if(type==1){
+          $scope.type=11;
+
+      }
+      else if(type==2){
+          $scope.type=12;
+      }
+      else if(type==3){
+          $scope.type=13;
+      }
+      
+   }
+
+   $scope.postSubmit = function (form){
+      if($scope.type==11){
+           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+      }
+      else if($scope.type==12){
+           $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+            console.log(response);
+            $scope.form={};
+            console.log(form.imgName);
+        })
+      }
+      else if($scope.type==13){
+          $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+            console.log(response);
+            $scope.form={};
+        })
+      }
+          
+   };
     
     
     /*
@@ -682,56 +807,73 @@ angular.module('myAppApp')
 .directive('contentNotif', function ($compile, $http,$modal) {
     var imageTemplate = '<div>'+
                             '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
-                                    '<img src="{{content.imageId.picUrl}}" id="img_post">'+
-                                    '<span>'+
-                                    '</span>'+
-                                    '<span id="img_name">{{content.imageId.imgName}}</span>'+
-                                    '<span class="thumb_trnsprnt"></span>'+
-                                    '<span id="user_art_info">'+
-                                        '<div id="a">'+
-                                            '<div id="vid_data">div>'+
-                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.imageId.view_count}}</span>'+
-                                        '</div>'+
-                                    '</span>'+
+                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+
+                                    // '<div class="center-cropped"'+ 
+                                    //      'style="background-image: url({{content.imageId.picUrl}});">'+
+                                    // '</div>'+
+                                   
+                                                                        
+                                    '<div id="notif_name" >'+ 
+                                        '{{content.uploader.user.name}}<span id="notif_uploader"> has added a new Image </span>'+
+                                        '"{{content.imageId.imgName}}"<span id="notif_uploader"> to his work</span>'+
+                                        
+                                    '</div>'+
+
+                                        '<br/><span id="notif_desc">'+
+                                            '<img class="notif_icon" src="http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png">'+
+                                            '"{{content.imageId.description}}"'+
+                                        '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                    
+                                   
                                 '</div>'+
+                                 '<div class="col-md-4" id="notif_back"> <img src="{{content.imageId.picUrl}}" id="notif_img" ></div>'+
                             '</div>'+                            
                         '</div>';
     var videoTemplate = '<div  ng-click=blur()>' +
                             '<div class="notif_div thumbs_wrap col-md-12" >'+
-                               '<div class="notif_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
-                                    '<img src="{{content.videoId.posterurl}}" id="img_post">'+
-                                    '<span>'+
-                                    '</span>'+
-                                    '<span id="img_name">'+
-                                        '{{content.videoId.vidname}}'+
-                                    '</span>'+
-                                    '<span class="play">'+
-                                        '<img src="http://clipartsy.com/openclipart.org/2013/October13/play_button-1969px.png">'+
-                                    '</span>'+
-                                    '<span class="thumb_trnsprnt"></span>'+
-                                    '<span id="user_art_info">'+
-                                        '<div id="a">'+
-                                            '<div id="vid_data">{{content.videoId.description}}</div>'+
-                                            '<span style="bottom:20px;left:10px;position:absolute">Views : {{content.videoId.view_count}}</span>'+
-                                        '</div>'+
-                                    '</span>'+
+
+                               '<div class="notif_div_wrap thumbs_wrap  col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                    
+                                    // '<div class="col-md-8" id="notif_back"><img src="{{content.videoId.posterurl}}" id="img_post"></div>'+
+                                    // '<span>'+
+                                    // '</span>'+
+                                    '<div id="notif_name" >'+
+                                        '{{content.uploader.user.name}}<span id="notif_uploader"> has added a new Video </span>'+
+                                        '"{{content.videoId.vidname}}"<span id="notif_uploader"> to his work</span>'+
+                                    '</div>'+
+                                        '<br/><span id="notif_desc">'+
+                                             '<img class="notif_icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Play_blauw.png">'+
+                                             '"{{content.videoId.description}}"'+
+                                        '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                
+                                    
+                                    
                                 '</div>'+
+                                '<div class="col-md-4"  id="notif_back"><img src="{{content.videoId.posterurl}}" id="notif_img"></div>'+
                             '</div>'+
                         '</div>';
-    var articleTemplate = '<div>'   +
-                                '<div class="notif_div col-md-12">'  +
-                                    '<div class="text_type_notif" id="article">' +
-                                        '<a href="#">'  +
-                                            '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
-                                        '</a>'  +
-                                        '</br>{{content.articleId.content}}</br>'  +
-                                        '<div>' +
-                                            '<span>by<a href="#"> {{content.uploader.user.name}}</a></span>'  +                                            
-                                        '</div>'    +
-                                    '</div>'    +
-                                '</div>'    +
-                            '</div>';
+    var articleTemplate = '<div>'+
+                            '<div class="notif_div thumbs_wrap col-md-12">'+
+                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+                                                                        
+                                    '<div id="notif_name" >'+ 
+                                        '{{content.uploader.user.name}}<span id="notif_uploader"> has added a new Writing </span>'+
+                                        '"{{content.articleId.articleName}}"<span id="notif_uploader"> to his work</span>'+
+                                        
+                                    '</div>'+
+
+                                        '<br/><span id="notif_desc">'+
+                                            '<img class="notif_icon" src="http://www.way2campus.net/images/image_01.png">'+
+                                            '"{{content.articleId.description}}"'+
+                                        '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                '</div>'+
+                            '</div>'+                            
+                        '</div>';
     var eventClubTemplate ='<div>'   +
                                 '<div class="post_div col-md-12">'  +
                                     '<div class="text_type_post" id="article">' +
@@ -746,27 +888,133 @@ angular.module('myAppApp')
                                     '<span id="post_time">{{content.createdOn}}</span>'   +
                                 '</div>'    +
                             '</div>';
-    var articleClubTemplate ='<div>'   +
-                                '<div class="post_div col-md-12">'  +
-                                    '<div class="text_type_post" id="article">' +
-                                        '<a href="#">'  +
-                                            '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
-                                        '</a>'  +
-                                        '</br>{{content.articleId.content}}</br></br>'  +
-                                        '<div>' +
-                                            '<span>by<a href="#"> {{content.uploader.club.name}}</a></span>'  +                                            
-                                        '</div>'    +
-                                    '</div>'    +
-                                    '<span id="post_time">'+
-                                            '<span id="respond_post">'+
-                                                '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
-                                                '{{ratingHalf}} by {{ratingName.votes}} users '+  
-                                                '{{postTime}}'+
-                                            '</span>'+
-                                            '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
-                                    '</span>'   +                                    
-                                '</div>'    +
-                            '</div>';                      
+     var imageATemplate = '<div>'+
+                            '<div class="notif_div thumbs_wrap col-md-12">'+
+                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+
+                                    // '<div class="center-cropped"'+ 
+                                    //      'style="background-image: url({{content.imageId.picUrl}});">'+
+                                    // '</div>'+
+                                   
+                                                                        
+                                    '<div id="notif_name" >'+ 
+                                        '{{content.uploader.user.name}}<span id="notif_uploader"> has added a new Image </span>'+
+                                        '"{{content.imageId.imgName}}"<span id="notif_uploader"> to his work</span>'+
+                                        
+                                    '</div>'+
+
+                                        '<br/><span id="notif_desc">'+
+                                            '<img class="notif_icon" src="http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png">'+
+                                            '"{{content.imageId.description}}"'+
+                                        '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                    
+                                   
+                                '</div>'+
+                                 '<div class="col-md-4" id="notif_back"> <img src="{{content.imageId.picUrl}}" id="notif_img" ></div>'+
+                            '</div>'+                            
+                        '</div>';
+    var videoATemplate = '<div  ng-click=blur()>' +
+                            '<div class="notif_div thumbs_wrap col-md-12" >'+
+
+                               '<div class="notif_div_wrap thumbs_wrap  col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                    
+                                    // '<div class="col-md-8" id="notif_back"><img src="{{content.videoId.posterurl}}" id="img_post"></div>'+
+                                    // '<span>'+
+                                    // '</span>'+
+                                    '<div id="notif_name" >'+
+                                        '{{content.uploader.user.name}}<span id="notif_uploader"> has added a new Video </span>'+
+                                        '"{{content.videoId.vidname}}"<span id="notif_uploader"> to his work</span>'+
+                                    '</div>'+
+                                        '<br/><span id="notif_desc">'+
+                                             '<img class="notif_icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Play_blauw.png">'+
+                                             '"{{content.videoId.description}}"'+
+                                        '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
+                                        '{{ratingHalf}} by {{ratingName.votes}} users '+  
+                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                
+                                    
+                                    
+                                '</div>'+
+                                '<div class="col-md-4"  id="notif_back"><img src="{{content.videoId.posterurl}}" id="notif_img"></div>'+
+                            '</div>'+
+                        '</div>';
+    var articleATemplate ='<div>'+
+                            '<div class="notif_div thumbs_wrap col-md-12">'+
+                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+                                 
+                                    '<div id="notif_name" >'+ 
+                                        '{{content.uploadedClub.name}}<span id="notif_uploader"> made an announcement regarding </span>'+
+                                        '"{{content.articleId.articleName}}"'+   
+                                    '</div>'+
+                                    '<br/><span id="notif_desc">'+
+                                        '<img class="notif_icon" src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/announcement-icon.png">'+
+                                        '"{{content.createdOn}}"'+
+                                    '</span>'+
+                                '</div>'+
+                                 
+                            '</div>'+                            
+                        '</div>';
+    var imageEATemplate = '<div>'+
+                            '<div class="notif_div thumbs_wrap col-md-12">'+
+                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+
+                                    // '<div class="center-cropped"'+ 
+                                    //      'style="background-image: url({{content.imageId.picUrl}});">'+
+                                    // '</div>'+
+                                   
+                                                                        
+                                    '<div id="notif_name" >'+ 
+                                        '{{content.eventId.name}}<span id="notif_uploader"> made an announcement regarding </span>'+
+                                        '"{{content.imageId.imgName}}"'+
+                                        
+                                    '</div>'+
+
+                                        '<br/><span id="notif_desc">'+
+                                            '<img class="notif_icon" src="http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png">'+
+                                            '"{{content.imageId.description}}"'+
+                                        '</span>'+
+                                    
+                                   
+                                '</div>'+
+                                 '<div class="col-md-4" id="notif_back"> <img src="{{content.imageId.picUrl}}" id="notif_img" ></div>'+
+                            '</div>'+                            
+                        '</div>';
+    var videoEATemplate = '<div  ng-click=blur()>' +
+                            '<div class="notif_div thumbs_wrap col-md-12" >'+
+
+                               '<div class="notif_div_wrap thumbs_wrap  col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                    
+                                
+                                    '<div id="notif_name" >'+
+                                        '{{content.eventId.name}}<span id="notif_uploader"> made an announcement regarding </span>'+
+                                        '"{{content.videoId.vidname}}"'+
+                                    '</div>'+
+                                        '<br/><span id="notif_desc">'+
+                                             '<img class="notif_icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Play_blauw.png">'+
+                                             '"{{content.videoId.description}}"'+
+                                        '</span>'+
+                                
+                                    
+                                    
+                                '</div>'+
+                                '<div class="col-md-4"  id="notif_back"><img src="{{content.videoId.posterurl}}" id="notif_img"></div>'+
+                            '</div>'+
+                        '</div>';
+    var articleEATemplate ='<div>'+
+                            '<div class="notif_div thumbs_wrap col-md-12">'+
+                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+                                 
+                                    '<div id="notif_name" >'+ 
+                                        '{{content.uploadedClub.name}}<span id="notif_uploader"> made an announcement regarding </span>'+
+                                        '"{{content.articleId.articleName}}"'+   
+                                    '</div>'+
+                                    '<br/><span id="notif_desc">'+
+                                        '<img class="notif_icon" src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/announcement-icon.png">'+
+                                        '"{{content.createdOn}}"'+
+                                    '</span>'+
+                                '</div>'+
+                                 
+                            '</div>'+                            
+                        '</div>';  
+
     var getTemplate = function(contentType) {
         var template = '';
 
@@ -781,13 +1029,22 @@ angular.module('myAppApp')
                 template = articleTemplate;
                 break;
             case 21:
-                template = articleClubTemplate;
+                template = articleATemplate;
                 break;
             case 22:
-                template = imageTemplate;
+                template = imageATemplate;
                 break;
             case 23:
-                template = videoTemplate;
+                template = videoATemplate;
+                break;
+            case 21:
+                template = articleEATemplate;
+                break;
+            case 22:
+                template = imageEATemplate;
+                break;
+            case 23:
+                template = videoEATemplate;
                 break;
             case 7:
                 template = eventClubTemplate;
@@ -822,6 +1079,7 @@ angular.module('myAppApp')
         
         
            
+           
             scope.one="one";
             scope.two="two";
             scope.three="three";
@@ -830,7 +1088,11 @@ angular.module('myAppApp')
             var ratingName='rating'+postIdRating;
             $http.get('/api/posts/ratingInfo/'+postIdRating).success(function (response){
                 scope.ratingName=response;
-                console.log(scope.ratingName);
+                //console.log(scope.ratingName);
+                if(scope.ratingName.votes<10){
+                    scope.review=true;
+                }
+                
                 scope.ratingHalf=scope.content.rating/2;
                 var roundedRating=Math.round(scope.ratingHalf);
                 

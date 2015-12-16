@@ -25,7 +25,9 @@ angular.module('myAppApp')
       console.log(response);
       $scope.event=response.event;
       $scope.attending=response.attending;
-      $scope.attendingNum=$scope.event.attending.length;
+      $scope.submitted=response.submitted;
+      console.log($scope.submitted);
+      $scope.attendingNum=$scope.event.entries.length;
 
       var date1 = new Date($scope.event.startDate);
       console.log(date1);
@@ -72,9 +74,11 @@ angular.module('myAppApp')
 	      
     }
     $scope.subEntry= function (entry){
-      	$http.post('/api/events/subEntry/'+id,{entry:entry}).success(function (response){
+      	$http.post('/api/events/subEntry/'+id,{entry:entry,attending:$scope.attending}).success(function (response){
       		console.log('done');
-      		
+      		$scope.event=response.event;
+      		$scope.attending=response.attending;
+
       	})
     }
 
