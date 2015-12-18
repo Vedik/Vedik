@@ -261,6 +261,57 @@ exports.subEntry = function(req, res) {
       })
   })
 };
+
+exports.declareRes = function(req, res) {
+  
+  Event.findById(req.params.id,function (err,event){
+    if(err) return handleError(res,err);
+
+   
+   
+    
+      event.winners.push({position:req.body.num,user:req.body.user._id});
+    
+
+
+       var newPost = new Post({
+          eventId: event._id,      
+          type:50,
+          uploader:{user:req.body.user._id},
+          uploaderClub:event.club,
+          position:req.body.position,
+          like:[],
+          createdOn:Date.now()
+        });
+      
+    
+      
+
+      newPost.save(function (err) {
+          if(err) return handleError(res, err);
+          console.log('postsaved');
+          
+      })
+      User.findById(req.body.user._id,function (err,user){
+              if(err) return handleError(res, err);
+              console.log(newPost);
+              user.unseenNotifs.push(newPost._id);
+              user.save(function (err){
+                  if(err) return handleError(res, err);
+                  console.log('notifadded');
+              })
+          });
+    
+    
+    
+      event.save(function (err) {
+        var attending=true;
+        if(err) return handleError(res, err);
+       
+        return res.json(event);
+      })
+  })
+};
 // Updates an existing event in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }

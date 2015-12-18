@@ -3,7 +3,7 @@
 	<div id="hidden"></div>	
 	<div style="padding:10px">	
 		
-		<div  class="thumbs_wrap col-md-12 ">
+		<div  class="thumbs_wrap col-md-12 " style="background: rgb(240,240,240);">
 			
 			<h3 style="text-align: center;font-family: "times new roman";">Upload your MasterPiece</h3>
 			
@@ -13,7 +13,7 @@
     			<div class="tab-content">
         			<div class="tab-pane fade in active" id="upload_form2">
         				<ul class="nav nav-tabs" style="width:100%;padding:0px 100px">
-			        		<li class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" >Article</a></li>	        			
+			        		<li class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" >Writing</a></li>	        			
 			        		<li ng-click="setType(2)"><a href="#image_upl" data-toggle="tab"> Image</a></li>
 			        		<li ng-click="setType(3)"><a href="#video_upl" data-toggle="tab" >Video</a></li>
 			        	</ul>
@@ -95,10 +95,10 @@
 							        <label>Upload As</label>
 							        <md-select ng-model="creditTo">
 							           <md-optgroup >
-							            <md-option ng-value="user().name" style="background: white;">Yourself</md-option>
+							            <md-option ng-value="user()._id" style="background: white;">Yourself</md-option>
 							          </md-optgroup>
 							          <md-optgroup label="Clubs">
-							            <md-option ng-value="club" ng-repeat="club in user().admin" style="background: white;">{{club}}</md-option>
+							            <md-option ng-value="club" ng-repeat="club in user().asAdmin" style="background: white;">{{club}}</md-option>
 							          </md-optgroup>
 							        </md-select>
 							  		{{creditTo}}
@@ -112,11 +112,16 @@
 							</div>
 	    				
 							<div  class="col-md-12"  ng-show="creditsRadio=='team'">
-								    
+								
+								<md-input-container>
+						              <label>Team Name</label>
+						              <input ng-model="user.team"  type="text" name="team" >
+						              <span class="sizeten colorg">We need a team name to represent the work</span>
+					            </md-input-container>    
 								<table>
 								   	<tr>
 								   		<th>Credit</th>
-								   		<th>User</th>
+								   		<th>Friends</th>
 								  	</tr>											    				
 								   	<tr ng-repeat="credit in creditType track by $index">
 								   		<td style="width:40%;verticle-align:top">
@@ -127,7 +132,7 @@
 											     
 											      <div layout-gt-sm="row">
 											        
-											        <md-autocomplete flex required
+											        <md-autocomplete flex 
 											            md-input-name="autocompleteField"
 											            md-input-minlength="2"
 											            md-input-maxlength="18"
@@ -158,15 +163,15 @@
 															    			
 										</td>
 										<td style="width:60%;vertical-align: bottom;">
-											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag a Friend">
+											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag Friends">
 												<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
 					      						</auto-complete>
 					    					</tags-input>
 										</td>
 									</tr>
 									<tr>
-										<td style="padding:10px 0px" colspan="2">
-											<button type="button" class="b2w" ng-click="addCredit()">Add Credit</button>
+										<td style="padding:10px 0px;text-align: left;" colspan="2">
+											<button type="button" class="w2g" ng-click="addCredit()" style="border:1px solid grey">Add Credit</button>
 										</td>
 										
 									</tr>      							    			

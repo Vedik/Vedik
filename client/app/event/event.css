@@ -75,7 +75,7 @@
         
     }
    	.posts_wrapper	{
-   		background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+   		background: rgb(240,240,240);
         width: 100%;
         float: left;
         z-index: 1000;

@@ -83,6 +83,8 @@
     </script>
 
     <div class="col-md-6" id="posts">
+    	
+    	
       <content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" index="$index"></content-item>
 
       <!-- <div class="awarding_div">
@@ -138,8 +140,8 @@
 
     </div>
     <div class="col-md-6" style="padding:10px 20px 10px 10px  ">
-        <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
-            <h4 style="color:white">Annouce<hr></h4>
+        <div class="thumbs_wrap col-md-12"  style="border:1px solid black;padding:10px;">
+            <h4 class="colorb">Annouce<hr></h4>
             <div >
               <ul class="nav nav-tabs" style="width:40%;">
                 <li  class="active"><a href="#Carticle_up" data-toggle="tab" style="padding:0px"><span class="glyphicon glyphicon-open" style="padding:6px 5px"></span> Post</a></li>               
@@ -271,13 +273,14 @@
         <br/><br/>
         <div class="col-md-12 box_shadow_dwn " style="padding:10px">
             <md-subheader class="md-no-sticky">Entries</md-subheader>
-        	<div class="col-md-4" ng-repeat="entry in event.entries"  style="padding:10px">
+        	<div class="col-md-4" ng-repeat="entry in event.entries | orderBy:myValueFunction"  style="padding:10px">
              	<span>{{entry.user.name}}</span>
                 <img alt="{{entry.entry.entry }}" ng-src="{{entry.entry.entry }}" width="100%" height="auto" />                
                 <rating ng-model="entry.entry.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ng-click="ratePost(entry.entry.rating,entry.entry._id)">
                 <md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>
               
-          </div>
+         	</div>
+         	<button type="button" class="w2g" data-toggle="modal" data-target="#declareRes"> Declare Results</button>
         </div>
 
     </div>

@@ -16,6 +16,7 @@ var PostSchema = new Schema({
     ratings:[{user:{type:Schema.Types.ObjectId, ref:"User"},rating:{type:Number,default:0}}],
     rating:{type:Number,default:0},
     tags: [String],
+    position:String,
     vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
     viewCount:{type:Number,default:0},
     createdOn:{type:Date,default:Date.now()}

@@ -18,7 +18,8 @@ var EventSchema = new Schema({
   subType:String,
   vedik:[{vedik:{type:Schema.Types.ObjectId,ref:'Stage'}}],
   attending:[{user:{type:Schema.Types.ObjectId,ref:'User'}}],
-  entries:[{entry:{type:Schema.Types.ObjectId,ref:'Entry'},user:{type:Schema.Types.ObjectId,ref:'User'}}]
+  entries:[{entry:{type:Schema.Types.ObjectId,ref:'Entry'},user:{type:Schema.Types.ObjectId,ref:'User'}}],
+  winners:[{position:{type:Number},user:{type:Schema.Types.ObjectId,ref:'User'}}]
 });
 
 module.exports = mongoose.model('Event', EventSchema);

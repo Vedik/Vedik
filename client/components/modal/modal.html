@@ -244,6 +244,7 @@
   </div>
 
 
+
   	
 <!--**********************************************************************************************-->
   			<div ng-controller="DatepickerDemoCtrl">
@@ -349,6 +350,63 @@
 
 <!--***********Broadcast closes***************************************************************-->
 
+  
+<!--************************************ Declare Results  ************************************************-->
+<div class="modal img_modal fade col-md-7" id="declareRes" role="dialog">
+    <div class="modal-dialog img_modal-dialog" id="modal-center">
+    
+      <!-- Modal content-->
+     
+     	<div class="modal-header bgw">
+	       <button type="button" class="close colorb" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">X</button>
+	       <h3 class="modal-title colorb">Declare Results</h3>
+	    </div>
+        
+        <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw">
+
+		  <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
+            
+            <div >
+              	<form name="form"  ng-model="form" ng-submit="declareRes(a,event.resNo)">
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="upload_form2">
+                    
+                        <div class="col-md-12">
+                          	<div class="form-group">
+	                      	   <input type="text" class="form-control upld_form" ng-model="event.resNo" placeholder="How many should be selected?" required>
+	                     	</div>                      
+                      
+                      		<div class="col-md-12 box_shadow_dwn " style="padding:10px">
+					            <md-subheader class="md-no-sticky">Selected Entries</md-subheader>
+					        	<div class="col-md-4" ng-repeat="entry in event.entries | orderBy:myValueFunction | limitTo:event.resNo"  style="padding:10px" ng-init="a[$index]=entry">
+					             	<span>{{entry.user.name}}</span>
+					                <img alt="{{entry.entry.entry }}" ng-src="{{entry.entry.entry }}" width="100%" height="auto" />                
+					                <rating ng-model="entry.entry.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ng-click="ratePost(entry.entry.rating,entry.entry._id)"></rating>
+					                <md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>
+					                
+					              
+					        	</div> 
+					        	                     	
+                      		</div>
+                      
+                        	<button type="submit" class="w2g col-md-12">Declare</button>
+                        	<p class="sizeten colorg">*Remember, Results once declared cannot be taken back</p>
+                          
+                        
+
+                   		 </div>
+                 
+                 	</div>
+                  </div>
+                </form>
+            </div>
+
+        </div>
+       </div>
+     </div>
+</div>
+
+<!--***********Broadcast closes***************************************************************-->
 <!--*****************************Submit entry opens*******************************************-->
 <div class="modal img_modal fade col-md-7" id="submitEntry" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">

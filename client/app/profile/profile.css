@@ -87,6 +87,9 @@
            
                 color: #247ba0;
             }
+            #HOF{
+                padding: 40px;
+            }
             #HOF_div    ul  {
                 padding: 0px;
                 margin: 0px;
@@ -329,10 +332,7 @@
             #upld_display .form-group{
                 margin: 0px;
             }
-            #HOF_display span   {
-                padding: 20px; 
-
-            }
+           
 
             .b2w  {
                 background-color: rgba(38,88,132,1);

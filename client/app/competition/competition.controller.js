@@ -229,4 +229,33 @@ angular.module('myAppApp')
       });
    };
 
+   $scope.entries=[];
+   $scope.a=[];
+   $scope.selectEntryw=function (entry){
+   		$scope.entries.push(entry);
+   		console.log('added');
+   		console.log($scope.entries);
+   }
+
+   $scope.myValueFunction = function(entry) {
+   	console.log('here2');
+   return -entry.entry.rating;
+};
+
+   $scope.declareRes = function(entries,no){
+   		console.log(entries);
+   		var x=entries.length;
+   		entries.splice(no,x-no);
+   		console.log(entries);
+
+   		var position=['First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eight','Ninth','Tenth'];
+   		for(var i=0;i<entries.length;i++)
+   		{
+   			$http.post('/api/events/declareRes/'+id,{user:entries[i].user,num:i,position:position[i]}).success(function (response){
+   			console.log('here');
+   		
+   		})
+   		}
+   		
+   }
 });
