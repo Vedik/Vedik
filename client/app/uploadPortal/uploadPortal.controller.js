@@ -1126,9 +1126,7 @@ angular.module('myAppApp')
             case 7:
                 template = eventClubTemplate;
                 break;
-            case 71:
-                template = articleClubTemplate;
-                break;
+            
         }
         
         return template;

@@ -11,6 +11,7 @@ angular.module('myAppApp', [
   'ngMaterial',
   'ngMessages',
   'duParallax',
+  'ui.bootstrap.datetimepicker',
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

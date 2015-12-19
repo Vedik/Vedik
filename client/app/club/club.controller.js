@@ -187,21 +187,24 @@ angular.module('myAppApp')
       console.log($scope.endDateTF);
     }
    $scope.createEvent = function (form){
-          
-          if($scope.endDateTF){ //if there is end date
-              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
-                  console.log(response);
-                  $location.path('/event/'+response._id);
+          console.log(form.dtED);
+          var date= new Date();
+          var n = date.toISOString(); 
+          console.log(date.getDate(),form.dtED.getDate());
+          // if($scope.endDateTF){ //if there is end date
+          //     $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
+          //         console.log(response);
+          //         $location.path('/event/'+response._id);
 
-              })
-          }
-          else
-          {
-              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
-                  console.log(response);
-                  $location.path('/event/'+response._id);
-              })
-          }
+          //     })
+          // }
+          // else
+          // {
+          //     $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
+          //         console.log(response);
+          //         $location.path('/event/'+response._id);
+          //     })
+          // }
       
           
    }

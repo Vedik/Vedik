@@ -8,7 +8,8 @@ var User = require('../user/user.model');
 
 // Get list of events
 exports.index = function(req, res) {
-  Event.find(function (err, events) {
+  var tDay=Date.now();
+  Event.find({$or :[{'startDate':{$gte: tDay}},{'startDate':tDay}]},function (err, events) {
     if(err) { return handleError(res, err); }
     return res.json(200, events);
   });

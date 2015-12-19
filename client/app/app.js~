@@ -11,8 +11,6 @@ angular.module('myAppApp', [
   'ngMaterial',
   'ngMessages',
   'duParallax',
-  'ngAnimate',
-  
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

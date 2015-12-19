@@ -16,7 +16,7 @@
             <!--user pic and info goes here-->
             	<div id="pro_pic">
             		
-            		<div id="pro_pic_wrapper" style="padding:10px">
+            		<div id="pro_pic_wrapper">
             			<div >
 	        				<img src="{{user.galleryPic}}" style="width:100%;height:100%;z-index:0;position:relative;" alt="" id="gal_pic" >
 	        				<div id="HOF_display" class="tab-content colorw">
@@ -121,7 +121,7 @@
 				        	</div>
 	        			</div>
 	           				
-           				<div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div>
+           				<!-- <div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div> -->
 
            				<script>
 					  	$(document).ready(function(){
@@ -189,7 +189,7 @@
 			        		<ul>
 			        			<a href="#about_user" data-toggle="tab"><li><span class="glyphicon glyphicon-user"></span> About</li></a>
 			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Hall of Fame</li></a>
-			        			<a href="#HOF" data-toggle="modal" data-target="#editUser" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><li><span class="glyphicon glyphicon-education"></span> Edit Profile</li></a>
+			        			<a href="#HOF" data-toggle="modal" data-target="#editUser" ng-show="user.name==loggedInUser.name"><li><span class="glyphicon glyphicon-education"></span> Edit Profile</li></a>
 			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Settings</li></a>
 			        			
 			        				        			

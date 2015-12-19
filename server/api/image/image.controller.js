@@ -6,6 +6,7 @@ var Post = require('../post/post.model');
 var User = require('../user/user.model');
 var Club = require('../club/club.model');
 var Credit = require('../credit/credit.model');
+var Event= require('../event/event.model');
 
 // Get list of images
 exports.index = function(req, res) {
@@ -370,6 +371,8 @@ exports.BeventPost = function(req, res) {
   });*/
   
   
+Event.findById(req.body.eventId,function (err,event){
+
 
  
   var newImage = new Image({
@@ -395,13 +398,13 @@ exports.BeventPost = function(req, res) {
         eventId:req.body.eventId
       });
 
-        
+        newPost.vedik=event.vedik;
       
          
 
          
             
-     console.log(req.params.id);     
+     console.log(newPost);     
       newPost.save(function (err)
       {
         if(err) {console.log(req.params.id); return handleError(res, err);}
@@ -452,6 +455,7 @@ exports.BeventPost = function(req, res) {
         }
     
     });
+  })
 };
 
 

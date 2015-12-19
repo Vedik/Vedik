@@ -4,8 +4,24 @@ angular.module('myAppApp')
   .controller('DashboardCtrl', function ($scope,$state, Auth,$http,ClubEventService) {
     /*$scope.message = 'Hello';
     $scope.slots = ;
+
+
     */
     // need to code DashboardService service
+
+
+     var that = this;
+
+    this.isOpen = false;
+
+    this.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        that.isOpen = true;
+    };
+
+    
     $scope.genres = ['horror','funny']; 
     $scope.limit = 3;
     $scope.user = Auth.getCurrentUser();
@@ -45,5 +61,9 @@ angular.module('myAppApp')
         
 
     });
+
+     $http.get('/api/events/').success(function (response){
+        console.log(response);
+     })
   })
 ;

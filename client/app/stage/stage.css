@@ -1,13 +1,17 @@
 #stage_info	{
-	margin:0px auto 0px;
-    padding:0px 10px 10px;
+	margin:0px 37.5% ;
+	display: block;
+    padding: 20px ;
     position: absolute;
-    top:20%;
-    right:2%;
+    top:40%;
+    text-shadow:0px 0px 2px black;
     z-index: 10;
-    background-color: white;            
+    background-color: rgba(0,0,0,0) !important;            
     border-radius: 0px;
-    color: grey;
+    color: rgba(255,255,255,0.9);
+}
+#stage_info	button{
+	color: black;
 }
 #stage_pic	{
 	padding: 0px;
@@ -19,7 +23,7 @@
 	
 	
 	padding: 0px;
-	background-image: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/06/black_desktop_wallpaper_hd_1.jpg");
+	background-color: rgb(220,220,220);
     background-repeat: repeat;
 }
 #bkd {

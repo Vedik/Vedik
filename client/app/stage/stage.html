@@ -7,11 +7,11 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 	<div class="thumbs_wrap col-md-12">
-		<div id="stage_info" class="col-md-3 box_shadow_dwn">
-			<span><h2>{{stage.name}}</h2></span>
+		<div id="stage_info" class="col-md-3">
+			<span><h2 class="centric" style="padding:0px 0px 10px">{{stage.name}}</h2></span>
 		<!--	<span><p>{{stage.description}}</p></span>	-->
-			<button ng-hide="isFollowing"  ng-click="follow()" class="w2b">Follow</button>
-			<button ng-show="isFollowing"  ng-click="unfollow()" class="w2b">Following</button>
+			<button   ng-click="follow()" class="btnbdr col-md-12" style="border:1px solid rgb(240,240,240)">{{follow}}</button>
+			
 		</div>
 		<div id="stage_pic" class="col-md-12" ng-controller="ParallaxEff">
 			<img src="{{stage.posterUrl}}" width="100%" height="auto" alt="Badminton ART" du-parallax y="background">
