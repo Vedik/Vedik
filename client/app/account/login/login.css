@@ -28,7 +28,7 @@
 
 #login  {
   
-  padding: 10px;
+  
   width: 100%;
   color: rgba(0,0,0,0.7);
   z-index: 10;
@@ -38,19 +38,23 @@
   
 }
 #login_wrapper{
-  padding: 10px 50px;
-  border-right: 1px solid grey;
-
+  padding: 20px 50px;
+}
+#video_slot{
+    margin: 50px 10%;
+    width: 80%;
+    height: 316px;
+    background-color: black;
 }
 #login #logob{
-  padding: 40px 100px 10px;
-  font-size: 50px;
-  color:rgb(23,23,23) 
+  padding: 35px 100px 20px ;
+  font-size: 20px;
+  text-align: center;
+  background-color: white;
+  color:rgb(0,0,0,0.2);
 }
 
 #login .row{
-  border:1px solid rgba(0,0,0,0.1);
   margin: 0px 0px 20px 0px;
-  border-radius: 20px;
   padding: 20px 30px;
 }

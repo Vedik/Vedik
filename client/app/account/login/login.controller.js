@@ -36,8 +36,8 @@ angular.module('myAppApp')
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
-          email: $scope.user.email,
-          password: $scope.user.password,
+          email: $scope.user.email2,
+          password: $scope.user.password2,
         })
         .then( function() {
           // Account created, redirect to home

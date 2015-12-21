@@ -79,21 +79,29 @@
 <!--********************* booking date****************************************-->
 
 <script type="text/ng-template" id="myModalBookADay.html">
-	 
-				
-                    <form name="form" ng-submit="bookPost()" ng-model="form" >
-                   		<div class="col-md-6 datepckr">
-                            <p class="input-group">
-                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="openedSD" min-date="minDate" max-date="' + '"2037-06-22"' + '" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                </span>
-                            </p>
-                        </div>
-                        <div ng-click="ok()"><button type="submit" class="b2w">Book</button></div>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                    </form>
-                
+
+	<div class="col-md-12">
+ 		<div class="col-md-6" style="margin:150px 25%">
+			<div class="modal-header bgw">
+		       <button type="button" class="close colorb" ng-click="cancel()">X</button>
+		       <h3 class="modal-title colorb">Can we know about your event</h3>
+		    </div>
+
+		    <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw colorb " >				
+                <form name="form" ng-submit="bookPost()" ng-model="form" class="bgw">
+               		<div class="col-md-12 datepckr">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="openedSD" min-date="minDate" max-date="' + '"2037-06-22"' + '" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div ng-click="ok()"><button type="submit" class="w2g">Book</button></div>
+                </form>
+            </div>
+        </div>    
+    </div>            
             
 </script>
 

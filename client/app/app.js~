@@ -11,6 +11,8 @@ angular.module('myAppApp', [
   'ngMaterial',
   'ngMessages',
   'duParallax',
+  'ui.bootstrap.datetimepicker',
+  'ngAnimate',
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

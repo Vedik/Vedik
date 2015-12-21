@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('DashboardCtrl', function ($scope,$state, Auth,$http,ClubEventService) {
+  .controller('DashboardCtrl', function ($scope,$state, Auth,$http,ClubEventService,$log) {
     /*$scope.message = 'Hello';
     $scope.slots = ;
 
@@ -10,18 +10,38 @@ angular.module('myAppApp')
     // need to code DashboardService service
 
 
-     var that = this;
+    $scope.mytime = new Date();
 
-    this.isOpen = false;
+  $scope.hstep = 1;
+  $scope.mstep = 15;
 
-    this.openCalendar = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+  $scope.options = {
+    hstep: [1, 2, 3],
+    mstep: [1, 5, 10, 15, 25, 30]
+  };
 
-        that.isOpen = true;
-    };
+  $scope.ismeridian = true;
+  $scope.toggleMode = function() {
+    $scope.ismeridian = ! $scope.ismeridian;
+  };
 
-    
+  $scope.update = function() {
+    var d = new Date();
+    d.setHours( 14 );
+    d.setMinutes( 0 );
+    $scope.mytime = d;
+  };
+
+  $scope.changed = function () {
+    $log.log('Time changed to: ' + $scope.mytime);
+  };
+
+  $scope.clear = function() {
+    $scope.mytime = null;
+  };
+
+
+
     $scope.genres = ['horror','funny']; 
     $scope.limit = 3;
     $scope.user = Auth.getCurrentUser();
@@ -48,12 +68,12 @@ angular.module('myAppApp')
     console.log(bookingDate);
 
     
-    //  $http.get('/api/bookings/'+bookingDate).success(function (response){
-    //     console.log(response);
-    //     $scope.bookings = response;
-    //     $scope.posts=$scope.bookings.postId;
-    //     console.log($scope.bookings);
-    // });
+     $http.get('/api/bookings/'+bookingDate).success(function (response){
+        console.log(response);
+        $scope.bookings = response;
+        $scope.posts=$scope.bookings.postId;
+        console.log($scope.bookings);
+    });
 
      $http.get('/api/clubs/').success(function (response){
         console.log(response);
