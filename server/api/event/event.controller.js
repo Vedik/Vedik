@@ -8,12 +8,36 @@ var User = require('../user/user.model');
 
 // Get list of events
 exports.index = function(req, res) {
-  var tDay=Date.now();
-  Event.find({$or :[{'startDate':{$gte: tDay}},{'startDate':tDay}]},function (err, events) {
+  var startDate=new Date();
+  startDate.setSeconds(0);
+  startDate.setHours(0);
+  startDate.setDate(startDate.getDate()-1);
+  startDate.setMinutes(0);
+  var endDate=new Date();
+  endDate.setSeconds(0);
+  endDate.setHours(0);
+  endDate.setDate(endDate.getDate());
+  endDate.setMinutes(0);
+
+ console.log(startDate)
+  Event.find({$or :[{'startDate':{$gte: endDate}}]},function (err, events) {
     if(err) { return handleError(res, err); }
-    return res.json(200, events);
+        
+        var x=[];
+
+                Event.find({$or :[{'startDate':{$gte: startDate,$lt:endDate}}]},function (err, tEvents) {
+                   if(err) { return handleError(res, err); }
+                   x=tEvents;
+                   console.log(events);
+
+                   return res.json(200, {events:events,tEvents:tEvents});
+      
+                });
+            
+
   });
 };
+  
 
 exports.clubEvents = function(req, res) {
   Event.find({club:req.params.clubId},function (err, events) {

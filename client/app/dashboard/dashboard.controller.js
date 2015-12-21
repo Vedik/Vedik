@@ -6,39 +6,12 @@ angular.module('myAppApp')
     $scope.slots = ;
 
 
+
     */
     // need to code DashboardService service
 
-
-    $scope.mytime = new Date();
-
-  $scope.hstep = 1;
-  $scope.mstep = 15;
-
-  $scope.options = {
-    hstep: [1, 2, 3],
-    mstep: [1, 5, 10, 15, 25, 30]
-  };
-
-  $scope.ismeridian = true;
-  $scope.toggleMode = function() {
-    $scope.ismeridian = ! $scope.ismeridian;
-  };
-
-  $scope.update = function() {
-    var d = new Date();
-    d.setHours( 14 );
-    d.setMinutes( 0 );
-    $scope.mytime = d;
-  };
-
-  $scope.changed = function () {
-    $log.log('Time changed to: ' + $scope.mytime);
-  };
-
-  $scope.clear = function() {
-    $scope.mytime = null;
-  };
+     $scope.loading=true;
+     console.log($scope.loading);
 
 
 
@@ -63,12 +36,12 @@ angular.module('myAppApp')
     var d = dateAdmin.getDate();
     var m = dateAdmin.getMonth()+1;
     var y = dateAdmin.getFullYear();
-    var bookingDate=d+"-"+m+"-"+y;
+    var todayDate=d+"-"+m+"-"+y;
      console.log('bookingDate');
-    console.log(bookingDate);
+    console.log(todayDate);
 
     
-     $http.get('/api/bookings/'+bookingDate).success(function (response){
+     $http.get('/api/bookings/'+todayDate).success(function (response){
         console.log(response);
         $scope.bookings = response;
         $scope.posts=$scope.bookings.postId;
@@ -81,9 +54,22 @@ angular.module('myAppApp')
         
 
     });
+     
+       $http.get('/api/events/').success(function (response){
+            console.log(response);
+            $scope.events=response.events;
+            $scope.tEvents=response.tEvents;
+        }) 
 
-     $http.get('/api/events/').success(function (response){
-        console.log(response);
-     })
+       $scope.redirect=function(subOnl,index){
+        if(subOnl){
+            $scope.redirect[index]="competition";
+        }
+        else
+        {
+            $scope.redirect[index]="event";
+        }
+       }
+     
   })
-;
+    ;

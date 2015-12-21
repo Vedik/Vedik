@@ -130,7 +130,7 @@
   		filter: blur(0px);
   		margin: 40px auto 0px;
   		overflow-y:auto;
-  		
+
 	}
 	.modal-dialog	{
 		width:auto;
@@ -346,6 +346,9 @@
      .colorbl{
      	color: rgb(1,192,255);
      }
+     .colorlb{
+     	color: #337AB7;
+     }
      /*background (bg) color*/
      .bgb{
      	background-color: rgb(19,19,19);
@@ -359,6 +362,10 @@
      .bglg{
      	background-color: rgb(220,220,220);
      }
+     .bgdb{
+     	background-color: #3F51B5;
+     }
+    
      /*font size*/
      .sizeten{
      	font-size: 10px;

@@ -37,15 +37,16 @@
     padding: 2px 0px;
 }
 .list_heading{
-    font-size:13px;
-    color:white;
-    background-color: rgb( 1, 192, 255 );
-    
-    padding: 5px !important;
+    color: #FFF;
+    padding: 20px !important;
     width: 100%;
-    position: relative; 
+    position: relative;
     font-weight: bold;
-}
+    background-color: rgb(130, 184, 245);
+    text-align: center;
+    font-family: arial;
+    font-size: 15px;
+    letter-spacing: 0px;
 
 
 

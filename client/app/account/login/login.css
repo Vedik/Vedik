@@ -48,13 +48,16 @@
 }
 #login #logob{
   padding: 35px 100px 20px ;
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
   background-color: white;
-  color:rgb(0,0,0,0.2);
+  color:#337AB7;
+  font-family: 'Times New Roman';
+  letter-spacing: 0px;
 }
 
 #login .row{
   margin: 0px 0px 20px 0px;
   padding: 20px 30px;
+  color: #337AB7;
 }

@@ -166,7 +166,7 @@
 
             }
             .w2g:hover    {
-                background-color: rgba(0,0,0,0.05) !important;
+                background-color: rgb(230,230,230); !important;
                 color: #337AB7;
                 
                 border: 0px;
