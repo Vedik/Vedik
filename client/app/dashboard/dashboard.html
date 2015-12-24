@@ -39,9 +39,7 @@
 			<p class="colorlb">Because Everyone needs<br>a Stage</p>
 		</div>
 		
-		<script>
-			
-		</script>
+		
 
 	
 
@@ -143,7 +141,7 @@
 }" >
 			<div  >
 				<div class="list_heading col-md-12">Today's Events</div>
-				<div style="max-height:400px;overflow-y:scroll" class="thumbs_wrap">
+				<div style="max-height:400px;overflow-y:scroll" class="thumbs_wrap col-md-12">
 					<a href="/{{redirect[$index]}}/{{tEvent._id}}" ng-repeat="tEvent in tEvents" ng-init="redirect(tEvent.subOnl,$index)">
 						<button type="button" class="btn btn-info btn-lg w2g col-md-12 lh20 alignL" style="font-size:15px">{{tEvent.name}}
 						<br/>
