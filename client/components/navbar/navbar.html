@@ -69,20 +69,20 @@
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
                         <ul class="nav nav-pills nav-stacked" id="notifMenu" >
-                            <li><a data-toggle="tab" href="#allNotifs" ><span  style="padding:10px">All</span></a></li>
+                            <li class="active"><a data-toggle="tab" href="#allNotifs" c>All</a></li>
                          
-                            <li style="border-top:1px solid grey;border-bottom:1px solid grey"><span class="colorb">Friends</span></li>
+                            <li ><div class="colorb">Friends</div></li>
 
                             <li><a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName">
-                              <md-list-item >
+                              <md-list-item style="padding:0px">
                                 <img alt="img" ng-src="{{friend.proPic }}" class="md-avatar" />
                                 <p>{{friend.name }}</p>
                               
                             </a></li>
                             
-                             <li style="border-top:1px solid grey;border-bottom:1px solid grey"><span class="colorb">Clubs</span></li>
+                             <li ><div class="colorb">Clubs</div></li>
                              <li  ><a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName">
-                              <md-list-item > 
+                              <md-list-item style="padding:0px"> 
                                 {{friend}}
                               </md-list-item>
                               </a>

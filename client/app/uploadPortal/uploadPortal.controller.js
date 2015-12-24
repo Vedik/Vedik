@@ -882,7 +882,7 @@ angular.module('myAppApp')
                                             '"{{content.imageId.description}}"'+
                                         '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
-                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                            '{{postTime}}</span><span ng-show="review" class="colorlb">Waiting for you to review</span></span>'+
                                     
                                    
                                 '</div>'+
@@ -906,7 +906,7 @@ angular.module('myAppApp')
                                              '"{{content.videoId.description}}"'+
                                         '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
-                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                            '{{postTime}}</span><span ng-show="review" class="colorlb">Waiting for you to review</span></span>'+
                                 
                                     
                                     
@@ -928,7 +928,7 @@ angular.module('myAppApp')
                                             '"{{content.articleId.description}}"'+
                                         '<br/><span ng-show="!review"><rating ng-model="rate"  max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
                                         '{{ratingHalf}} by {{ratingName.votes}} users '+  
-                                            '{{postTime}}</span><span ng-show="review">Waiting for you to review</span></span>'+
+                                            '{{postTime}}</span><span ng-show="review" class="colorlb">Waiting for you to review</span></span>'+
                                 '</div>'+
                             '</div>'+                            
                         '</div>';
@@ -1072,7 +1072,7 @@ angular.module('myAppApp')
                                  
                             '</div>'+                            
                         '</div>';  
-      var winningTemplate = '<div class="post_div col-md-12">'+
+      var winningTemplate = '<div class="notif_div col-md-12" style="padding:5px 0px">'+
                               '<div class="Ellipse_1"></div>'+
                                 '<div class="text_type_post" id="article">'+
                                     '<div class="ardecode"><a href=""> Congratulations {{content.uploader.user.name}}</a></div>'+

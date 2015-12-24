@@ -70,9 +70,10 @@
 		position: relative;		
 		/*margin: 30px 0px;*/
 		float: left;
-		padding: 0px;
-		border-bottom: 2px solid white;	
-		background-color: rgba(0,0,0,0.1);
+		padding: 5px 0px 0px;
+		border-bottom: 1px solid rgba(0,0,255,0.2);	
+		border-left: 1px solid rgba(0,0,255,0.2);
+		background-color: white;
 	}
 	.w2bfade	{
 		display: block;
@@ -105,13 +106,13 @@
 	#notif_desc{
 		font-size: 10px;
 		color: rgba(0,0,0,0.5);
-		line-height: 15px;
+		line-height: 20px;
 		position: absolute;
 		text-overflow:ellipsis;
 		white-space: nowrap;
 		left: 10px;
 		width: 286px;
-		bottom: 5px;
+		bottom: 0px;
 		overflow: hidden;
 	}
 	
