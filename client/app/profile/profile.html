@@ -6,10 +6,6 @@
 
 <div ng-controller="ProfileCtrl" id="for_blur">
 	<div ng-include="'components/navbar/navbar.html'"></div>
-	<div id="hidden"></div>
-	<!-- <div id="nav_fade">
-	  <img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" width="100%" height="200px">
-	</div> -->
 	
 
             <div id="profile">
@@ -24,7 +20,7 @@
 
 				        		<span id="about_user" class="tab-pane fade ">
 				        			
-				        			<h4>About<hr></hr></h4>
+				        			<h4>About<hr/></h4>
 				        			
 									<span>
 					                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
@@ -42,7 +38,7 @@
 					                </span>
 								</span>
 				        		<span id="HOF" class="tab-pane fade">
-				        			<h4>Hall of Fame<hr></hr></h4>
+				        			<h4>Hall of Fame<hr/></h4>
 
 				        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px 8.167%;" class="col-md-10">
 															
@@ -141,13 +137,9 @@
 			                        $("#pro_pic").css({"height": ($(window).height()-65)+'px'});
 			                  });
 			            </script>
-           			</div>
-	            	
-
-		            <div id="user_profile" >
-		            	<div>
-			            	<div class="thumbs_wrap">
-			            		<img src="{{user.proPic}}" width="auto" height="106px" id="dp">
+			            <div id="user_profile">
+			            	<div class="thumbs_wrap col-md-12">
+			            		<img src="{{user.proPic}}"  id="dp">
 
 			            		<!-- <div id="dp_edit" data-toggle="modal" data-target="#dp_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name">
 			            			<a href=""><u>
@@ -155,9 +147,9 @@
 			            			</u></a>
 			            		</div> -->
 			            	</div>
-		            		<div >
-					            <div class="thumbs_wrap" id="user_profile_wrapper">
-					                <span>
+		            		<div  class="col-md-12" >
+					        
+					                
 					                	<p ng-click="edit.name=true" ng-hide="edit.name && user.name==loggedInUser.name" id="pro_name">{{user.name}}</p>
 					                	<!-- <div ng-show="edit.name && user.name==loggedInUser.name">
 					                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
@@ -167,7 +159,7 @@
 					                			<button type="button" ng-click="edit.name=false" class="w2b">Cancel</button>
 					                		</form>
 					                	</div> -->
-					                </span>
+					                
 					            
 					        
 						        	<div id="infodiv">
@@ -179,10 +171,15 @@
 											<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
 										</span> -->
 						            </div>
-					            </div>
+					            
 
 				        	</div>
 				        </div>
+           			</div>
+	            	
+
+		            <!-- <div >
+		            	
 				        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 				        <div id="HOF_div" onclick="document.getElementById('HOF_display').style.display = 'block'">
@@ -200,7 +197,7 @@
 			        	
 			        	
 
-		        	</div>
+		        	</div> -->
 		        	
 		        	
 

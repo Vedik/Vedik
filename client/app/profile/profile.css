@@ -13,21 +13,26 @@
                     text-align:left;
             }
             #user_profile   {
-               z-index: 0;
-               padding: 20px;
-               width: 27%;
-               height: 100%;
-               background-color: white;
-               position: relative;
-               float: left;
+               z-index: 10000;
+                position: absolute;
+                text-align: center;
+                top: 200px;
+                width: 500px;
+                left: 31.6%;
+                padding: 20px !important;
+                background: white none repeat scroll 0% 0%;
+                box-shadow: 0px 1px 3px grey;
             }
+
             #user_profile_wrapper{
                 padding:10px 10px 10px 20px;
 
             }
             #dp {
                border-radius: 50%;
-               padding: 0px 5px 0px 0px;
+               margin: 0px 33.33%;
+               width: 100px;
+               height: auto;
 
             }
             #profile    {
@@ -379,7 +384,7 @@
             }
             #pro_pic_wrapper    {
                 position: relative;
-                width:73%; 
+                width:100%; 
                 float: left;
             }
             .thumbs_out {
