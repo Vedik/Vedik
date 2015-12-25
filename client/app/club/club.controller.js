@@ -13,6 +13,7 @@ angular.module('myAppApp')
     
     
     $http.get('/api/clubs/'+id).success(function (response){
+      console.log(response);
       $scope.club = response.club;
       $scope.isFollowing = response.isFollowing;
 

@@ -51,6 +51,7 @@
             
             margin: 0px;
             width: 100%;
+            overflow-x:hidden;
             /*background-color: white;*/
             background:rgb( 221, 221, 221 );          
            padding: 0px;
@@ -255,6 +256,17 @@
            
             
         }
+        .hide_scroll{
+            max-height:400px;
+            background-color: white;
+            overflow:hidden;
+        }
+        .hide_scroll > div{
+                width: 110%;
+                overflow-y: scroll;
+                max-height: 400px;
+        }
+
 
 
 .animate-enter, 

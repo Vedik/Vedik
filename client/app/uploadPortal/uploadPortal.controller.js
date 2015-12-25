@@ -1072,9 +1072,9 @@ angular.module('myAppApp')
                                  
                             '</div>'+                            
                         '</div>';  
-      var winningTemplate = '<div class="notif_div col-md-12" style="padding:5px 0px">'+
+      var winningTemplate = '<div class="notif_div col-md-12" style="padding:5px 10px">'+
                               '<div class="Ellipse_1"></div>'+
-                                '<div class="text_type_post" id="article">'+
+                                '<div >'+
                                     '<div class="ardecode"><a href=""> Congratulations {{content.uploader.user.name}}</a></div>'+
                                     
                                     

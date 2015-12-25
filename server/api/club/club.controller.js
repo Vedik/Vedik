@@ -12,6 +12,14 @@ exports.index = function(req, res) {
     return res.json(200, clubs);
   });
 };
+exports.tagingClub = function(req, res) {
+  var query = req.params.query;
+  Club.find({ "name": { "$regex": query, "$options": "i" } },'name',function (err, clubs) {
+    if(err) { return handleError(res, err); }
+    console.log(clubs);
+    return res.json(200, clubs);
+  });
+};
 
 // Get a single club
 exports.show = function(req, res) {

@@ -4,6 +4,8 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var Club = require('../club/club.model');
+var Stage = require('../stage/stage.model');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -69,12 +71,16 @@ exports.addHOF = function (req, res, next) {
 
 exports.editProfile = function (req, res) {
   var userId = req.user._id;
-  
+  console.log(req.body.club,req.body.vedik);
+  var c=req.body.club;
+  var v=req.body.vedik;
 
   User.findById(userId, function (err,user){
 
+    if(req.body.name){
+      user.name=req.body.name; 
+    }
     
-    user.name=req.body.name; 
     
     user.about=req.body.about;
     
@@ -82,6 +88,25 @@ exports.editProfile = function (req, res) {
     
     user.proPic=req.body.proPic;
     
+    for(var i=0;i<c.length;i++){
+      Club.findById(c[i]._id,function (err,club){
+        club.subscribed_users.push({user:req.user._id});
+        club.save(function (err){
+             if (err) { return handleError(res, err); }
+             console.log('club added +'+i);
+        })
+      })
+    }
+    for(var i=0;i<v.length;i++){
+      Stage.findById(v[i]._id,function (err,stage){
+        stage.subscribed_users.push({user:req.user._id});
+        stage.save(function (err){
+             if (err) { return handleError(res, err); }
+             console.log('stage added +'+i);
+        })
+      })
+    }
+
     
     user.save(function (err) {
       if (err) { return handleError(res, err); }
