@@ -7,6 +7,7 @@
 <div ng-controller="ProfileCtrl" id="for_blur">
 	<div ng-include="'components/navbar/navbar.html'"></div>
 	
+	
 
             <div id="profile">
             <!--user pic and info goes here-->
@@ -14,107 +15,8 @@
             		
             		<div id="pro_pic_wrapper">
             			<div >
-	        				<img src="{{user.galleryPic}}" style="width:100%;height:100%;z-index:0;position:relative;" alt="" id="gal_pic" >
-	        				<div id="HOF_display" class="tab-content colorw">
-				        		<button type="button" class="close" onclick="document.getElementById('HOF_display').style.display = 'none'">&times;</button>
-
-				        		<span id="about_user" class="tab-pane fade ">
-				        			
-				        			<h4>About<hr/></h4>
-				        			
-									<span>
-					                	<span ng-click="edit.about=true" ng-hide="edit.about && user.name==loggedInUser.name" ng-disabled="user.name!=loggedInUser.name">{{userAbout}}</span>
-					                	<div ng-show="edit.about && user.name==loggedInUser.name">
-					                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
-					                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='About' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
-					                			</textarea>
-					                			
-					                			
-					                			<br>
-					                			<button type="submit" class="w2b">Save</button> 
-					                			<button type="button" ng-click="edit.about=false" class="w2b">Cancel</button>
-					                		</form>
-					                	</div>
-					                </span>
-								</span>
-				        		<span id="HOF" class="tab-pane fade">
-				        			<h4>Hall of Fame<hr/></h4>
-
-				        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px 8.167%;" class="col-md-10">
-															
-									</content-item>
-				        		</span>
-								
-				        		
-
-									<!--<div class="tab-pane fade in active" id="upload_form2">
-						        		<div class="tab-content">
-							        		<span id="articlee_up" class="tab-pane fade">
-							        			<h3>Add your Article here</h3>					
-													
-													<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-							        		</span>
-							        		<span id="imagee_up" class="tab-pane fade">
-							        			<h3>Add your Image here</h3>
-																
-												<div class="form-group">
-													<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-												</div>
-												<div class="form-group">	
-													<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-												</div>
-												<div class="form-group">	
-													<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
-												</div>
-												<div class="form-group">
-													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-												    </tags-input>
-												</div>
-												<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-							        		</span>
-							        		<span id="videoe_up" class="tab-pane fade">
-													<h3>Add your Video here</h3>
-																		
-														<div class="form-group">
-																		
-															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
-														</div>
-														<div class="form-group">
-																			
-															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
-														</div>
-														<div class="form-group">
-																				
-															<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
-														</div>
-														<div class="form-group"> <!-- Put text area --
-															<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
-								                			</textarea>													
-																		
-														</div>
-														<div>
-															<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-
-														    </tags-input>
-														</div>
-																	
-														<div>
-															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-														    </tags-input>
-														</div>
-														<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-							        		</span>
-							        	</div>
-						        	</div>-->
-						        	
-					        	
-				        	</div>
+	        				<img src="{{user.galleryPic}}" style="width:100%;height:100%;z-index:0;position:relative;opacity:0.4" alt="" id="gal_pic" >
+	        				
 	        			</div>
 	           				
            				<!-- <div id="gal_pic_edit" data-toggle="modal" data-target="#gal_pic_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name"><a href=""><u>Edit Pic</u></a></div> -->
@@ -138,7 +40,7 @@
 			                  });
 			            </script>
 			            <div id="user_profile">
-			            	<div class="thumbs_wrap col-md-12">
+			            	<div class="thumbs_wrap col-md-3">
 			            		<img src="{{user.proPic}}"  id="dp">
 
 			            		<!-- <div id="dp_edit" data-toggle="modal" data-target="#dp_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name">
@@ -147,10 +49,13 @@
 			            			</u></a>
 			            		</div> -->
 			            	</div>
-		            		<div  class="col-md-12" >
-					        
+		            		<div  class="col-md-6" >					        
 					                
-					                	<p ng-click="edit.name=true" ng-hide="edit.name && user.name==loggedInUser.name" id="pro_name">{{user.name}}</p>
+					                	<p   id="pro_name">
+					                		{{user.name}}'s
+					                		<br/>
+					                		<span style="font-size:12px " class="colorw" >R 12,231</span>
+					                	</p>
 					                	<!-- <div ng-show="edit.name && user.name==loggedInUser.name">
 					                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
 					                			<input type="text" value="{{user.name}}" ng-model="form.name" autofocus>
@@ -159,45 +64,33 @@
 					                			<button type="button" ng-click="edit.name=false" class="w2b">Cancel</button>
 					                		</form>
 					                	</div> -->
-					                
 					            
-					        
-						        	<div id="infodiv">
-
-						            	<!--<span id="info">Director Editor Screenwriter</br></span>-->
-						            	<span style="font-size:12px" class="btnbdr">_/\_ Respect</span>
-						            	<!-- <span ng-if="user._id!=loggedInUser._id">
-							            	<button  ng-click="follow()" class="w2b">{{followStatus}}</button>
-											<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
-										</span> -->
-						            </div>
-					            
-
 				        	</div>
+				        	<div class="col-md-3" id="vedik_pro"> Vedik</div>
+
+				        	<div id="infodiv" class="col-md-12">
+
+				            	<!--<span id="info">Director Editor Screenwriter</br></span>-->
+				            	<!-- <span ng-if="user._id!=loggedInUser._id">
+					            	<button  ng-click="follow()" class="w2b">{{followStatus}}</button>
+									<button ng-show="isFollowing"  ng-click="unfollow()"  class="w2b">Following</button>
+								</span> -->
+								
+				            </div>
 				        </div>
            			</div>
 	            	
 
-		            <!-- <div >
+		            <div >
 		            	
 				        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-				        <div id="HOF_div" onclick="document.getElementById('HOF_display').style.display = 'block'">
-			        		<ul>
-			        			<a href="#about_user" data-toggle="tab"><li><span class="glyphicon glyphicon-user"></span> About</li></a>
-			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Hall of Fame</li></a>
-			        			<a href="#HOF" data-toggle="modal" data-target="#editUser" ng-show="user.name==loggedInUser.name"><li><span class="glyphicon glyphicon-education"></span> Edit Profile</li></a>
-			        			<a href="#HOF" data-toggle="tab"><li><span class="glyphicon glyphicon-education"></span> Settings</li></a>
-			        			
-			        				        			
-			        			 
-			        		</ul>
-			        	</div>
+				        
 			        	
 			        	
 			        	
 
-		        	</div> -->
+		        	</div>
 		        	
 		        	
 
@@ -272,7 +165,7 @@
 											<div ng-repeat="item in posts | orderBy:'-createdOn'" class="thumbs_wrap col-md-12 tab-pane fade in active" ng-init="getCredit($index, item._id)">
 												<div style="padding: 0px 10px" class="col-md-12">
 													<div class="bgw col-md-12 colorb" style="padding: 10px"> 
-														<img src="{{user.proPic}}" width="auto" height="20px" id="dp">  {{user.name}} as 
+														<img src="{{user.proPic}}" width="auto" height="20px" id="dpsm">  {{user.name}} as 
 														<span ng-repeat="credit in credits[$index]">{{credit.credit.creditDetail}} </span>
 													</div>
 												</div>
@@ -286,9 +179,9 @@
 
 											<div  class="tab-pane fade" ng-repeat="stageDiv in stageList" id="{{stageDiv.id}}">
 												<div ng-repeat="item in stageDivPosts | orderBy:'-createdOn' ">
-													<div style="padding: 0px 10px" class="col-md-12">
+													<div style="padding: 0px 10px" class="col-md-12 ">
 														<div class="bgw col-md-12 colorb" style="padding: 10px"> 
-															<img src="{{user.proPic}}" width="auto" height="20px" id="dp"> {{user.name}} as 
+															<img src="{{user.proPic}}" width="auto" height="20px" id="dpsm"> {{user.name}} as 
 															<span ng-repeat="credit in credits[$index]">{{credit.credit.creditDetail}}</span>
 														</div>
 													</div>
@@ -300,6 +193,118 @@
 										</div>												
 													
 											
+						
+					</div>
+					<div class="col-md-6 " style="padding:20px">
+						<div id="stages_list" class="box_shadow_up thumbs_wrap bgw">
+		            		<ul class="nav nav-tabs">
+		            			<li ><a data-toggle="tab" href="#about_user">About</a></li> 
+		            			<li class="active"><a data-toggle="tab" href="#HOF"> Hall of Fame</a></li>  
+		            			<li ><a href="#HOF" data-toggle="modal" data-target="#editUser" ng-show="user.name==loggedInUser.name"><span class="glyphicon glyphicon-education"></span> Edit Profile</a></li> 
+		            			<li ><a data-toggle="tab" href="#HOF"> Settings</a></li> 
+							</ul>
+							<div  class="tab-content colorw">
+				        		
+
+				        		<span id="about_user" class="tab-pane fade ">
+				        			
+				        			
+				        			
+									<span>
+					                	<span  >{{user.about}}</span>
+					                	<span ng-if="!user.about">{{user.name}} is yet to tell about himself to Vedik</span>
+					                	<!-- <div ng-show="edit.about && user.name==loggedInUser.name">
+					                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
+					                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='About' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
+					                			</textarea>
+					                			
+					                			
+					                			<br>
+					                			<button type="submit" class="w2b">Save</button> 
+					                			<button type="button" ng-click="edit.about=false" class="w2b">Cancel</button>
+					                		</form>
+					                	</div> -->
+					                </span>
+								</span>
+				        		<span id="HOF" class="tab-pane fade in active">
+				        			
+
+				        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px 8.167%;" class="col-md-10">
+									<hr/>					
+									</content-item>
+				        		</span>
+								
+				        		
+
+									<!--<div class="tab-pane fade in active" id="upload_form2">
+						        		<div class="tab-content">
+							        		<span id="articlee_up" class="tab-pane fade">
+							        			<h3>Add your Article here</h3>					
+													
+													<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+							        		</span>
+							        		<span id="imagee_up" class="tab-pane fade">
+							        			<h3>Add your Image here</h3>
+																
+												<div class="form-group">
+													<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
+												</div>
+												<div class="form-group">	
+													<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
+												</div>
+												<div class="form-group">	
+													<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
+												</div>
+												<div class="form-group">
+													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+												    </tags-input>
+												</div>
+												<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+							        		</span>
+							        		<span id="videoe_up" class="tab-pane fade">
+													<h3>Add your Video here</h3>
+																		
+														<div class="form-group">
+																		
+															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
+														</div>
+														<div class="form-group">
+																			
+															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
+														</div>
+														<div class="form-group">
+																				
+															<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
+														</div>
+														<div class="form-group"> <!-- Put text area --
+															<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+								                			</textarea>													
+																		
+														</div>
+														<div>
+															<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+
+														    </tags-input>
+														</div>
+																	
+														<div>
+															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
+														    </tags-input>
+														</div>
+														<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
+							        		</span>
+							        	</div>
+						        	</div>-->
+						        	
+					        	
+				        	</div>
+						</div>
 						
 					</div>
 					

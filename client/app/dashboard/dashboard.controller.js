@@ -70,6 +70,18 @@ angular.module('myAppApp')
             $scope.redirect[index]="event";
         }
        }
+
+       $scope.splitIn3 = function (index){
+            index= index/3;
+            if (index === parseInt(index, 10))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+       }
      
   })
     ;

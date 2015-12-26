@@ -47,9 +47,9 @@ exports.unseenNotifs = function(req, res) {
 
 exports.hof = function(req, res) {
   
-
+  User.findById(req.params.id,function (err, user){
   Post.find({
-                '_id': { $in: req.user.hof}
+                '_id': { $in: user.hof}
                       },function (err, posts) {
               if(err) {console.log('hof'); return handleError(res, err); }
               })
@@ -64,6 +64,7 @@ exports.hof = function(req, res) {
                 console.log(posts);
                 return res.json(posts);
   });
+  })
 };
 
 
@@ -240,11 +241,18 @@ exports.showStageForUser = function(req, res) {
     console.log(x);
      var query = {};
   query['uploader.' + 'user'] = y;
+  Credit.find( { creditedUsers: { $elemMatch: { user:user_id } } },function (err, credits) {
+    if(err) { return handleError(res, err); }
+        var postId=[];
+          for(var i=0;i<credits.length;i++){
+            postId[i]=credits[i].postId;
+          }
+            console.log(postId);
   Post.find( { $and: [ query, {vedik: { $elemMatch: {vedik:stage_id} } }  ] },function (err, posts) {
     console.log(posts);
     if(err) { console.log(posts+"dfggf"); return handleError(res, err);
      }
-     console.log(posts+"dfggf")
+     console.log(posts+"dfggf");
     })
   .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
   
@@ -255,6 +263,7 @@ exports.showStageForUser = function(req, res) {
       
       return res.json(posts);
   })
+})
 };
 // Creates a new post in the DB.
 exports.create = function(req, res) {

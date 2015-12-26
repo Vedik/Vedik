@@ -4,7 +4,7 @@ angular.module('myAppApp')
   .controller('WelcomeUserCtrl', function ($scope,$http,$state) {
     $scope.message = 'Hello';
     $scope.user={};
-    $scope.user.galleryPic="http://www.goodnik.net/assets/default-7e3f08530293551aa4ff5fbd7c0995c5.png";
+    $scope.user.galleryPic="http://74211.com/wallpaper/picture_big/beautiful-scenery-wallpaper_1920x1080_2013-top-10-scenery-images-4.jpg";
     $scope.user.proPic="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
   	
   	$scope.loadTags = function(query) {
