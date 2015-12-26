@@ -177,7 +177,7 @@ angular.module('myAppApp')
         
     }
     
-    $scope.creditsRadio="team";$scope.creditsRadioB=true;
+    
 
     $scope.stageDiv = function (id){
 
@@ -191,6 +191,11 @@ angular.module('myAppApp')
     $scope.myFilter = function (item,y) { 
         return item === y; 
     };
+
+
+
+    $scope.creditsRadio="team";$scope.creditsRadioB=true;
+    
     $scope.creditType=[];
       $scope.creditUser=[];
     $scope.creditType[0]='';
@@ -343,8 +348,7 @@ angular.module('myAppApp')
          
         $('#editUser').modal('hide');
          
-        $('#for_blur').css('filter','blur(0px)');
-               
+      
        
         
         

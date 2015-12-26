@@ -230,10 +230,9 @@ angular.module('myAppApp')
 
     $scope.editClub = function (club){
       
-      $http.put('/api/clubs/'+id,{name:club.name,about:club.about,vedik:club.vedik,galleryPic:club.galleryPic}).success(function (response){
+      $http.put('/api/clubs/'+id,{name:club.name,about:club.about,vedik:club.vedik,galleryPic:club.galleryPic,proPic:club.proPic}).success(function (response){
         console.log('here2');
         $scope.club=response;
-        
         $scope.edit=false; 
         
       })

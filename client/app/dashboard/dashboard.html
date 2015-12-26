@@ -6,7 +6,9 @@
 
 <div ng-controller="DashboardCtrl" id="for_blur" >
 <div ng-include="'components/navbar/navbar.html'"></div>
-	
+<script>
+	$('#top_logo').addClass('top_logo_sec');
+</script>	
 
 <div class="thumbs_wrap" id="dashboard" >
 	
@@ -35,8 +37,8 @@
 
 
 
-		<div class="col-md-12" id="tagline_box">
-			<p class="colorlb">Because Everyone needs<br>a Stage</p>
+		<div class="col-md-12 valignOut" id="tagline_box">
+			<p class="colorlb">Because Everyone needs a Stage</p>
 		</div>
 		
 		
@@ -54,8 +56,8 @@
 
 							<span class="floatL" style="font-size:20px" ng-click="x()">IIT Madras' Vedik</span>
 							<ul class="nav nav-tabs floatL">
-							    <li class="btnbg rlmargin"><a data-toggle="tab" href="#booked_display">On Stage</a></li>
-							    <li class="btnbg rlmargin"><a data-toggle="tab" href="#stage">Latest</a></li>
+							    <li class="btnbg rlmargin"><a data-toggle="tab" href="#booked_display"><span class="glyphicon glyphicon-play-circle"></span> On Stage</a></li>
+							    <li class="btnbg rlmargin"><a data-toggle="tab" href="#stage"><span class="glyphicon glyphicon-th" ></span> Latest</a></li>
 							    
 							</ul>
 							<br/>		
@@ -71,10 +73,10 @@
 				<div>
 										
 					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4" style="padding:0px 20px 30px 0px;">
-						<div class="col-md-12" style="font-family: arial;letter-spacing: 0px;
-}" >
-							<div  >
-								<div class="list_heading col-md-12">Today's Events</div>
+						<div class="col-md-12 bgw" style="font-family: arial;letter-spacing: 0px;padding:20px;margin:0px 0px 20px 0px">
+
+							<div  class="thumbs_wrap box_shadow_dwn">
+								<div class="list_heading col-md-12"><span class="glyphicon glyphicon-th-list"> Today's Events</span></div>
 								<div  class="thumbs_wrap col-md-12 hide_scroll">
 									<div>
 									<a href="/{{redirect[$index]}}/{{tEvent._id}}" ng-repeat="tEvent in tEvents" ng-init="redirect(tEvent.subOnl,$index)">
@@ -84,12 +86,12 @@
 										 <span class="glyphicon glyphicon-map-marker" style="width:40%;text-overflow:ellipsis;overflow:hidden"> {{tEvent.location}} </span>
 										<span class="glyphicon glyphicon-time" style="width:60%;text-overflow:ellipsis;overflow:hidden"> {{tEvent.startDate}}<span ng-show="tEvents.endDate">-{{tEvent.endDate}}</span></span></div></button>
 									</a>
-									<a href="" ng-show="!tEvents[0]"><button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" >Sadly! No events Today</button></a>
+									<a href="" ng-show="!tEvents[0]"><button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" style="height:50px">Sadly! No events Today</button></a>
 									</div>
 								</div>
 								
 
-								<div class="list_heading col-md-12" >Upcoming Events</div>
+								<div class="list_heading col-md-12" ><span class="glyphicon glyphicon-th-list"> Upcoming Events</span></div>
 								<div class="thumbs_wrap col-md-12 hide_scroll">
 									<div>
 										<a href="/{{redirect[$index]}}/{{event._id}}" ng-repeat="event in events" ng-init="redirect(event.subOnl,$index)">
@@ -99,7 +101,7 @@
 											 <span class="glyphicon glyphicon-map-marker" style="width:40%;text-overflow:ellipsis;overflow:hidden"> {{event.location}} </span>
 											<span class="glyphicon glyphicon-time" style="width:60%;text-overflow:ellipsis;overflow:hidden"> {{event.startDate}}<span ng-show="events.endDate">-{{event.endDate}}</span></span></div></button>
 										</a>
-										<a href="" ng-show="!events[0]"><button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" >No upcoming events in near future</button></a>
+										<a href="" ng-show="!events[0]"><button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" style="height:50px">No upcoming events in near future</button></a>
 									</div>
 								</div>
 
@@ -122,12 +124,12 @@
 						</content-item>
 						</div>
 					</div>
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 0px 30px 20px ">
+					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 20px 30px 0px ">
 						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" index="$index">
 							
 						</content-item>
 					</div>	
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 0px 30px 20px ">
+					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 20px 30px 0px ">
 						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" index="$index">
 							
 						</content-item>
@@ -188,20 +190,15 @@
 			
 		</div>
 		
-		<div class="col-md-12" style="background:grey;height:200px">
+		<!-- <div class="col-md-12" style="background:grey;height:200px">
 				About<br/>
 				Team
-		</div>
-
+		</div> -->
+		<div ng-include="'components/footer/footer.html'"></div>
 		
 
 	</div>
-	</div>
-	<!-- to be ignored ;) to be implemented later
-	<p>{{user.updatedOn | date:'medium'}}</p>
-	<p>{{user.createdOn | date:'medium'}}</p>
-	testing -->
-
-	<!--To be put:: The recent videos uploaded and trending videos divs-->
+	
 </div>
+	
 	

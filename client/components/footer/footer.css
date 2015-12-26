@@ -1,0 +1,263 @@
+*   {
+    box-sizing:border-box;
+}
+body {
+            
+            position:relative;
+            min-height:100%;
+            top:0px;
+            margin:0px;
+            /*font-family:"verdane";*/
+           letter-spacing: 1px;
+         /*   background-image:  url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");*/
+            font-size: 12px;
+
+            }
+.centric    {
+    text-align:center;
+    
+    margin:0% auto;
+}
+#nav_fade{
+    width: 100%;
+    opacity: 0.5;
+    height:200px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+#top_logo {
+            height: 65px;            
+            width:100%;
+           
+            background-size:10px 100%;
+            box-sizing:border-box;
+            box-shaddow:0px 5px 10px BLACK;
+            position:fixed;
+            top:0px;
+            z-index: 1001;
+        }
+
+        .top_logo_sec {
+            height: 45px;            
+            width:100%;
+            background-color: rgb(33,33,33);
+            background-size:10px 100%;
+            box-sizing:border-box;
+            box-shaddow:0px 5px 10px BLACK;
+            position:fixed;
+            top:10px;
+            z-index: 10000;
+        }
+
+        #hidden {
+            height:65px;
+            position: relative;
+            background-color: rgb( 33, 33, 33 );
+            
+            box-shadow: 0px 1px 4px black;
+            /*background-color:#0a4b60;*/
+        }
+        #logo {
+            font-size:25px;
+            color: rgb( 1, 182, 255 ) !important;
+            text-decoration: none;
+          /*  font-family:'Gill Sans MT';*/
+            
+            display:inline;
+            padding:5px 30px;
+            font-family: logo;
+            letter-spacing: 0;
+            position: absolute;
+            right: 43.5%;
+        }
+        #logo a:visited{
+            color: rgb( 1, 182, 255 ) !important;
+            text-decoration: none;
+        }
+        #logo a:hover{
+            color: rgb( 255,255,255 ) !important;
+            text-decoration: none;
+        }
+        #search {
+            float:right;
+            padding:20px 50px;
+            position: relative;
+            
+            
+        }
+        #search input   {
+            background:ao white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 17px 5px;
+            background-repeat: no-repeat;
+            padding: 4px 10px 4px 25px;
+        }
+        #search_res {
+            background: rgba(255,255,255,0.8);
+        }
+        #indiv_res:hover   {
+            background: #F7EDFF;
+        }
+        #indiv_res  {
+            border:;
+             
+            padding:5px 10px;
+        }
+        #nav    {
+            background-color:#;
+            font-size:12px;
+            float:left;
+            margin: 0px 45px 0px 0px;
+            padding:25px 5px 15px 50px;
+            border-radius: 0px;
+            position: relative;
+            height: 55px;
+            letter-spacing: 1.5px;
+        }
+        ul.drop_nav {
+            list-style-type:none;
+            margin:0px;
+            padding:2px;
+            background-color:;
+        }
+        span.nav  {
+            float:right;
+            padding:15px 10px;
+        }
+        span:hover.nav  {
+            background-color:white;
+        }
+        a:link    {
+            text-decoration:none;
+
+        }
+        #indiv_res a:hover   {
+            padding:15.5px 0px;
+            color: #2a6496;
+        }
+        a:visited#_logo    {
+                color:white;
+        }
+        a:visited#nav   {
+            color:black;
+        }
+        #stage_cntnt {
+            box-sizing:border-box;
+            margin:0px auto;
+            width:1000px;
+
+        }
+        .dropdown   {
+            margin:auto;
+        }
+.drop-nav {
+  position: absolute;
+  display: none;
+}
+li#nav_li  {
+padding:6px 20px;
+    background-color:#00001f;
+    }
+a:link.dark, a:visited.dark   {
+    color:white;
+    font-size:14px;
+}
+a:hover.dark, a:active.dark   {
+    color:black;
+    font-size:14px;
+}
+li:hover#nav_li, li:active#nav_li{
+    background-color:#ffde00;
+    color:black;
+}
+#search .form-control   {
+    width:400px;
+    height:25px;
+    padding:4px 25px;
+}
+#caretid    {
+    margin:20px 0px;
+    padding:0px 10px;
+    border:0px;
+    color: white;
+    cursor: pointer;
+    background-color: none;
+
+}
+.dropdown-menu  {
+    padding:0px;
+    background: rgba(255,255,255,0.8);
+
+}
+#notifDropDown {
+    width: 575px;
+    border: 0px;
+    background-color: white;
+    z-index: 10000;
+    position: fixed;
+    left: 0px;
+    top: 65px;
+    box-shadow: 1px 1px 5px grey;    
+}
+#notifDropDown .md-avatar{
+    width: 25px;
+    height: auto;
+}
+#notifDropDown> li >a {
+    padding:  10px;
+}
+#notifDropDown> li a md-list-item {
+    padding:  0px;
+}
+#notifDropDown li div {
+    padding:  10px;
+    color: white;
+    background-color: #212121;
+}
+#notifDropDown #img_name{
+    color: rgba(0,0,0,0.8);
+    width: 100%;
+}
+.nav-stacked > li + li{
+    margin: 0px;
+}
+.nav-pills > li > a{
+    border-radius: 0px;
+}
+#notifMenu {
+    width: 145px;
+    float: left;
+    
+    padding: 0px;
+
+}
+
+
+#notifMenu ul   {
+    list-style: none;
+    text-align: left;
+    padding: 0px 10px;
+}
+#notifMenu li   {
+    padding: 0px;
+
+}
+#notifs {
+    width: 430px;
+    float: left;
+    padding: 4px;
+    max-height:500px;
+    overflow-y: auto;
+    overflow-x:hidden;  
+}
+
+#logo img{
+    
+
+}
+@font-face {
+    font-family: logo;
+    src: url('assets/images/GreatVibes-Regular.woff');
+}
+

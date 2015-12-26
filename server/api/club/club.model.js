@@ -8,6 +8,7 @@ var ClubSchema = new Schema({
   posts:[{post:{type:Schema.Types.ObjectId, ref:"Post"}}],
   galleryPic:String,
   about:String,
+  proPic: String,
   createdOn:{type:Date,default:Date.now()},
   admin:[{type:Schema.Types.ObjectId, ref:"User"}],
   subscribed_users:[{user:{type:Schema.Types.ObjectId, ref:"User"}}],

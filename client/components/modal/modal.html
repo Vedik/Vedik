@@ -1,4 +1,4 @@
-<!--***************************Edit Gallerypic ********************************-->
+<!--***************************Edit User Profile ********************************-->
 		<!-- Modal -->
   <div class="modal img_modal fade col-md-7" id="editUser" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">
@@ -45,14 +45,14 @@
     </div>
 <!--***************************Edit Gallerypic Closes ********************************-->
 
-
+<!-- 
  <div class="modal img_modal fade" id="dp_modal" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">
     
       <!-- Modal content-->
      	
         
-        <div class="modal-body img_modal-body centric glassy" id="editModal">
+        <!-- <div class="modal-body img_modal-body centric glassy" id="editModal">
 
         	<p>
         		New Profile Pic
@@ -73,7 +73,7 @@
         
       </div>
       
-    </div>
+    </div> --> 
 
 
 <!--********************* booking date****************************************-->
@@ -211,13 +211,16 @@
   </div>
 <!--**************************** Edit club data**************************************-->
 
-<div class="modal img_modal fade" id="editClub" role="dialog">
+<div class="modal img_modal fade col-md-8" id="editClub" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">
     
       <!-- Modal content-->
-     
+     	<div class="modal-header bgw">
+	       <button type="button" class="close colorb" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">X</button>
+	       <h3 class="modal-title colorb">Ola!</h3>
+	    </div>
         
-        <div class="modal-body img_modal-body glassy_thick col-md-10" style="margin:50px 8.3%;border:2px solid white" ng-if="club">
+        <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw"  ng-if="club">
         	<p>
         		<h3 class="centric" >Edit Details</h2>
         		<button type="button" class="close img_close" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">&times;</button>
@@ -236,6 +239,10 @@
 	     			      <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 					    </tags-input>
 					</div>
+					<div class="form-group">
+		          		<input type="text" ng-model="club.proPic" placeholder="Club Profile Pic" class="form-control">
+		          		<img src="{{club.proPic}}"  id="dp" style="margin:10px 35%">
+		          	</div>
 					<br/>	         	
 		         
 		    	</div>
@@ -245,7 +252,7 @@
 		          	</div>
 		          	<img src="{{club.galleryPic}}" width="100%" height="auto">
 			    </div>
-			    <button type="submit" class="b2w">Save</button>
+			    <button type="submit" class="w2g col-md-12">Save</button>
 		    </form>
         </div>
       

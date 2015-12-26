@@ -320,7 +320,7 @@ angular.module('myAppApp')
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
-    var eventClubTemplate ='<div class="post_div thumbs_wrap col-md-12">'+
+    var imageBTemplate ='<div class="post_div thumbs_wrap col-md-12">'+
                                     '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">'+
                                      '  <img src="{{content.imageId.picUrl}}" id="img_post">'+
                                       '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>'+
@@ -372,7 +372,7 @@ angular.module('myAppApp')
                                     
                                 
                                 '</div>';
-    var articleClubTemplate ='<div>'   +
+    var articleBTemplate ='<div>'   +
                                 '<div class="post_div col-md-12">'  +
                                     '<div class="text_type_post" id="article">' +
                                         '<a href="#">'  +
@@ -393,7 +393,7 @@ angular.module('myAppApp')
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
-    var postBTemplate = '<div>'   +
+    var postAnnTemplate = '<div>'   +
                                 '<div class="post_div" style="width:{{width}}%">'  +
                                     '<div class="text_type_post" id="article">' +
                                         '<a href="#">'  +
@@ -426,7 +426,7 @@ angular.module('myAppApp')
                                     '</span>'   +                                    
                                 '</div>'    +
                             '</div>';
-    var imageBTemplate = '<div>'+
+    var imageAnnTemplate = '<div>'+
                             '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
                                 '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
                                     '<img src="{{content.imageId.picUrl}}" id="img_post">'+
@@ -463,7 +463,7 @@ angular.module('myAppApp')
                                     '</span>'+
                             '</div>'+                            
                         '</div>';
-    var videoBTemplate = '<div  ng-click=blur()>' +
+    var videoAnnTemplate = '<div  ng-click=blur()>' +
                             '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
                                '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                     '<img src="{{content.videoId.posterurl}}" id="img_post">'+
@@ -538,7 +538,7 @@ angular.module('myAppApp')
         var template = '';
 
         switch(contentType) {
-            case 12:
+            case 12:                        //User posts
                 template = imageTemplate;
                 break;
             case 13:
@@ -547,33 +547,30 @@ angular.module('myAppApp')
             case 11:
                 template = articleTemplate;
                 break;
-            case 21:
-                template = articleClubTemplate;
+            case 21:                        //club annouce
+                template = articleAnnTemplate;
                 break;
             case 22:
-                template = imageTemplate;
+                template = imageAnnTemplate;
                 break;
             case 23:
-                template = videoTemplate;
+                template = videoAnnTemplate;
                 break;
-            case 42:
-                template = eventClubTemplate;
-                break;
-            case 31:
-                template = postBTemplate;
+            case 31:                        //event annouce
+                template = postAnnTemplate;
                 break;
             case 32:
-                template = imageBTemplate;
+                template = imageAnnTemplate;
                 break;
             case 33:
-                template = videoBTemplate;
-                break;  
+                template = videoAnnTemplate;
+                break; 
+            case 42:
+                template = imageBTemplate;
+                break; 
             case 50:
                 template=winningTemplate;
-                break;          
-            case 71:
-                template = articleClubTemplate;
-                break;
+                break; 
         }
         
         return template;
@@ -1110,15 +1107,6 @@ angular.module('myAppApp')
                 break;
             case 23:
                 template = videoATemplate;
-                break;
-            case 21:
-                template = articleEATemplate;
-                break;
-            case 22:
-                template = imageEATemplate;
-                break;
-            case 23:
-                template = videoEATemplate;
                 break;
             case 50:
                 template=winningTemplate;

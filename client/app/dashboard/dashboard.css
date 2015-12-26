@@ -63,7 +63,7 @@
         }
         #tagline_box{
             height: 150px;
-            background-color: white;
+            background-image: url("/assets/images/blueDots.jpg");
             color: grey;
             font-family: "Times new roman";
             padding: 40px 9.5%;

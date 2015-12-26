@@ -10,7 +10,7 @@ var CreditSchema = new Schema({
   //in his profile, use of refereences here??
   	postId:{type:Schema.Types.ObjectId, ref:"Post"},
     credit:{type:Schema.Types.ObjectId, ref:"CreditDet"},
-    creditedUsers:[{user:{type:Schema.Types.ObjectId, ref:"User"}}],
+    creditedUsers:[{user:{type:Schema.Types.ObjectId, ref:"User"},club:{type:Schema.Types.ObjectId, ref:"Club"}}],
 });
 
 module.exports = mongoose.model('Credit', CreditSchema);

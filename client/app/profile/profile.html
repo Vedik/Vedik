@@ -15,7 +15,7 @@
             		
             		<div id="pro_pic_wrapper">
             			<div >
-	        				<img src="{{user.galleryPic}}" style="width:100%;height:100%;z-index:0;position:relative;opacity:0.4" alt="" id="gal_pic" >
+	        				<img src="{{user.galleryPic}}" style="width:100%;height:100%;z-index:0;position:relative;opacity:0.6" alt="" id="gal_pic" >
 	        				
 	        			</div>
 	           				
@@ -40,7 +40,7 @@
 			                  });
 			            </script>
 			            <div id="user_profile">
-			            	<div class="thumbs_wrap col-md-3">
+			            	<div class="thumbs_wrap col-md-3 valignOut">
 			            		<img src="{{user.proPic}}"  id="dp">
 
 			            		<!-- <div id="dp_edit" data-toggle="modal" data-target="#dp_modal" onclick="document.getElementById('for_blur').style.filter = 'blur(5px)'" ng-show="user.name==loggedInUser.name">
@@ -49,12 +49,12 @@
 			            			</u></a>
 			            		</div> -->
 			            	</div>
-		            		<div  class="col-md-6" >					        
+		            		<div  class="col-md-6 valignOut" >					        
 					                
 					                	<p   id="pro_name">
 					                		{{user.name}}'s
-					                		<br/>
-					                		<span style="font-size:12px " class="colorw" >R 12,231</span>
+					                		
+					                		
 					                	</p>
 					                	<!-- <div ng-show="edit.name && user.name==loggedInUser.name">
 					                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
@@ -66,7 +66,7 @@
 					                	</div> -->
 					            
 				        	</div>
-				        	<div class="col-md-3" id="vedik_pro"> Vedik</div>
+				        	<div class="col-md-3 " id="vedik_pro"> Vedik</div>
 
 				        	<div id="infodiv" class="col-md-12">
 
@@ -236,72 +236,7 @@
 								
 				        		
 
-									<!--<div class="tab-pane fade in active" id="upload_form2">
-						        		<div class="tab-content">
-							        		<span id="articlee_up" class="tab-pane fade">
-							        			<h3>Add your Article here</h3>					
-													
-													<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-							        		</span>
-							        		<span id="imagee_up" class="tab-pane fade">
-							        			<h3>Add your Image here</h3>
-																
-												<div class="form-group">
-													<input type="text" class="form-control upld_form" ng-model="form.imgName" placeholder="Image Name">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control upld_form" ng-model="form.description" placeholder="Description">
-												</div>
-												<div class="form-group">	
-													<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
-												</div>
-												<div class="form-group">	
-													<input type="text" class="form-control upld_form" ng-model="form.tags" placeholder="Tag a category" >
-												</div>
-												<div class="form-group">
-													<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-												        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-												    </tags-input>
-												</div>
-												<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-							        		</span>
-							        		<span id="videoe_up" class="tab-pane fade">
-													<h3>Add your Video here</h3>
-																		
-														<div class="form-group">
-																		
-															<input type="text" class="form-control upld_form" ng-model="form.vidName" placeholder="Name of Video">
-														</div>
-														<div class="form-group">
-																			
-															<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
-														</div>
-														<div class="form-group">
-																				
-															<input type="text" class="form-control upld_form" ng-model="form.posterUrl" placeholder="Poster Url">
-														</div>
-														<div class="form-group"> <!-- Put text area --
-															<textarea class='autoExpand form-control' rows='3' data-min-rows='3' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
-								                			</textarea>													
-																		
-														</div>
-														<div>
-															<tags-input ng-model="form.genres" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-
-														    </tags-input>
-														</div>
-																	
-														<div>
-															<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
-														        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
-														    </tags-input>
-														</div>
-														<a href="#credits2" data-toggle="tab" class="b2w">Next</a>
-							        		</span>
-							        	</div>
-						        	</div>-->
-						        	
+									      	
 					        	
 				        	</div>
 						</div>

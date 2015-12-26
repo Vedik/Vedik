@@ -114,11 +114,12 @@ exports.editProfile = function (req, res) {
     club.name= req.body.name;
     club.galleryPic=req.body.galleryPic;
     club.about=req.body.about;
+    club.proPic=req.body.proPic;
     
     
     club.save(function (err) {
       if (err) { return handleError(res, err); }
-      
+        console.log(club);
        res.json(200, club);
 
     });
