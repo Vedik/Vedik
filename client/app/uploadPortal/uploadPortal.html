@@ -94,10 +94,10 @@
 								<md-input-container>
 							        <label>Upload As</label>
 							        <md-select ng-model="creditTo">
-							           <md-optgroup >
+							           <md-optgroup ng-click="form.club=false">
 							            <md-option ng-value="user()._id" style="background: white;">Yourself</md-option>
-							          </md-optgroup>
-							          <md-optgroup label="Clubs">
+							          </md-optgroup> 
+							          <md-optgroup label="Clubs" ng-click="form.club=true">
 							            <md-option ng-value="club" ng-repeat="club in user().asAdmin" style="background: white;">{{club}}</md-option>
 							          </md-optgroup>
 							        </md-select>
@@ -115,7 +115,7 @@
 								
 								<md-input-container>
 						              <label>Team Name</label>
-						              <input ng-model="user.team"  type="text" name="team" >
+						              <input ng-model="form.team"  type="text" name="team" >
 						              <span class="sizeten colorg">We need a team name to represent the work</span>
 					            </md-input-container>    
 								<table>
@@ -163,7 +163,7 @@
 															    			
 										</td>
 										<td style="width:60%;vertical-align: bottom;">
-											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag Friends">
+											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag Friends" required>
 												<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
 					      						</auto-complete>
 					    					</tags-input>

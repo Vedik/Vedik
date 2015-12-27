@@ -7,6 +7,7 @@ body {
             min-height:100%;
             top:0px;
             margin:0px;
+
             /*font-family:"verdane";*/
            letter-spacing: 1px;
          /*   background-image:  url("http://10steps.sg/wp-content/uploads//2012/11/White-christmas-light-background.jpg");*/
@@ -31,13 +32,14 @@ body {
 #top_logo {
             height: 65px;            
             width:100%;
-           
+            font-family: Montserrat;
             background-size:10px 100%;
             box-sizing:border-box;
             box-shaddow:0px 5px 10px BLACK;
             position:fixed;
             top:0px;
             z-index: 1001;
+            letter-spacing: 0px;
         }
 
         .top_logo_sec {
@@ -55,7 +57,7 @@ body {
         #hidden {
             height:65px;
             position: relative;
-            background-color: rgb( 33, 33, 33 );
+            background-color:#00171f;
             
             box-shadow: 0px 1px 4px black;
             /*background-color:#0a4b60;*/
@@ -113,7 +115,6 @@ body {
             border-radius: 0px;
             position: relative;
             height: 55px;
-            letter-spacing: 1.5px;
         }
         ul.drop_nav {
             list-style-type:none;

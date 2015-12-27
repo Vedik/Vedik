@@ -164,7 +164,7 @@
 										<div class="tab-content" >
 											<div ng-repeat="item in posts | orderBy:'-createdOn'" class="thumbs_wrap col-md-12 tab-pane fade in active" ng-init="getCredit($index, item._id)">
 												<div style="padding: 0px 10px" class="col-md-12">
-													<div class="bgw col-md-12 colorb" style="padding: 10px"> 
+													<div class="bgw col-md-12 colorb box_shadow_dwn" style="padding: 10px"> 
 														<img src="{{user.proPic}}" width="auto" height="20px" id="dpsm">  {{user.name}} as 
 														<span ng-repeat="credit in credits[$index]">{{credit.credit.creditDetail}} </span>
 													</div>
@@ -196,7 +196,7 @@
 						
 					</div>
 					<div class="col-md-6 " style="padding:20px">
-						<div id="stages_list" class="box_shadow_up thumbs_wrap bgw">
+						<div id="stages_list" class="box_shadow_up thumbs_wrap bgw" style="background:url('assets/images/blueDots.jpg')">
 		            		<ul class="nav nav-tabs">
 		            			<li ><a data-toggle="tab" href="#about_user">About</a></li> 
 		            			<li class="active"><a data-toggle="tab" href="#HOF"> Hall of Fame</a></li>  

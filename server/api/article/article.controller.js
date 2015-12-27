@@ -60,7 +60,7 @@ exports.create = function(req, res) {
           var newPost = new Post({
             articleId: newArticle._id,
             tags:req.body.tags,
-            type:11,
+            
             uploader:{user:req.user._id},
             view_count:0,
             ratings:[],
@@ -72,29 +72,84 @@ exports.create = function(req, res) {
           {
             newPost.vedik.push({vedik:b[i]});
           }
+          if(req.body.creditsRadio=='me' && !req.body.club){
+            newPost.type=111;
+          }
+          else if(req.body.creditsRadio=='me' && req.body.club){
+            newPost.type=112;
+            newPost.uploaderClub=req.body.team._id;
+          }
+          else if(req.body.creditsRadio=='team'){
+            newPost.type=113;
+            newPost.team=req.body.team;
+          }
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else 
               {
-                for(var i=0;i<req.body.creditType.length;i++)
+                if(req.body.creditsRadio=='me' && !req.body.club)
                 {
-                  var users=req.body.creditUser[i];
-                  console.log(users);
-                  var newCredit =  new Credit({
-                    postId:newPost._id,
-                    credit:req.body.creditType[i]._id,
-                    creditedUsers:[]
-                  });
+                  for(var i=0;i<req.body.credits.length;i++)
+                  {
+                    var newCredit =  new Credit({
+                      postId:newPost._id,
+                      credit:req.body.credits[i]._id,
+                      creditedUsers:[]
+                    });
 
-                  for(var j=0;j<req.body.creditUser[i].length;j++){
-                    newCredit.creditedUsers.push({user:users[j]._id});
+                    
+                      newCredit.creditedUsers.push({user:req.body.team});
+                    
+                    newCredit.save(function(err){
+                    if(err) return handleError(res,err);
+                    console.log(newCredit);
+                  })
+
                   }
-                  newCredit.save(function(err){
-                  if(err) return handleError(res,err);
-                  console.log('Credit added');
-                })
-
                 }
+                if(req.body.creditsRadio=='me' && req.body.club)
+                {
+                  for(var i=0;i<req.body.credits.length;i++)
+                  {
+                    var newCredit =  new Credit({
+                      postId:newPost._id,
+                      credit:req.body.credits[i]._id,
+                      creditedClubs:[]
+                    });
+
+                    
+                      newCredit.creditedClubs.push({club:req.body.team._id});
+                    
+                    newCredit.save(function(err){
+                    if(err) return handleError(res,err);
+                    console.log(newCredit);
+                  })
+
+                  }
+                }
+                else if(req.body.creditsRadio=='team')
+                {
+                    for(var i=0;i<req.body.creditType.length;i++)
+                    {
+                      var users=req.body.creditUser[i];
+                      console.log(users);
+                      var newCredit =  new Credit({
+                        postId:newPost._id,
+                        credit:req.body.creditType[i]._id,
+                        creditedUsers:[]
+                      });
+
+                      for(var j=0;j<req.body.creditUser[i].length;j++){
+                        newCredit.creditedUsers.push({user:users[j]._id});
+                      }
+                      newCredit.save(function(err){
+                      if(err) return handleError(res,err);
+                      console.log('Credit added');
+                    })
+
+                    }
+                }
+                
 
                 console.log('post created');
              
@@ -289,16 +344,22 @@ exports.eventPost = function(req, res) {
          
           var newPost = new Post({
             articleId: newArticle._id,            
-            type:31,
+            
             view_count:0,
             uploader:{user:req.user._id},
             ratings:[],
             like:[],
             createdOn:Date.now(),
             uploaderClub:req.params.id,
-            eventId:req.body.eventId
+            
           });
-          
+          if(!req.body.club){
+            newPost.eventId=req.body.eventId;
+            newPost.type=31;
+          }
+          else if(req.body.club){
+            newPost.type=21;
+          }
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else 
@@ -357,7 +418,7 @@ exports.eventPost = function(req, res) {
                 
            //      return res.json(post);
            //  })
-          
+            console.log(newPost);
            return res.json(200,newPost);
         }
     

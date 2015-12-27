@@ -42,7 +42,7 @@ exports.create = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.json(201, video);
   });*/
-  var type=13;
+
  
 
   var c=req.body.vedik;
@@ -72,7 +72,6 @@ console.log(newVideo);
           console.log('12');
           var newPost = new Post({
             videoId: newVideo._id,
-            type:type,
             tags:req.body.genres,
             uploader:{user:req.user._id},   //club:req.params.id},
             ratings:[],
@@ -86,30 +85,84 @@ console.log(newVideo);
           {
             newPost.vedik.push({vedik:b[i]});
           }
+          if(req.body.creditsRadio=='me' && !req.body.club){
+            newPost.type=131;
+          }
+          else if(req.body.creditsRadio=='me' && req.body.club){
+            newPost.type=132;
+            newPost.uploaderClub=req.body.team._id;
+          }
+          else if(req.body.creditsRadio=='team'){
+            newPost.type=133;
+            newPost.team=req.body.team;
+          }
           console.log('1');
           newPost.save(function(err){
             if(err) return handleError(res,err);
             else 
               {
 
-                for(var i=0;i<req.body.creditType.length;i++)
+                if(req.body.creditsRadio=='me' && !req.body.club)
                 {
-                  var users=req.body.creditUser[i];
-                  console.log(users);
-                  var newCredit =  new Credit({
-                    postId:newPost._id,
-                    credit:req.body.creditType[i]._id,
-                    creditedUsers:[]
-                  });
+                  for(var i=0;i<req.body.credits.length;i++)
+                  {
+                    var newCredit =  new Credit({
+                      postId:newPost._id,
+                      credit:req.body.credits[i]._id,
+                      creditedUsers:[]
+                    });
 
-                  for(var j=0;j<req.body.creditUser[i].length;j++){
-                    newCredit.creditedUsers.push({user:users[j]._id});
+                    
+                      newCredit.creditedUsers.push({user:req.body.team});
+                    
+                    newCredit.save(function(err){
+                    if(err) return handleError(res,err);
+                    console.log(newCredit);
+                  })
+
                   }
-                  newCredit.save(function(err){
-                  if(err) return handleError(res,err);
-                  console.log('Credit added');
-                })
+                }
+                else if(req.body.creditsRadio=='me' && req.body.club)
+                {
+                  for(var i=0;i<req.body.credits.length;i++)
+                  {
+                    var newCredit =  new Credit({
+                      postId:newPost._id,
+                      credit:req.body.credits[i]._id,
+                      creditedClubs:[]
+                    });
 
+                    
+                      newCredit.creditedClubs.push({club:req.body.team._id});
+                    
+                    newCredit.save(function(err){
+                    if(err) return handleError(res,err);
+                    console.log(newCredit);
+                  })
+
+                  }
+                }
+                else if(req.body.creditsRadio=='team')
+                {
+                    for(var i=0;i<req.body.creditType.length;i++)
+                    {
+                      var users=req.body.creditUser[i];
+                      console.log(users);
+                      var newCredit =  new Credit({
+                        postId:newPost._id,
+                        credit:req.body.creditType[i]._id,
+                        creditedUsers:[]
+                      });
+
+                      for(var j=0;j<req.body.creditUser[i].length;j++){
+                        newCredit.creditedUsers.push({user:users[j]._id});
+                      }
+                      newCredit.save(function(err){
+                      if(err) return handleError(res,err);
+                      console.log('Credit added');
+                    })
+
+                    }
                 }
 
 
@@ -311,13 +364,18 @@ console.log(newvideo);
           console.log('12');
           var newPost = new Post({
             videoId: newvideo._id,
-            type:33,
             uploader:{user:req.user._id}, 
             like:[],
             createdOn:Date.now(),
             uploaderClub:req.params.id,
-            eventId:req.body.eventId
           });
+          if(!req.body.club){
+            newPost.eventId=req.body.eventId;
+            newPost.type=33;
+          }
+          else if(req.body.club){
+            newPost.type=23;
+          }
           
          
           console.log('1');

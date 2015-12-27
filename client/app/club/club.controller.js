@@ -48,7 +48,7 @@ angular.module('myAppApp')
   
     $http.get('/api/posts/club/'+id).success(function (response){
         console.log(response);
-        $scope.posts = response;
+        $scope.posts = response.posts;
         console.log($scope.posts);
     });
 
@@ -100,6 +100,56 @@ angular.module('myAppApp')
 
    $scope.type=21;
 
+
+   $scope.postSubmit = function (){
+      console.log('sdaf');
+       $http.post('/api/articles/event/'+id,{articleName:$scope.form.name,club:true,description:$scope.form.description}).success(function (response){
+        console.log(response);
+        response.articleId={articleName:$scope.form.name,description:$scope.form.description};
+        response.uploader={user:{name:$scope.user().name}};
+        $scope.form={};
+        
+        
+        console.log(response);
+        $scope.posts.push(response);
+        console.log($scope.posts);
+
+     //    $mdToast.show(
+     //   $mdToast.simple()
+     //    .textContent('Announcement Made!')
+     //    .hideDelay(3000)
+      // );
+       
+      
+        });
+      
+          
+   };
+
+   $scope.imageSubmit = function (){
+      $http.post('/api/images/event/'+id,{imgName:$scope.form.name,description:$scope.form.description,picUrl:$scope.form.picUrl,club:true}).success(function (response){
+            console.log(response);
+            $scope.form={};
+      });
+    };
+   $scope.videoSubmit = function(){
+      $http.post('/api/videos/event/'+id,{vidname:$scope.form.name,description:$scope.form.description,posterurl:$scope.form.posterUrl,vidurl:$scope.form.vidUrl,club:true}).success(function (response){
+            console.log(response);
+            $scope.form={};
+      });
+   };
+
+   $scope.redirect=function(subOnl,index){
+        if(subOnl){
+            $scope.redirect[index]="competition";
+        }
+        else
+        {
+            $scope.redirect[index]="event";
+        }
+       }
+
+
    $scope.setType= function(type){
       if(type==1){
           $scope.type=21;
@@ -116,28 +166,28 @@ angular.module('myAppApp')
       
    }
 
-   $scope.postSubmit = function (form){
-      if($scope.type==21){
-           $http.post('/api/articles/'+id,{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
-            console.log(response);
-            $scope.form={};
-        })
-      }
-      else if($scope.type==22){
-           $http.post('/api/images/'+id,{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
-            console.log(response);
-            $scope.form={};
-            console.log(form.imgName);
-        })
-      }
-      else if($scope.type==23){
-          $http.post('/api/videos/'+id,{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
-            console.log(response);
-            $scope.form={};
-        })
-      }
+   // $scope.postSubmit = function (form){
+   //    if($scope.type==21){
+   //         $http.post('/api/articles/'+id,{articleName:$scope.form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+   //          console.log(response);
+   //          $scope.form={};
+   //      })
+   //    }
+   //    else if($scope.type==22){
+   //         $http.post('/api/images/'+id,{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+   //          console.log(response);
+   //          $scope.form={};
+   //          console.log(form.imgName);
+   //      })
+   //    }
+   //    else if($scope.type==23){
+   //        $http.post('/api/videos/'+id,{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,creditType:$scope.creditType,creditUser:$scope.creditUser}).success(function (response){
+   //          console.log(response);
+   //          $scope.form={};
+   //      })
+   //    }
           
-   };
+   // };
 
   
 

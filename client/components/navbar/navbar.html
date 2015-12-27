@@ -1,9 +1,11 @@
 <div ng-include="'components/jqscripts/jqscripts.html'"></div>
-<div id="top_logo" ng-controller="NavbarCtrl">
+<nav class = "navbar " role = "navigation" id="top_logo" ng-controller="NavbarCtrl">
+  <div >
 
     
 
-    <div id="logo">
+    <div id="logo" class = "navbar-header">
+
         <a href="/" id="_logo"><span><img src="/assets/images/logo3.png" width="120px" alt="Vedik Logo"></span></a>
     </div>
     
@@ -44,27 +46,25 @@
             </div>
         </div>
     </div>
-    <div id="nav">
-       
-        <div class="dropdown" ng-if="isLoggedIn()">
-            <span class="dropdown-toggle" >
-                <span id="caretid">                    
-                      
-                    <span class=" glyphicon glyphicon-th-large" ng-click="toggleRight()"></span>                    
-                </span>
-            </span>
-            <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>       
-         </div>
-    </div>
+    
 
-         <div class="container">                                         
-            <div style="position:relative;width:400px;margin:0px 20px">
-                
+         <div >
+
+            <div style="position:relative;width:40%;margin:0px 0px 0px 50px">
+                <div class="dropdown" ng-if="isLoggedIn()" style="margin:18px 30px;padding:6px">
+                  <span class="dropdown-toggle" >
+                      <span id="caretid">                    
+                            
+                          <span class=" glyphicon glyphicon-th-large" ng-click="toggleRight()"></span>                    
+                      </span>
+                  </span>
+                  <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>       
+               </div> 
                 <button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  ng-click="showNotif=!showNotif">
                   <span class="glyphicon glyphicon-bell" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
                 </button>
                 <a href="/uploadPortal" style="color: white;"><button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  >
-                  <span style="font-size:12px;padding:2px">Upload</span></button></a>
+                  <span style="font-size:12px;padding:2px">UPLOAD</span></button></a>
                 
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
                     
@@ -77,7 +77,7 @@
                               <md-list-item style="padding:0px">
                                 <img alt="img" ng-src="{{friend.proPic }}" class="md-avatar" />
                                 <p>{{friend.name }}</p>
-                              
+                              </md-list-item>
                             </a></li>
                             
                              <li ><div class="colorb">Clubs</div></li>
@@ -110,7 +110,8 @@
                     </div>
             </div>
           </div>
-</div>
+  </div>
+</nav>
 
             <div  layout="column"  class="col-md-12" ng-controller="NavbarCtrl">
                 <section layout="row" flex>
@@ -147,7 +148,4 @@
                 </section>
               </div>
 
-   
-</div>
-    
     

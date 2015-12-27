@@ -175,19 +175,30 @@ exports.showForClub = function(req, res) {
   console.log(req.params.id+'jbbhgf');
    var club_id = req.params.id;
   var query = {};
-  
-  Post.find({$and : [{uploaderClub:club_id},{$or : [{type:21},{type:22},{type:23},{type:30}]}]},function (err, posts) {
+   query['uploaderClub'] = club_id;
+  Credit.find( { creditedClubs: { $elemMatch: { club:club_id } } },function (err, credits) {
     if(err) { return handleError(res, err); }
-    })
-  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
-  
-  .exec(function (err, posts){
-      if (err) return handleError(err);
-     
-      console.log(posts);
+        var postId=[];
+          for(var i=0;i<credits.length;i++){
+            postId[i]=credits[i].postId;
+          }
+            console.log(postId);
+    
+  Post.find({
+                '_id': { $in: postId}
+                      },function (err, posts) {
+              if(err) {console.log('dddddddd'); return handleError(res, err); }
+              })
+      .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId comments.comment uploaderClub')
       
-      return res.json(posts);
-  })
+      .exec(function (err, posts){
+          if (err) return handleError(err);
+     
+          console.log('er12');
+          
+          return res.json({posts:posts,credits:credits});
+      })
+    })
 };
 
 exports.showForEvent = function(req, res) {
