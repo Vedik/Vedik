@@ -36,9 +36,9 @@
 			}
 	#img_post 	{
 		position: absolute;
-		
+		top:0px;
+		left: 0px;
 		width: 100%;
-		height: auto;
 		 transition: all 0.3s ease 0s;
 		
 	}
@@ -60,11 +60,9 @@
 		
 	
 	.post_div	{
-		position: relative;
-		padding: 0px 10px 20px;
+		padding: 0px 15px 20px;
+		display: inline-block;
 		
-		/*margin: 30px 0px;*/
-		float: left;
 					
 	}
 	

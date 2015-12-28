@@ -214,12 +214,12 @@ angular.module('myAppApp')
 })
 .directive('contentItem', function ($compile, $http,$modal) {
     var imageTemplate = '<div>'+
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
-                                        '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                            '<div class="post_div  " style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
+                                    '<div class="  thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                        '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -242,23 +242,23 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+                            
                         '</div>';
     var videoTemplate=  '<div  ng-click=blur()>' +
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                   '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
-                                        '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+                            '<div class="post_div  " style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
+                                   '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                        '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -284,26 +284,26 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+
                         '</div>';
     var articleTemplate = '<div>'   +
                                 '<div class="post_div" style="width:{{width}}%">'  +
-                                    '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
+                                    '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
-                                            '<a href="#">'  +
+                                            '<a href="">'  +
                                                 '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
                                             '</a>'  +
                                             '</br>{{content.articleId.content}}</br></br>'  +
                                             '<div>' +
-                                                '<span>by<a href="#"> {{content.uploader.user.name}}</a></span>'  +                                            
+                                                '<span>by<a href=""> {{content.uploader.user.name}}</a></span>'  +                                            
                                             '</div>'    +
                                         '</div>'    +
                                         '<span id="post_time">'+
@@ -315,24 +315,24 @@ angular.module('myAppApp')
                                                 '<div class="dropdown">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
-                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                         '</span>'   +   
                                     '</div>'+                                 
                                 '</div>'    +
                             '</div>';
     var imageClubTemplate = '<div>'+
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
-                                        '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                            '<div class="post_div" style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn col-md-12">'+
+                                    '<div class=" thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                        '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative" >'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post"  >'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -355,23 +355,23 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+                            
                         '</div>';
-    var videoClubTemplate=  '<div  ng-click=blur()>' +
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                   '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
-                                        '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+    var videoClubTemplate=  '<div  >' +
+                            '<div class="post_div" style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn col-md-12">'+
+                                   '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                        '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -397,26 +397,26 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+
                         '</div>';
     var articleClubTemplate = '<div>'   +
                                 '<div class="post_div" style="width:{{width}}%">'  +
-                                    '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
+                                    '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
-                                            '<a href="#">'  +
+                                            '<a href="">'  +
                                                 '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
                                             '</a>'  +
                                             '</br>{{content.articleId.content}}</br></br>'  +
                                             '<div>' +
-                                                '<span>by<a href="#"> {{content.uploaderClub.name}}</a></span>'  +                                            
+                                                '<span>by<a href=""> {{content.uploaderClub.name}}</a></span>'  +                                            
                                             '</div>'    +
                                         '</div>'    +
                                         '<span id="post_time">'+
@@ -428,24 +428,24 @@ angular.module('myAppApp')
                                                 '<div class="dropdown">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
-                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                         '</span>'   +   
                                     '</div>'+                                 
                                 '</div>'    +
                             '</div>';
     var imageTeamTemplate = '<div>'+
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
-                                        '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                            '<div class="post_div  " style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
+                                    '<div class="  thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                        '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -468,23 +468,23 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+                            
                         '</div>';
     var videoTeamTemplate=  '<div  ng-click=blur()>' +
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                   '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
-                                        '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+                            '<div class="post_div  " style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
+                                   '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                        '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -510,26 +510,26 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+
                         '</div>';
     var articleTeamTemplate = '<div>'   +
                                 '<div class="post_div" style="width:{{width}}%">'  +
-                                    '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
+                                    '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
-                                            '<a href="#">'  +
+                                            '<a href="">'  +
                                                 '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
                                             '</a>'  +
                                             '</br>{{content.articleId.content}}</br></br>'  +
                                             '<div>' +
-                                                '<span>by<a href="#"> {{content.team}}</a></span>'  +                                            
+                                                '<span>by<a href=""> {{content.team}}</a></span>'  +                                            
                                             '</div>'    +
                                         '</div>'    +
                                         '<span id="post_time">'+
@@ -541,21 +541,21 @@ angular.module('myAppApp')
                                                 '<div class="dropdown">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
-                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                         '</span>'   +   
                                     '</div>'+                                 
                                 '</div>'    +
                             '</div>';
-    var imageBTemplate ='<div class="post_div thumbs_wrap col-md-12">'+
-                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12">'+
-                                     '  <img src="{{content.imageId.picUrl}}" id="img_post">'+
-                                      '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;"></span>'+
+    var imageBTemplate ='<div class="post_div   col-md-12">'+
+                                    '<div class="  thumbs_in col-md-12">'+
+                                     '  <img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
+                                      '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post"></span>'+
                                       '  <span id="img_name">{{content.eventId.name}}</span>'+
                                             '<span class="thumb_trnsprnt">'+
                                              '</span>'+
@@ -585,7 +585,7 @@ angular.module('myAppApp')
                                         '<div style="padding:10px 0px;color:black">{{content.videoId.description}}</div>'+
                                         '<span id="respond_post">'+
                                             '<span id="respond_post"  ng-click="likey(content._id)">'  +
-                                                '<a href="#">'   +
+                                                '<a href="">'   +
                                                     '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                                 '</a>'  +
                                             '</span>'   +
@@ -594,55 +594,57 @@ angular.module('myAppApp')
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                     
                                 
                                 '</div>';
     var articleBTemplate ='<div>'   +
                                 '<div class="post_div col-md-12">'  +
-                                    '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
+                                    '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
-                                            '<a href="#">'  +
+                                            '<a href="">'  +
                                                 '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
                                             '</a>'  +
                                             '</br>{{content.articleId.content}}</br></br>'  +
                                             '<div>' +
-                                                '<span>by<a href="#"> {{content.uploader.club.name}}</a></span>'  +                                            
+                                                '<span>by<a href=""> {{content.uploader.club.name}}</a></span>'  +                                            
                                             '</div>'    +
                                         '</div>'    +
                                         '<span id="post_time">'+
                                                 '<span id="respond_post">'+
-                                                    '<rating ng-model="rate" max="max" readonly="true"  titles="[{{one}},{{two}},{{three}}]" ng-click="ratePost(rate)"></rating>'+
-                                                    '{{ratingHalf}} by {{ratingName.votes}} users '+  
-                                                    '{{postTime}}'+
+                                                    '<span id="respond_post"  ng-click="likey(content._id)">'  +
+                                                        '<a href="">'   +
+                                                            '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
+                                                        '</a>'  +
+                                                    '</span>'   +
                                                 '</span>'+
-                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                         '</span>'   +
                                     '</div>'+                                    
                                 '</div>'    +
                             '</div>';
     var postAnnTemplate = '<div>'   +
                                 '<div class="post_div" style="width:{{width}}%">'  +
-                                    '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
+                                    '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
-                                            '<a href="#">'  +
+                                            '<a href="">'  +
                                                 '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
                                             '</a>'  +
                                             '</br>{{content.articleId.description}}</br></br>'  +
                                             '<div>' +
-                                                '<span>by<a href="#"> {{content.uploaderClub.name}}</a></span>'  +                                            
+                                                '<span>by<a href=""> {{content.uploaderClub.name}}</a></span>'  +                                            
                                             '</div>'    +
                                         '</div>'    +
                                         '<span id="post_time">'+
                                                 
                                                  '<span id="respond_post"  ng-click="likey(content._id)">'  +
-                                                    '<a href="#">'   +
+                                                    '<a href="">'   +
                                                         '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                                     '</a>'  +
                                                 '</span>'   +
@@ -651,24 +653,24 @@ angular.module('myAppApp')
                                                 '<div class="dropdown">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
-                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                                '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                         '</span>'   + 
                                     '</div>'+                                   
                                 '</div>'    +
                             '</div>';
     var imageAnnTemplate = '<div>'+
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                    '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
-                                        '<img src="{{content.imageId.picUrl}}" id="img_post">'+
+                            '<div class="post_div  " style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
+                                    '<div class="  thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
+                                        '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -684,30 +686,30 @@ angular.module('myAppApp')
                                     '<span id="post_time">'+
                                         '<div style="padding:10px 0px;color:black">{{content.imageId.description}}</div>'+
                                          '<span id="respond_post"  ng-click="likey(content._id)">'  +
-                                            '<a href="#">'   +
+                                            '<a href="">'   +
                                                 '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                             '</a>'  +
                                         '</span>'   +
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+                            
                         '</div>';
     var videoAnnTemplate = '<div  ng-click=blur()>' +
-                            '<div class="post_div thumbs_wrap" style="width:{{width}}%">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
-                                   '<div class="img_div_wrap thumbs_wrap thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
-                                        '<img src="{{content.videoId.posterurl}}" id="img_post">'+
+                            '<div class="post_div  " style="width:{{width}}%">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
+                                   '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                                        '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -726,28 +728,28 @@ angular.module('myAppApp')
                                     '<span id="post_time">'+
                                         '<div style="padding:10px 0px;color:black">{{content.videoId.description}}</div>'+
                                          '<span id="respond_post"  ng-click="likey(content._id)">'  +
-                                            '<a href="#">'   +
+                                            '<a href="">'   +
                                                 '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                             '</a>'  +
                                         '</span>'   +
                                         '<div class="dropdown">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
-                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="#">Book A Day</a></span>'+
+                                        '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
                                     '</span>'+
                                 '</div>'+
                             '</div>'+
                         '</div>'; 
     var winningTemplate =   '<div class="post_div col-md-12">'+
-                                '<div class="box_shadow_dwn thumbs_wrap col-md-12">'+
+                                '<div class="box_shadow_dwn   col-md-12">'+
                                     '<div class="Ellipse_1"></div>'+
                                     '<div class="text_type_post" id="article">'+
-                                        '<a href="#"><span id="award_heading"><img alt="{{ content.uploaderClub.proPic }}" ng-src="http://c15179525.r25.cf2.rackcdn.com/8136545_0_2b0a2099be3b06c2896418e30bb2f461.jpg" class="md-avatar" /> {{content.uploaderClub.name}}</span></a><span  id="light"> awards </span><a href="#"><span  id="award_heading"><img alt="{{  }}" ng-src="{{content.uploader.user.proPic}}" class="md-avatar" /> {{content.uploader.user.name}}</span></a>'+
+                                        '<a href=""><span id="award_heading"><img alt="{{ content.uploaderClub.proPic }}" ng-src="http://c15179525.r25.cf2.rackcdn.com/8136545_0_2b0a2099be3b06c2896418e30bb2f461.jpg" class="md-avatar" /> {{content.uploaderClub.name}}</span></a><span  id="light"> awards </span><a href=""><span  id="award_heading"><img alt="{{  }}" ng-src="{{content.uploader.user.proPic}}" class="md-avatar" /> {{content.uploader.user.name}}</span></a>'+
                                         
                                         '<div id="light"> {{content.eventId.name}} </div>'+
                                         
@@ -760,15 +762,17 @@ angular.module('myAppApp')
                                         '<div class="ardecode"><a href=""> Congratulations {{content.uploader.user.name}}</a></div>'+
                                     '</div>'+
                                     '<span id="post_time">'+
-                                        '<span tabindex="0" role="button" id="respond_post" ng-click="likey(content._id)">'+
-                                            '<a href="#"><img height="20px" width="20px"> 0 Like</a>'+
-                                        '</span>'+
+                                        '<span id="respond_post"  ng-click="likey(content._id)">'  +
+                                            '<a href="">'   +
+                                                '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
+                                            '</a>'  +
+                                        '</span>'   +
                                         '<div class="dropdown">'+
                                             '<button aria-expanded="false" aria-haspopup="true" type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
-                                                '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="w2b">Edit</a></li>'+
-                                                '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
-                                                '<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+
+                                                '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
+                                                '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
+                                                '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         
@@ -964,7 +968,7 @@ angular.module('myAppApp')
                   
             }
             
-            if(scope.content.type==42 || scope.content.type==32 || scope.content.type==31 || scope.content.type==33)
+            if(scope.content.type<100)
             {
                 console.log('hereasaaaa');
                 var postIdLike=scope.content._id;
@@ -1121,8 +1125,8 @@ angular.module('myAppApp')
 
 .directive('contentNotif', function ($compile, $http,$modal) {
     var imageTemplate = '<div>'+
-                            '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+
                                     // '<div class="center-cropped"'+ 
                                     //      'style="background-image: url({{content.imageId.picUrl}});">'+
                                     // '</div>'+
@@ -1147,11 +1151,11 @@ angular.module('myAppApp')
                             '</div>'+                            
                         '</div>';
     var videoTemplate = '<div  ng-click=blur()>' +
-                            '<div class="notif_div thumbs_wrap col-md-12" >'+
+                            '<div class="notif_div   col-md-12" >'+
 
-                               '<div class="notif_div_wrap thumbs_wrap  col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                               '<div class="notif_div_wrap    col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                     
-                                    // '<div class="col-md-8" id="notif_back"><img src="{{content.videoId.posterurl}}" id="img_post"></div>'+
+                                    // '<div class="col-md-8" id="notif_back"><img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative"></div>'+
                                     // '<span>'+
                                     // '</span>'+
                                     '<div id="notif_name" >'+
@@ -1172,8 +1176,8 @@ angular.module('myAppApp')
                             '</div>'+
                         '</div>';
     var articleTemplate = '<div>'+
-                            '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+                                                                        
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+                                                                        
                                     '<div id="notif_name" >'+ 
                                         '{{content.uploader.user.name}}<span id="notif_uploader"> has added a new Writing </span>'+
                                         '"{{content.articleId.articleName}}"<span id="notif_uploader"> to his work</span>'+
@@ -1197,15 +1201,15 @@ angular.module('myAppApp')
                                         '</a>'  +
                                         '</br>{{content.eventId.description}}</br></br>'  +
                                         '<div>' +
-                                            'by<a href="#"> {{content.uploader.club.name}}</a>'  +
+                                            'by<a href=""> {{content.uploader.club.name}}</a>'  +
                                         '</div>'    +                                        
                                     '</div>'    +
                                     '<span id="post_time">{{content.createdOn}}</span>'   +
                                 '</div>'    +
                             '</div>';
      var imageATemplate = '<div>'+
-                            '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+
                                     // '<div class="center-cropped"'+ 
                                     //      'style="background-image: url({{content.imageId.picUrl}});">'+
                                     // '</div>'+
@@ -1230,11 +1234,11 @@ angular.module('myAppApp')
                             '</div>'+                            
                         '</div>';
     var videoATemplate = '<div  ng-click=blur()>' +
-                            '<div class="notif_div thumbs_wrap col-md-12" >'+
+                            '<div class="notif_div   col-md-12" >'+
 
-                               '<div class="notif_div_wrap thumbs_wrap  col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                               '<div class="notif_div_wrap    col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                     
-                                    // '<div class="col-md-8" id="notif_back"><img src="{{content.videoId.posterurl}}" id="img_post"></div>'+
+                                    // '<div class="col-md-8" id="notif_back"><img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative"></div>'+
                                     // '<span>'+
                                     // '</span>'+
                                     '<div id="notif_name" >'+
@@ -1255,8 +1259,8 @@ angular.module('myAppApp')
                             '</div>'+
                         '</div>';
     var articleATemplate ='<div>'+
-                            '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+                                 
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+                                 
                                     '<div id="notif_name" >'+ 
                                         '{{content.uploadedClub.name}}<span id="notif_uploader"> made an announcement regarding </span>'+
                                         '"{{content.articleId.articleName}}"'+   
@@ -1270,8 +1274,8 @@ angular.module('myAppApp')
                             '</div>'+                            
                         '</div>';
     var imageEATemplate = '<div>'+
-                            '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+
                                     // '<div class="center-cropped"'+ 
                                     //      'style="background-image: url({{content.imageId.picUrl}});">'+
                                     // '</div>'+
@@ -1294,9 +1298,9 @@ angular.module('myAppApp')
                             '</div>'+                            
                         '</div>';
     var videoEATemplate = '<div  ng-click=blur()>' +
-                            '<div class="notif_div thumbs_wrap col-md-12" >'+
+                            '<div class="notif_div   col-md-12" >'+
 
-                               '<div class="notif_div_wrap thumbs_wrap  col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
+                               '<div class="notif_div_wrap    col-md-8"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                     
                                 
                                     '<div id="notif_name" >'+
@@ -1315,8 +1319,8 @@ angular.module('myAppApp')
                             '</div>'+
                         '</div>';
     var articleEATemplate ='<div>'+
-                            '<div class="notif_div thumbs_wrap col-md-12">'+
-                                '<div class="notif_div_wrap thumbs_wrap  col-md-8" ng-click="viewImage(content.imageId._id)">'+                                 
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+                                 
                                     '<div id="notif_name" >'+ 
                                         '{{content.uploadedClub.name}}<span id="notif_uploader"> made an announcement regarding </span>'+
                                         '"{{content.articleId.articleName}}"'+   

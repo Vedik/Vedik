@@ -1,10 +1,12 @@
 'use strict';
 
 var _ = require('lodash');
+var mongoose = require('mongoose');
 var Event = require('./event.model');
 var Post = require('../post/post.model');
 var Entry = require('../entry/entry.model');
 var User = require('../user/user.model');
+var Credit = require('../credit/credit.model');
 
 // Get list of events
 exports.index = function(req, res) {
@@ -326,8 +328,21 @@ exports.declareRes = function(req, res) {
                   console.log('notifadded');
               })
           });
-    
-    
+      
+      var newCredit =  new Credit({
+          postId:newPost._id,
+          credit:mongoose.Types.ObjectId('568143ea40c6fb6d1eb3ba4a'),
+          creditedUsers:[]
+        });
+
+        
+          newCredit.creditedUsers.push({user:req.body.user._id});
+        
+        newCredit.save(function(err){
+        if(err) return handleError(res,err);
+        console.log(newCredit);
+      })
+      
     
       event.save(function (err) {
         var attending=true;

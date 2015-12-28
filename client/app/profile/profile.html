@@ -6,7 +6,7 @@
 
 <div ng-controller="ProfileCtrl" id="for_blur">
 	<div ng-include="'components/navbar/navbar.html'"></div>
-	
+			<div class="valignOut " id="respectToast">{{user.name}}'s R-score: {{respect}}</div>
 	
 
             <div id="profile">
@@ -52,9 +52,7 @@
 		            		<div  class="col-md-6 valignOut" >					        
 					                
 					                	<p   id="pro_name">
-					                		{{user.name}}'s
-					                		
-					                		
+					                		{{user.name}}'s	
 					                	</p>
 					                	<!-- <div ng-show="edit.name && user.name==loggedInUser.name">
 					                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
@@ -163,7 +161,7 @@
 
 										<div class="tab-content" >
 											<div ng-repeat="item in posts | orderBy:'-createdOn'" class="thumbs_wrap col-md-12 tab-pane fade in active" ng-init="getCredit($index, item._id)">
-												<div style="padding: 0px 10px" class="col-md-12">
+												<div style="padding: 0px 15px" class="col-md-12" ng-if="credits[$index][0].credit.creditDetail!='Winner'">
 													<div class="bgw col-md-12 colorb box_shadow_dwn" style="padding: 10px"> 
 														<img src="{{user.proPic}}" width="auto" height="20px" id="dpsm">  {{user.name}} as 
 														<span ng-repeat="credit in credits[$index]">{{credit.credit.creditDetail}} </span>

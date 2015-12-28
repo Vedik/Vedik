@@ -158,7 +158,7 @@ exports.showForUser = function(req, res) {
                       },function (err, posts) {
               if(err) {console.log('dddddddd'); return handleError(res, err); }
               })
-      .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId comments.comment')
+      .populate('articleId videoId imageId like.user uploader.user vedik.vedik eventId comments.comment uploaderClub')
       
       .exec(function (err, posts){
           if (err) return handleError(err);

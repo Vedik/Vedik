@@ -65,8 +65,17 @@ angular.module('myAppApp')
         console.log(response);
         $scope.posts = response.posts;
         console.log($scope.posts);
-    
-
+        $scope.respect=0;
+        for(var i=0;i<$scope.posts.length;i++)
+        {
+          if($scope.posts[i].rating){
+            $scope.respect=$scope.posts[i].rating +$scope.respect;
+          }
+          else{
+            $scope.respect=$scope.posts[i].like.length +$scope.respect; 
+          }
+        }
+        console.log($scope.respect);
     $scope.stageId=["aa"];
     $scope.stageList=[];
     var x=0;
@@ -141,7 +150,7 @@ angular.module('myAppApp')
       
       $http.get('api/credits/credit/'+postId+'/'+id).success(function (response){
           $scope.credits[index]=angular.copy(response);
-         
+          console.log($scope.credits[index]);
         
       })
 

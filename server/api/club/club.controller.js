@@ -36,18 +36,26 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!club) { return res.send(404); }
     
-     var i =0,isFollowing;
-    for(;i<club.subscribed_users.length;i++){
+     var isFollowing;
+    for(var i=0;i<club.subscribed_users.length;i++){
       if(club.subscribed_users[i].user.equals(req.user._id)){
         isFollowing = true;
+        break;
       }
     }
     if(isFollowing!=true){
       isFollowing=false;
     }
-    console.log({club:club,isFollowing:isFollowing});
+    var isAdmin=false;
+    for(var i=0;i<club.admin.length;i++){
+      if(club.admin[i]._id.equals(req.user._id)){
+        isAdmin = true;
+        break;
+      }
+    }
+    console.log({club:club,isFollowing:isFollowing,isAdmin:isAdmin});
    
-    return res.json({club:club,isFollowing:isFollowing});
+    return res.json({club:club,isFollowing:isFollowing,isAdmin:isAdmin});
   });
   
  // var clubId = req.params.id;

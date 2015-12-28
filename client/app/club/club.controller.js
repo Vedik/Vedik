@@ -16,6 +16,7 @@ angular.module('myAppApp')
       console.log(response);
       $scope.club = response.club;
       $scope.isFollowing = response.isFollowing;
+      $scope.isAdmin=response.isAdmin;
 
        if(!$scope.club.galleryPic)
         {
@@ -342,7 +343,7 @@ angular.module('myAppApp')
             console.log($scope.confirmDialog);
             $scope.newAdmins=[];
             $scope.confirmDialog=false;
-            console.log($scope.form,$scope.confirmDialog);
+            console.log($scope.confirmDialog);
             for(var i=0;i<newAdmins.length;i++){
                 $scope.club.admin.push({_id:newAdmins[i]._id,name:newAdmins[i].name});
             }
