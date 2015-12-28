@@ -363,6 +363,57 @@
 
 <!--***********Broadcast closes***************************************************************-->
 
+<!--************************************Add club Admins  ************************************************-->
+<div class="modal img_modal fade col-md-7" id="clubSettings" role="dialog">
+    <div class="modal-dialog img_modal-dialog" id="modal-center">
+    
+      <!-- Modal content-->
+     
+     	<div class="modal-header bgw">
+	       <button type="button" class="close colorb" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">X</button>
+	       <h3 class="modal-title colorb">Club Settings</h3>
+	    </div>
+        
+        <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw">
+        	<p class="sizeten colorg">*Edit Admins</p>
+		  	<div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
+            
+            <div >
+              	<form name="form"  ng-model="form" ng-submit="addAdmin(newAdmins)">    
+                    <div class="col-md-12">
+                      	<tags-input ng-model="newAdmins" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Add Admins" required>
+							<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
+      						</auto-complete>
+    					</tags-input>                     
+
+                    	<button type="button" class="w2g col-md-12" ng-click="confirmDialog=true" ng-show="!confirmDialog" >Add Admin</button>
+                    	<p id="anim_in" ng-show="confirmDialog"  class="col-md-12 centric">Confirm?<button type="submit" class="w2g" >Yes</button> <button type="button" class="w2g" ng-click="confirmDialog=false">No</button>   
+               		 </div>
+                </form>
+	       		<div class="col-md-12 box_shadow_dwn " style="padding:10px">
+		            <md-subheader class="md-no-sticky">Admins</md-subheader>
+		            <div class="fullW" ng-repeat="admin in club.admin">
+		        		<md-list-item   ng-show="!confirm[$index]">
+		        			
+			             	<img alt="img" ng-src="{{ admin.proPic }}" class="md-avatar" />
+			                <p>{{ admin.name }}</p>
+			                <span style="float:right;padding:0px 5px"  ng-click="confirm[$index]=true">x</span>
+		                
+			                
+		              	</md-list-item> 
+		              	<p ng-show="confirm[$index]" style="margin:0px 30px">Are you sure you want to remove {{admin.name}}? <button type="button" class="w2g" ng-click="deleteAdmin(admin._id,$index)">Yes</button> <button type="button" class="w2g" ng-click="confirm[$index]=false">No</button>
+			            </p>
+		            </div> 
+
+	      		</div>
+                 
+                
+            </div>
+
+        </div>
+       </div>
+     </div>
+</div>
   
 <!--************************************ Declare Results  ************************************************-->
 <div class="modal img_modal fade col-md-7" id="declareRes" role="dialog">

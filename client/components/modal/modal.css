@@ -177,5 +177,42 @@ md-content{
 }
 
 
+#anim_out{
+  width: 100%;
+    position: relative;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 2s;
+}
 
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {left:0px; top:0px;}
+    100% { left:0px; top:-50px;}
+}
 
+/* Standard syntax */
+@keyframes example {
+    0%   {left:0px; top:0px;}
+    100% { left:0px; top:-50px;}
+
+#anim_in{
+  width: 100%;
+    position: relative;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 2s;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {left:0px; top:50px;}
+    100% { left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {left:0px; top:50px;}
+    100% { left:0px; top:0px;}

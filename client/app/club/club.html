@@ -165,8 +165,8 @@
 		            			<li ><a data-toggle="tab" href="#about_user">About</a></li>
 		            			<li class="active"><a data-toggle="tab" href="#events"><span class=" 	glyphicon glyphicon-calendar"></span> Events</a></li> 
 		            			<li ><a data-toggle="tab" href="#HOF"> Hall of Fame</a></li>  
-		            			<li ><a href="#HOF" data-toggle="modal" data-target="#editClub" ><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li> 
-		            			<li ><a data-toggle="tab" href="#HOF"><span class="glyphicon glyphicon-cog"></span> Settings</a></li> 
+		            			<li ><a href="" data-toggle="modal" data-target="#editClub" ><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li> 
+		            			<li ><a data-toggle="modal" data-target="#clubSettings" href=""><span class="glyphicon glyphicon-cog"></span> Settings</a></li> 
 							</ul>
 							<div  class="tab-content colorw">
 				        		
@@ -196,11 +196,16 @@
 										<div class="thumbs_wrap box_shadow_dwn">
 											<div class="list_heading" ><span class=" 	glyphicon glyphicon-calendar"></span> Events</div>				
 											<a href="/{{redirect[$index]}}/{{tEvent._id}}" ng-repeat="event in eventsList" ng-init="redirect(event.subOnl,$index)">
-												<button type="button" class="btn btn-info btn-lg w2g col-md-12 lh20 alignL" style="font-size:15px">{{event.name}}
+												<button type="button" class="btn btn-info btn-lg w2g col-md-12 lh20 alignL" style="font-size:15px"><span class="glyphicon glyphicon-calendar"></span> {{event.name}}
 												<br/>
-												<div class="sizeten colorg">
-												 <span class="glyphicon glyphicon-map-marker" style="width:40%;text-overflow:ellipsis;overflow:hidden"> {{event.location}} </span>
-												<span class="glyphicon glyphicon-time" style="width:60%;text-overflow:ellipsis;overflow:hidden"> {{event.startDate}}<span ng-show="events.endDate">-{{event.endDate}}</span></span></div></button>
+													<div class="sizeten colorg row">
+													 <span class="col-sm-5" style="text-overflow:ellipsis;overflow:hidden"><span class="glyphicon glyphicon-map-marker"></span> {{event.location}} </span>
+													<span class="col-sm-7" style="text-overflow:ellipsis;overflow:hidden">
+														<span class="glyphicon glyphicon-time"></span> {{event.startDate}}
+														<span ng-show="events.endDate">-{{event.endDate}}</span>
+													</span>
+													</div>
+												</button>
 											</a>
 											<a href="" ng-show="!eventsList[0]"><button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" style="height:50px">{{club.name}} dint create any events yet</button></a>		
 												

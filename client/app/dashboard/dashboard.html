@@ -119,18 +119,18 @@
 							</div>
 						</div>
 						<div style="">
-						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$even" index="$index">
+						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index+2)" index="$index">
 							
 						</content-item>
 						</div>
 					</div>
 					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 20px 30px 0px ">
-						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" index="$index">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index)" index="$index">
 							
 						</content-item>
 					</div>	
 					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 20px 30px 0px ">
-						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="$odd" index="$index">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index+1)" index="$index">
 							
 						</content-item>
 					</div>

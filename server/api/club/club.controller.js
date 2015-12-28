@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Club = require('./club.model');
 var Stage = require('../stage/stage.model');
+var User = require('../user/user.model');
 
 
 // Get list of clubs
@@ -27,6 +28,14 @@ exports.show = function(req, res) {
   Club.findById(req.params.id, function (err, club) {
     if(err) { return handleError(res, err); }
     if(!club) { return res.send(404); }
+    
+    
+  })
+  .populate('admin')
+  .exec(function (err , club){
+    if(err) { return handleError(res, err); }
+    if(!club) { return res.send(404); }
+    
      var i =0,isFollowing;
     for(;i<club.subscribed_users.length;i++){
       if(club.subscribed_users[i].user.equals(req.user._id)){
@@ -39,7 +48,6 @@ exports.show = function(req, res) {
     console.log({club:club,isFollowing:isFollowing});
    
     return res.json({club:club,isFollowing:isFollowing});
-    
   });
   
  // var clubId = req.params.id;
@@ -166,6 +174,63 @@ exports.search = function (req, res, next) {
       } 
     } 
   );
+};
+
+exports.addAdmin = function (req,res){
+  Club.findById(req.params.id,function (err,club){
+    if(err){
+      return handleError(res,err);
+    }
+    if(!club) { return res.send(404); }
+    for(var i=0;i<req.body.newAdmins.length;i++)
+    {
+        club.admin.push(req.body.newAdmins[i]._id);
+        User.findById(req.body.newAdmins[i]._id,function (err,user){
+          user.asAdmin.push(req.params.id);
+          user.save(function (err){
+            if(err) return handleError(res,err);
+            console.log('added to user'+i);
+          })
+        })
+    }
+    
+    club.save(function (err){
+      if(err){
+        return handleError(res,err);
+      }
+
+      else{
+        console.log(club);
+        return res.json(club.admin);
+      }
+    });  
+  });
+  
+};
+
+exports.deleteAdmin = function (req,res){
+  console.log(req.body.userId);
+  Club.findById(req.params.id,function (err,club){
+    if(err){  console.log('safage');
+      return handleError(res,err);}
+      console.log('sfasv');
+   for(var i=0;i<club.admin.length;i++){
+    console.log('sfasv',i);
+      if(club.admin[i].equals(req.body.userId)){
+        console.log('sfasv',i);
+        club.admin.splice(i,1);
+         
+            club.save(function (err){
+              if(err){console.log('safssage'); return handleError(res, err);}
+              else {
+                console.log('sfasv',i);
+                return res.json(club.admin);
+           
+          }
+        })
+      }
+    } 
+  });
 };
 
 exports.addSubscriber = function (req,res){

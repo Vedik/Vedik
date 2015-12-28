@@ -11,6 +11,8 @@ router.post('/', auth.isAuthenticated(), controller.create);
 //router.put('/editProfile/:type', auth.isAuthenticated(), controller.editProfile);
 router.get('/:id/addSubscriber',auth.isAuthenticated(),controller.addSubscriber);
 router.delete('/:id/deleteSubscriber',auth.isAuthenticated(),controller.deleteSubscriber);
+router.post('/addAdmin/:id', auth.isAuthenticated(), controller.addAdmin);
+router.put('/deleteAdmin/:id',auth.isAuthenticated(),controller.deleteAdmin);
 //router.put('/editProfile/:id',auth.isAuthenticated,controller.editProfile);
 router.put('/:id', controller.editProfile);
 router.patch('/:id', controller.update);

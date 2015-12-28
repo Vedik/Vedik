@@ -334,6 +334,31 @@ angular.module('myAppApp')
           $scope.showEvent=true;
           
   };
+  $scope.confirmDialog=false;
+  $scope.addAdmin = function(newAdmins){
+        $http.post('/api/clubs/addAdmin/'+id,{newAdmins:newAdmins}).success(function (response){
+            console.log(response);
+
+            console.log($scope.confirmDialog);
+            $scope.newAdmins=[];
+            $scope.confirmDialog=false;
+            console.log($scope.form,$scope.confirmDialog);
+            for(var i=0;i<newAdmins.length;i++){
+                $scope.club.admin.push({_id:newAdmins[i]._id,name:newAdmins[i].name});
+            }
+
+            
+        });
+    }
+    $scope.deleteAdmin = function(userId,index){
+       $scope.user=userId;
+       console.log($scope.user);
+        $http.put('/api/clubs/deleteAdmin/'+id,{userId:userId}).success(function (response){
+            console.log(response);
+            $scope.club.admin.splice(index,1);
+            
+        });
+    }
 
   $scope.follow = function(){
         $http.get('/api/clubs/'+id+'/addSubscriber').success(function (response){
