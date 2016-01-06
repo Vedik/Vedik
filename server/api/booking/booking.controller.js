@@ -1,3 +1,4 @@
+var todaysDate;
 'use strict';
 
 var _ = require('lodash');
@@ -9,25 +10,14 @@ var Image = require('../image/image.model');
 
 // Get list of bookings
 exports.index = function(req, res) {
+  var startDate=new Date();
+  startDate.setDate(startDate.getDate()-1);
+  var endDate=new Date();
+  endDate.setDate();
 
-
- /* Booking.find(function (err, bookings) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(bookings);
-  });*/
-  /*Post.find(function (err, posts) {
-    if(err) { return handleError(res, err); }
-    })
-  .populate('articleId videoId imageId uploader.user uploader.club')
-  
-  .exec(function (err, posts){
-      if (err) return handleError(err);*/
-      
-      var todaysDate=req.params.bookingDate;
-      console.log(todaysDate);
 
       var bPosts=[];
-         Booking.find({bookedFor:todaysDate},function (err, bookings) {
+         Booking.find({bookedFor:{$gte: startDate,$lt:endDate}},function (err, bookings) {
        var sequence= bookings.length;
             for(var i=0;i<bookings.length;i++)
             {
@@ -101,9 +91,9 @@ exports.create = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(booking);
   });*/
-console.log(req.body.bookingDate);
-
-  Booking.find({bookedFor:req.body.bookingDate},function (err, bookings) {
+  var bookingDate=req.body.bookingDate;
+  
+  Booking.find({bookedFor:bookingDate},function (err, bookings) {
        var sequence= bookings.length;
        console.log(bookings.length);
 
@@ -114,7 +104,7 @@ console.log(req.body.bookingDate);
     bkngCreatedOn:{type:Date,default:Date.now()},
     user:req.user._id,
     postId:req.params.post_id,
-    bookedFor:req.body.bookingDate
+    bookedFor:bookingDate
   });
   console.log('d');
       newBooking.save(function (err){
@@ -149,14 +139,17 @@ exports.update = function(req, res) {
 
 // Deletes a booking from the DB.
 exports.destroy = function(req, res) {
-  Booking.findById(req.params.id, function (err, booking) {
-    if(err) { return handleError(res, err); }
-    if(!booking) { return res.status(404).send('Not Found'); }
-    booking.remove(function(err) {
+  console.log(req.params.postId);
+  var startDate=new Date();
+  startDate.setDate(startDate.getDate()-1);
+  var endDate=new Date();
+  endDate.setDate(endDate.getDate());
+
+    Booking.remove({$and:[{bookedFor:{$gte: startDate,$lt:endDate}},{postId:req.params.postId}]},function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
-  });
+  
 };
 
 function handleError(res, err) {
