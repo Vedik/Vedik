@@ -13,6 +13,7 @@ angular.module('myAppApp', [
   'duParallax',
   'ui.bootstrap.datetimepicker',
   'ngAnimate',
+  'ngImgCrop',
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

@@ -4,6 +4,7 @@
 angular.module('myAppApp')
   .controller('LoginCtrl', function ($scope, Auth,$state, $location, $window) {
     $scope.user = {};
+
     $scope.errors = {};
 
     $scope.login = function(form) {
@@ -36,8 +37,8 @@ angular.module('myAppApp')
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
-          email: $scope.user.email2,
-          password: $scope.user.password2,
+          email: $scope.user.emailNew,
+          password: $scope.user.passwordNew,
         })
         .then( function() {
           // Account created, redirect to home

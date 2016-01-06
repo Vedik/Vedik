@@ -352,6 +352,27 @@ exports.declareRes = function(req, res) {
       })
   })
 };
+
+exports.showForStage = function(req, res) {
+
+   var stage_id = req.params.id;
+ 
+  Event.find({ vedik: { $elemMatch: {vedik:stage_id} } },function (err, events) {
+  
+    if(err) { return handleError(res, err);
+     }
+    })
+  .populate('club')
+  
+  .exec(function (err, events){
+      if (err) return handleError(err);
+     
+      console.log('er2');
+      
+      return res.json(events);
+  })
+};
+
 // Updates an existing event in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }

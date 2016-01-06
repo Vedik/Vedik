@@ -395,7 +395,7 @@ angular.module('myAppApp')
     
 
    
-    
+   $scope.test=true; 
 
    
 

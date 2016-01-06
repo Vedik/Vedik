@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Post = require('./post.model');
 var User = require('../user/user.model');
 var Credit = require('../credit/credit.model');
+var ForNotif= require('../forNotif/forNotif.model');
 
 // Get list of posts
 exports.index = function(req, res) {
@@ -37,11 +38,20 @@ exports.unseenNotifs = function(req, res) {
             .exec(function (err, posts){
                 if (err) return handleError(err);
 
-                
-               
-                console.log('dddddddd')
-                console.log(posts);
-                return res.json(posts);
+                ForNotif.find({
+                    '_id': { $in: req.user.otherUnseenNotifs}
+                      },function (err, notifs) {
+              if(err) {console.log('dddddddd'); return handleError(res, err); }
+                })
+                .deepPopulate('postId.articleId postId.videoId postId.imageId postId.uploader.user postId.uploaderClub')
+                .exec(function (err, notifs){
+                    if (err) return handleError(err);
+                   
+                    console.log('dddddddd');
+                    var notifsAll = notifs.concat(posts);
+                    return res.json(notifsAll);
+                })
+
   });
 };
 
@@ -145,7 +155,7 @@ exports.showForUser = function(req, res) {
   var query = {};
 
   query['uploader.' + 'user'] = user_id;
-  Credit.find( { creditedUsers: { $elemMatch: { user:user_id } } },function (err, credits) {
+  Credit.find( { creditedUsers: { $elemMatch: { user:user_id ,confirmed:true} } },function (err, credits) {
     if(err) { return handleError(res, err); }
         var postId=[];
           for(var i=0;i<credits.length;i++){

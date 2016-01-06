@@ -7,6 +7,7 @@ var User = require('../user/user.model');
 var Like = require('../like/like.model');
 var Club = require('../club/club.model');
 var Credit = require('../credit/credit.model');
+var ForNotif= require('../forNotif/forNotif.model');
 
 // Get list of articles
 exports.index = function(req, res) {
@@ -98,7 +99,7 @@ exports.create = function(req, res) {
                     });
 
                     
-                      newCredit.creditedUsers.push({user:req.body.team});
+                      newCredit.creditedUsers.push({user:req.body.team,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -118,7 +119,7 @@ exports.create = function(req, res) {
                     });
 
                     
-                      newCredit.creditedClubs.push({club:req.body.team._id});
+                      newCredit.creditedClubs.push({club:req.body.team._id,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -139,8 +140,32 @@ exports.create = function(req, res) {
                         creditedUsers:[]
                       });
 
-                      for(var j=0;j<req.body.creditUser[i].length;j++){
-                        newCredit.creditedUsers.push({user:users[j]._id});
+                      for(var j=0;j<req.body.creditUser[i].length;j++)
+                      {console.log(users[j]._id,req.user._id)
+                        if(users[j]._id==req.user._id){
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:true});
+                        }
+                        else{
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:false});
+                          /* adding confirmation notif*/
+                          var newForNotif= new ForNotif({
+                            postId:newPost._id,
+                            type:91,
+                            createdOn:Date.now()
+                          })
+                          newForNotif.save( function (err){
+                            if(err) return handleError(res,err);
+                            console.log('added confirmation notif to user',j);
+                          })
+                          User.findById(users[j]._id,function (err, user){
+                            if(err) return handleError(res,err);
+                            user.otherUnseenNotifs.push(newForNotif._id);
+                            user.save(function (err){
+                              if(err) return handleError(res,err);
+                              console.log(j);
+                            })
+                          })
+                        }
                       }
                       newCredit.save(function(err){
                       if(err) return handleError(res,err);

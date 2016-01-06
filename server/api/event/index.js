@@ -12,6 +12,7 @@ router.get('/comp/:id', auth.isAuthenticated(), controller.compShow);
 router.get('/attendInfo/:id', auth.isAuthenticated(), controller.attendInfo);
 router.post('/attend/:id',auth.isAuthenticated(),controller.addAttend);
 router.delete('/attend/:id',auth.isAuthenticated(),controller.unAttend);
+router.get('/showForStage/:id', auth.isAuthenticated(), controller.showForStage);
 router.post('/subEntry/:id',auth.isAuthenticated(),controller.subEntry);
 router.post('/declareRes/:id',auth.isAuthenticated(),controller.declareRes);
 router.post('/:id', auth.isAuthenticated(), controller.create);

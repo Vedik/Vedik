@@ -84,7 +84,7 @@
  		<div class="col-md-6" style="margin:150px 25%">
 			<div class="modal-header bgw">
 		       <button type="button" class="close colorb" ng-click="cancel()">X</button>
-		       <h3 class="modal-title colorb">Can we know about your event</h3>
+		       <h3 class="modal-title colorb">So whats the ospicious date?</h3>
 		    </div>
 
 		    <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw colorb " >				
@@ -106,6 +106,26 @@
 </script>
 
 <!--***************booking date closes*****************************************-->
+
+<script type="text/ng-template" id="confirmCredit.html">
+
+	<div class="col-md-12">
+ 		<div class="col-md-6" style="margin:150px 25%">
+			<div class="modal-header bgw">
+		       <button type="button" class="close colorb" ng-click="cancel()">X</button>
+		       <h3 class="modal-title colorb">Confirm?</h3>
+		    </div>
+
+		    <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw colorb " >				
+                <form name="form"  ng-model="form" class="bgw">
+               		<p>Are you the <span ng-repeat="credit in credits">{{credit.credit.creditDetail}} </span>of "{{name}}"?</p>
+                    <div><button type="submit" class="w2g col-md-6" ng-click="confirmYes()">Yes</button><button type="submit" class="w2g col-md-6" ng-click="confirm=no">No</button></div>
+                </form>
+            </div>
+        </div>    
+    </div>            
+            
+</script> 
 
 <!--***************************Create Event ******************************************-->
 
@@ -238,7 +258,11 @@
 					</div>
 					<div class="form-group">
 		          		<input type="text" ng-model="club.proPic" placeholder="Club Profile Pic" class="form-control">
-		          		<img src="{{club.proPic}}"  id="dp" style="margin:10px 35%">
+		          		<img src="{{myCroppedImage}}"   style="margin:10px 35%">
+		          		 <div>Select an image file: <input type="file" id="fileInput" onchange="angular.element(this).scope().uploadFile(this.files[0])" /></div>
+  <div class="scropArea">
+    <img-crop image="myImage" result-image="myCroppedImage" ></img-crop>
+  </div>
 		          	</div>
 					<br/>	         	
 		         

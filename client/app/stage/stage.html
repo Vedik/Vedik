@@ -6,15 +6,15 @@
 <div ng-controller="StageCtrl" id="for_blur">
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-	<div class="thumbs_wrap col-md-12">
+	<div class="thumbs_wrap bgb col-md-12">
 		<div id="stage_info" class="col-md-3">
 			<span><h2 class="centric" style="padding:0px 0px 10px">{{stage.name}}</h2></span>
 		<!--	<span><p>{{stage.description}}</p></span>	-->
-			<button   ng-click="follow()" class="btnbdr col-md-12" style="border:1px solid rgb(240,240,240)">{{follow}}</button>
+			<button   ng-click="followVedik()" class="btnbdr col-md-12" style="border:1px solid rgb(240,240,240)">{{follow}}</button>
 			
 		</div>
-		<div id="stage_pic" class="col-md-12" ng-controller="ParallaxEff">
-			<img src="{{stage.posterUrl}}" width="100%" height="auto" alt="Badminton ART" du-parallax y="background">
+		<div id="stage_pic" class="col-md-12" >
+			<img src="{{stage.posterUrl}}" width="100%" height="auto" alt="Vedik Picture din't load yet" style="opacity:0.3" >
 		</div>
 		<div class="stage_nav_wrap_out thumbs_wrap">
 			<script>
@@ -55,10 +55,29 @@
 
 				</div>
 
-				<div class="col-md-3">
-					<div id="stage_content_wrap" class="thumbs_wrap">
-						<div id="clubs_list_wrap">Groups showup if you logged in</div>
+				<div class="col-md-6">
+					<div class="col-md-12" id="clubs_list">
+						<div class="thumbs_wrap box_shadow_dwn">
+							<div class="list_heading" ><span class=" 	glyphicon glyphicon-calendar"></span> Events</div>				
+							<a href="/{{redirect[$index]}}/{{event._id}}" ng-repeat="event in eventsList" ng-init="redirect(event.subOnl,$index)">
+								<button type="button" class="btn btn-info btn-lg w2g col-md-12 lh20 alignL" style="font-size:15px"><span class="glyphicon glyphicon-calendar"></span> {{event.name}} <span class="sizeten colorb">by {{event.club.name}}</span>
+								<br/>
+									<div class="sizeten colorg row">
+									 <span class="col-sm-5" style="text-overflow:ellipsis;overflow:hidden"><span class="glyphicon glyphicon-map-marker"></span> {{event.location}} </span>
+									<span class="col-sm-7" style="text-overflow:ellipsis;overflow:hidden">
+										<span class="glyphicon glyphicon-time"></span> {{event.startDate}}
+										<span ng-show="events.endDate">-{{event.endDate}}</span>
+									</span>
+									</div>
+								</button>
+							</a>
+							<a href="" ng-show="!eventsList[0]"><button type="button" class="btn btn-info btn-lg w2g col-md-12 alignL" style="height:50px">{{club.name}} dint create any events yet</button></a>		
+								
+							
+							
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>

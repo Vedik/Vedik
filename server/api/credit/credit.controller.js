@@ -40,6 +40,30 @@ exports.Credits = function(req, res) {
        return res.json(200, credits);
     });
 };
+exports.confirmCredit = function(req, res) {
+
+ Credit.find({ $and: [ { creditedUsers: { $elemMatch: { user:req.user._id } } }, {postId:req.params.postId} ] },function (err, credits) {
+    if(err) { return handleError (res, err); }
+
+    for(var i=0; i<credits.length;i++){
+      for(var j=0;j<credits[i].creditedUsers.length;j++){
+        if(credits[j].creditedUsers[j].user.equals(req.user._id)){
+          credits[j].creditedUsers[j].confirmed=req.body.confirm;
+          credits[i].save(function (err, credit){
+             if(err) { return handleError(res, err); }
+             console.log('saved true');
+             
+          })
+          break;
+          
+        }
+      }  
+    }
+    return res.json(200,credits);
+   
+  })
+  
+};
 
 // Get a single credit
 exports.show = function(req, res) {

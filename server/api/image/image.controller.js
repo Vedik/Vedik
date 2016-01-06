@@ -7,6 +7,7 @@ var User = require('../user/user.model');
 var Club = require('../club/club.model');
 var Credit = require('../credit/credit.model');
 var Event= require('../event/event.model');
+var ForNotif= require('../forNotif/forNotif.model');
 
 // Get list of images
 exports.index = function(req, res) {
@@ -96,7 +97,7 @@ exports.create = function(req, res) {
                     });
 
                     
-                      newCredit.creditedUsers.push({user:req.body.team});
+                      newCredit.creditedUsers.push({user:req.body.team,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -116,7 +117,7 @@ exports.create = function(req, res) {
                     });
 
                     
-                      newCredit.creditedClubs.push({club:req.body.team._id});
+                      newCredit.creditedClubs.push({club:req.body.team._id,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -138,7 +139,13 @@ exports.create = function(req, res) {
                       });
 
                       for(var j=0;j<req.body.creditUser[i].length;j++){
-                        newCredit.creditedUsers.push({user:users[j]._id});
+                        if(users[j]._id.equals(req.user._id)){
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:true});
+                        }
+                        else{
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:false})
+                        }
+                        
                       }
                       newCredit.save(function(err){
                       if(err) return handleError(res,err);

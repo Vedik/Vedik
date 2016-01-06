@@ -16,9 +16,5 @@ var BookingSchema = new Schema({
 
 module.exports = mongoose.model('Booking', BookingSchema);
 
-/*var deepPopulate = require('mongoose-deep-populate' && 'mongoose')	;
-BookingSchema.plugin(deepPopulate, {
-									  whitelist: [
-									    'user'
-									  ]
-									} );*/
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
+BookingSchema.plugin(deepPopulate /* more on options below */);

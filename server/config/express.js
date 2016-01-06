@@ -4,7 +4,9 @@
 
 'use strict';
 
-var express = require('express');
+var express = require('express'),
+    http = require('http'),
+    socketio = require('socket.io');
 var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var compression = require('compression');

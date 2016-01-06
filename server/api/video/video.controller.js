@@ -113,7 +113,7 @@ console.log(newVideo);
                     });
 
                     
-                      newCredit.creditedUsers.push({user:req.body.team});
+                      newCredit.creditedUsers.push({user:req.body.team,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -133,7 +133,7 @@ console.log(newVideo);
                     });
 
                     
-                      newCredit.creditedClubs.push({club:req.body.team._id});
+                      newCredit.creditedClubs.push({club:req.body.team._id,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -155,7 +155,12 @@ console.log(newVideo);
                       });
 
                       for(var j=0;j<req.body.creditUser[i].length;j++){
-                        newCredit.creditedUsers.push({user:users[j]._id});
+                       if(users[j]._id.equals(req.user._id)){
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:true});
+                        }
+                        else{
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:false})
+                        }
                       }
                       newCredit.save(function(err){
                       if(err) return handleError(res,err);

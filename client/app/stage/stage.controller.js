@@ -26,7 +26,12 @@ angular.module('myAppApp')
         console.log($scope.posts);
     });
 
-    $scope.follow = function(){
+    $http.get('/api/events/showForStage/'+id).success( function (response){
+        console.log(response);
+        $scope.eventsList=response;
+    })
+
+    $scope.followVedik = function(){
         console.log('gdhs');
         if(!$scope.isFollowing){
             $http.get('/api/stages/'+id+'/addSubscriber').success(function (response){

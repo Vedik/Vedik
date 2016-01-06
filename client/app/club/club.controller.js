@@ -379,6 +379,29 @@ angular.module('myAppApp')
     }
 
 
+
+
+    $scope.myImage='';
+    $scope.myCroppedImage='';
+
+    $scope.uploadFile = function(file) {
+      console.log(file);
+        if (file) {
+            // ng-img-crop
+            var imageReader = new FileReader();
+            imageReader.onload = function(image) {
+                $scope.$apply(function($scope) {
+                    $scope.myImage = image.target.result;
+                });
+            };
+            imageReader.readAsDataURL(file);
+        }
+    };
+
+
+
+
+
   })
 
 

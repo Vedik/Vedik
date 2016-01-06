@@ -1,5 +1,5 @@
 //global variable
-var ranX, ranY=0,attendArray=[],likeArray=[];
+var ranX, ranY=0,attendArray=[],likeArray=[],userId,id;
 
 'use strict';
 
@@ -9,13 +9,10 @@ angular.module('myAppApp')
     $scope.message = 'Hello';
     $scope.submitted = false;
     $scope.user = Auth.getCurrentUser;
+   
 
   
-    $http.get('/api/posts/').success(function (response){
-        console.log(response);
-        $scope.posts = response;
-        console.log($scope.posts);
-    });
+  
 
      /*$http.get('/api/bookings/').success(function (response){
         console.log(response);
@@ -38,12 +35,6 @@ angular.module('myAppApp')
             }
         });
     }*/
-
-    $scope.blur = function ()   {
-        UploadPortalService.setProperty().then(function (response){
-                console.log(response);
-        }); 
-    };
 
 
 
@@ -239,12 +230,13 @@ angular.module('myAppApp')
                                             '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -281,12 +273,13 @@ angular.module('myAppApp')
                                             '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -312,13 +305,14 @@ angular.module('myAppApp')
                                                     '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                     '{{postTime}}'+
                                                 '</span>'+
-                                                '<div class="dropdown">'+
+                                                '<div class="dropdown animated">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+ 
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+ 
                                                     '</ul>'+
                                                 '</div>'+
                                                 '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -352,11 +346,12 @@ angular.module('myAppApp')
                                             '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated slideInLeft">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+                                            
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
@@ -394,12 +389,13 @@ angular.module('myAppApp')
                                             '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -425,12 +421,12 @@ angular.module('myAppApp')
                                                     '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                     '{{postTime}}'+
                                                 '</span>'+
-                                                '<div class="dropdown">'+
+                                                '<div class="dropdown animated">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
-                                                          
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
@@ -465,12 +461,13 @@ angular.module('myAppApp')
                                             '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -507,12 +504,13 @@ angular.module('myAppApp')
                                             '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                 '{{postTime}}'+
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -538,12 +536,12 @@ angular.module('myAppApp')
                                                     '{{ratingHalf}} by {{ratingName.votes}} users '+  
                                                     '{{postTime}}'+
                                                 '</span>'+
-                                                '<div class="dropdown">'+
+                                                '<div class="dropdown animated">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
-                                                          
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
@@ -591,7 +589,7 @@ angular.module('myAppApp')
                                             '</span>'   +
                                            
                                         '</span>'+
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
@@ -650,7 +648,7 @@ angular.module('myAppApp')
                                                 '</span>'   +
                                                     
                                                
-                                                '<div class="dropdown">'+
+                                                '<div class="dropdown animated">'+
                                                     '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
@@ -690,7 +688,7 @@ angular.module('myAppApp')
                                                 '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                             '</a>'  +
                                         '</span>'   +
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
@@ -732,7 +730,7 @@ angular.module('myAppApp')
                                                 '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                             '</a>'  +
                                         '</span>'   +
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
@@ -767,7 +765,7 @@ angular.module('myAppApp')
                                                 '<img src="{{content.articleId.picUrl}}" width="20px" height="20px"> {{likeNum}} {{like}}'  +
                                             '</a>'  +
                                         '</span>'   +
-                                        '<div class="dropdown">'+
+                                        '<div class="dropdown animated">'+
                                             '<button aria-expanded="false" aria-haspopup="true" type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                 '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
@@ -857,35 +855,34 @@ angular.module('myAppApp')
           var h="0" + date.getHours();
           var s= "0" + date.getSeconds();
           scope.postTime=d+"-"+m+"-"+y+" "+h+":"+min;*/
-          if(scope.random)
-          {
-                if(ranY==1){
-                scope.width=50;
-                ranY=0;
-               // console.log(ranX,ranY,50);
-                }
-                else{
+          // if(scope.random)
+          // {
+          //       if(ranY==1){
+          //       scope.width=50;
+          //       ranY=0;
+          //      // console.log(ranX,ranY,50);
+          //       }
+          //       else{
 
-                    ranX= Math.floor((Math.random() * 100) + 1);
-                    var data=(ranX)/2;
-                    if (data === parseInt(data, 10))
-                    {
-                        scope.width=50;
-                        ranY=1;
-                        console.log(ranX,ranY,50);
-                    }   
-                    else
-                    {
-                        scope.width=100;
-                        ranY=0; 
-                        //console.log(ranX,ranY,100);
-                    }
-            }
-          }
-          else
-             scope.width=100;
-            
-            
+          //           ranX= Math.floor((Math.random() * 100) + 1);
+          //           var data=(ranX)/2;
+          //           if (data === parseInt(data, 10))
+          //           {
+          //               scope.width=50;
+          //               ranY=1;
+          //               console.log(ranX,ranY,50);
+          //           }   
+          //           else
+          //           {
+          //               scope.width=100;
+          //               ranY=0; 
+          //               //console.log(ranX,ranY,100);
+          //           }
+          //   }
+          // }
+          // else
+          //    scope.width=100;
+            scope.width=100;
             
             
                 
@@ -1117,13 +1114,13 @@ angular.module('myAppApp')
         link: linker,
         scope: {
             content:'=',
-            random:'=',
+            booking:'=',
             index:'='
         }
     };
 })
 
-.directive('contentNotif', function ($compile, $http,$modal) {
+.directive('contentNotif', function ($compile, $http,$modal,User,Auth) {
     var imageTemplate = '<div>'+
                             '<div class="notif_div   col-md-12">'+
                                 '<div class="notif_div_wrap    col-md-8" ng-click="viewImage(content.imageId._id)">'+
@@ -1349,6 +1346,24 @@ angular.module('myAppApp')
                                 '</div>'+
                                 
                             '</div>  ';
+     var creditConfirmationTemplate = '<div ng-click="confirmCredit(content.postId.articleId.articleName)">'+
+                            '<div class="notif_div   col-md-12">'+
+                                '<div class="notif_div_wrap    col-md-8" >'+                                                                        
+                                    '<div id="notif_name">'+ 
+                                        '{{content.postId.uploader.user.name}}<span id="notif_uploader"> added you in team </span>'+
+                                        '"{{content.postId.team}}"<span id="notif_uploader"> for the Writing </span>'+
+                                        '"{{content.postId.articleId.articleName}}"<span id="notif_uploader"> as </span>'+
+                                        '<span ng-repeat="credit in credits" >{{credit.credit.creditDetail}} </span>'+
+                                        
+                                    '</div>'+
+
+                                        '<br/><span id="notif_desc">'+
+                                            '<img class="notif_icon" src="http://www.way2campus.net/images/image_01.png">'+
+                                            'Click to agree/disagree'+
+                                        '<br/>'+
+                                '</div>'+
+                            '</div>'+                            
+                        '</div>';
 
     var getTemplate = function(contentType) {
         var template = '';
@@ -1378,6 +1393,9 @@ angular.module('myAppApp')
             case 7:
                 template = eventClubTemplate;
                 break;
+            case 91:
+                template = creditConfirmationTemplate;
+                break;
             
         }
         
@@ -1406,7 +1424,7 @@ angular.module('myAppApp')
         
         
            
-           
+    if(scope.content.type<90){  
             scope.one="one";
             scope.two="two";
             scope.three="three";
@@ -1433,7 +1451,7 @@ angular.module('myAppApp')
                     scope.rate=roundedRating;                
                                  
             });
-
+    }
         
 
         scope.like = function(postId){
@@ -1446,23 +1464,21 @@ angular.module('myAppApp')
             });
         };
 
-        function Ctrl2($scope, UploadPortalService) {
-            $scope.prop2 = "Second";
-            $scope.both = UploadPortalService.setProperty()
+       
+
+        
+        
+        scope.user = Auth.getCurrentUser;
+         userId= scope.user()._id;
+        
+        if(scope.content.type==91){
+          $http.get('api/credits/credit/'+scope.content.postId._id+'/'+userId).success(function (response){
+              scope.credits=angular.copy(response);
+              console.log(scope.credits);
+            
+          })
         }
-
         
-        
-
-        scope.unlike = function(postId){
-            $http.delete('/api/posts/'+postId+'/unlike').success(function (response){
-                console.log(response);
-                var likingName='liking'+postId;
-                scope.content.like.length=response;
-                scope.likingName = false;
-                
-            });
-        };
 
          scope.blur =function(){
             scope.for_blur = {
@@ -1545,6 +1561,26 @@ angular.module('myAppApp')
                 }
             });
         }
+
+        scope.confirmCredit =function(name){            
+           
+            var modalInstance = $modal.open({
+              animation: true,
+              templateUrl:'confirmCredit.html' ,
+              controller: 'ConfirmCreditCtrl',
+              resolve: {
+                  postId: function(){
+                    return scope.content.postId._id;
+                  },
+                  credits: function(){
+                    return scope.credits;
+                  },
+                  name:function(){
+                    return name;
+                  }
+                }
+            });
+        };
     }
 
     return {
@@ -1954,6 +1990,35 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
              
         }
     });
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
+
+angular.module('myAppApp').controller('ConfirmCreditCtrl',function ($scope,$modalInstance,postId,credits,name,$http){
+  console.log('hello');
+  
+    $scope.name=name;
+    $scope.credits=credits;
+   
+
+
+    $scope.confirmYes=function(){
+        
+      
+        $http.put('/api/credits/confirm/'+postId,{confirm:true}).success(function(response){
+            $modalInstance.dismiss('cancel');
+        })
+    };
+    $scope.confirmNo=function(){
+        
+      
+        $http.put('/api/credits/confirm/'+postId,{confirm:false}).success(function(response){
+            $modalInstance.dismiss('cancel');
+        })
+    };
+
+ 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };

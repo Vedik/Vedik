@@ -4,7 +4,7 @@
 <div ng-include="'components/modal/modal.html'"></div>
 <!--******************************************************************-->
 
-<div ng-controller="DashboardCtrl" id="for_blur" >
+<div ng-controller="DashboardCtrl" id="for_blur" ng-show="isLoaded">
 <div ng-include="'components/navbar/navbar.html'"></div>
 <script>
 	$('#top_logo').addClass('top_logo_sec');
@@ -38,7 +38,7 @@
 
 
 		<div class="col-md-12 valignOut" id="tagline_box">
-			<p >Because Everyone needs a Stage</p>
+			<p ng-click="x()">Because Everyone needs a Stage</p>
 		</div>
 		
 		
@@ -72,7 +72,7 @@
 				
 				<div>
 										
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4" style="padding:0px 20px 30px 0px;">
+					<div    class="col-md-4 animated fadeInUp" style="padding:0px 20px 30px 0px;">
 						<div class="col-md-12 " style="font-family: arial;letter-spacing: 0px;margin:0px 0px 20px 0px">
 
 							<div  class="thumbs_wrap box_shadow_dwn">
@@ -119,18 +119,18 @@
 							</div>
 						</div>
 						<div style="">
-						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index+2)" index="$index">
+						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" ng-style="for_blur" ng-if="splitIn3($index+2)" index="$index" isBooking="true">
 							
 						</content-item>
 						</div>
 					</div>
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 20px 30px 0px ">
-						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index)" index="$index">
+					<div  class="col-md-4"style="padding:0px 20px 30px 0px ">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item"  ng-style="for_blur" ng-if="splitIn3($index)" index="$index" booking="true">
 							
 						</content-item>
 					</div>	
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4"style="padding:0px 20px 30px 0px ">
-						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index+1)" index="$index">
+					<div  class="col-md-4"style="padding:0px 20px 30px 0px ">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="true" ng-style="for_blur" ng-if="splitIn3($index+1)" index="$index"  isBooking="true">
 							
 						</content-item>
 					</div>
@@ -156,12 +156,12 @@
 				</div>
 				<div id="main_stage" class="col-md-12">
 								
-         			<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4">
-						<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index)" index="$index">
+         			<div  >
+						<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur"  index="$index" class="col-md-4" style="float:left">
 							
-						</content-item>
+						</content-item >
 					</div>
-					<div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4">
+					<!-- <div ng-controller="UploadPortalCtrl"  ng-class="for_blur" class="col-md-4">
 						<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index+1)" index="$index">
 							
 						</content-item>
@@ -170,7 +170,7 @@
 						<content-item ng-repeat="item in posts | orderBy:'-createdOn'" content="item" random="false" ng-style="for_blur" ng-if="splitIn3($index+2)" index="$index">
 							
 						</content-item>
-					</div>									
+					</div>	 -->								
 						
 							
 				</div>					

@@ -15,12 +15,12 @@
     
     
   <div class=" bglg row ">
-    <div class="col-md-7  " style="height:500px" id="login_wrapper">
+    <div class="col-md-7 animated fadeInUp " style="height:500px" id="login_wrapper">
 
         <div id="video_slot"></div>
     </div>
     <div class="container  col-md-5 colorb" id="login_wrapper" >
-      <div class="row box_shadow_dwn">
+      <div class="row box_shadow_dwn animated fadeInUp">
         <div class="col-sm-12">
           <h4>Sign In</h4>
         </div>
@@ -29,14 +29,14 @@
           <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
         </div>-->
         <div class="col-sm-12">
-          <form class="form" name="signIn" ng-submit="login(signIn)" novalidate>
+          <form class="form" name="signIn" ng-submit="login(signIn)" validate>
 
             
               <div class="form-group">
-                <input type="text" class="form-control " ng-model="user.email" autofocus placeholder="Smail" required >
+                <input type="text" class="form-control " ng-model="user.email" autofocus placeholder="Smail" required name="email">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control " ng-model="user.password" required placeholder="Password">
+                <input type="password" class="form-control " ng-model="user.password" required placeholder="Password" name="password">
               </div> 
 
             <div class="form-group has-error">
@@ -71,34 +71,35 @@
           
 
         
-      <div class="row box_shadow_dwn">
+      <div class="row box_shadow_dwn animated fadeInUp">
         <div class="col-sm-12">
           <h4>Sign up</h4>
           
 
         </div>
         <div class="col-sm-12">
-          <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
+          <form class="form" name="signUp" ng-submit="register(signUp)" validate>
 
-            <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submitted,
-                                                'has-error': signUp.name.$invalid && submitted }">
-              <div class="form-group">
-                <input type="text" class="form-control " ng-model="user.name" placeholder="Name" required>
+            <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submittedSignUp,
+                                                'has-error': signUp.name.$invalid && submittedSignUp }" >
+              <div class="form-group ">
+                <input type="text" class="form-control " ng-model="user.firstName" placeholder="Name" required name="name" ng-minlength="3">
               </div>
-              <p class="help-block" ng-show="signUp.name.$error.required && submitted">
+              <p class="help-block" ng-show="signUp.name.$error.required && submittedSignUp">
                 A name is required
               </p>
             </div>
+           
 
-            <div class="form-group" ng-class="{ 'has-success': signUp.email.$valid && submitted,
-                                                'has-error': signUp.email.$invalid && submitted }">
+            <div class="form-group" ng-class="{ 'has-success': signUp.email.$valid && submittedSignUp,
+                                                'has-error': signUp.email.$invalid && submittedSignUp }">
               <div class="form-group">
-                <input type="email" class="form-control " ng-model="user.email2" placeholder="Smail" required>
+                <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail" required name="email">
               </div>
-              <p class="help-block" ng-show="signUp.email.$error.email && submitted">
+              <p class="help-block" ng-show="signUp.email.$error.email && submittedSignUp">
                 Doesn't look like a valid email.
               </p>
-              <p class="help-block" ng-show="signUp.email.$error.required && submitted">
+              <p class="help-block" ng-show="signUp.email.$error.required && submittedSignUp">
                 What's your email address?
               </p>
               <p class="help-block" ng-show="signUp.email.$error.mongoose">
@@ -109,17 +110,17 @@
 
             
 
-            <div class="form-group" ng-class="{ 'has-success': signUp.password2.$valid && submitted,
-                                                'has-error': signUp.password2.$invalid && submitted }">
+            <div class="form-group" ng-class="{ 'has-success': signUp.password2.$valid && submittedSignUp,
+                                                'has-error': signUp.password2.$invalid && submittedSignUp }">
              <div class="form-group">
-                <input type="password" class="form-control " ng-model="user.password2"  placeholder="Password" required>
+                <input type="password" class="form-control " ng-model="user.passwordNew"  placeholder="Password" required name="password">
               </div> 
              
    
 
               
               <p class="help-block"
-                 ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required) && submitted">
+                 ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required) && submittedSignUp">
                 Password must be at least 3 characters.
               </p>
               <p class="help-block" ng-show="signUp.password2.$error.mongoose">

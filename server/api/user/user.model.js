@@ -19,6 +19,7 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   unseenNotifs:[{type:Schema.Types.ObjectId}],
+  otherUnseenNotifs:[{type:Schema.Types.ObjectId,ref:'ForNotif'}],
   subscribed_users:[{user:{type:Schema.Types.ObjectId, ref:'User'}}],
   hof:[{type:Schema.Types.ObjectId}],
   asAdmin:[{user:{type:Schema.Types.ObjectId, ref:'Club'}}],

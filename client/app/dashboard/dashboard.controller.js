@@ -40,12 +40,17 @@ angular.module('myAppApp')
      console.log('bookingDate');
     console.log(todayDate);
 
-    
      $http.get('/api/bookings/'+todayDate).success(function (response){
         console.log(response);
         $scope.bookings = response;
-        $scope.posts=$scope.bookings.postId;
+        
         console.log($scope.bookings);
+    });
+ 
+      $http.get('/api/posts/').success(function (response){
+        console.log(response);
+        $scope.posts = response;
+        console.log($scope.posts);
     });
 
      $http.get('/api/clubs/').success(function (response){
@@ -82,6 +87,7 @@ angular.module('myAppApp')
                 return false;
             }
        }
+    $scope.isLoaded=true;
      
   })
     ;
