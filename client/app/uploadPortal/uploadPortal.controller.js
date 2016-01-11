@@ -428,6 +428,7 @@ angular.module('myAppApp')
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="editBooking(content._id)" class="w2b">Edit Booking(s)</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
                                                 '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -1007,11 +1008,7 @@ angular.module('myAppApp')
             
         };
 
-        function Ctrl2($scope, UploadPortalService) {
-            $scope.prop2 = "Second";
-            $scope.both = UploadPortalService.setProperty()
-        }
-
+       
         scope.deletePost = function(postId){
             $http.delete('/api/posts/'+postId).success(function(response){
                 console.log('Deleted');
@@ -1023,8 +1020,12 @@ angular.module('myAppApp')
                 console.log('added');
             })
         }
+         scope.editBooking = function(postId){
+            $http.get('/api/bookings/post/'+postId).success(function(response){
+                console.log(response);
+            })
+        }
         
-
        
          scope.blur =function(){
             scope.for_blur = {

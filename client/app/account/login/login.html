@@ -83,7 +83,7 @@
             <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submittedSignUp,
                                                 'has-error': signUp.name.$invalid && submittedSignUp }" >
               <div class="form-group ">
-                <input type="text" class="form-control " ng-model="user.firstName" placeholder="Name" required name="name" ng-minlength="3">
+                <input type="text" class="form-control " ng-model="user.name" placeholder="Name" required name="name" ng-minlength="3">
               </div>
               <p class="help-block" ng-show="signUp.name.$error.required && submittedSignUp">
                 A name is required
