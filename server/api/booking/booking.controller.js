@@ -158,3 +158,43 @@ function handleError(res, err) {
   return res.status(500).send(err);
 }
 
+
+
+
+
+
+exports.editBooking = function(req, res) {
+
+
+ /* Booking.find(function (err, bookings) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(bookings);
+  });*/
+  /*Post.find(function (err, posts) {
+    if(err) { return handleError(res, err); }
+    })
+  .populate('articleId videoId imageId uploader.user uploader.club')
+  
+  .exec(function (err, posts){
+      if (err) return handleError(err);*/
+     var postId =req.params.postId 
+     
+     
+         Booking.find({'postId':postId},function (err, bookings) {
+
+            if(err) { return handleError(res, err); }
+      
+        return res.json(bookings);
+        
+            
+        });
+        
+             
+        
+
+
+
+        
+    
+
+};
