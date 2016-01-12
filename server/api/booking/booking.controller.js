@@ -13,7 +13,6 @@ exports.index = function(req, res) {
   var startDate=new Date();
   startDate.setDate(startDate.getDate()-1);
   var endDate=new Date();
-  endDate.setDate();
 
 
       var bPosts=[];
@@ -92,8 +91,11 @@ exports.create = function(req, res) {
     return res.status(201).json(booking);
   });*/
   var bookingDate=req.body.bookingDate;
+  var startDate=bookingDate;
+  startDate.setDate(startDate.getDate()-1);
+  var endDate=bookingDate;
   
-  Booking.find({bookedFor:bookingDate},function (err, bookings) {
+  Booking.find({bookedFor:{$gte: startDate,$lt:endDate}},function (err, bookings) {
        var sequence= bookings.length;
        console.log(bookings.length);
 

@@ -144,7 +144,12 @@ angular.module('myAppApp')
          if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
             console.log(response);
-            $scope.form={};
+            $scope.form={};            
+            $('#uploadAnimate').addClass("animated  zoomOut ").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+                $('#uploadAnimate').css("display","none");
+                 $('postCreated').addClass("animated zoomIn");
+            });
+           
         })
       }
       else if($scope.type==12){

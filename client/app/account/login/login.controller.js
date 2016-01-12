@@ -42,7 +42,7 @@ angular.module('myAppApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $state.go('dashboard');
+          $state.go('welcomeUser');
         })
         .catch( function(err) {
           err = err.data;
