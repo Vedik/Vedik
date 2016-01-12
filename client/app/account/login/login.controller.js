@@ -32,7 +32,7 @@ angular.module('myAppApp')
 
 
     $scope.register = function(form) {
-      $scope.submitted = true;
+      $scope.submittedSignUp = true;
 
       if(form.$valid) {
         Auth.createUser({
@@ -55,6 +55,7 @@ angular.module('myAppApp')
           });
         });
       }
+     
     };
 
    

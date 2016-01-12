@@ -148,7 +148,12 @@ angular.module('myAppApp')
       if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
             console.log(response);
-            $scope.form={};
+            $scope.form={};            
+            $('#uploadAnimate').addClass("animated  zoomOut ").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+                $('#uploadAnimate').css("display","none");
+                 $('postCreated').addClass("animated zoomIn");
+            });
+           
         })
       }
       else if($scope.type==12){
@@ -240,7 +245,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -283,7 +288,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -316,7 +321,7 @@ angular.module('myAppApp')
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+ 
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+ 
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+ 
                                                     '</ul>'+
                                                 '</div>'+
                                                 '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -355,7 +360,7 @@ angular.module('myAppApp')
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+                                            
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+                                            
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                             '</ul>'+
                                         '</div>'+
@@ -399,7 +404,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -430,7 +435,7 @@ angular.module('myAppApp')
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="editBooking(content._id)" class="w2b">Edit Booking(s)</a></li>'+  
                                                     '</ul>'+
@@ -472,7 +477,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -515,7 +520,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -546,7 +551,7 @@ angular.module('myAppApp')
                                                     '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id)" ng-show="booking">Unbook</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
                                                     '</ul>'+
                                                 '</div>'+
@@ -600,6 +605,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -659,7 +665,8 @@ angular.module('myAppApp')
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="deletePost(content._id)" class="w2b">Delete</a></li>'+
                                                           
-                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+  
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="addHOF(content._id)" class="w2b">+HOF</a></li>'+ 
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+ 
                                                     '</ul>'+
                                                 '</div>'+
                                                 '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -699,6 +706,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -741,6 +749,7 @@ angular.module('myAppApp')
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
+                                                          '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
                                         '</div>'+
                                         '<span ng-click="bookADay(content._id)" class="float_right"><a href="">Book A Day</a></span>'+
@@ -1012,10 +1021,17 @@ angular.module('myAppApp')
             
         };
 
-       
+
+
+        scope.unbook = function(postId,index){
+            $http.delete('/api/bookings/'+postId).success(function(response){
+                console.log('Deleted');
+            })
+        }
+
         scope.deletePost = function(postId){
             $http.delete('/api/posts/'+postId).success(function(response){
-                console.log('Deleted');
+                console.log(response);
             })
         }
 
@@ -1906,15 +1922,18 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
           var dd = date.getDate();
           var mm = date.getMonth()+1;
           var yy = date.getFullYear();
-          var bookingDate=dd+"-"+mm+"-"+yy;
+          var bookingDate=date;
         }
         else
-            var bookingDate=$scope.dtNumeric;
+          var bookingDate=dateTdy;
+          bookingDate.setSeconds(0);
+          bookingDate.setHours(0);
+          bookingDate.setMinutes(0);
 
-      
-       $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate}).success(function (response){
-        console.log(booked);
-      })
+          console.log(bookingDate);
+           $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate}).success(function (response){
+            console.log(booked);
+          })
      
     };
 

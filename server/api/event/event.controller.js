@@ -27,7 +27,7 @@ exports.index = function(req, res) {
         
         var x=[];
 
-                Event.find({$or :[{'startDate':{$gte: startDate,$lt:endDate}}]},function (err, tEvents) {
+                Event.find({'startDate':{$gte: startDate,$lt:endDate}},function (err, tEvents) {
                    if(err) { return handleError(res, err); }
                    x=tEvents;
                    console.log(events);

@@ -38,7 +38,7 @@
 
 
 		<div class="col-md-12 valignOut" id="tagline_box">
-			<p ng-click="x()">Because Everyone needs a Stage</p>
+			<p >Because Everyone needs a Stage</p>
 		</div>
 		
 		
@@ -119,7 +119,7 @@
 							</div>
 						</div>
 						<div style="">
-						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" ng-style="for_blur" ng-if="splitIn3($index+2)" index="$index" isBooking="true">
+						<content-item ng-repeat="item in bookings | orderBy:'-createdOn'" content="item" ng-style="for_blur" ng-if="splitIn3($index+1)" index="$index" isBooking="true">
 							
 						</content-item>
 						</div>
@@ -130,7 +130,7 @@
 						</content-item>
 					</div>	
 					<div  class="col-md-4"style="padding:0px 20px 30px 0px ">
-						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="true" ng-style="for_blur" ng-if="splitIn3($index+1)" index="$index"  isBooking="true">
+						<content-item ng-repeat="item in bookings| orderBy:'-createdOn'" content="item" random="true" ng-style="for_blur" ng-if="splitIn3($index+2)" index="$index"  isBooking="true">
 							
 						</content-item>
 					</div>
