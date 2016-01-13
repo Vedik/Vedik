@@ -14,6 +14,7 @@ angular.module('myAppApp', [
   'ui.bootstrap.datetimepicker',
   'ngAnimate',
   'ngImgCrop',
+  'ngFileUpload'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

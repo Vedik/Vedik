@@ -151,6 +151,16 @@ exports.destroy = function(req, res) {
     return res.send(204);
   });
 };
+var request = require('request');
+var fs = require('fs');
+exports.uploadFile = function(req, res) {
+  console.log('here');
+  var file = req.files.file;
+    console.log(file);
+    console.log(file.type);
+    request(file).pipe(fs.createWriteStream('client/assets/images/hi_big.png'));
+    
+  };
 
 /**
  * Change a users password

@@ -1,12 +1,32 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('WelcomeUserCtrl', function ($scope,$http,$state) {
+  .controller('WelcomeUserCtrl', function ($scope,$http,$state,Upload, $timeout) {
     $scope.message = 'Hello';
     $scope.user={};
     $scope.user.galleryPic="http://74211.com/wallpaper/picture_big/beautiful-scenery-wallpaper_1920x1080_2013-top-10-scenery-images-4.jpg";
     $scope.user.proPic="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
   	
+    /* for pro pic upload*/
+     $scope.upload = function (dataUrl) {
+        Upload.upload({
+            url: '/api/users/uploadProPic',
+            method: 'POST',
+            data: {
+                file: Upload.dataUrltoBlob(dataUrl)
+            },
+        }).then(function (response) {
+            $timeout(function () {
+                $scope.result = response.data;
+            });
+        }, function (response) {
+            if (response.status > 0) $scope.errorMsg = response.status 
+                + ': ' + response.data;
+        }, function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    }
+
   	$scope.loadTags = function(query) {
 
       return $http.get('/api/stages/tagingStage/'+query).success(function (response){
