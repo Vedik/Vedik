@@ -146,8 +146,10 @@ angular.module('myAppApp')
             console.log(response);
             $scope.form={};            
             $('#uploadAnimate').addClass("animated  zoomOut ").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
-                $('#uploadAnimate').css("display","none");
-                 $('postCreated').addClass("animated zoomIn");
+                $('#uploadAnimate').css("display","none").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+                       
+                         $('postCreated').addClass("animated fadeIn");
+                    });
             });
            
         })

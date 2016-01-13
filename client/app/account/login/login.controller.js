@@ -4,7 +4,7 @@
 angular.module('myAppApp')
   .controller('LoginCtrl', function ($scope, Auth,$state, $location, $window) {
     $scope.user = {};
-
+    $scope.submitted=false;
     $scope.errors = {};
 
     $scope.login = function(form) {

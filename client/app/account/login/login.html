@@ -29,22 +29,25 @@
           <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
         </div>-->
         <div class="col-sm-12">
-          <form class="form" name="signIn" ng-submit="login(signIn)" validate>
+          <form class="form" name="signIn" ng-submit="login(signIn)" novalidate>
 
             
               <div class="form-group">
-                <input type="text" class="form-control " ng-model="user.email" autofocus placeholder="Smail" required name="email">
+                <input type="email" class="form-control " ng-model="user.email" autofocus placeholder="Smail"   name="email" required>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control " ng-model="user.password" required placeholder="Password" name="password">
+                <input type="password" class="form-control " ng-model="user.password"   placeholder="Password" name="password" required>
               </div> 
-
+              
             <div class="form-group has-error">
-              <p class="help-block" ng-show="signIn.email.$error.required && signIn.password.$error.required && submitted">
+              <p class="help-block" ng-show="signIn.email.$error.required  && signIn.password.$error.required  && submitted">
                  Please enter your email and password.
               </p>
               <p class="help-block" ng-show="signIn.email.$error.email && submitted">
                  Please enter a valid email.
+              </p>
+               <p class="help-block" ng-show="signIn.password.$error.required && submitted">
+                 Oops!! It looks like you forgot to enter your password.
               </p>
 
               <p class="help-block">{{ errors.other }}</p>
@@ -83,10 +86,10 @@
             <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submittedSignUp,
                                                 'has-error': signUp.name.$invalid && submittedSignUp }" >
               <div class="form-group ">
-                <input type="text" class="form-control " ng-model="user.name" placeholder="Name" required name="name" ng-minlength="3">
+                <input type="text" class="form-control " ng-model="user.name" placeholder="Name"   name="name" ng-minlength="3" required>
               </div>
-              <p class="help-block" ng-show="signUp.name.$error.required && submittedSignUp">
-                A name is required
+              <p class="help-block" ng-show="signUp.name.$error.required  && submittedSignUp">
+                A name is required 
               </p>
             </div>
            
@@ -94,12 +97,12 @@
             <div class="form-group" ng-class="{ 'has-success': signUp.email.$valid && submittedSignUp,
                                                 'has-error': signUp.email.$invalid && submittedSignUp }">
               <div class="form-group">
-                <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail" required name="email">
+                <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail"   name="email" required>
               </div>
               <p class="help-block" ng-show="signUp.email.$error.email && submittedSignUp">
                 Doesn't look like a valid email.
               </p>
-              <p class="help-block" ng-show="signUp.email.$error.required && submittedSignUp">
+              <p class="help-block" ng-show="signUp.email.$error.required  && submittedSignUp">
                 What's your email address?
               </p>
               <p class="help-block" ng-show="signUp.email.$error.mongoose">
@@ -113,14 +116,14 @@
             <div class="form-group" ng-class="{ 'has-success': signUp.password2.$valid && submittedSignUp,
                                                 'has-error': signUp.password2.$invalid && submittedSignUp }">
              <div class="form-group">
-                <input type="password" class="form-control " ng-model="user.passwordNew"  placeholder="Password" required name="password">
+                <input type="password" class="form-control " ng-model="user.passwordNew"  placeholder="Password"   name="password" required>
               </div> 
              
    
 
               
               <p class="help-block"
-                 ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required) && submittedSignUp">
+                 ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required ) && submittedSignUp">
                 Password must be at least 3 characters.
               </p>
               <p class="help-block" ng-show="signUp.password2.$error.mongoose">
