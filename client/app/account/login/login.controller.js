@@ -29,7 +29,7 @@ angular.module('myAppApp')
       $window.location.href = '/auth/' + provider;
     };
 
-
+          $scope.submittedSignUp=false;
 
     $scope.register = function(form) {
       $scope.submittedSignUp = true;

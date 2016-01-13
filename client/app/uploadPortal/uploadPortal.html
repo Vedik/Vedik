@@ -99,7 +99,11 @@
 							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 							    </tags-input>
 							</div>
-							
+							 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.tagVedik.$invalid && submitted">
+              									   Please add Vedik</p>
+
+										 </div>
 							<!-- <a href="#credits2" data-toggle="tab" class="b2w">Next</a> -->
 	        			</div>
 	        			
@@ -132,10 +136,18 @@
 							      </md-input-container>
 								
 								<div>
-									<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false" min-tags="1">
+									<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false" min-tags="1" name="creditYourself">
 								        <auto-complete source="loadCredit($query)" max-results-to-show="10"></auto-complete>
 								    </tags-input>
 								</div>
+               
+                                         <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.creditYourself.$invalid && submitted">
+              									   Please add Vedik</p>
+
+										 </div>
+
+
 							</div>
 	    				
 							<div  class="col-md-12"  ng-if="creditsRadio=='team'">
@@ -144,7 +156,15 @@
 						              <label>What's Your Team Name</label>
 						              <input ng-model="form.team"  type="text" name="teamName" required>
 						              <span class="sizeten colorg">We need a team name to represent the work</span>
-					            </md-input-container>    
+					            </md-input-container>  
+
+										 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.teamName.$error.required && submitted">
+              									   Please enter Team Name</p>
+
+										 </div>
+
+
 								<table>
 								   	<tr>
 								   		<th>Credit</th>
@@ -195,7 +215,20 @@
 												<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
 					      						</auto-complete>
 					    					</tags-input>
-					    					<span>asdfghj</span>
+					    					
+										</td>
+
+									</tr>
+									<tr>
+										<td style="width:40%;verticle-align:top">
+											
+										</td>
+										<td style="width:60%;vertical-align: bottom;">
+											 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.tagFriends.$invalid && submitted">
+              									   Please tag Friends</p>
+
+										 </div>
 										</td>
 									</tr>
 									<tr>
