@@ -96,7 +96,7 @@
               <div class="form-group">
                 <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail" required name="email">
               </div>
-              <p class="help-block" ng-show="signUp.email.$error.email && submittedSignUp">
+              <p class="help-block" ng-show=" submittedSignUp && validEmail">
                 Doesn't look like a valid email.
               </p>
               <p class="help-block" ng-show="signUp.email.$error.required && submittedSignUp">

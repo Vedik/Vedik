@@ -30,9 +30,14 @@ angular.module('myAppApp')
     };
 
           $scope.submittedSignUp=false;
-
+          $scope.validEmail=false;
     $scope.register = function(form) {
       $scope.submittedSignUp = true;
+      var  smailLength =$scope.user.emailNew.length;
+      if($scope.user.emailNew.slice(smailLength-17)=="@smail.iitm.ac.in")
+      {
+
+
 
       if(form.$valid) {
         Auth.createUser({
@@ -55,7 +60,11 @@ angular.module('myAppApp')
           });
         });
       }
-     
+     }
+     else
+     {
+       $scope.validEmail=true
+     }
     };
 
    
