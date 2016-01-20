@@ -13,7 +13,7 @@ exports.index = function(req, res) {
   var startDate=new Date();
   startDate.setDate(startDate.getDate()-1);
   var endDate=new Date();
-
+  console.log(startDate,endDate);
 
       var bPosts=[];
          Booking.find({bookedFor:{$gte: startDate,$lt:endDate}},function (err, bookings) {
@@ -91,8 +91,8 @@ exports.create = function(req, res) {
     return res.status(201).json(booking);
   });*/
   var bookingDate=req.body.bookingDate;
-  var startDate=bookingDate;
-  startDate.setDate(startDate.getDate()-1);
+  console.log(bookingDate);
+  var startDate=req.body.startDate;
   var endDate=bookingDate;
   
   Booking.find({bookedFor:{$gte: startDate,$lt:endDate}},function (err, bookings) {
@@ -166,17 +166,6 @@ function handleError(res, err) {
 exports.editBooking = function(req, res) {
 
 
- /* Booking.find(function (err, bookings) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(bookings);
-  });*/
-  /*Post.find(function (err, posts) {
-    if(err) { return handleError(res, err); }
-    })
-  .populate('articleId videoId imageId uploader.user uploader.club')
-  
-  .exec(function (err, posts){
-      if (err) return handleError(err);*/
      var postId =req.params.postId 
      
      

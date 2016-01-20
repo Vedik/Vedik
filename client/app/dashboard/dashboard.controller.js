@@ -39,8 +39,8 @@ angular.module('myAppApp')
     var todayDate=d+"-"+m+"-"+y;
      console.log('bookingDate');
     console.log(todayDate);
-
-     $http.get('/api/bookings/'+todayDate).success(function (response){
+    
+     $http.get('/api/bookings/').success(function (response){
         console.log(response);
         $scope.bookings = response;
         

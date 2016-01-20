@@ -1,7 +1,7 @@
 
 
 <!-- <div ><img src="assets/images/loginpage3.jpg" width="100%" height="100%"></div> -->
-<div id="login">
+<div id="login" ng-show="loaded">
 
     <div id="top_logo" > 
         <div id="logo">
@@ -20,7 +20,7 @@
         <div id="video_slot"></div>
     </div>
     <div class="container  col-md-5 colorb" id="login_wrapper" >
-      <div class="row box_shadow_dwn animated fadeInUp">
+      <div class="row box_shadow_dwn animated fadeInUp" id="animate">
         <div class="col-sm-12">
           <h4>Sign In</h4>
         </div>
@@ -33,10 +33,12 @@
 
             
               <div class="form-group">
+
                 <input type="email" class="form-control " ng-model="user.email" autofocus placeholder="Smail"   name="email" required>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control " ng-model="user.password"   placeholder="Password" name="password" required>
+
               </div> 
               
             <div class="form-group has-error">
@@ -74,14 +76,14 @@
           
 
         
-      <div class="row box_shadow_dwn animated fadeInUp">
+      <div class="row box_shadow_dwn animated fadeInUp" id="animate">
         <div class="col-sm-12">
           <h4>Sign up</h4>
           
 
         </div>
         <div class="col-sm-12">
-          <form class="form" name="signUp" ng-submit="register(signUp)" validate>
+          <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
 
             <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submittedSignUp,
                                                 'has-error': signUp.name.$invalid && submittedSignUp }" >
@@ -116,10 +118,17 @@
             <div class="form-group" ng-class="{ 'has-success': signUp.password2.$valid && submittedSignUp,
                                                 'has-error': signUp.password2.$invalid && submittedSignUp }">
              <div class="form-group">
-                <input type="password" class="form-control " ng-model="user.passwordNew"  placeholder="Password"   name="password" required>
+
+                <input type="password" class="form-control " ng-model="user.passwordNew" minlength="2" placeholder="Password" required name="password">
+             
+
+                     <div class="form-group has-error">
+                     <p class="help-block" ng-show="signUp.password.$invalid && submittedSignUp  ">
+                                   Password too  short</p>
+
+                     </div>
               </div> 
              
-   
 
               
               <p class="help-block"

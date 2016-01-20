@@ -5,12 +5,30 @@ angular.module('myAppApp')
     $scope.message = 'Hello';
     $scope.user={};
     $scope.user.galleryPic="http://74211.com/wallpaper/picture_big/beautiful-scenery-wallpaper_1920x1080_2013-top-10-scenery-images-4.jpg";
-    $scope.user.proPic="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
-  	
+    $scope.croppedDataUrl="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
+  	$scope.step=1;
     /* for pro pic upload*/
-     $scope.upload = function (dataUrl) {
+     $scope.uploadProPic = function (dataUrl) {
         Upload.upload({
             url: '/api/users/uploadProPic',
+            method: 'POST',
+            data: {
+                file: Upload.dataUrltoBlob(dataUrl)
+            },
+        }).then(function (response) {
+            $timeout(function () {
+                $scope.result = response.data;
+            });
+        }, function (response) {
+            if (response.status > 0) $scope.errorMsg = response.status 
+                + ': ' + response.data;
+        }, function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    }
+    $scope.uploadGalPic = function (dataUrl) {
+        Upload.upload({
+            url: '/api/users/uploadGalPic',
             method: 'POST',
             data: {
                 file: Upload.dataUrltoBlob(dataUrl)
@@ -46,7 +64,15 @@ angular.module('myAppApp')
       });
 
     };
-
+    $scope.skip=function(num){
+      if(num==4){
+        $state.go('dashboard');
+      }
+      else{
+        $scope.step=num+1;
+      }
+      
+    }
     $scope.editProfile = function (form){
       $http.post('/api/users/editProfile',{about:form.about,proPic:form.proPic,galleryPic:form.galleryPic,club:form.club,vedik:form.vedik}).success(function (response){
         

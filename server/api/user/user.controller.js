@@ -4,6 +4,8 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var request = require('request');
+var fs = require('fs');
 var Club = require('../club/club.model');
 var Stage = require('../stage/stage.model');
 
@@ -87,24 +89,27 @@ exports.editProfile = function (req, res) {
     user.galleryPic=req.body.galleryPic;
     
     user.proPic=req.body.proPic;
-    
-    for(var i=0;i<c.length;i++){
-      Club.findById(c[i]._id,function (err,club){
-        club.subscribed_users.push({user:req.user._id});
-        club.save(function (err){
-             if (err) { return handleError(res, err); }
-             console.log('club added +'+i);
+    if(c){
+      for(var i=0;i<c.length;i++){
+        Club.findById(c[i]._id,function (err,club){
+          club.subscribed_users.push({user:req.user._id});
+          club.save(function (err){
+               if (err) { return handleError(res, err); }
+               console.log('club added +'+i);
+          })
         })
-      })
+      }
     }
-    for(var i=0;i<v.length;i++){
-      Stage.findById(v[i]._id,function (err,stage){
-        stage.subscribed_users.push({user:req.user._id});
-        stage.save(function (err){
-             if (err) { return handleError(res, err); }
-             console.log('stage added +'+i);
+    if(v){
+      for(var i=0;i<v.length;i++){
+        Stage.findById(v[i]._id,function (err,stage){
+          stage.subscribed_users.push({user:req.user._id});
+          stage.save(function (err){
+               if (err) { return handleError(res, err); }
+               console.log('stage added +'+i);
+          })
         })
-      })
+      }
     }
 
     
@@ -151,17 +156,52 @@ exports.destroy = function(req, res) {
     return res.send(204);
   });
 };
-var request = require('request');
-var fs = require('fs');
-exports.uploadFile = function(req, res) {
+
+/*propic upload code*/
+exports.uploadProPic = function(req, res) {
+  console.log(req.files.file.path);
+  fs.readFile(req.files.file.path, function (err, data) {
+  console.log(data);
+  var newPath = 'client/assets/proPic/'+req.user._id ;
+  console.log(newPath);
+  fs.writeFile(newPath, data, function (err) {
+    res.redirect("back");
+  });
+  req.user.proPic='assets/proPic/'+req.user._id ;
+  req.user.save( function(err){
+    if (err) {return res.send(500, err)};
+    console.log('saved');
+  })
+});
+
+
   console.log('here');
-  var file = req.files.file;
-    console.log(file);
-    console.log(file.type);
-    request(file).pipe(fs.createWriteStream('client/assets/images/hi_big.png'));
+  // var file = req.files.file;
+  //   console.log(file);
+  //   console.log(file.type);
+  //   request(file).pipe(fs.createWriteStream('client/assets/images/hi_big.png'));
     
   };
 
+exports.uploadGalPic = function(req, res) {
+  console.log(req.files.file.path);
+  fs.readFile(req.files.file.path, function (err, data) {
+  console.log(data);
+  var newPath = 'client/assets/proPic/'+req.user._id ;
+  console.log(newPath);
+  fs.writeFile(newPath, data, function (err) {
+    res.redirect("back");
+  });
+});
+  
+
+  console.log('here');
+  // var file = req.files.file;
+  //   console.log(file);
+  //   console.log(file.type);
+  //   request(file).pipe(fs.createWriteStream('client/assets/images/hi_big.png'));
+    
+  };
 /**
  * Change a users password
  */

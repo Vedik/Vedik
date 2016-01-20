@@ -9,8 +9,10 @@
 			
 			<div class="centric sizeten colorg">*Note: It is not necessary that uploader gets to see the uploaded work on his/her profile, it only appears if her/she is credited for it.</div>
 			<hr style="border: 1px solid white;" />
-			<form name="form" ng-submit="postSubmit(form)" ng-model="form">
-    			<div class="tab-content  thumbs_wrap col-md-12 " id="uploadAnimate">
+
+			<form name="form" ng-submit="postSubmit(form)" ng-model="form" novalidate>
+    			<div class="tab-content thumbs_wrap col-md-12 " id="uploadAnimate">
+
         			<div class="tab-pane fade in active" id="upload_form2">
         				<ul class="nav nav-tabs" style="width:100%;padding:0px 100px">
 			        		<li class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" >Writing</a></li>	        			
@@ -24,18 +26,36 @@
 					          <input ng-model="form.name" placeholder="Title">
 					        </md-input-container> -->
 	        				<div class="form-group">
-								<input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Title">
+								<input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Title"  name="title" required>
+
 							</div>
+							
+							
+							 <div class="form-group has-error">
+							 <p class="help-block" ng-show="form.title.$error.required && submitted">
+              									   Please enter title
+          									    </p>
+          									    </div>
 							<div class="form-group">
 								<!-- <md-input-container class="md-block">
 							        <label>Description</label>
 							        <textarea ng-model="form.description" columns="1"  rows="1"></textarea>
 							     </md-input-container>
 								 -->
-								<textarea class='autoExpand form-control' rows='1' data-min-rows='1' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+								<textarea type="text" class='autoExpand form-control' rows='1' data-min-rows='1' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true"   name="descript" required>
 					    		</textarea>													
 														
 							</div>
+							 <div class="form-group has-error">
+                     								 
+             									
+          									     <p class="help-block" ng-show="form.descript.$error.required && submitted ">
+              									   Please enter Description
+          									    </p>
+          									     
+            								  <p class="help-block">{{ errors.other }}</p>
+          									  </div>
+	
 							<!-- <div>
 								<tags-input ng-model="form.tags" add-on-paste="true" display-property="name" placeholder="Genre/Category" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
 							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
@@ -45,10 +65,17 @@
 		        				<div class="tab-content">
 		        					<div id="article_upl" class="tab-pane fade in active">
 		        						<div class="form-group">
-											<textarea class='autoExpand form-control' rows='7' data-min-rows='7' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true">
+		      
+											<textarea type="text" class='autoExpand form-control' rows='7' data-min-rows='7' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true"  name="article" required>
 								    		</textarea>						
 										</div>
+										 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.article.$error.required && submitted">
+              									   Please enter article</p>
+
+										 </div>
 									</div>
+
 									<div id="image_upl" class="tab-pane fade">
 		        						<div class="form-group">	
 											<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
@@ -68,11 +95,15 @@
 								</div>							
 							</div>											
 							<div>
-								<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+								<tags-input ng-model="form.vedik" add-on-paste="true" display-property="name" placeholder="Add the Vedik" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false" min-tags="1" name="tagVedik">
 							        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 							    </tags-input>
 							</div>
-							
+							 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.tagVedik.$invalid && submitted">
+              									   Please add Vedik</p>
+
+										 </div>
 							<!-- <a href="#credits2" data-toggle="tab" class="b2w">Next</a> -->
 	        			</div>
 	        			
@@ -90,7 +121,7 @@
 								<br/>
 							</div>
 
-							<div class="col-md-12" ng-show="creditsRadio=='me'">
+							<div class="col-md-12" ng-if="creditsRadio=='me'">
 								<md-input-container>
 							        <label>Upload As</label>
 							        <md-select ng-model="creditTo">
@@ -105,19 +136,35 @@
 							      </md-input-container>
 								
 								<div>
-									<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false">
+									<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false" min-tags="1" name="creditYourself">
 								        <auto-complete source="loadCredit($query)" max-results-to-show="10"></auto-complete>
 								    </tags-input>
 								</div>
+               
+                                         <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.creditYourself.$invalid && submitted">
+              									   Please add Vedik</p>
+
+										 </div>
+
+
 							</div>
 	    				
-							<div  class="col-md-12"  ng-show="creditsRadio=='team'">
+							<div  class="col-md-12"  ng-if="creditsRadio=='team'">
 								
 								<md-input-container>
-						              <label>Team Name</label>
-						              <input ng-model="form.team"  type="text" name="team" >
+						              <label>What's Your Team Name</label>
+						              <input ng-model="form.team"  type="text" name="teamName" required>
 						              <span class="sizeten colorg">We need a team name to represent the work</span>
-					            </md-input-container>    
+					            </md-input-container>  
+
+										 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.teamName.$error.required && submitted">
+              									   Please enter Team Name</p>
+
+										 </div>
+
+
 								<table>
 								   	<tr>
 								   		<th>Credit</th>
@@ -128,7 +175,7 @@
 			 					   			<div  layout="column" ng-cloak>
 
 											  <md-content class="md-padding">
-											    <form ng-submit="$event.preventDefault()" name="searchForm">
+											  
 											     
 											      <div layout-gt-sm="row">
 											        
@@ -144,29 +191,44 @@
 											            md-floating-label="Credit"
 											           
 											           	md-menu-class="autoCompleteDropDown"
-											           >
+											           	name="credit"
+											           	required>
 											          <md-item-template>
 											            <span md-highlight-text="searchText">{{item.creditDetail}}</span>
 											          </md-item-template>
-											          <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+											          <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
 											            <div ng-message="required">You <b>must</b> have a favorite state.</div>
 											            <div ng-message="minlength">Your entry is not long enough.</div>
 											            <div ng-message="maxlength">Your entry is too long.</div>
-											          </div>-->
+											          </div>
 
 											        </md-autocomplete>
 											      </div>
-											       </form>
+											     
 
 											  </md-content>
 											</div>
 															    			
 										</td>
 										<td style="width:60%;vertical-align: bottom;">
-											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag Friends" required>
+											<tags-input ng-model="creditUser[$index]" display-property="name" add-from-autocomplete-only="true"  class="bootstrap" placeholder="Tag Friends" name="tagFriends" min-tags="1">
 												<auto-complete source="getSuggestionsForNames($query)" min-length='1'>
 					      						</auto-complete>
 					    					</tags-input>
+					    					
+										</td>
+
+									</tr>
+									<tr>
+										<td style="width:40%;verticle-align:top">
+											
+										</td>
+										<td style="width:60%;vertical-align: bottom;">
+											 <div class="form-group has-error">
+										 <p class="help-block" ng-show="form.tagFriends.$invalid && submitted">
+              									   Please tag Friends</p>
+
+										 </div>
 										</td>
 									</tr>
 									<tr>
@@ -185,10 +247,13 @@
 											      		
 					    	</div>
 					    	
-	        				
-						
+	        								
 			        		
 	        			</div>
+
+
+	        					
+						
 	        			<div class="col-md-12" >
 				    		<button type="submit" class="w2g col-md-12">Submit</button>
 				    	

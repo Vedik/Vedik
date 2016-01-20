@@ -138,10 +138,14 @@ angular.module('myAppApp')
       }
       
    }
-
+   $scope.submitted=false;
    $scope.postSubmit = function (form){
-    if($scope.creditsRadio=='team'){
-         if($scope.type==11){
+    $scope.submitted=true;
+    console.log(form,form.$valid);
+
+    if($scope.creditsRadio=='team' && form.$valid){
+        console.log("yo");
+      if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
             console.log(response);
             $scope.form={};            
@@ -168,7 +172,7 @@ angular.module('myAppApp')
         })
       }
     }
-    else if($scope.creditsRadio=='me'){
+    else if($scope.creditsRadio=='me' && form.$valid){
         console.log(form.userCredits,$scope.creditTo,form.club);
          if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
@@ -1927,9 +1931,10 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
           bookingDate.setSeconds(0);
           bookingDate.setHours(0);
           bookingDate.setMinutes(0);
-
-          console.log(bookingDate);
-           $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate}).success(function (response){
+          var startDate=new Date(bookingDate.valueOf());
+          startDate.setDate(startDate.getDate()-1);
+          console.log(bookingDate,startDate,dateTdy);
+           $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate,startDate:startDate}).success(function (response){
             console.log(booked);
           })
      

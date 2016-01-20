@@ -23,6 +23,7 @@ router.post('/addHOF/:postId',auth.isAuthenticated(), controller.addHOF);
 router.post('/editProfile', auth.isAuthenticated(), controller.editProfile);
 router.get('/search/:searchQuery', controller.search);
 router.get('/:id',auth.isAuthenticated(), controller.showUser);
-router.post('/uploadProPic', multipartyMiddleware, controller.uploadFile);
+router.post('/uploadProPic',auth.isAuthenticated(), multipartyMiddleware, controller.uploadProPic);
+router.post('/uploadGalPic',auth.isAuthenticated(), multipartyMiddleware, controller.uploadGalPic);
 
 module.exports = router;

@@ -35,6 +35,11 @@
   position: absolute;
   top: 0px;
   left: 0px;
+   -webkit-animation-duration: 5s;
+  -moz-animation-duration: 5s;
+  animation-duration: 3s;
+  -vendor-animation-delay: 10s;
+
   
 }
 #login_wrapper{

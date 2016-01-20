@@ -8,8 +8,8 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 var UserSchema = new Schema({
   name: {type:String, required:true},
   email: { type: String,required:true,unique:true, lowercase: true },
-  proPic: String,
-  galleryPic:String,
+  proPic: {type:String,default:"http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg"},
+  galleryPic:{type:String,default:"http://lifewallpapers.com/wp-content/uploads/2014/07/Photography-Awesome-Nature-Desktop-Backgrounds-Wallpaper-1600x1000.jpg"},
   about:String,
   role: {
     type: String,
