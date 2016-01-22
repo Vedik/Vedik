@@ -15,6 +15,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  step:{type:Number,default:1}, //which step the user has to complete
   hashedPassword: String,
   provider: String,
   salt: String,

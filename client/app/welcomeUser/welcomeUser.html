@@ -48,8 +48,9 @@
 					        <auto-complete source="loadClubs($query)" max-results-to-show="10"></auto-complete>
 					    </tags-input>
 					</div>
-					<button type="button" class="w2g col-md-6" ng-click="skip(1)">Skip</button> 
-					<button type="submit" class="w2g col-md-6">Next</button> 
+					<button type="button" class="w2g col-md-4" ng-click="skip(1)">back</button> 
+					<button type="button" class="w2g col-md-4" ng-click="skip(2)">Skip</button> 
+					<button type="submit" class="w2g col-md-4" ng-click="editProfile(user)">Next</button> 
 				</div>
 				<div ng-show="step==3">
 					<div>
@@ -57,39 +58,45 @@
 					        <auto-complete source="loadTags($query)" max-results-to-show="10"></auto-complete>
 					    </tags-input>
 					</div>
-					<button type="button" class="w2g col-md-6" ng-click="skip(1)">Skip</button> 
-					<button type="submit" class="w2g col-md-6">Next</button> 
+					<button type="button" class="w2g col-md-4" ng-click="skip(2)">Back</button> 
+					<button type="button" class="w2g col-md-4" ng-click="skip(3)">Skip</button> 
+					<button type="submit" class="w2g col-md-4" ng-click="editProfile(user)">Next</button> 
 				</div>
 				<div ng-show="step==4">
-					<div class="form-group">
-		          		<input type="text" ng-model="user.galleryPic" placeholder="Event Cover" class="form-control">
-		          	</div>
-		          	<img src="{{user.galleryPic}}" width="100%" height="auto" >
-		          	<button type="button" class="w2g col-md-6" ng-click="skip(1)">Skip</button> 
-					<button type="submit" class="w2g col-md-6">Next</button> 
+					<div class="centric colorlb">Whats the background of your Vedik?</div>
+					<form name="form" ng-model="form" style="color:black" ng-submit="uploadGalPic(croppedGalUrl)">
+					<br/>
+						<div class="form-group">
+			          		<button ngf-select ng-model="picFile" accept="image/*" class="w2g col-md-12">
+					            Upload your Vedik's Gallery picture</button>
+					        <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+					             class="cropArea">
+					             <img src="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg" style="margin:0px auto;display:inherit;height:100%" ng-if="!picFile">
+					            <img-crop image="picFile  | ngfDataUrl"                 
+					            result-image="croppedGalUrl" ng-init="croppedGalUrl=''" area-type="rectangle" aspect-ratio="1.7" result-image-size='{w: 2040,h: 1200}' >
+					            </img-crop>
+					        </div>
+					       <!--  <div>
+					            <img ng-src="{{croppedDataUrl}}" />
+					        </div> -->
+					        <button type="button" class="w2g col-md-4" ng-click="skip(3)">Back</button> 
+					        <button type="button" class="w2g col-md-4" ng-click="skip(4)">Skip</button> 
+					        <button type="submit" class="w2g col-md-4">Done</button> 
+					            
+					        <span class="progress" ng-show="progress >= 0">
+					          <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+					        </span>
+					        <!-- <span ng-show="result">Upload Successful</span> -->
+					        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+			          		
+			          	</div>
+					</form>
 				</div>
 			</div>
-			<form name="form" ng-model="form" style="color:black">
-        		<!-- <div class="col-md-6" style="padding:20px 50px 20px 100px">
-	        	
-		          	
-		          	
-		          	
-					
-					
-					<br/>
-		         	
-		         
-		    	</div>
-		    	<div class="col-md-6" style="padding:20px 100px 20px 50px">
-		    		
-					<br/>
-		    		
-		          	
-			    </div> -->
-
-	         	
-	        </form>
+			<div ng-show="step==5">
+				<h1 class="centric">Successful</h1>
+			</div>
+			
 	    </div>
 	</div>
 </div>

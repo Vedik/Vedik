@@ -1,12 +1,17 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('WelcomeUserCtrl', function ($scope,$http,$state,Upload, $timeout) {
+  .controller('WelcomeUserCtrl', function ($scope,$http,$state,Upload, $timeout, Auth) {
     $scope.message = 'Hello';
     $scope.user={};
     $scope.user.galleryPic="http://74211.com/wallpaper/picture_big/beautiful-scenery-wallpaper_1920x1080_2013-top-10-scenery-images-4.jpg";
     $scope.croppedDataUrl="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
-  	$scope.step=1;
+  	$scope.user= Auth.getCurrentUser;
+    if($scope.user().step) 
+      $scope.step=4;
+    else
+      $scope.step=1;
+    console.log($scope.step);
     /* for pro pic upload*/
      $scope.uploadProPic = function (dataUrl) {
         Upload.upload({
@@ -18,14 +23,27 @@ angular.module('myAppApp')
         }).then(function (response) {
             $timeout(function () {
                 $scope.result = response.data;
+
             });
         }, function (response) {
             if (response.status > 0) $scope.errorMsg = response.status 
                 + ': ' + response.data;
         }, function (evt) {
+            console.log($scope.progress);
             $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+            if($scope.progress==100){
+              $scope.goNext=function(){
+                $timeout(function() {
+                  $scope.step=2;
+                },2000);              
+              }
+              $scope.goNext();
+            }
+            
+
         });
     }
+
     $scope.uploadGalPic = function (dataUrl) {
         Upload.upload({
             url: '/api/users/uploadGalPic',
@@ -36,12 +54,25 @@ angular.module('myAppApp')
         }).then(function (response) {
             $timeout(function () {
                 $scope.result = response.data;
+               
             });
         }, function (response) {
             if (response.status > 0) $scope.errorMsg = response.status 
                 + ': ' + response.data;
         }, function (evt) {
             $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+            if($scope.progress==100){
+              $scope.goNext=function(){
+                $timeout(function() {
+                  $scope.step=5;
+                  $timeout(function() {
+                     $state.go('dashboard');
+                  },2000); 
+                }, 1500);
+                             
+              }
+              $scope.goNext();
+            }
         });
     }
 
@@ -74,10 +105,10 @@ angular.module('myAppApp')
       
     }
     $scope.editProfile = function (form){
-      $http.post('/api/users/editProfile',{about:form.about,proPic:form.proPic,galleryPic:form.galleryPic,club:form.club,vedik:form.vedik}).success(function (response){
+      $http.post('/api/users/editProfile',{about:form.about,proPic:form.proPic,galleryPic:form.galleryPic,club:form.club,vedik:form.vedik,step:$scope.step}).success(function (response){
         
         $scope.user=response;     
-     	$state.go('dashboard');
+     	  $scope.step=$scope.step+1;
       })
 
     }

@@ -83,12 +83,15 @@ exports.editProfile = function (req, res) {
       user.name=req.body.name; 
     }
     
-    
+    if(req.body.about){
     user.about=req.body.about;
-    
+    }
+    if(req.body.galleryPic){
     user.galleryPic=req.body.galleryPic;
-    
+    }
+    if(req.body.propic){
     user.proPic=req.body.proPic;
+    }
     if(c){
       for(var i=0;i<c.length;i++){
         Club.findById(c[i]._id,function (err,club){
@@ -111,11 +114,11 @@ exports.editProfile = function (req, res) {
         })
       }
     }
-
+    user.step=req.body.step+1;
     
     user.save(function (err) {
       if (err) { return handleError(res, err); }
-        console.log(user.proPic);
+        console.log(user.step);
        res.json(200, user);
 
     });
@@ -165,9 +168,11 @@ exports.uploadProPic = function(req, res) {
   var newPath = 'client/assets/proPic/'+req.user._id ;
   console.log(newPath);
   fs.writeFile(newPath, data, function (err) {
+    if (err) {return res.send(500, err)};
     res.redirect("back");
   });
   req.user.proPic='assets/proPic/'+req.user._id ;
+  req.user.step=2;
   req.user.save( function(err){
     if (err) {return res.send(500, err)};
     console.log('saved');
@@ -187,11 +192,17 @@ exports.uploadGalPic = function(req, res) {
   console.log(req.files.file.path);
   fs.readFile(req.files.file.path, function (err, data) {
   console.log(data);
-  var newPath = 'client/assets/proPic/'+req.user._id ;
+  var newPath = 'client/assets/galleryPic/'+req.user._id ;
   console.log(newPath);
   fs.writeFile(newPath, data, function (err) {
     res.redirect("back");
   });
+  req.user.galleryPic='assets/galleryPic/'+req.user._id ;
+  req.user.step=5;
+  req.user.save( function(err){
+    if (err) {return res.send(500, err)};
+    console.log('saved');
+  })
 });
   
 
