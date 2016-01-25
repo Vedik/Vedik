@@ -11,7 +11,8 @@ router.get('/post/:postId', controller.editBooking);
 router.post('/:post_id',auth.isAuthenticated(), controller.create);
 router.put('/update/:bookingCheckbox',auth.isAuthenticated(), controller.update); 
 router.patch('/:id', controller.update);
-router.put('/:postId', controller.destroy);
+router.delete('/:postId', controller.destroy);
+router.delete('/deleteBooking/:id', controller.deleteBooking);
 
 router.get('/post/:postId', controller.sendBookedDates);
 

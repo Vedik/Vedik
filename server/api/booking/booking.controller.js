@@ -114,7 +114,7 @@ exports.create = function(req, res) {
          return handleError(res, err); }
         else {
           console.log('done');
-          return res.json(newBooking.bookedFor);
+          return res.json({bookedFor:newBooking.bookedFor,_id:newBooking._id});
         };
       });
     });
@@ -143,7 +143,7 @@ exports.update = function(req, res) {
 // Deletes a booking from the DB.
 exports.destroy = function(req, res) {
   console.log(req.body.date);
-  if(req.body.date){
+  if(req.params.date){
     var startDate=new Date(req.body.date);
     startDate.setDate(startDate.getDate()-1);
     var endDate=new Date(req.body.date);
@@ -167,6 +167,17 @@ exports.destroy = function(req, res) {
       return res.status(204).send('No Content');
     });
   
+};
+
+exports.deleteBooking = function(req, res) {
+  Booking.findById(req.params.id, function (err, booking) {
+    if(err) { return handleError(res, err); }
+    if(!booking) { return res.status(404).send('Not Found'); }
+    booking.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.status(204).send('No Content');
+    });
+  });
 };
 
 function handleError(res, err) {

@@ -104,13 +104,14 @@
 
 							<li class="list-group-item" ng-repeat="date in bookedDates">
 							{{date.bookedFor}}
-							 	<button type="button" class="close colorb" ng-click="unbook(date.bookedFor,$index)">X</button>
+							 	<button type="button" class="close colorb" ng-click="unbook(date._id,$index)">X</button>
 							</li>
 						</ul>
-			    		</div>
 			    	</div>
-			    	<div ng-show="bookedDates.length>4"> maximum  4 bookings only</div>
-                <div ><button type="submit" class="w2g">Book</button></div>
+			    </div>
+			    	<div ng-show="bookedDates.length==4 && checkRepeat"> maximum  4 bookings only</div>
+			    	<div ng-show="bookedDates.length!=4 && checkRepeat && !noRepeat">repeated bookings not allowed</div>
+               	    <div ><button type="submit" class="w2g">Book</button></div>
             </form>
                
             

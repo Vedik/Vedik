@@ -1920,6 +1920,7 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
   
 
     $scope.bookPost=function(){
+
         if($scope.dt2!=$scope.dt)
         {
           var date = $scope.dt ;
@@ -1935,30 +1936,34 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
           bookingDate.setMinutes(0);
           var startDate=new Date(bookingDate.valueOf());
           startDate.setDate(startDate.getDate()-1);
-          console.log(bookingDate,startDate,dateTdy);
-          var noRepeat=true;
+          console.log($scope.bookedDates);
+           $scope.noRepeat=true;
           for(var i=0;i<$scope.bookedDates.length;i++)
-          {  console.log("wertg");
-             
-             console.log($scope.bookedDates[i].bookedFor);
+          {  
+        
              var bookedDate=bookingDate.toISOString();
-             console.log(bookedDate);
-            if($scope.bookedDates[i].bookedFor==bookedDate)
-                 console.log("sedf");
-                 noRepeat=false;
+            
+            if($scope.bookedDates[i].bookedFor.slice(0,-5)==bookedDate.slice(0,-5))
+              {
+                 $scope.noRepeat=false;
+                 
+                 break;
+              }
           }
-          if(noRepeat)
+          if($scope.noRepeat && $scope.bookedDates.length!=4)
           {
               $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate,startDate:startDate}).success(function (response){
                   console.log(response);
-                  $scope.bookedDates.push({bookedFor:response});
+                  $scope.bookedDates.push(response);
                   console.log($scope.bookedDates);
-
+                   $scope.checkRepeat=false;
           })
           }
           else{
+            $scope.checkRepeat=true;
             console.log("repeated");
-          }
+            
+              }
     };
 
 
@@ -1969,6 +1974,7 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
         {
           $scope.bookedDates[i]=response[i];
         }
+        console.log($scope.bookedDates);
 
     });
         
@@ -1981,8 +1987,8 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
     
      
 
-    $scope.unbook = function(date,index){
-        $http.put('/api/bookings/'+$scope.postId,{date:date}).success(function(response){
+    $scope.unbook = function(id,index){
+        $http.delete('/api/bookings/deleteBooking/'+id).success(function(response){
             console.log('Deleted');
             $scope.bookedDates.splice(index,1);
         })
@@ -1998,26 +2004,26 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
   };
 
   // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    if ($scope.bookedDates.length>3)
-      return true;
-   else if(mode === 'day')
-    {
+  // $scope.disabled = function(date, mode) {
+  //   if ($scope.bookedDates.length>3)
+  //     return true;
+  //  else if(mode === 'day')
+  //   {
 
         
-      console.log($scope.bookedDates.length);
-      for(var i=0;i<$scope.bookedDates.length;i++)
-      {
-        console.log("dertf");
+  //     console.log($scope.bookedDates.length);
+  //     for(var i=0;i<$scope.bookedDates.length;i++)
+  //     {
+  //       console.log("dertf");
        
-        if(date == $scope.bookedDates[i].bookedFor)
-          {
-             console.log("dertf");
-          return true;
-           }   
-      }
-    }
-  };
+  //       if(date == $scope.bookedDates[i].bookedFor)
+  //         {
+  //            console.log("dertf");
+  //         return true;
+  //          }   
+  //     }
+  //   }
+  // };
 
   $scope.toggleMin = function() {
     $scope.minDate = $scope.minDate ? null : new Date();
