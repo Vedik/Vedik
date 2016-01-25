@@ -196,8 +196,8 @@ exports.create = function(req, res) {
                       else
                       {
                         user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
-                        user.subscribed_users[i].user.save(function (error){
-                          if(error){
+                        user.subscribed_users[i].user.save(function (err){
+                          if(err){
                             return handleError(res,err);
                           }
                           else
@@ -214,19 +214,28 @@ exports.create = function(req, res) {
 
             }
           });
-          Post.findById(newPost._id, function (err, post) {
-            if(err) { return handleError(res, err); }
-            })
-          .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment')
-          
-          .exec(function (err, post){
-              if (err) return handleError(err);
-
-              
-              //console.log(posts);
-              
-              return res.json(post);
+          var club;
+          Club.findById(newPost.uploaderClub,function (err,club){
+            if (err) {return handleError(err);}
+            club=club;
           })
+          var post=[{
+              _id:newPost._id,
+              articleId:newArticle,
+              type:newPost.type,
+              uploader:{user:req.user},
+              uploaderClub:club,
+              ratings:[{user:"",rating:{type:Number,default:0}}],
+              rating:{type:Number,default:0},
+              team:newPost.team,
+              vedik:[{vedik:""}],
+              createdOn:newPost.createdOn
+          }];
+          
+          console.log(post);
+         
+              return res.json(post);
+          
           
           
         }

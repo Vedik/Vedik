@@ -143,13 +143,15 @@ angular.module('myAppApp')
     $scope.submitted=true;
     console.log(form,form.$valid);
 
+    $scope.newUpload=[]; 
     if($scope.creditsRadio=='team' && form.$valid){
         console.log("yo");
       if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
-            console.log(response);
+        
             $scope.form={}; 
-            $scope.post=response;           
+            $scope.newUpload.push(response[0]);
+            console.log($scope.newUpload);          
             // $('#uploadAnimate').addClass("animated  zoomOut ").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
             //     $('#uploadAnimate').css("display","none").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
                        
