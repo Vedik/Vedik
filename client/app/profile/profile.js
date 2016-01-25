@@ -6,7 +6,8 @@ angular.module('myAppApp')
       .state('profile', {
         url: '/profile/:id',
         templateUrl: 'app/profile/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        data : { pageTitle: 'Profile' }
       });
 
       $.fn.autogrow = function(options)

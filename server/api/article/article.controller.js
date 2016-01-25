@@ -214,9 +214,21 @@ exports.create = function(req, res) {
 
             }
           });
-
+          Post.findById(newPost._id, function (err, post) {
+            if(err) { return handleError(res, err); }
+            })
+          .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment')
           
-          return res.json(200,newArticle);
+          .exec(function (err, post){
+              if (err) return handleError(err);
+
+              
+              //console.log(posts);
+              
+              return res.json(post);
+          })
+          
+          
         }
     
     });
@@ -224,125 +236,125 @@ exports.create = function(req, res) {
 
 
 
-exports.clubPost = function(req, res) {
-  console.log(req.params.id);
-  /*Video.create(req.body, function(err, video) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, video);
-  });*/
-  var a=req.body.vedik;
+// exports.clubPost = function(req, res) {
+//   console.log(req.params.id);
+//   /*Video.create(req.body, function(err, video) {
+//     if(err) { return handleError(res, err); }
+//     return res.json(201, video);
+//   });*/
+//   var a=req.body.vedik;
   
-  var b=[];
-  for(var i=0;i<a.length;i++)
-  {
-    b[i]=a[i]._id;
-  };
+//   var b=[];
+//   for(var i=0;i<a.length;i++)
+//   {
+//     b[i]=a[i]._id;
+//   };
   
   
 
-  var newArticle = new Article({
-    articleName:req.body.articleName,
-    content:req.body.content,
-    description:req.body.description,
+//   var newArticle = new Article({
+//     articleName:req.body.articleName,
+//     content:req.body.content,
+//     description:req.body.description,
     
-  });
+//   });
  
 
-  newArticle.save(function (err){
+//   newArticle.save(function (err){
  
-    if(err) {return handleError(res, err); }
-    else {
+//     if(err) {return handleError(res, err); }
+//     else {
   
           
          
-          var newPost = new Post({
-            articleId: newArticle._id,
-            tags:req.body.tags,
-            type:21,
-            view_count:0,
-            uploader:{user:req.user._id},
-            ratings:[],
-            rating:0,
-            like:[],
-            createdOn:Date.now(),
-            uploaderClub:req.params.id
-          });
+//           var newPost = new Post({
+//             articleId: newArticle._id,
+//             tags:req.body.tags,
+//             type:21,
+//             view_count:0,
+//             uploader:{user:req.user._id},
+//             ratings:[],
+//             rating:0,
+//             like:[],
+//             createdOn:Date.now(),
+//             uploaderClub:req.params.id
+//           });
          
-          for(i=0;i<b.length;i++)
-          {
-            newPost.vedik.push({vedik:b[i]});
-          }
-          newPost.save(function(err){
-            if(err) return handleError(res,err);
-            else 
-              {
+//           for(i=0;i<b.length;i++)
+//           {
+//             newPost.vedik.push({vedik:b[i]});
+//           }
+//           newPost.save(function(err){
+//             if(err) return handleError(res,err);
+//             else 
+//               {
                 
 
-                for(var i=0;i<req.body.creditType.length;i++)
-                {
-                  var users=req.body.creditUser[i];
-                  console.log(users);
-                  var newCredit =  new Credit({
-                    postId:newPost._id,
-                    credit:req.body.creditType[i]._id,
-                    creditedUsers:[]
-                  });
+//                 for(var i=0;i<req.body.creditType.length;i++)
+//                 {
+//                   var users=req.body.creditUser[i];
+//                   console.log(users);
+//                   var newCredit =  new Credit({
+//                     postId:newPost._id,
+//                     credit:req.body.creditType[i]._id,
+//                     creditedUsers:[]
+//                   });
 
-                  for(var j=0;j<req.body.creditUser[i].length;j++){
-                    newCredit.creditedUsers.push({user:users[j]._id});
-                  }
-                  newCredit.save(function(err){
-                  if(err) return handleError(res,err);
-                  console.log('Credit added');
-                })
+//                   for(var j=0;j<req.body.creditUser[i].length;j++){
+//                     newCredit.creditedUsers.push({user:users[j]._id});
+//                   }
+//                   newCredit.save(function(err){
+//                   if(err) return handleError(res,err);
+//                   console.log('Credit added');
+//                 })
 
-                }
+//                 }
 
 
-                console.log('post created');
+//                 console.log('post created');
              
                 
-               Club.findById(req.params.id,function (err,club){
-                    if(err) { return handleError(res, err); }
-                })
-                .populate('subscribed_users.user')
-                .exec(function(err,club){
-                    if (err) return handleError(err);
-                  for(var i=0;i<club.subscribed_users.length;i++)
-                  {
-                      console.log(club.subscribed_users[i].user._id);
-                      if(club.subscribed_users[i].user._id.equals(req.user._id))
-                      {
-                        console.log('user');
-                      }
-                      else
-                      {
-                        club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
-                        club.subscribed_users[i].user.save(function (error){
-                          if(error){
-                            return handleError(res,err);
-                          }
-                          else
-                          {
-                             console.log('add unseen notif to');
-                          }
+//                Club.findById(req.params.id,function (err,club){
+//                     if(err) { return handleError(res, err); }
+//                 })
+//                 .populate('subscribed_users.user')
+//                 .exec(function(err,club){
+//                     if (err) return handleError(err);
+//                   for(var i=0;i<club.subscribed_users.length;i++)
+//                   {
+//                       console.log(club.subscribed_users[i].user._id);
+//                       if(club.subscribed_users[i].user._id.equals(req.user._id))
+//                       {
+//                         console.log('user');
+//                       }
+//                       else
+//                       {
+//                         club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+//                         club.subscribed_users[i].user.save(function (error){
+//                           if(error){
+//                             return handleError(res,err);
+//                           }
+//                           else
+//                           {
+//                              console.log('add unseen notif to');
+//                           }
                        
-                        });
-                      }
-                  }
+//                         });
+//                       }
+//                   }
                  
                   
-                });
+//                 });
 
-            }
-          });
+//             }
+//           });
 
           
-          return res.json(200,newArticle);
-        }
+//           return res.json(200,newArticle);
+//         }
     
-    });
-};
+//     });
+// };
 
 exports.eventPost = function(req, res) {
   console.log(req.params.id);

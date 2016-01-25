@@ -9,7 +9,8 @@
 			
 			<div class="centric sizeten colorg">*Note: It is not necessary that uploader gets to see the uploaded work on his/her profile, it only appears if her/she is credited for it.</div>
 			<hr style="border: 1px solid white;" />
-
+			<content-item ng-repeat="item in post " content="item" ng-style="for_blur" index="$index" ng-show="post">
+			</content-item>
 			<form name="form" ng-submit="postSubmit(form)" ng-model="form" novalidate>
     			<div class="tab-content thumbs_wrap col-md-12 " id="uploadAnimate">
 

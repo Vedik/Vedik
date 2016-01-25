@@ -148,13 +148,14 @@ angular.module('myAppApp')
       if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
             console.log(response);
-            $scope.form={};            
-            $('#uploadAnimate').addClass("animated  zoomOut ").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
-                $('#uploadAnimate').css("display","none").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+            $scope.form={}; 
+            $scope.post=response;           
+            // $('#uploadAnimate').addClass("animated  zoomOut ").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
+            //     $('#uploadAnimate').css("display","none").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
                        
-                         $('postCreated').addClass("animated fadeIn");
-                    });
-            });
+            //              $('postCreated').addClass("animated fadeIn");
+            //         });
+            // });
            
         })
       }
@@ -305,7 +306,7 @@ angular.module('myAppApp')
                                             '<a href="">'  +
                                                 '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
                                             '</a>'  +
-                                            '</br>{{content.articleId.content}}</br></br>'  +
+                                            '</br>{{content.articleId.content}} <span ng-click="expand()" ng-show="seeLess">see more...</span></br></br>'  +
                                             '<div>' +
                                                 '<span>by<a href=""> {{content.uploader.user.name}}</a></span>'  +                                            
                                             '</div>'    +
@@ -899,7 +900,9 @@ angular.module('myAppApp')
           // else
           //    scope.width=100;
             scope.width=100;
-            
+            if(scope.content.type==111){
+              
+            }
             
                 
          
@@ -1896,7 +1899,7 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
   console.log('hello');
    $scope.ok = function () {
     $modalInstance.close($scope.selected.item);
-  };
+    };
     $scope.postId=bookingPostId;  
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];

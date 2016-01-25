@@ -8,7 +8,7 @@ angular.module('myAppApp')
     $scope.croppedDataUrl="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
   	$scope.user= Auth.getCurrentUser;
     if($scope.user().step) 
-      $scope.step=4;
+      $scope.step=$scope.user().step;
     else
       $scope.step=1;
     console.log($scope.step);
