@@ -114,6 +114,7 @@ exports.create = function(req, res) {
          return handleError(res, err); }
         else {
           console.log('done');
+          return res.json({bookedFor:newBooking.bookedFor,_id:newBooking._id});
         };
       });
     });
@@ -141,6 +142,19 @@ exports.update = function(req, res) {
 
 // Deletes a booking from the DB.
 exports.destroy = function(req, res) {
+  console.log(req.body.date);
+  if(req.params.date){
+    var startDate=new Date(req.body.date);
+    startDate.setDate(startDate.getDate()-1);
+    var endDate=new Date(req.body.date);
+    endDate.setDate(endDate.getDate());
+  }
+  else{
+    var startDate=new Date();
+    startDate.setDate(startDate.getDate()-1);
+    var endDate=new Date();
+    endDate.setDate(endDate.getDate());
+  }
   console.log(req.params.postId);
   var startDate=new Date();
   startDate.setDate(startDate.getDate()-1);
@@ -149,9 +163,21 @@ exports.destroy = function(req, res) {
 
     Booking.remove({$and:[{bookedFor:{$gte: startDate,$lt:endDate}},{postId:req.params.postId}]},function(err) {
       if(err) { return handleError(res, err); }
+      console.log('here');
       return res.status(204).send('No Content');
     });
   
+};
+
+exports.deleteBooking = function(req, res) {
+  Booking.findById(req.params.id, function (err, booking) {
+    if(err) { return handleError(res, err); }
+    if(!booking) { return res.status(404).send('Not Found'); }
+    booking.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.status(204).send('No Content');
+    });
+  });
 };
 
 function handleError(res, err) {
@@ -178,12 +204,23 @@ exports.editBooking = function(req, res) {
             
         });
         
-             
+
+};
+
+exports.sendBookedDates = function(req, res) {
+
+
+     var postId =req.params.postId 
+     
+     
+         Booking.find({'postId':postId},function (err, bookings) {
+
+            if(err) { return handleError(res, err); }
+      
+        return bookings;
         
-
-
-
+            
+        });
         
-    
 
 };

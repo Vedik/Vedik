@@ -1,7 +1,7 @@
 angular.module('myAppApp').controller('DatepickerDemoCtrl', function ($scope, $http) {
   
 $scope.today = function() {
-    $scope.dt = new Date();
+    $scope.form.dt= new Date();
   };
   $scope.today();
 
@@ -44,9 +44,7 @@ $scope.bookingDate=function(post_id){
 
 
 
-
-
-
+console.log("dertying");
 
 
 
@@ -63,10 +61,13 @@ $scope.bookingDate=function(post_id){
   //   return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
   // };
 
-  $scope.toggleMin = function() {
-    $scope.minDate = $scope.minDate ? null : new Date();
-  };
-  $scope.toggleMin();
+  // $scope.toggleMin = function() {
+  //   $scope.minDate = $scope.minDate ? null : new Date();
+  //   console.log($scope.minDate)
+  // };
+  // $scope.toggleMin();
+  $scope.minDate= new Date();
+  
 
   $scope.openED = function($event) {    //OpenEndDate
     $event.preventDefault();

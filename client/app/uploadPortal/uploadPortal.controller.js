@@ -1903,7 +1903,7 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
     $modalInstance.close($scope.selected.item);
     };
     $scope.postId=bookingPostId;  
-
+  
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
 
@@ -1922,7 +1922,10 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
   };
   $scope.today();
 
+  
+
     $scope.bookPost=function(){
+
         if($scope.dt2!=$scope.dt)
         {
           var date = $scope.dt ;
@@ -1938,12 +1941,64 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
           bookingDate.setMinutes(0);
           var startDate=new Date(bookingDate.valueOf());
           startDate.setDate(startDate.getDate()-1);
-          console.log(bookingDate,startDate,dateTdy);
-           $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate,startDate:startDate}).success(function (response){
-            console.log(booked);
+          console.log($scope.bookedDates);
+           $scope.noRepeat=true;
+          for(var i=0;i<$scope.bookedDates.length;i++)
+          {  
+        
+             var bookedDate=bookingDate.toISOString();
+            
+            if($scope.bookedDates[i].bookedFor.slice(0,-5)==bookedDate.slice(0,-5))
+              {
+                 $scope.noRepeat=false;
+                 
+                 break;
+              }
+          }
+          if($scope.noRepeat && $scope.bookedDates.length!=4)
+          {
+              $http.post('/api/bookings/'+$scope.postId,{bookingDate:bookingDate,startDate:startDate}).success(function (response){
+                  console.log(response);
+                  $scope.bookedDates.push(response);
+                  console.log($scope.bookedDates);
+                   $scope.checkRepeat=false;
           })
-     
+          }
+          else{
+            $scope.checkRepeat=true;
+            console.log("repeated");
+            
+              }
     };
+
+
+    $scope.bookedDates=[];   
+    $http.get('/api/bookings/post/'+$scope.postId).success(function(response){
+      $scope.bookedDates=[];
+        for(var i=0;i<response.length;i++)
+        {
+          $scope.bookedDates[i]=response[i];
+        }
+        console.log($scope.bookedDates);
+
+    });
+        
+
+
+    // $scope.maxFour= function(givenDate){
+
+    //     console.log('Deleted');
+    // };
+    
+     
+
+    $scope.unbook = function(id,index){
+        $http.delete('/api/bookings/deleteBooking/'+id).success(function(response){
+            console.log('Deleted');
+            $scope.bookedDates.splice(index,1);
+        })
+    }
+
 
      $scope.ok = function () {
         $modalInstance.close($scope.postId);
@@ -1954,9 +2009,26 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
   };
 
   // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  };
+  // $scope.disabled = function(date, mode) {
+  //   if ($scope.bookedDates.length>3)
+  //     return true;
+  //  else if(mode === 'day')
+  //   {
+
+        
+  //     console.log($scope.bookedDates.length);
+  //     for(var i=0;i<$scope.bookedDates.length;i++)
+  //     {
+  //       console.log("dertf");
+       
+  //       if(date == $scope.bookedDates[i].bookedFor)
+  //         {
+  //            console.log("dertf");
+  //         return true;
+  //          }   
+  //     }
+  //   }
+  // };
 
   $scope.toggleMin = function() {
     $scope.minDate = $scope.minDate ? null : new Date();
@@ -1999,11 +2071,20 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
       }
     ];
 
-  $scope.getDayClass = function(date, mode) {
+
+
+
+
+
+  $scope.getDClass = function(date, mode) {
+     console.log(date,mode);
+
     if (mode === 'day') {
+      console.log(date);
+       
       var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-      for (var i=0;i<$scope.events.length;i++){
+      for (var i = 0; i < $scope.events.length; i++) {
         var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
         if (dayToCheck === currentDay) {
@@ -2014,6 +2095,7 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
 
     return '';
   };
+
 
   $(document).keyup(function(e) {
 
