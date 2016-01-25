@@ -9,9 +9,10 @@ router.get('/', controller.index);
 router.get('/post/:postId', controller.editBooking);
 //router.get('/:id', controller.show);
 router.post('/:post_id',auth.isAuthenticated(), controller.create);
-router.put('/:bookingCheckbox',auth.isAuthenticated(), controller.update); 
+router.put('/update/:bookingCheckbox',auth.isAuthenticated(), controller.update); 
 router.patch('/:id', controller.update);
-router.delete('/:postId', controller.destroy);
+router.put('/:postId', controller.destroy);
 
+router.get('/post/:postId', controller.sendBookedDates);
 
 module.exports = router;

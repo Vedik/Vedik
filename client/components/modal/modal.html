@@ -87,19 +87,34 @@
 		       <h3 class="modal-title colorb">So whats the ospicious date?</h3>
 		    </div>
 
-		    <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw colorb " >				
-                <form name="form" ng-submit="bookPost()" ng-model="form" class="bgw">
-               		<div class="col-md-12 datepckr">
-                        <p class="input-group">
-                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="openedSD" min-date="minDate" max-date="' + '"2037-06-22"' + '" datepicker-options="dateOptions"  ng-required="true" close-text="Close" style="height:34px" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="openSD($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </p>
-                    </div>
-                    <div ng-click="ok()"><button type="submit" class="w2g">Book</button></div>
-                </form>
-            </div>
+              
+              
+                   
+            <form name="form" ng-submit="bookPost()" ng-model="form" class="bgw">
+                <div class="row" style="margin:0px 10px">
+                    <div class="col-md-8">
+
+					    <div style="display:inline-block; min-height:290px;">
+					      <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDClass(dt,mode)" datepicker-mode="day" id="hi"   date-disabled="disabled(date, mode)"></datepicker>
+					    </div>
+					</div>
+
+            		<div class="col-md-4">
+						<ul class="list-group">
+
+							<li class="list-group-item" ng-repeat="date in bookedDates">
+							{{date.bookedFor}}
+							 	<button type="button" class="close colorb" ng-click="unbook(date.bookedFor,$index)">X</button>
+							</li>
+						</ul>
+			    		</div>
+			    	</div>
+			    	<div ng-show="bookedDates.length>4"> maximum  4 bookings only</div>
+                <div ><button type="submit" class="w2g">Book</button></div>
+            </form>
+               
+            
+          
         </div>    
     </div>            
             

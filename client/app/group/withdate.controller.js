@@ -48,8 +48,6 @@ $scope.bookingDate=function(post_id){
 
 
 
-
-
 /*********************************from angularjs datepicker************/
 
   
