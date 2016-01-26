@@ -25,5 +25,7 @@ var PostSchema = new Schema({
 
 module.exports = mongoose.model('Post', PostSchema);
 
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
+PostSchema.plugin(deepPopulate /* more on options below */);
 
 

@@ -27,7 +27,7 @@
 					            <img ng-src="{{croppedDataUrl}}" />
 					        </div> -->
 					        <button type="button" class="w2g col-md-6" ng-click="skip(1)">Skip</button> 
-					        <button type="submit" class="w2g col-md-6">Next</button> 
+					        <button type="submit" class="w2g col-md-6" ng-disabled="!picFile">Next</button> 
 					            
 					        <span class="progress" ng-show="progress >= 0">
 					          <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>

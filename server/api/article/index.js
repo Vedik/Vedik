@@ -10,6 +10,7 @@ router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(),controller.create);
 // router.post('/:id',auth.isAuthenticated(), controller.clubPost);
 router.post('/event/:id',auth.isAuthenticated(), controller.eventPost);
+router.post('/eventResults/:id',auth.isAuthenticated(), controller.eventResults);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);

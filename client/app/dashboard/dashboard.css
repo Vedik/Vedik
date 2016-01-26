@@ -75,6 +75,11 @@
             font-size: 30px;
             line-height: 40px;
         }
+        .tagline_box_fix{
+            position: fixed;
+            top:-45px;
+
+        }
         .btnbg a {
             padding: 5px 15px !important;
             border-radius: 15px !important;

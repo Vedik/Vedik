@@ -214,7 +214,7 @@ console.log(newVideo);
           });
 
           
-          return res.json(200,newVideo);
+          return res.json(200,newVideo._id);
         }
     
     });
