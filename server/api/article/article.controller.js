@@ -6,6 +6,7 @@ var Post = require('../post/post.model');
 var User = require('../user/user.model');
 var Like = require('../like/like.model');
 var Club = require('../club/club.model');
+var Event = require('../event/event.model');
 var Credit = require('../credit/credit.model');
 var ForNotif= require('../forNotif/forNotif.model');
 
@@ -198,11 +199,12 @@ exports.create = function(req, res) {
                         user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
                         user.subscribed_users[i].user.save(function (err){
                           if(err){
+                            console.log(err,i);
                             return handleError(res,err);
                           }
                           else
-                          {
-                             console.log('add unseen notif to');
+                          { 
+                             console.log('add unseen notif to',i);
                           }
                        
                         });
@@ -214,27 +216,11 @@ exports.create = function(req, res) {
 
             }
           });
-          var club;
-          Club.findById(newPost.uploaderClub,function (err,club){
-            if (err) {return handleError(err);}
-            club=club;
-          })
-          var post=[{
-              _id:newPost._id,
-              articleId:newArticle,
-              type:newPost.type,
-              uploader:{user:req.user},
-              uploaderClub:club,
-              ratings:[{user:"",rating:{type:Number,default:0}}],
-              rating:{type:Number,default:0},
-              team:newPost.team,
-              vedik:[{vedik:""}],
-              createdOn:newPost.createdOn
-          }];
           
-          console.log(post);
+          
+          // console.log(post);
          
-              return res.json(post);
+              return res.json(newPost._id)    ;
           
           
           
@@ -466,6 +452,115 @@ exports.eventPost = function(req, res) {
            //  })
             console.log(newPost);
            return res.json(200,newPost);
+        }
+    
+    });
+};
+
+exports.eventResults = function(req, res) {
+  console.log(req.params.id);
+  /*Video.create(req.body, function(err, video) {
+    if(err) { return handleError(res, err); }
+    return res.json(201, video);
+  });*/
+  
+
+  var newArticle = new Article({
+    description:req.body.description,
+    
+  });
+ 
+
+  newArticle.save(function (err){
+ 
+    if(err) {return handleError(res, err); }
+    else {
+  
+          
+         
+          var newPost = new Post({
+            articleId: newArticle._id,            
+            
+            view_count:0,
+            uploader:{user:req.user._id},
+            like:[],
+            createdOn:Date.now(),
+            uploaderClub:req.params.id,
+            
+          });
+          
+            newPost.eventId=req.body.eventId;
+            newPost.type=34;
+          
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else 
+              {
+                
+
+               
+
+
+                console.log('post created');
+             
+                
+               Club.findById(req.params.id,function (err,club){
+                    if(err) { return handleError(res, err); }
+                })
+                .populate('subscribed_users.user')
+                .exec(function(err,club){
+                    if (err) return handleError(err);
+                  for(var i=0;i<club.subscribed_users.length;i++)
+                  {
+                      console.log(club.subscribed_users[i].user._id);
+                      if(club.subscribed_users[i].user._id.equals(req.user._id))
+                      {
+                        console.log('user');
+                      }
+                      else
+                      {
+                        club.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        club.subscribed_users[i].user.save(function (error){
+                          if(error){
+                            return handleError(res,err);
+                          }
+                          else
+                          {
+                             console.log('add unseen notif to');
+                          }
+                       
+                        });
+                      }
+                  }
+                 
+                  
+                });
+
+            }
+          });
+          var eventDetails;
+          console.log('aaaaaaaaa',newPost.eventId);
+          Event.findById(newPost.eventId,'winners',function (err,eventDetails){
+            if (err) {return handleError(err);}
+          })
+          .populate('winners.user')
+          .exec(function(err,user){
+            eventDetails=eventDetails; 
+          });
+          console.log(eventDetails);
+          var post=[{
+              _id:newPost._id,
+              articleId:newArticle,
+              eventId:eventDetails,
+              type:newPost.type,
+              uploader:{user:req.user},
+              ratings:[{user:"",rating:{type:Number,default:0}}],
+              like:[],
+              createdOn:newPost.createdOn
+          }];
+            
+            console.log(post);
+           return res.json(200,post);
         }
     
     });

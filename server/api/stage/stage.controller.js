@@ -16,7 +16,7 @@ exports.index = function(req, res) {
 // Get a single stage
 exports.show = function(req, res) {
 
-  Stage.findById(req.params.id, function (err, stage) {
+  Stage.findById(req.params.id,'subscribed_users name  posterUrl', function (err, stage) {
     console.log(req.user._id);
     if(err) { return handleError(res, err); }
     if(!stage) { return res.send(404); }

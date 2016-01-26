@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('CompetitionCtrl', function ($scope,$state,  $mdToast,$location,Auth,$http) {
+  .controller('CompetitionCtrl', function ($scope,$state,  $mdToast,$location,Auth,$http,Upload) {
     $scope.message = 'Hello';
      $scope.user = Auth.getCurrentUser;
    
@@ -49,6 +49,24 @@ angular.module('myAppApp')
     	
     });
 
+    $scope.uploadPic = function(file,form) {
+      file.upload = Upload.upload({
+        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+        data: {file: file, username: form.name,description:form.description},
+      });
+
+      file.upload.then(function (response) {
+        $timeout(function () {
+          file.result = response.data;
+        });
+      }, function (response) {
+        if (response.status > 0)
+          $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      });
+    }
     
     
     $http.get('/api/posts/event/'+id).success(function (response){
@@ -242,17 +260,29 @@ angular.module('myAppApp')
    return -entry.entry.rating;
 };
 
-   $scope.declareRes = function(entries,no){
+   $scope.declareRes = function(entries,event){
    		console.log(entries);
    		var x=entries.length;
-   		entries.splice(no,x-no);
+      var num=event.resNo;
+   		entries.splice(num,x-num);
    		console.log(entries);
 
    		var position=['First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eight','Ninth','Tenth'];
    		for(var i=0;i<entries.length;i++)
    		{
    			$http.post('/api/events/declareRes/'+id,{user:entries[i].user,num:i,position:position[i]}).success(function (response){
-   			console.log('here');
+       			console.log('here');
+            $http.post('/api/articles/eventResults/'+$scope.event.club._id,{eventId:id,description:event.message}).success(function (response){
+                console.log(response);
+                // response.articleId={articleName:$scope.form.name,description:$scope.form.description};
+                // response.uploader={user:{name:$scope.user().name}};
+                // $scope.form={};
+             
+                $scope.posts.push(response);
+                console.log($scope.posts);
+                $('#declareRes').modal('hide');
+            });
+      
    		
    		})
    		}

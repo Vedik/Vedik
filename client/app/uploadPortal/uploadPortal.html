@@ -9,14 +9,14 @@
 			
 			<div class="centric sizeten colorg">*Note: It is not necessary that uploader gets to see the uploaded work on his/her profile, it only appears if her/she is credited for it.</div>
 			<hr style="border: 1px solid white;" />
-			<div id="newUpload" ng-show="newUpload" style="margin:0px 20%">
-				<content-item ng-repeat="item in newUpload " content="item" ng-style="for_blur" index="$index" >
-				</content-item>
-				<button type="button" class="col-md-4 w2g">Edit</button>
-				<button type="button" class="col-md-4 w2g" >Delete</button>
-				<button type="button" class="col-md-4 w2g">Add One more</button>
+			<div id="newUpload"  style="padding:0px 20%" ng-repeat="item in newUpload" ng-show="newUpload[$index]">
+					<content-item content="item" ng-style="for_blur" index="$index" >
+					</content-item>
+					<button type="button" class="col-md-4 w2g" ng-click="edit()">Edit</button>
+					<button type="button" class="col-md-4 w2g" >Delete</button>
+					<button type="button" class="col-md-4 w2g">Add One more</button>
 			</div>
-			<form name="form" ng-submit="postSubmit(form)" ng-model="form" novalidate ng-show="!newUpload">
+			<form name="form" ng-submit="postSubmit(form)" ng-model="form" novalidate collapse="newUpload.length==1 && edited" style="width:100%">
     			<div class="tab-content thumbs_wrap col-md-12 " id="uploadAnimate">
 
         			<div class="tab-pane fade in active" id="upload_form2">

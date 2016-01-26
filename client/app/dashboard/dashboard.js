@@ -7,6 +7,6 @@ angular.module('myAppApp')
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardCtrl',
-        data : { pageTitle: 'Home' }
+        data : { pageTitle: 'Vedik' }
       });
   });

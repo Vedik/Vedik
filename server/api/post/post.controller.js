@@ -12,7 +12,7 @@ exports.index = function(req, res) {
   Post.find(function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment')
+  .deepPopulate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment eventId.winners.user')
   
   .exec(function (err, posts){
       if (err) return handleError(err);
@@ -21,6 +21,19 @@ exports.index = function(req, res) {
       //console.log(posts);
       
       return res.json(posts);
+  })
+};
+
+exports.show = function(req, res) {
+  Post.findById(req.params.id, function (err, post) {
+    if(err) { return handleError(res, err); }
+    if(!post) { return res.send(404); }
+  })
+  .deepPopulate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment eventId.winners.user')
+  
+  .exec(function (err, post){
+      if (err) return handleError(err);
+      return res.json(post);
   })
 };
 
@@ -219,7 +232,7 @@ exports.showForEvent = function(req, res) {
   Post.find({eventId:req.params.id},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
-  .populate('articleId videoId imageId like.user uploaderClub eventId comments.comment uploader.user vedik.vedik')
+  .deepPopulate('articleId videoId imageId like.user uploaderClub eventId.winners.user comments.comment uploader.user vedik.vedik')
   
   .exec(function (err, posts){
       if (err) return handleError(err);

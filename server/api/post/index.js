@@ -6,6 +6,7 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.get('/',auth.isAuthenticated(), controller.index);
+router.get('/show/:id',auth.isAuthenticated(), controller.show);
 router.get('/likeInfo/:postIdLike',auth.isAuthenticated(), controller.likeInfo);
 router.get('/ratingInfo/:postIdRating',auth.isAuthenticated(), controller.ratingInfo);
 router.get('/user/:id', controller.showForUser);
@@ -25,3 +26,4 @@ router.delete('/:postId', controller.destroy);
 router.post('/rating/:postId',auth.isAuthenticated(),controller.rate);
 
 module.exports = router;
+

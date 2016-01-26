@@ -1,19 +1,23 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('WelcomeUserCtrl', function ($scope,$http,$state,Upload, $timeout, Auth) {
+  .controller('WelcomeUserCtrl', function ($scope,$http,$state,Upload, $timeout, Auth, $window) {
     $scope.message = 'Hello';
     $scope.user={};
     $scope.user.galleryPic="http://74211.com/wallpaper/picture_big/beautiful-scenery-wallpaper_1920x1080_2013-top-10-scenery-images-4.jpg";
     $scope.croppedDataUrl="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg";
   	$scope.user= Auth.getCurrentUser;
     if($scope.user().step) 
-      $scope.step=$scope.user().step;
+      $scope.step=1;
     else
       $scope.step=1;
     console.log($scope.step);
     /* for pro pic upload*/
      $scope.uploadProPic = function (dataUrl) {
+      if(!dataUrl){
+        $window.alert('Oops!! You forgot to add your picture. Do you want to skip?');
+      }
+      else{
         Upload.upload({
             url: '/api/users/uploadProPic',
             method: 'POST',
@@ -42,6 +46,7 @@ angular.module('myAppApp')
             
 
         });
+      }
     }
 
     $scope.uploadGalPic = function (dataUrl) {
