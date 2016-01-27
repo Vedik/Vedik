@@ -347,9 +347,9 @@ angular.module('myAppApp').directive('contentNotif', function ($compile, $http,$
         
         
         scope.user = Auth.getCurrentUser;
-         userId= scope.user()._id;
+         var userId= scope.user()._id;
         
-        if(scope.content.type==91){
+        if(scope.content.type==91 && scope.content.postId){
           $http.get('api/credits/credit/'+scope.content.postId._id+'/'+userId).success(function (response){
               scope.credits=angular.copy(response);
               console.log(scope.credits);

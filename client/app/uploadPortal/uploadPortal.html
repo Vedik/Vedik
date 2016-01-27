@@ -117,7 +117,7 @@
 
 	        				<div class="col-md-12" name="myForm">
 
-			        			<p ng-click="x()">Who worked for this?</p>
+			        			<p >Who worked for this?</p>
 
 			        				<md-radio-group ng-model="creditsRadio">
 								      <md-radio-button value="me" class="md-primary" style="width:20%;float:left" > Only Me/Club</md-radio-button>
@@ -128,17 +128,16 @@
 							</div>
 
 							<div class="col-md-12" ng-if="creditsRadio=='me'">
-								<md-input-container>
+								<md-input-container style="background:white">
 							        <label>Upload As</label>
-							        <md-select ng-model="creditTo">
+							        <md-select ng-model="creditTo"
 							           <md-optgroup ng-click="form.club=false">
 							            <md-option ng-value="user()._id" style="background: white;">Yourself</md-option>
 							          </md-optgroup> 
 							          <md-optgroup label="Clubs" ng-click="form.club=true">
-							            <md-option ng-value="club" ng-repeat="club in user().asAdmin" style="background: white;">{{club}}</md-option>
+							            <md-option ng-value="club.user._id" ng-repeat="club in user().asAdmin" style="background: white;">{{club.user.name}}</md-option>
 							          </md-optgroup>
 							        </md-select>
-							  		{{creditTo}}
 							      </md-input-container>
 								
 								<div>

@@ -79,7 +79,7 @@ exports.create = function(req, res) {
           }
           else if(req.body.creditsRadio=='me' && req.body.club){
             newPost.type=112;
-            newPost.uploaderClub=req.body.team._id;
+            newPost.uploaderClub=req.body.team;
           }
           else if(req.body.creditsRadio=='team'){
             newPost.type=113;
@@ -120,7 +120,7 @@ exports.create = function(req, res) {
                     });
 
                     
-                      newCredit.creditedClubs.push({club:req.body.team._id,confirmed:true});
+                      newCredit.creditedClubs.push({club:req.body.team,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);

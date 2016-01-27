@@ -90,7 +90,7 @@ console.log(newVideo);
           }
           else if(req.body.creditsRadio=='me' && req.body.club){
             newPost.type=132;
-            newPost.uploaderClub=req.body.team._id;
+            newPost.uploaderClub=req.body.team;
           }
           else if(req.body.creditsRadio=='team'){
             newPost.type=133;
@@ -133,7 +133,7 @@ console.log(newVideo);
                     });
 
                     
-                      newCredit.creditedClubs.push({club:req.body.team._id,confirmed:true});
+                      newCredit.creditedClubs.push({club:req.body.team,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);

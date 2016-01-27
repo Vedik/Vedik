@@ -294,7 +294,7 @@ exports.me = function(req, res, next) {
     res.json(user);
   });*/
   User.findOne({_id:userId},'-salt -hashedPassword')
-  .populate('videos.video')
+  .populate('asAdmin.user')
   .exec(function (err, user){
     if(err) {
       console.log(err);
