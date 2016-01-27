@@ -8,7 +8,11 @@ angular.module('myAppApp')
   .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService,User,$timeout) {
     $scope.message = 'Hello';
     $scope.submitted = false;
-    $scope.user = Auth.getCurrentUser;
+    $scope.x=function(){
+      $scope.user = Auth.getCurrentUser;
+      console.log($scope.user);
+    }
+    
    
 
   
@@ -143,8 +147,9 @@ angular.module('myAppApp')
     $scope.submitted=true;
     console.log(form,form.$valid);
 
-    $scope.newUpload=[]; 
+   
     if($scope.creditsRadio=='team' && form.$valid){
+      $scope.newUpload=[]; 
         console.log("yo");
       if($scope.type==11){
           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
@@ -183,6 +188,7 @@ angular.module('myAppApp')
       }
     }
     else if($scope.creditsRadio=='me' && form.$valid){
+      $scope.newUpload=[]; 
         console.log(form.userCredits,$scope.creditTo,form.club);
          if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){

@@ -198,14 +198,10 @@ exports.create = function(req, res) {
                       {
                         user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
                         user.subscribed_users[i].user.save(function (err){
-                          if(err){
-                            console.log(err,i);
+                          if(err)
                             return handleError(res,err);
-                          }
-                          else
-                          { 
-                             console.log('add unseen notif to',i);
-                          }
+                           console.log('add unseen notif to',i);
+                          
                        
                         });
                       }

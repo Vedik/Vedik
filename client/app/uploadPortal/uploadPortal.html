@@ -69,7 +69,7 @@
 							</div>	 -->
 							<div >
 		        				<div class="tab-content">
-		        					<div id="article_upl" class="tab-pane fade in active">
+		        					<div id="article_upl" ng-if="type==11">
 		        						<div class="form-group">
 		      
 											<textarea type="text" class='autoExpand form-control' rows='7' data-min-rows='7' placeholder='Article' id="textarea" style="width:100%" ng-model="form.content" data-bind="hasfocus: true"  name="article" required>
@@ -82,13 +82,13 @@
 										 </div>
 									</div>
 
-									<div id="image_upl" class="tab-pane fade">
+									<div id="image_upl" ng-if="type==12">
 		        						<div class="form-group">	
 											<input type="text" class="form-control upld_form" ng-model="form.picUrl" placeholder="Image Url">
 										</div>
 										<img src="{{form.picUrl}}" width="100%" height="auto">
 									</div>
-									<div id="video_upl" class="tab-pane fade ">
+									<div id="video_upl" ng-if="type==13">
 		        						<div class="form-group">
 																	
 											<input type="text" class="form-control upld_form" ng-model="form.vidUrl" placeholder="Youtube link to video">
@@ -117,7 +117,7 @@
 
 	        				<div class="col-md-12" name="myForm">
 
-			        			<p >Who worked for this?</p>
+			        			<p ng-click="x()">Who worked for this?</p>
 
 			        				<md-radio-group ng-model="creditsRadio">
 								      <md-radio-button value="me" class="md-primary" style="width:20%;float:left" > Only Me/Club</md-radio-button>

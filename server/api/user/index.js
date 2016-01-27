@@ -4,6 +4,8 @@ var express = require('express');
 var controller = require('./user.controller');
 var config = require('../../config/environment');
 var auth = require('../../auth/auth.service');
+// var multiparty = require('connect-multiparty'),
+// multipartyMiddleware = multiparty();
 
 var router = express.Router();
 
@@ -22,6 +24,9 @@ router.post('/editProfile', auth.isAuthenticated(), controller.editProfile);
 router.get('/search/:searchQuery', controller.search);
 router.get('/:id',auth.isAuthenticated(), controller.showUser);
 router.post('/uploadProPic',auth.isAuthenticated(), controller.uploadProPic);
-router.post('/uploadGalPic',auth.isAuthenticated(),  controller.uploadGalPic);
+router.post('/uploadGalPic',auth.isAuthenticated(), controller.uploadGalPic);
+
+// router.post('/uploadProPic',auth.isAuthenticated(), multipartyMiddleware, controller.uploadProPic);
+// router.post('/uploadGalPic',auth.isAuthenticated(), multipartyMiddleware, controller.uploadGalPic);
 
 module.exports = router;

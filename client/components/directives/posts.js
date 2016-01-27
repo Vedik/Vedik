@@ -5,7 +5,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class="  thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
                                         '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -45,7 +45,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                    '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                         '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -121,7 +121,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class=" thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
                                         '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative" >'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post"  >'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="b2w_fade"  >'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -161,7 +161,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                    '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                         '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -237,7 +237,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class="  thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
                                         '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -277,7 +277,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                    '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                         '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    
@@ -349,7 +349,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
     var imageBTemplate ='<div class="post_div   col-md-12">'+
                                     '<div class="  thumbs_in col-md-12">'+
                                      '  <img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
-                                      '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post"></span>'+
+                                      '  <span><img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="b2w_fade"></span>'+
                                       '  <span id="img_name">{{content.eventId.name}}</span>'+
                                             '<span class="thumb_trnsprnt">'+
                                              '</span>'+
@@ -466,7 +466,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class="  thumbs_in col-md-12" ng-click="viewImage(content.imageId._id)">'+
                                         '<img src="{{content.imageId.picUrl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="70px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.imageId.imgName}}'+                                    
@@ -506,7 +506,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                    '<div class="  thumbs_in col-md-12"  ng-click="viewVideo(content.videoId.vidurl)" >'+
                                         '<img src="{{content.videoId.posterurl}}" id="img_post" style="position:relative">'+
                                         '<span>'+
-                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="img_post">'+
+                                            '<img src="http://www.rottweilerheartsrescue.org/Images/fade2black.png" height="50px" width="100%" style="opacity:0.5;" id="b2w_fade">'+
                                         '</span>'+
                                         '<span id="img_name">'+
                                             '{{content.videoId.vidname}}'+                                    

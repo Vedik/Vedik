@@ -180,12 +180,12 @@
             overflow: hidden;
         }
 
-        .thumbs_in:hover #user_art_info , .thumbs_in:hover .thumb_trnsprnt {
+      /*  .thumbs_in:hover #user_art_info , .thumbs_in:hover .thumb_trnsprnt {
             display:block;
         }
         #thumbs_in_dshbrd:hover .thumb_cntnt , #thumbs_in_dshbrd:hover .thumb_trnsprnt {
             display:block;
-        }
+        }*/
         
         
         #dashbrd_cntnt  {

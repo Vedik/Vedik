@@ -139,7 +139,7 @@ exports.create = function(req, res) {
                       });
 
                       for(var j=0;j<req.body.creditUser[i].length;j++){
-                        if(users[j]._id.equals(req.user._id)){
+                        if(users[j]._id==req.user._id){
                           newCredit.creditedUsers.push({user:users[j]._id,confirmed:true});
                         }
                         else{
@@ -192,8 +192,8 @@ exports.create = function(req, res) {
               };
           });
         
-          
-          return res.json(200,newImage._id);
+          console.log(newImage);
+          return res.json(200,newPost._id);
         }
     
     });
