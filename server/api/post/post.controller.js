@@ -27,6 +27,7 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Post.findById(req.params.id, function (err, post) {
     if(err) { return handleError(res, err); }
+    console.log(post, 11111111111111111111111111111);
     if(!post) { return res.send(404); }
   })
   .deepPopulate('articleId videoId imageId uploader.user uploaderClub eventId comments.comment eventId.winners.user')

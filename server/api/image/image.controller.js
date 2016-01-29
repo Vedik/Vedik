@@ -75,7 +75,7 @@ exports.create = function(req, res) {
           }
           else if(req.body.creditsRadio=='me' && req.body.club){
             newPost.type=122;
-            newPost.uploaderClub=req.body.team._id;
+            newPost.uploaderClub=req.body.team;
           }
           else if(req.body.creditsRadio=='team'){
             newPost.type=123;
@@ -117,7 +117,7 @@ exports.create = function(req, res) {
                     });
 
                     
-                      newCredit.creditedClubs.push({club:req.body.team._id,confirmed:true});
+                      newCredit.creditedClubs.push({club:req.body.team,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -139,7 +139,7 @@ exports.create = function(req, res) {
                       });
 
                       for(var j=0;j<req.body.creditUser[i].length;j++){
-                        if(users[j]._id.equals(req.user._id)){
+                        if(users[j]._id==req.user._id){
                           newCredit.creditedUsers.push({user:users[j]._id,confirmed:true});
                         }
                         else{
@@ -192,8 +192,8 @@ exports.create = function(req, res) {
               };
           });
         
-          
-          return res.json(200,newImage._id);
+          console.log(newImage);
+          return res.json(200,newPost._id);
         }
     
     });

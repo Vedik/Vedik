@@ -107,7 +107,7 @@ exports.create = function(req, res) {
     }
     else {
 
-      req.user.asAdmin.push(newClub._id);
+      req.user.asAdmin.push({user:newClub._id});
       req.user.save(function (err){
         if(err){
           return handleError(res,err);

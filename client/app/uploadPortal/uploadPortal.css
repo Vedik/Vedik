@@ -36,11 +36,20 @@
 			}
 	#img_post 	{
 		position: absolute;
+		overflow: hidden;
+		display: block;
+		margin: 0px auto;
+		width: 100%;
+		height: auto;
+
+		 transition: all 0.8s ease 0s;
+		
+	}
+	#b2w_fade{
+		position: absolute;
 		top:0px;
 		left: 0px;
 		width: 100%;
-		 transition: all 0.3s ease 0s;
-		
 	}
 
      #notif_back{
