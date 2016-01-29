@@ -337,9 +337,15 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
           for(var i=0;i<$scope.bookedDates.length;i++)
           {  
         
-             var bookedDate=bookingDate.toISOString();
-            
-            if($scope.bookedDates[i].bookedFor.slice(0,-5)==bookedDate.slice(0,-5))
+             var date =bookingDate;
+
+              var month=["January","February","March","April","May","June","July","August","September","October","November","December"];
+          
+              var d = date.getDate();
+              var m = date.getMonth();
+              var y = date.getFullYear();
+              var bookedDate = d+"-"+month[m]+"-"+y;
+            if($scope.bookedDates[i].bookedFor==bookedDate)
               {
                  $scope.noRepeat=false;
                  
@@ -362,8 +368,6 @@ angular.module('myAppApp').controller('ModalBookADayInstanceCtrl',function ($sco
               }
     };
 
-
-    $scope.bookedDates=[];   
     $http.get('/api/bookings/post/'+$scope.postId).success(function(response){
       $scope.bookedDates=[];
         for(var i=0;i<response.length;i++)
