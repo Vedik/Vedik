@@ -6,7 +6,7 @@ var auth  = require('../../auth/auth.service');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/post/:postId', controller.editBooking);
+// router.get('/post/:postId', controller.editBooking);
 //router.get('/:id', controller.show);
 router.post('/:post_id',auth.isAuthenticated(), controller.create);
 router.put('/update/:bookingCheckbox',auth.isAuthenticated(), controller.update); 

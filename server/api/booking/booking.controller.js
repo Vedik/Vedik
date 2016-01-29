@@ -114,7 +114,15 @@ exports.create = function(req, res) {
          return handleError(res, err); }
         else {
           console.log('done');
-          return res.json({bookedFor:newBooking.bookedFor,_id:newBooking._id});
+          var month=["January","February","March","April","May","June","July","August","September","October","November","December"];
+          var booking;
+          var date = newBooking.bookedFor;
+          var d = date.getDate();
+          var m = date.getMonth();
+          var y = date.getFullYear();
+          booking=d+"-"+month[m]+"-"+y;
+     
+          return res.json({bookedFor:booking,_id:newBooking._id});
         };
       });
     });
@@ -189,38 +197,52 @@ function handleError(res, err) {
 
 
 
-exports.editBooking = function(req, res) {
+// exports.editBooking = function(req, res) {
 
 
-     var postId =req.params.postId 
+//      var postId =req.params.postId 
      
      
-         Booking.find({'postId':postId},function (err, bookings) {
+//          Booking.find({'postId':postId},function (err, bookings) {
 
-            if(err) { return handleError(res, err); }
+//             if(err) { return handleError(res, err); }
       
-        return res.json(bookings);
+//         return res.json(bookings);
         
             
-        });
+//         });
         
 
-};
+// };
 
 exports.sendBookedDates = function(req, res) {
-
+    console.log('here');
 
      var postId =req.params.postId 
      
      
-         Booking.find({'postId':postId},function (err, bookings) {
-
+         Booking.find({'postId':postId},'bookedFor',function (err, bookings) {
+            var month=["January","February","March","April","May","June","July","August","September","October","November","December"];
+            var booking=[];
             if(err) { return handleError(res, err); }
-      
-        return bookings;
+            for(var i=0;i<bookings.length;i++){
+                var date = bookings[i].bookedFor;
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+                booking.push({_id:bookings[i]._id,bookedFor:d+"-"+month[m]+"-"+y});
+                console.log(booking[i].bookedFor);
+            }
+
+  
+   
+ 
+
+        return res.json(booking);
         
             
         });
         
 
 };
+
