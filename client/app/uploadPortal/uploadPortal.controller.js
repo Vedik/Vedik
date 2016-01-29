@@ -5,7 +5,7 @@ var ranX, ranY=0,attendArray=[],likeArray=[],userId,id;
 
 
 angular.module('myAppApp')
-  .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService,User,$timeout) {
+  .controller('UploadPortalCtrl', function ($scope,Auth,$http, UploadPortalService,User,$timeout,$state) {
     $scope.message = 'Hello';
     $scope.submitted = false;
     $scope.user = Auth.getCurrentUser;
@@ -144,15 +144,20 @@ angular.module('myAppApp')
     $scope.submitted=true;
     console.log(form,form.$valid);
 
-     
+   
     if($scope.creditsRadio=='team' && form.$valid){
-        $scope.newUpload=[];
+       $scope.newUpload=[]; 
+       $scope.editForm={};
+
         console.log("yo");
       if($scope.type==11){
+
           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
-              $http.get('/api/posts/yo/'+response).success(function (res){
+              $http.get('/api/posts/show/'+response).success(function (res){
+                  $scope.editForm=$scope.form;
                   $scope.form={}; 
                   $scope.newUpload.push(res);
+                  
                   console.log($scope.newUpload);  
                 
                   $('#newUpload').addClass("animated  zoomIn ");
@@ -163,7 +168,8 @@ angular.module('myAppApp')
       }
       else if($scope.type==12){
            $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
-              $http.get('/api/posts/yo/'+response).success(function (res){
+              $http.get('/api/posts/show/'+response).success(function (res){
+                  $scope.editForm=$scope.form;
                   $scope.form={}; 
                   $scope.newUpload.push(res);
                   console.log($scope.newUpload);  
@@ -174,7 +180,8 @@ angular.module('myAppApp')
       }
       else if($scope.type==13){
           $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
-            $http.get('/api/posts/yo/'+response).success(function (res){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
                 $scope.form={}; 
                 $scope.newUpload.push(res);
                 console.log($scope.newUpload);  
@@ -185,11 +192,15 @@ angular.module('myAppApp')
       }
     }
     else if($scope.creditsRadio=='me' && form.$valid){
-        $scope.newUpload=[];
+
+       $scope.newUpload=[];
+       $scope.editForm={}; 
+
         console.log(form.userCredits,$scope.creditTo,form.club);
          if($scope.type==11){
            $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
-            $http.get('/api/posts/yo/'+response).success(function (res){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
                 $scope.form={}; 
                 $scope.newUpload.push(res);
                 console.log($scope.newUpload);  
@@ -200,7 +211,8 @@ angular.module('myAppApp')
       }
       else if($scope.type==12){
            $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
-            $http.get('/api/posts/yo/'+response).success(function (res){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
                 $scope.form={}; 
                 $scope.newUpload.push(res);
                 console.log($scope.newUpload);  
@@ -211,7 +223,8 @@ angular.module('myAppApp')
       }
       else if($scope.type==13){
           $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
-            $http.get('/api/posts/yo/'+response).success(function (res){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
                 $scope.form={}; 
                 $scope.newUpload.push(res);
                 console.log($scope.newUpload);  
@@ -221,9 +234,119 @@ angular.module('myAppApp')
         })
       }
     }
+}
+    $scope.savePost = function (form){
+    $scope.submitted=true;
+    console.log(form,form.$valid);
+
+   
+    if($scope.creditsRadio=='team' && form.$valid){
+      
+        console.log("yo");
+      if($scope.type==11){
+
+          $http.put('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
+              $http.get('/api/posts/show/'+response).success(function (res){
+                  $scope.editForm=$scope.form;
+                  $scope.form={}; 
+                  $scope.newUpload.push(res);
+                  
+                  console.log($scope.newUpload);  
+                
+                  $('#newUpload').addClass("animated  zoomIn ");
+              })
+            
+           
+          })
+      }
+      else if($scope.type==12){
+           $http.put('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
+              $http.get('/api/posts/show/'+response).success(function (res){
+                  $scope.editForm=$scope.form;
+                  $scope.form={}; 
+                  $scope.newUpload.push(res);
+                  console.log($scope.newUpload);  
+                
+                  $('#newUpload').addClass("animated  zoomIn ");
+              })
+        })
+      }
+      else if($scope.type==13){
+          $http.put('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
+                $scope.form={}; 
+                $scope.newUpload.push(res);
+                console.log($scope.newUpload);  
+              
+                $('#newUpload').addClass("animated  zoomIn ");
+            })
+        })
+      }
+    }
+    else if($scope.creditsRadio=='me' && form.$valid){
+
+       
+
+        console.log(form.userCredits,$scope.creditTo,form.club);
+         if($scope.type==11){
+           $http.put('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
+                $scope.form={}; 
+                $scope.newUpload[0]=res;
+                console.log($scope.newUpload);  
+              
+                $('#newUpload').addClass("animated  zoomIn ");
+            })
+        })
+      }
+      else if($scope.type==12){
+           $http.put('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
+                $scope.form={}; 
+                $scope.newUpload.push(res);
+                console.log($scope.newUpload);  
+              
+                $('#newUpload').addClass("animated  zoomIn ");
+            })
+        })
+      }
+      else if($scope.type==13){
+          $http.put('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+            $http.get('/api/posts/show/'+response).success(function (res){
+                $scope.editForm=$scope.form;
+                $scope.form={}; 
+                $scope.newUpload.push(res);
+                console.log($scope.newUpload);  
+              
+                $('#newUpload').addClass("animated  zoomIn ");
+            })
+        })
+      }
+    }
+  }
+
+    $scope.edited =true;
+    $scope.edit=function(){
+      $scope.edited =false;
+      $scope.form=$scope.editForm;
+    }
+    $scope.addingMore=function(){
+      console.log("hier");
+      $state.reload();
+    }
+    $scope.deletePost = function(){
+            var postId = $scope.newUpload[0]._id;
+
+            $http.delete('/api/posts/'+postId).success(function(response){
+                console.log(response);
+               $state.reload();
+            })
+        }
      
-          
-   };
+
     
     
     /*

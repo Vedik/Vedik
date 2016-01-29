@@ -9,18 +9,18 @@
 			
 			<div class="centric sizeten colorg">*Note: It is not necessary that uploader gets to see the uploaded work on his/her profile, it only appears if her/she is credited for it.</div>
 			<hr style="border: 1px solid white;" />
-			<div id="newUpload"  style="margin:0px 20%" ng-repeat="item in newUpload" ng-show="newUpload[$index]">
+			<div id="newUpload"  style="padding:0px 20%" ng-repeat="item in newUpload" ng-show="newUpload[$index]">
 					<content-item content="item" ng-style="for_blur" index="$index" >
 					</content-item>
-					<button type="button" class="col-md-4 w2g">Edit</button>
-					<button type="button" class="col-md-4 w2g" >Delete</button>
-					<button type="button" class="col-md-4 w2g">Add One more</button>
+					<button type="button" class="col-md-4 w2g" ng-click="edit()">Edit</button>
+					<button type="button" class="col-md-4 w2g" ng-click="deletePost()" >Delete</button>
+					<button type="button" class="col-md-4 w2g " ng-click="addingMore()">Add One more</button>
 			</div>
-			<form name="form" ng-submit="postSubmit(form)" ng-model="form" novalidate collapse="newUpload">
+			<form name="form" ng-submit="postSubmit(form)" ng-model="form" novalidate collapse="newUpload.length==1 && edited" style="width:100%">
     			<div class="tab-content thumbs_wrap col-md-12 " id="uploadAnimate">
 
         			<div class="tab-pane fade in active" id="upload_form2">
-        				<ul class="nav nav-tabs" style="width:100%;padding:0px 100px">
+        				<ul class="nav nav-tabs" style="width:100%;padding:0px 100px" ng-show="newUpload.length!=1">
 			        		<li class="active" ng-click="setType(1)"><a href="#article_upl" data-toggle="tab" >Writing</a></li>	        			
 			        		<li ng-click="setType(2)"><a href="#image_upl" data-toggle="tab"> Image</a></li>
 			        		<li ng-click="setType(3)"><a href="#video_upl" data-toggle="tab" >Video</a></li>
@@ -259,12 +259,16 @@
 
 	        					
 						
-	        			<div class="col-md-12" >
+	        			<div class="col-md-12" ng-show="newUpload.length!=1" >
 				    		<button type="submit" class="w2g col-md-12">Publish</button>
 				    	
 				    	</div>
 	        			
+				    	<div class="col-md-12" ng-show="newUpload.length==1">
+				    		<button type="button" class="w2g col-md-12" ng-click="savePost(form)">Save</button>
 				    	
+				    	</div>
+	        			
 				    	
 			    	</div>
 	    		</div>
