@@ -28,7 +28,7 @@
 
 #login  {
   
-  
+  background-image: url('assets/12');
   width: 100%;
   color: rgba(0,0,0,0.7);
   z-index: 10;
@@ -49,7 +49,7 @@
     margin: 50px 10%;
     width: 80%;
     height: 316px;
-    background-color: black;
+    background-color: rgb(230,230,230);
 }
 #login #logob{
   padding: 35px 100px 20px ;
@@ -64,4 +64,27 @@
 #login .row{
   padding: 20px 30px;
   color: #337AB7;
+}
+
+#login_logo{
+  background-color: #028090;
+  height: 270px;
+  width: 100%;
+  padding: 50px 100px 0px 0px;
+  margin-bottom: -20px;
+}
+#login_left img{
+  position: relative;
+  display: block;
+  margin:0px auto;
+}
+#login_logo #animate{
+  margin: 0px auto;
+}
+#login_right{
+  padding: 0px 70px 0px 0px;
+}
+
+.bgvd{
+  background-color: #028090;
 }

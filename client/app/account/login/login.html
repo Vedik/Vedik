@@ -1,29 +1,32 @@
 
 
 <!-- <div ><img src="assets/images/loginpage3.jpg" width="100%" height="100%"></div> -->
-<div id="login" ng-show="loaded">
+<div id="login" ng-show="loaded" class="row">
 
-    <div id="top_logo" > 
-        <div id="logo">
-            <a href="/" id="_logo"><span><img src="/assets/images/logo3.png" width="120px" alt="Vedik Logo"></span></a>
-        </div>  
-    </div>
-    <div id="hidden"></div> 
-    <div id="logob">Because Everyone needs a Stage</div>
-
-
+    <!-- <div id="login_logo" > 
     
-    
-  <div class=" bglg row ">
-    <div class="col-md-7 animated fadeInUp " style="height:500px" id="login_wrapper">
-
+    </div> -->
+    <img src="assets/12" width="100%">
+    <div style="position:absolute;top:150px" class="col-md-12">
+    <div id="login_left" class="col-md-7">
+      <div>
+          <a href="/" id="_logo"><span><img src="/assets/imadges/logo4.png" width="120px" alt="Vedik Logo"></span></a>
+      </div> 
+      <div class="col-md-12 animated fadeInUp " style="height:500px" id="login_wrapper">
         <div id="video_slot"></div>
+      </div> 
     </div>
-    <div class="container  col-md-5 colorb" id="login_wrapper" >
-      <div class="row box_shadow_dwn animated fadeInUp" id="animate">
-        <div class="col-sm-12">
-          <h4>Sign In</h4>
-        </div>
+    <!-- <div id="hidden"></div> 
+    <div id="logob">Because Everyone needs a Stage</div>
+ -->
+
+    
+    
+  <div class="col-md-5" id="login_right">
+    
+    <div class="container  col-md-12 colorb" id="login_wrapper" >
+      <div class="row animated fadeInUp" id="animate">
+        
         
        <!--   <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
           <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
@@ -57,7 +60,7 @@
 
             <div>
               
-              <button class="btn btn-inverse btn-lg btn-login w2g" type="submit">
+              <button class="btn btn-inverse btn-lg btn-login w2g col-md-12" type="submit">
                 Login
               </button>
               <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/signup">
@@ -69,16 +72,16 @@
           </form>
         </div>
       </div>
-      <br/>
+      <br/><br/><br/><br/><br/>
 
 
 
           
 
         
-      <div class="row box_shadow_dwn animated fadeInUp" id="animate">
+      <div class="row bgvd animated fadeInUp " id="animate">
         <div class="col-sm-12">
-          <h4>Sign up</h4>
+          <h4 class="colorw">Sign up</h4>
           
 
         </div>
@@ -149,7 +152,7 @@
               </a> -->
             </div>
 
-            <hr>
+          
           </form>
         </div>
       </div>
@@ -157,7 +160,8 @@
     </div>
     
   </div>
-  <div ng-include="'components/footer/footer.html'"></div>
+  </div>
+ <!--  <div ng-include="'components/footer/footer.html'"></div> -->
 </div>
         
 
