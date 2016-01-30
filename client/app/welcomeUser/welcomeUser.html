@@ -67,12 +67,12 @@
 					<form name="form" ng-model="form" style="color:black" ng-submit="uploadGalPic(croppedGalUrl)">
 					<br/>
 						<div class="form-group">
-			          		<button ngf-select ng-model="picFile" accept="image/*" class="w2g col-md-12">
+			          		<button ngf-select ng-model="picFile2" accept="image/*" class="w2g col-md-12">
 					            Upload your Vedik's Gallery picture</button>
-					        <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+					        <div ngf-drop ng-model="picFile2" ngf-pattern="image/*"
 					             class="cropArea">
-					             <img src="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg" style="margin:0px auto;display:inherit;height:100%" ng-if="!picFile">
-					            <img-crop image="picFile  | ngfDataUrl"                 
+					             <img src="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg" style="margin:0px auto;display:inherit;height:100%" ng-if="!picFile2">
+					            <img-crop image="picFile2  | ngfDataUrl"                 
 					            result-image="croppedGalUrl" ng-init="croppedGalUrl=''" area-type="rectangle" aspect-ratio="1.7" result-image-size='{w: 2040,h: 1200}' >
 					            </img-crop>
 					        </div>

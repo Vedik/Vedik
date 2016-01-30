@@ -130,7 +130,7 @@
 							<div class="col-md-12" ng-if="creditsRadio=='me'">
 								<md-input-container style="background:white">
 							        <label>Upload As</label>
-							        <md-select ng-model="creditTo"
+							        <md-select ng-model="form.creditTo">
 							           <md-optgroup ng-click="form.club=false">
 							            <md-option ng-value="user()._id" style="background: white;">Yourself</md-option>
 							          </md-optgroup> 
@@ -139,6 +139,7 @@
 							          </md-optgroup>
 							        </md-select>
 							      </md-input-container>
+							      {{form.creditTo}}
 								
 								<div>
 									<tags-input ng-model="form.userCredits" add-on-paste="true" display-property="creditDetail" placeholder="Credit yourself" add-from-autocomplete-only="true"  class="bootstrap" replace-spaces-with-dashes="false" min-tags="1" name="creditYourself">

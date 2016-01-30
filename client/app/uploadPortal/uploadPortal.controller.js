@@ -151,7 +151,7 @@ angular.module('myAppApp')
 
         console.log("yo");
       if($scope.type==11){
-
+          console.log(form.creditTo);
           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.team,creditType:$scope.creditType,creditUser:$scope.creditUser,creditsRadio:$scope.creditsRadio}).success(function (response){
               $http.get('/api/posts/show/'+response).success(function (res){
                   $scope.editForm=$scope.form;
@@ -196,9 +196,10 @@ angular.module('myAppApp')
        $scope.newUpload=[];
        $scope.editForm={}; 
 
-        console.log(form.userCredits,$scope.creditTo,form.club);
+        console.log(form.userCredits,form.creditTo,form.club);
          if($scope.type==11){
-           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+                console.log(form.creditTo);
+           $http.post('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
             $http.get('/api/posts/show/'+response).success(function (res){
                 $scope.editForm=$scope.form;
                 $scope.form={}; 
@@ -210,7 +211,7 @@ angular.module('myAppApp')
         })
       }
       else if($scope.type==12){
-           $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+           $http.post('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:form.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
             $http.get('/api/posts/show/'+response).success(function (res){
                 $scope.editForm=$scope.form;
                 $scope.form={}; 
@@ -222,7 +223,7 @@ angular.module('myAppApp')
         })
       }
       else if($scope.type==13){
-          $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+          $http.post('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:form.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
             $http.get('/api/posts/show/'+response).success(function (res){
                 $scope.editForm=$scope.form;
                 $scope.form={}; 
@@ -288,21 +289,23 @@ angular.module('myAppApp')
 
        
 
-        console.log(form.userCredits,$scope.creditTo,form.club);
+        console.log(form.userCredits,form.creditTo,form.club);
          if($scope.type==11){
-           $http.put('/api/articles',{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+          console.log(form.team);
+           $http.put('/api/articles/'+$scope.newUpload[0]._id,{articleName:form.name,description:form.description,content:form.content,tags:form.tags,vedik:form.vedik,team:form.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
             $http.get('/api/posts/show/'+response).success(function (res){
+              console.log('here');
                 $scope.editForm=$scope.form;
-                $scope.form={}; 
                 $scope.newUpload[0]=res;
-                console.log($scope.newUpload);  
+                console.log($scope.newUpload);
+                $scope.edited =true;  
               
                 $('#newUpload').addClass("animated  zoomIn ");
             })
         })
       }
       else if($scope.type==12){
-           $http.put('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+           $http.put('/api/images',{imgName:form.name,description:form.description,picUrl:form.picUrl,tags:form.tags,vedik:form.vedik,team:form.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
             $http.get('/api/posts/show/'+response).success(function (res){
                 $scope.editForm=$scope.form;
                 $scope.form={}; 
@@ -314,7 +317,7 @@ angular.module('myAppApp')
         })
       }
       else if($scope.type==13){
-          $http.put('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:$scope.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
+          $http.put('/api/videos',{vidname:form.name,description:form.description,posterurl:form.posterUrl,vidurl:form.vidUrl,tags:form.tags,vedik:form.vedik,team:form.creditTo,credits:form.userCredits,creditsRadio:$scope.creditsRadio,club:form.club}).success(function (response){
             $http.get('/api/posts/show/'+response).success(function (res){
                 $scope.editForm=$scope.form;
                 $scope.form={}; 

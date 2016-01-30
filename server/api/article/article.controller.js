@@ -30,6 +30,200 @@ exports.show = function(req, res) {
 // Creates a new article in the DB.
 exports.create = function(req, res) {
   
+  var a=req.body.vedik;
+  console.log(a[1]);
+  var b=[];
+  for(var i=0;i<a.length;i++)
+  {
+    b[i]=a[i]._id;
+  };
+  
+
+  var newArticle = new Article({
+    articleName:req.body.articleName,
+    content:req.body.content,
+    description:req.body.description,
+    
+  });
+
+  
+  newArticle.save(function (err){
+    if(err) return handleError(res, err);
+    else {
+         /* req.user.articles.push({article:newArticle,role:['actor']});
+          req.user.save(function (error) {
+            if(error) {
+              return handleError(res, err);
+            }
+            else {
+              console.log('user saved');
+            }
+          });*/
+          var newPost = new Post({
+            articleId: newArticle._id,
+            tags:req.body.tags,
+            
+            uploader:{user:req.user._id},
+            view_count:0,
+            ratings:[],
+            rating:0,
+            like:[],
+            createdOn:Date.now()
+          });
+          for(i=0;i<b.length;i++)
+          {
+            newPost.vedik.push({vedik:b[i]});
+          }
+          if(req.body.creditsRadio=='me' && !req.body.club){
+            newPost.type=111;
+          }
+          else if(req.body.creditsRadio=='me' && req.body.club){
+            newPost.type=112;
+            newPost.uploaderClub=req.body.team;
+          }
+          else if(req.body.creditsRadio=='team'){
+            newPost.type=113;
+            newPost.team=req.body.team;
+          }
+          newPost.save(function(err){
+            if(err) return handleError(res,err);
+            else 
+              {
+                console.log(req.body.team);
+                if(req.body.creditsRadio=='me' && !req.body.club)
+                {
+                  for(var i=0;i<req.body.credits.length;i++)
+                  {
+                    var newCredit =  new Credit({
+                      postId:newPost._id,
+                      credit:req.body.credits[i]._id,
+                      creditedUsers:[]
+                    });
+
+                    
+                      newCredit.creditedUsers.push({user:req.user._id,confirmed:true});
+                    
+                    newCredit.save(function(err){
+                    if(err) return handleError(res,err);
+                    console.log(newCredit);
+                  })
+
+                  }
+                }
+                if(req.body.creditsRadio=='me' && req.body.club)
+                {
+                  for(var i=0;i<req.body.credits.length;i++)
+                  {
+                    var newCredit =  new Credit({
+                      postId:newPost._id,
+                      credit:req.body.credits[i]._id,
+                      creditedClubs:[]
+                    });
+
+                    
+                      newCredit.creditedClubs.push({club:req.body.team,confirmed:true});
+                    
+                    newCredit.save(function(err){
+                    if(err) return handleError(res,err);
+                    console.log(newCredit);
+                  })
+
+                  }
+                }
+                else if(req.body.creditsRadio=='team')
+                {
+                    for(var i=0;i<req.body.creditType.length;i++)
+                    {
+                      var users=req.body.creditUser[i];
+                      console.log(users);
+                      var newCredit =  new Credit({
+                        postId:newPost._id,
+                        credit:req.body.creditType[i]._id,
+                        creditedUsers:[]
+                      });
+
+                      for(var j=0;j<req.body.creditUser[i].length;j++)
+                      {console.log(users[j]._id,req.user._id)
+                        if(users[j]._id==req.user._id){
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:true});
+                        }
+                        else{
+                          newCredit.creditedUsers.push({user:users[j]._id,confirmed:false});
+                          /* adding confirmation notif*/
+                          var newForNotif= new ForNotif({
+                            postId:newPost._id,
+                            type:91,
+                            createdOn:Date.now()
+                          })
+                          newForNotif.save( function (err){
+                            if(err) return handleError(res,err);
+                            console.log('added confirmation notif to user',j);
+                          })
+                          User.findById(users[j]._id,function (err, user){
+                            if(err) return handleError(res,err);
+                            user.otherUnseenNotifs.push(newForNotif._id);
+                            user.save(function (err){
+                              if(err) return handleError(res,err);
+                              console.log(j);
+                            })
+                          })
+                        }
+                      }
+                      newCredit.save(function(err){
+                      if(err) return handleError(res,err);
+                      console.log('Credit added');
+                    })
+
+                    }
+                }
+                
+
+                console.log('post created');
+             
+
+                
+                User.findById(req.user._id,function (err,user){
+                    if(err) { return handleError(res, err); }
+                })
+                .populate('subscribed_users.user')
+                .exec(function(err,user){
+                    if (err) return handleError(err);
+                  for(var i=0;i<user.subscribed_users.length;i++)
+                  {
+                      console.log(user.subscribed_users[i].user._id);
+                      if(user.subscribed_users[i].user._id.equals(req.user._id))
+                      {
+                        console.log('user');
+                      }
+                      else
+                      {
+                        user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
+                        user.subscribed_users[i].user.save(function (err){
+                          if(err)
+                            return handleError(res,err);
+                           console.log('add unseen notif to',i);
+                          
+                       
+                        });
+                      }
+                  }
+                 
+                  
+                });
+
+            }
+          });
+          
+          
+          // console.log(post);
+         
+              return res.json(newPost._id)    ;
+          
+          
+          
+        }
+    
+    });
 };
 
 
@@ -415,24 +609,28 @@ exports.update = function(req, res) {
               {
                 Credit.find({postId:post._id},function(err,credits){
                     if(err) return handleError(res,err);
-                    credits.remove(function(err) {
+
+                    for(var i=0;i<credits.length;i++){
+                      credits[i].remove(function(err) {
                       if(err) { return handleError(res, err); }
                       console.log('removed');
                     })
+                    }
+                    
                 });
-              
+                console.log(req.body.team);
                 if(req.body.creditsRadio=='me' && !req.body.club)
                 {
                   for(var i=0;i<req.body.credits.length;i++)
                   {
                     var newCredit =  new Credit({
-                      postId:newPost._id,
+                      postId:post._id,
                       credit:req.body.credits[i]._id,
                       creditedUsers:[]
                     });
 
                     
-                      newCredit.creditedUsers.push({user:req.body.team,confirmed:true});
+                      newCredit.creditedUsers.push({user:req.user._id,confirmed:true});
                     
                     newCredit.save(function(err){
                     if(err) return handleError(res,err);
@@ -446,7 +644,7 @@ exports.update = function(req, res) {
                   for(var i=0;i<req.body.credits.length;i++)
                   {
                     var newCredit =  new Credit({
-                      postId:newPost._id,
+                      postId:post._id,
                       credit:req.body.credits[i]._id,
                       creditedClubs:[]
                     });
@@ -468,7 +666,7 @@ exports.update = function(req, res) {
                       var users=req.body.creditUser[i];
                       console.log(users);
                       var newCredit =  new Credit({
-                        postId:newPost._id,
+                        postId:post._id,
                         credit:req.body.creditType[i]._id,
                         creditedUsers:[]
                       });
@@ -482,7 +680,7 @@ exports.update = function(req, res) {
                           newCredit.creditedUsers.push({user:users[j]._id,confirmed:false});
                           /* adding confirmation notif*/
                           var newForNotif= new ForNotif({
-                            postId:newPost._id,
+                            postId:post._id,
                             type:91,
                             createdOn:Date.now()
                           })
@@ -520,7 +718,7 @@ exports.update = function(req, res) {
           
           // console.log(post);
          
-              return res.json(newPost._id)    ;
+              return res.json(post._id)    ;
           
           
           
