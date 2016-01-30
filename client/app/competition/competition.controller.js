@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('CompetitionCtrl', function ($scope,$state,  $mdToast,$location,Auth,$http,Upload) {
+  .controller('CompetitionCtrl', function ($scope,$state, $timeout, $mdToast,$location,Auth,$http,Upload) {
     $scope.message = 'Hello';
      $scope.user = Auth.getCurrentUser;
    
@@ -44,6 +44,16 @@ angular.module('myAppApp')
           var y = date2.getFullYear();
           $scope.endDate=d+"/"+m+"/"+y;
       }
+      if($scope.event.subType=='Image'){
+        $scope.accept='image/*';
+      }
+      else if($scope.event.subType=='Video'){
+        $scope.accept='video/*';
+      }
+      else if($scope.event.subType=='Document'){
+        $scope.accept='application/pdf';
+      }
+      console.log($scope.accept)
       
 
     	
@@ -91,14 +101,14 @@ angular.module('myAppApp')
     	}
 	      
     }
-    $scope.subEntry= function (entry){
-      	$http.post('/api/events/subEntry/'+id,{entry:entry,attending:$scope.attending}).success(function (response){
-      		console.log('done');
-      		$scope.event=response.event;
-      		$scope.attending=response.attending;
+    // $scope.subEntry= function (entry){
+    //   	$http.post('/api/events/subEntry/'+id,{entry:entry,attending:$scope.attending}).success(function (response){
+    //   		console.log('done');
+    //   		$scope.event=response.event;
+    //   		$scope.attending=response.attending;
 
-      	})
-    }
+    //   	})
+    // }
 
 
       
@@ -249,11 +259,11 @@ angular.module('myAppApp')
 
    $scope.entries=[];
    $scope.a=[];
-   $scope.selectEntryw=function (entry){
-   		$scope.entries.push(entry);
-   		console.log('added');
-   		console.log($scope.entries);
-   }
+   // $scope.selectEntry=function (entry){
+   // 		$scope.entries.push(entry);
+   // 		console.log('added');
+   // 		console.log($scope.entries);
+   // }
 
    $scope.myValueFunction = function(entry) {
    	console.log('here2');
@@ -288,4 +298,44 @@ angular.module('myAppApp')
    		}
    		
    }
+
+    $scope.subEntry = function(file,form) {
+      console.log(file);
+      var file2;
+      if($scope.event.subType=='Image'){
+        file2=Upload.dataUrltoBlob(file.$ngfDataUrl);
+      }
+      else if($scope.event.subType=='Video'){
+        file2=file;
+      }
+      else if($scope.event.subType=='Document'){
+        file2=file;
+      }
+      file.upload = Upload.upload({
+        url: '/api/events/subEntry/'+id,
+        method:'POST',
+        data: {file: file2 ,
+          name:form.name,
+          description:form.description,
+          attending:$scope.attending
+        },
+      });
+
+      file.upload.then(function (response) {
+        $scope.success=true;
+        $("#success_tick").addClass('infiZoom');
+        $timeout(function () {
+          file.result = response.data;
+          $scope.event.entries=response.data.entries;
+            $scope.attending=response.attending;
+            $('#submitEntry').modal('hide');
+        },1500);
+      }, function (response) {
+        if (response.status > 0)
+          $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      });
+    }
 });

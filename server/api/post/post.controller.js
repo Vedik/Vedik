@@ -230,7 +230,7 @@ exports.showForEvent = function(req, res) {
    var event_id = req.params.id;
   var query = {};
   query['eventId'] = event_id;
-  Post.find({eventId:req.params.id},function (err, posts) {
+  Post.find({$and: [{eventId:req.params.id},{type:{$lte:35}}]},function (err, posts) {
     if(err) { return handleError(res, err); }
     })
   .deepPopulate('articleId videoId imageId like.user uploaderClub eventId.winners.user comments.comment uploader.user vedik.vedik')

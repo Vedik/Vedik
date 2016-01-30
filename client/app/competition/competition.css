@@ -32,3 +32,11 @@
 	z-index: 44;
 	position: absolute;
 }
+
+.thumb {
+    width: 100px;
+    height: auto;
+    float: none;
+    position: relative;
+    padding: 5px;
+}

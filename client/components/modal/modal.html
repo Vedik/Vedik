@@ -471,7 +471,7 @@
 		  <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
             
             <div >
-              	<form name="form"  ng-model="form" ng-submit="declareRes(a,event)">
+              	<form name="form"  ng-model="form" ng-submit="declareRes(entries,event)">
                   <div class="tab-content">
                     <div class="tab-pane fade in active" id="upload_form2">
                     
@@ -516,26 +516,55 @@
 
 <!--***********Broadcast closes***************************************************************-->
 <!--*****************************Submit entry opens*******************************************-->
-<div class="modal img_modal fade col-md-7" id="submitEntry" role="dialog">
+<div class="modal img_modal fade col-md-6" id="submitEntry" role="dialog">
     <div class="modal-dialog img_modal-dialog" id="modal-center">
     
       <!-- Modal content-->
-     
-     	<div class="modal-header bgw">
-	       <button type="button" class="close colorb" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">X</button>
-	       <h3 class="modal-title colorb">Submit Entry</h3>
-	    </div>
+     	<div style="min-height:350px">
+	     	<div class="modal-header bgw"  ng-if="!success">
+		       <button type="button" class="close colorb" data-dismiss="modal" onclick="document.getElementById('for_blur').style.filter = 'blur(0px)'">X</button>
+		       <h3 class="modal-title colorb">Submit Entry</h3>
+		    </div>
         
-        <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw">
+	        <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw"  ng-if="!success">
 
-		  <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
+			  <div class="thumbs_wrap col-md-12"  style="border:2px solid white;padding:10px;">
 
-		  	<form ng-submit="subEntry(entry)">            
-	            <input type="text" placeholder="Entry Link" ng-model="entry" style="width:50%"><br/><br/>
-	            <button type="submit" class="b2w">Submit</button>
-            </form>
-
-        </div>
+			  	<form ng-submit="subEntry(form.picFile,form)" >  
+			  		<div class="form-group">
+	              	   <input type="text" class="form-control upld_form" ng-model="form.name" placeholder="Name of your Entry?" required>
+	             	</div> 
+	             	<div class="form-group">
+	                    <textarea class='autoExpand form-control' rows='2' data-min-rows='2' placeholder='Description' id="textarea" style="width:100%" ng-model="form.description" data-bind="hasfocus: true">
+	                     </textarea>   
+	                </div>          
+		            <i ng-show="myForm.userName.$error.required">*required</i>
+				      <br>Photo:
+				      <input type="file" ngf-select ng-model="form.picFile" name="file"    
+				             accept="{{accept}}" ngf-max-size="2MB" required
+				             ngf-model-invalid="errorFiles">
+				      <i ng-show="myForm.file.$error.required">*required</i><br>
+				      <!-- <i ng-show="myForm.file.$error.maxSize">File too large 
+				          {{errorFiles[0].size / 1000000|number:1}}MB: max 2M</i> -->
+				      <img ng-show="myForm.file.$valid" ngf-thumbnail="form.picFile" class="thumb"> <button ng-click="form.picFile = null" ng-show="form.picFile">x</button>
+				      <br>
+				      <button ng-disabled="!myForm.$valid" 
+				             type="submit">Submit</button>
+				      <span class="progress" ng-show="form.picFile.progress >= 0">
+				        <div style="width:{{form.picFile.progress}}%" 
+				            ng-bind="form.picFile.progress + '%'"></div>
+				      </span>
+				      <span ng-show="form.picFile.result">Upload Successful</span>
+				      <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+				  
+		           
+	            </form>
+	            
+	        </div>
+	       </div>
+	       <div ng-if="success" style="width:100%;height:100%">
+	        	<img src="assets/images/black_tick.png" style="width:100px;height:auto;margin:20% auto;display:block" id="success_tick" class="infiZoom" >
+	        </div>
        </div>
      </div>
 </div>

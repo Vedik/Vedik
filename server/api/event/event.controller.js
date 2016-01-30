@@ -1,6 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
+var request = require('request');
+var fs = require('fs');
 var mongoose = require('mongoose');
 var Event = require('./event.model');
 var Post = require('../post/post.model');
@@ -263,15 +265,46 @@ exports.unAttend = function (req,res){
 
 exports.subEntry = function(req, res) {
   console.log(req.params.id);
+  console.log(req.body,req.files );
   Event.findById(req.params.id,function (err,event){
     if(err) return handleError(res,err);
 
     var newEntry= new Entry({
-      entry:req.body.entry,
+      name:req.body.name,
+      description:req.body.description,
       user:req.user._id,
       rating:0,
       createdOn:Date.now(),
     })
+    var newPath;
+    fs.readFile(req.files.file.path, function (err, data) {
+    console.log(data);
+    if(event.subType=='Image'){
+      newPath = 'client/assets/competition/images/'+newEntry._id;
+    }
+    else if(event.subType=='Video'){
+      newPath = 'client/assets/competition/videos/'+newEntry._id;
+    }
+    else if(event.subType=='Document'){
+       newPath = 'client/assets/competition/documents/'+newEntry._id;
+    }
+  
+    console.log(newPath);
+    fs.writeFile(newPath, data, function (err) {
+      if (err) {return res.send(500, err)};
+       // res.redirect("back");
+    });
+    if(event.subType=='Image'){
+      newEntry.entry='assets/competition/images/'+newEntry._id;
+    }
+    else if(event.subType=='Video'){
+      newEntry.entry='assets/competition/videos/'+newEntry._id;
+    }
+    else if(event.subType=='Document'){
+      newEntry.entry='assets/competition/documents/'+newEntry._id;
+    }
+   
+    
     console.log(req.body.attending);
     event.entries.push({entry:newEntry._id,user:req.user._id});
     if(!req.body.attending){
@@ -284,9 +317,10 @@ exports.subEntry = function(req, res) {
         var attending=true;
         if(err) return handleError(res, err);
         console.log('submited'+attending);
-        return res.json({event:event,attending:attending});
+        return res.json({event:event.entries,attending:attending});
       })
-  })
+    })
+  });
 };
 
 exports.declareRes = function(req, res) {

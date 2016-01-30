@@ -587,11 +587,11 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                       
                                         
                                         '<div id="bold" >'+ 
-                                            '{{content.uploader.user.name}}<span id="light"> {{content.articleId.description}} </span>'+                  
+                                            '<span id="light"> {{content.articleId.description}} </span>'+                  
                                         '</div>'+
                                         '<div class="ardecode"><a href=""> Congratulations to Everyone</a></div>'+
                                         '<ul style="list-style-type:none">'+
-                                          '<li ng-repeat="winner in content.eventId.winners"><span id="light">{{winner.position}})</span> <a href=""><span  id="award_heading"><img alt="{{  }}" ng-src="{{winner.user.proPic}}" class="md-avatar" /> {{winner.user.name}}</span></a>'+
+                                          '<li ng-repeat="winner in content.eventId.winners"><span id="light">{{winner.position+1}})</span> <a href=""><span  id="award_heading"><img alt="{{  }}" ng-src="{{winner.user.proPic}}" class="md-avatar" /> {{winner.user.name}}</span></a>'+
                                         '</ul>'+
                                     '</div>'+
                                     '<span id="post_time">'+

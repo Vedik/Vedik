@@ -14,6 +14,7 @@ angular.module('myAppApp')
     console.log($scope.step);
     /* for pro pic upload*/
      $scope.uploadProPic = function (dataUrl) {
+      console.log(dataUrl);
       if(!dataUrl){
         $window.alert('Oops!! You forgot to add your picture. Do you want to skip?');
       }
@@ -58,15 +59,15 @@ angular.module('myAppApp')
             },
         }).then(function (response) {
             $timeout(function () {
-                $scope.result = response.data;
+                $scope.result2 = response.data;
                
             });
         }, function (response) {
-            if (response.status > 0) $scope.errorMsg = response.status 
+            if (response.status > 0) $scope.errorMsg2 = response.status 
                 + ': ' + response.data;
         }, function (evt) {
-            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-            if($scope.progress==100){
+            $scope.progress2= parseInt(100.0 * evt.loaded / evt.total);
+            if($scope.progress2==100){
               $scope.goNext=function(){
                 $timeout(function() {
                   $scope.step=5;

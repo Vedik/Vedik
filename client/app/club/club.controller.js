@@ -239,12 +239,18 @@ angular.module('myAppApp')
       console.log($scope.endDateTF);
     }
    $scope.createEvent = function (form){
-          console.log(form.dtED);
+          console.log(form.subType,form.submissionType);
           
           if($scope.endDateTF){ //if there is end date
-              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
+              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,endDate:form.dtED,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.submissionType}).success(function (response){
                   console.log(response);
-                  $state.go('event',{'id':response._id});
+                  if(form.comp){
+                    $state.go('competition',{'id':response._id});
+                  }
+                  else{
+                    $state.go('event',{'id':response._id});
+                  }
+                  
                   
              
 
@@ -252,9 +258,14 @@ angular.module('myAppApp')
           }
           else
           {
-              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.subType}).success(function (response){
+              $http.post('/api/events/'+id,{name:form.name,description:form.description,location:form.location,startDate:form.dtSD,tages:form.tags,vedik:form.vedik,eventCover:form.galPic,regReq:form.regReq,comp:form.comp,subOnl:form.subOnl,subType:form.submissionType}).success(function (response){
                   console.log(response);
-                  $state.go('event',{'id':response._id});
+                  if(form.comp){
+                    $state.go('competition',{'id':response._id});
+                  }
+                  else{
+                    $state.go('event',{'id':response._id});
+                  }
               })
           }
       
