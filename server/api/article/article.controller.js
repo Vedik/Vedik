@@ -30,7 +30,6 @@ exports.show = function(req, res) {
 // Creates a new article in the DB.
 exports.create = function(req, res) {
   
- fu
 };
 
 
@@ -373,7 +372,7 @@ exports.eventResults = function(req, res) {
 
 
 
-Updates an existing article in the DB.
+// Updates an existing article in the DB.
 exports.update = function(req, res) {
    var a=req.body.vedik;
   console.log(a[1]);
@@ -414,7 +413,14 @@ exports.update = function(req, res) {
             if(err) return handleError(res,err);
             else 
               {
-                Credit.find({$and :[{})
+                Credit.find({postId:post._id},function(err,credits){
+                    if(err) return handleError(res,err);
+                    credits.remove(function(err) {
+                      if(err) { return handleError(res, err); }
+                      console.log('removed');
+                    })
+                });
+              
                 if(req.body.creditsRadio=='me' && !req.body.club)
                 {
                   for(var i=0;i<req.body.credits.length;i++)
@@ -506,35 +512,7 @@ exports.update = function(req, res) {
                 console.log('post created');
              
 
-                
-                User.findById(req.user._id,function (err,user){
-                    if(err) { return handleError(res, err); }
-                })
-                .populate('subscribed_users.user')
-                .exec(function(err,user){
-                    if (err) return handleError(err);
-                  for(var i=0;i<user.subscribed_users.length;i++)
-                  {
-                      console.log(user.subscribed_users[i].user._id);
-                      if(user.subscribed_users[i].user._id.equals(req.user._id))
-                      {
-                        console.log('user');
-                      }
-                      else
-                      {
-                        user.subscribed_users[i].user.unseenNotifs.push(newPost._id);
-                        user.subscribed_users[i].user.save(function (err){
-                          if(err)
-                            return handleError(res,err);
-                           console.log('add unseen notif to',i);
-                          
-                       
-                        });
-                      }
-                  }
-                 
-                  
-                });
+            
 
             }
           });
@@ -546,22 +524,25 @@ exports.update = function(req, res) {
           
           
           
-        }
+        })
+})
+})
+
     
-    });
+   
 
 
 
-  if(req.body._id) { delete req.body._id; }
-  Article.findById(req.params.id, function (err, article) {
-    if (err) { return handleError(res, err); }
-    if(!article) { return res.send(404); }
-    var updated = _.merge(article, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, article);
-    });
-  });
+  // if(req.body._id) { delete req.body._id; }
+  // Article.findById(req.params.id, function (err, article) {
+  //   if (err) { return handleError(res, err); }
+  //   if(!article) { return res.send(404); }
+  //   var updated = _.merge(article, req.body);
+  //   updated.save(function (err) {
+  //     if (err) { return handleError(res, err); }
+  //     return res.json(200, article);
+  //   });
+  // });
 };
 
 // Deletes a article from the DB.
