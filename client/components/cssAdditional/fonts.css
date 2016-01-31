@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'ardecode';
+  src: url('fonts/ARDECODE.ttf');
+}
+@font-face {
+    font-family: logo;
+    src: url('fonts/GreatVibes-Regular.ttf');
+}
+@font-face {
+    font-family: lithosPro;
+    src: url('fonts/LithosProRegular.ttf');
+}
+@font-face {
+    font-family: 'tprol';
+    src: url('fonts/TypographPRO/TYPOGRAPHPROLightItalic.ttf');
+}

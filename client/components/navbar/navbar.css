@@ -2,7 +2,7 @@
     box-sizing:border-box;
 }
 body {
-            
+            background: #e4fde1 ;
             position:relative;
             min-height:100%;
             top:0px;
@@ -268,8 +268,5 @@ li:hover#nav_li, li:active#nav_li{
     
 
 }
-@font-face {
-    font-family: logo;
-    src: url('assets/images/GreatVibes-Regular.woff');
-}
+
 

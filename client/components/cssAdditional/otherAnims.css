@@ -1,0 +1,20 @@
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+     0% {transform: scale(1);}
+    50% {transform:scale(2);}
+}
+
+@keyframes mymove {
+   0% {transform: scale(0.8);}
+   50% {transform:scale(1.1);}
+100% {transform:scale(0.8);}
+}
+
+.infiZoom {
+    -webkit-animation: mymove 3s;  /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: 3;  /* Chrome, Safari, Opera */
+    animation: mymove 1s;
+    transform:scale(0.8);
+    animation-iteration-count: 10;
+}

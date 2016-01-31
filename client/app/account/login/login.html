@@ -1,31 +1,47 @@
 
-
+<div ng-include="'components/jqscripts/jqscripts.html'"></div>
 <!-- <div ><img src="assets/images/loginpage3.jpg" width="100%" height="100%"></div> -->
-<div id="login" ng-show="loaded" class="row">
-
-    <!-- <div id="login_logo" > 
-    
-    </div> -->
-    <img src="assets/12" width="100%">
-    <div style="position:absolute;top:150px" class="col-md-12">
-    <div id="login_left" class="col-md-7">
-      <div>
-          <a href="/" id="_logo"><span><img src="/assets/imadges/logo4.png" width="120px" alt="Vedik Logo"></span></a>
-      </div> 
-      <div class="col-md-12 animated fadeInUp " style="height:500px" id="login_wrapper">
-        <div id="video_slot"></div>
-      </div> 
+<div id="login" ng-show="loaded" >
+    <!--code for elements-->
+    <div ng-show="elements">
+      <img src="assets/essentials/1.png" id="element1" class="animated fadeIn">
+      <img src="assets/essentials/2.png" id="element2" class="animated fadeIn">
+      <img src="assets/essentials/3.png" id="element3" class="animated fadeIn">
+      <img src="assets/essentials/4.png" id="element4" class="animated fadeIn">
+      <img src="assets/essentials/5.png" id="element5" class="animated fadeIn">
+      <img src="assets/essentials/6.png" id="element6" class="animated fadeIn">
+      <img src="assets/essentials/7.png" id="element7" class="animated fadeIn">
+      <img src="assets/essentials/8.png" id="element8" class="animated fadeIn">
+      <img src="assets/essentials/9.png" id="element9" class="animated fadeIn">
+      <img src="assets/essentials/10.png" id="element10" class="animated fadeIn">
+      <img src="assets/essentials/11.png" id="element11" class="animated fadeIn">
     </div>
+
+    <!--code for blue strip-->
+    <div id="login_logo" > 
+    
+    </div>
+   
+    <div  class="col-md-12">
+      <div id="login_left" class="col-md-7" >
+        <div class=" animated zoomIn" ng-show="logo">
+            <span><img src="assets/essentials/logo.png" width="150px" alt="Vedik Logo"></span>
+            <p style="font-family:tprol,verdana,arial;font-size:18px" class="centric colorgr">Because Everyone needs<br/>a Stage</p>
+        </div> 
+        <div class="col-md-12 animated zoomIn " style="height:500px" id="login_wrapper" ng-show="other">
+          <div id="video_slot"></div>
+        </div> 
+      </div>
     <!-- <div id="hidden"></div> 
     <div id="logob">Because Everyone needs a Stage</div>
  -->
 
     
     
-  <div class="col-md-5" id="login_right">
+  <div class="col-md-5" id="login_right" ng-show='other'>
     
     <div class="container  col-md-12 colorb" id="login_wrapper" >
-      <div class="row animated fadeInUp" id="animate">
+      <div class="row animated zoomIn" id="animate">
         
         
        <!--   <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
@@ -60,9 +76,10 @@
 
             <div>
               
-              <button class="btn btn-inverse btn-lg btn-login w2g col-md-12" type="submit">
+              <button class="btn btn-inverse btn-lg btn-login w2g col-md-4" type="submit">
                 Login
               </button>
+              <span style="padding:10px"><a href="" class="colorgr" > Forgot Password?</a></span>
               <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/signup">
                 Register
               </a> -->
@@ -72,14 +89,14 @@
           </form>
         </div>
       </div>
-      <br/><br/><br/><br/><br/>
+      <br/><br/><br/>
 
 
 
           
 
         
-      <div class="row bgvd animated fadeInUp " id="animate">
+      <div class="row bgvd animated zoomIn " id="animate">
         <div class="col-sm-12">
           <h4 class="colorw">Sign up</h4>
           

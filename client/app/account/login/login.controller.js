@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('LoginCtrl', function ($scope, Auth,$state, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth,$state, $location, $window,$timeout) {
     $scope.loaded=false;
     $scope.user = {};
     $scope.submitted=false;
@@ -68,10 +68,18 @@ angular.module('myAppApp')
      }
     };
 
-    $scope.loaded=true;
-    $('#login').addClass('animated fadeIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $('#login_wrapper').addClass('animated fadeInUp');
-         $('#animate').addClass('animated fadeInUp');
-    });
-   
+    $scope.$on('$viewContentLoaded', function(){
+      $scope.loaded=true;
+      $timeout(function() { 
+        $scope.elements=true;
+        $timeout(function() {
+          $scope.logo=true;
+          $timeout(function() {
+            $scope.other=true;
+          },800);  
+        },500);  
+      },500);   
+    })
+
+
   });
