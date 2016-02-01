@@ -61,25 +61,27 @@
               </div> 
               
             <div class="form-group has-error">
-              <p class="help-block" ng-show="signIn.email.$error.required  && signIn.password.$error.required  && submitted">
+              <p class="help-block colorgr" ng-show="signIn.email.$error.required  && signIn.password.$error.required  && submitted">
                  Please enter your email and password.
               </p>
-              <p class="help-block" ng-show="signIn.email.$error.email && submitted">
+              <p class="help-block colorgr" ng-show="signIn.email.$error.email && submitted">
                  Please enter a valid email.
               </p>
-               <p class="help-block" ng-show="signIn.password.$error.required && submitted">
+               <p class="help-block colorgr" ng-show="signIn.password.$error.required && submitted && !signIn.email.$error.required">
                  Oops!! It looks like you forgot to enter your password.
               </p>
 
-              <p class="help-block">{{ errors.other }}</p>
+              <p class="help-block colorgr">{{ errors.other }}</p>
             </div>
 
             <div>
               
-              <button class="btn btn-inverse btn-lg btn-login w2g col-md-4" type="submit">
-                Login
-              </button>
-              <span style="padding:10px"><a href="" class="colorgr" > Forgot Password?</a></span>
+              <div style="width:40%">
+                <button class="btn btn-inverse btn-lg btn-login w2g col-md-12" type="submit">
+                  Login
+                </button>
+              </div>
+              <div style="padding:10px;width:60%;float:left"><a href="" class="colorgr" > Forgot Password?</a></div>
               <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/signup">
                 Register
               </a> -->
@@ -110,7 +112,7 @@
               <div class="form-group ">
                 <input type="text" class="form-control " ng-model="user.name" placeholder="Name"   name="name" ng-minlength="3" required>
               </div>
-              <p class="help-block" ng-show="signUp.name.$error.required  && submittedSignUp">
+              <p class="help-block colorgr" ng-show="signUp.name.$error.required  && submittedSignUp">
                 A name is required 
               </p>
             </div>
@@ -121,13 +123,13 @@
               <div class="form-group">
                 <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail"   name="email" required>
               </div>
-              <p class="help-block" ng-show=" submittedSignUp && validEmail">
+              <p class="help-block colorgr" ng-show=" submittedSignUp && validEmail">
                 Doesn't look like a valid email.
               </p>
-              <p class="help-block" ng-show="signUp.email.$error.required  && submittedSignUp">
+              <p class="help-block colorgr" ng-show="signUp.email.$error.required  && submittedSignUp">
                 What's your email address?
               </p>
-              <p class="help-block" ng-show="signUp.email.$error.mongoose">
+              <p class="help-block colorgr" ng-show="signUp.email.$error.mongoose">
                 {{ errors.email }}
               </p>
             </div>
@@ -143,7 +145,7 @@
              
 
                      <div class="form-group has-error">
-                     <p class="help-block" ng-show="signUp.password.$invalid && submittedSignUp  ">
+                     <p class="help-block colorgr" ng-show="signUp.password.$invalid && submittedSignUp  ">
                                    Password too  short</p>
 
                      </div>
@@ -151,17 +153,17 @@
              
 
               
-              <p class="help-block"
+              <p class="help-block colorgr"
                  ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required ) && submittedSignUp">
                 Password must be at least 3 characters.
               </p>
-              <p class="help-block" ng-show="signUp.password2.$error.mongoose">
+              <p class="help-block colorgr" ng-show="signUp.password2.$error.mongoose">
                 {{ errors.password }}
               </p>
             </div>
 
-            <div>
-              <button class="btn btn-inverse btn-lg btn-login w2g" type="submit">
+            <div style="width:40%">
+              <button class="btn btn-inverse btn-lg btn-login w2g" type="submit" style="width:100%">
                 Sign up
               </button>
               <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/login">

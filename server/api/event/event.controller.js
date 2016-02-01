@@ -286,7 +286,7 @@ exports.subEntry = function(req, res) {
       newPath = 'client/assets/competition/videos/'+newEntry._id;
     }
     else if(event.subType=='Document'){
-       newPath = 'client/assets/competition/documents/'+newEntry._id;
+       newPath = 'client/assets/competition/documents/'+newEntry._id+req.files.file.originalFilename;
     }
   
     console.log(newPath);
@@ -301,7 +301,7 @@ exports.subEntry = function(req, res) {
       newEntry.entry='assets/competition/videos/'+newEntry._id;
     }
     else if(event.subType=='Document'){
-      newEntry.entry='assets/competition/documents/'+newEntry._id;
+      newEntry.entry='assets/competition/documents/'+newEntry._id+req.files.file.originalFilename;
     }
    
     

@@ -282,6 +282,13 @@
                 <md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>
               
           </div>
+          <div class="col-md-4" ng-repeat="entry in event.entries | orderBy:myValueFunction"  style="padding:10px" ng-if="event.subType=='Document'">
+              <span>{{entry.user.name}} by </span>
+                <a href="{{entry.entry.entry}}" target="_blank">{{entry.entry.name}}</a>                
+                <rating ng-model="entry.entry.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ng-click="ratePost(entry.entry.rating,entry.entry._id)">
+                <md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>
+              
+          </div>
          	<button type="button" class="w2g" data-toggle="modal" data-target="#declareRes"> Declare Results</button>
         </div>
 
