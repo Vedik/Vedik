@@ -1,21 +1,7 @@
 {
   "name": "my-app",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "main": "server/app.js",
-  "mean": "0.4.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/VenkatTeja/Vedik.git"
-  },
-  "engines": {
-    "node": "5.4.1",
-    "npm":"3.3.12"
-  },
-  "scripts": {
-    "start": "node node_modules/grunt-cli/bin/grunt",
-    "test": "node node_modules/grunt-cli/bin/grunt test",
-    "postinstall": "HOME=$HOME/app-root/runtime node node_modules/bower/bin/bower install"
-  },
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^0.4.0",
     "body-parser": "~1.5.0",
