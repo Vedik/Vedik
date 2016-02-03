@@ -42,13 +42,17 @@
 
   
 }
-#login_wrapper{
-  padding: 20px 50px;
+#login_wrapper > div{
+    width: 100%;
+    position: relative;
+    float: left;
+    padding: 10px;
 }
 #video_slot{
-    margin: 20px 10%;
-    width: 80%;
-    height: 316px;
+    margin: 70px 0px;
+    width: 100%;
+    height:auto;
+    min-height: 316px;
     box-shadow: 0px 0px 10px grey;
     background-color: rgb(230,230,230);
 }
@@ -71,7 +75,8 @@
   background-color: #028090;
   width: 100%;
   padding: 50px 100px 0px 0px;
-  margin-bottom:-230px;
+
+  /*margin-bottom:-230px;*/
 }
 #login_left img{
   position: relative;
@@ -82,7 +87,9 @@
   margin: 0px auto;
 }
 #login_right{
-  padding: 0px 70px 0px 0px;
+  
+  margin-top: 70px;
+  padding-top: 20px;
   font-family: lithosPro,verdana,arial;
 }
 

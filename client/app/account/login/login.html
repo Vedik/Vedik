@@ -23,162 +23,165 @@
     </div>
    
     <div  class="col-md-12">
-      <div id="login_left" class="col-md-7" >
+      <div class="col-md-1"></div>
+      <div id="login_left" class="col-md-5" >
         <div class=" animated zoomIn" ng-show="logo">
             <span><img src="assets/essentials/logo.png" width="150px" alt="Vedik Logo"></span>
             <p style="font-family:tprol,verdana,arial;font-size:18px" class="centric colorgr">Because Everyone needs<br/>a Stage</p>
         </div> 
-        <div class="col-md-12 animated zoomIn " style="height:500px" id="login_wrapper" ng-show="other">
-          <div id="video_slot"></div>
+        <div class="col-md-12 animated zoomIn " id="login_wrapper" ng-show="other">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/teaO8hzOvsI" frameborder="0" allowfullscreen id="video_slot"></iframe>
         </div> 
       </div>
+      <div class="col-md-1"></div>
     <!-- <div id="hidden"></div> 
     <div id="logob">Because Everyone needs a Stage</div>
  -->
 
     
     
-  <div class="col-md-5" id="login_right" ng-show='other'>
-    
-    <div class="container  col-md-12 colorb" id="login_wrapper" >
-      <div class="row animated zoomIn" id="animate">
+      <div class="col-md-4 thumbs" id="login_right" ng-show='other'>
         
-        
-       <!--   <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
-          <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
-        </div>-->
-        <div class="col-sm-12">
-          <form class="form" name="signIn" ng-submit="login(signIn)" novalidate>
+        <div class="colorb" id="login_wrapper" >
+          <div class="animated zoomIn " id="animate" style="margin-bottom:50px">
+            
+            
+           <!--   <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
+              <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
+            </div>-->
+            <div class="col-sm-12">
+              <form class="form" name="signIn" ng-submit="login(signIn)" novalidate>
+
+                
+                  <div class="form-group">
+
+                    <input type="email" class="form-control " ng-model="user.email" autofocus placeholder="Smail"   name="email" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control " ng-model="user.password"   placeholder="Password" name="password" required>
+
+                  </div> 
+                  
+                <div class="form-group has-error">
+                  <p class="help-block colorgr" ng-show="signIn.email.$error.required  && signIn.password.$error.required  && submitted">
+                     Please enter your email and password.
+                  </p>
+                  <p class="help-block colorgr" ng-show="signIn.email.$error.email && submitted">
+                     Please enter a valid email.
+                  </p>
+                   <p class="help-block colorgr" ng-show="signIn.password.$error.required && submitted && !signIn.email.$error.required">
+                     Oops!! It looks like you forgot to enter your password.
+                  </p>
+
+                  <p class="help-block colorgr">{{ errors.other }}</p>
+                </div>
+
+                <div>
+                  
+                  <div style="width:40%">
+                    <button class="btn btn-inverse btn-lg btn-login w2g col-md-12" type="submit">
+                      Login
+                    </button>
+                  </div>
+                  <div style="padding:10px;width:60%;float:left"><a href="" class="colorgr" > Forgot Password?</a></div>
+                  <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/signup">
+                    Register
+                  </a> -->
+                </div>
+
+
+              </form>
+            </div>
+          </div>
+          <br/><br/><br/>
+
+
+
+              
 
             
-              <div class="form-group">
-
-                <input type="email" class="form-control " ng-model="user.email" autofocus placeholder="Smail"   name="email" required>
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control " ng-model="user.password"   placeholder="Password" name="password" required>
-
-              </div> 
+          <div class=" bgvd animated zoomIn " id="animate" style="padding:10px">
+            <div class="col-sm-12">
+              <h4 class="colorw">Sign up</h4>
               
-            <div class="form-group has-error">
-              <p class="help-block colorgr" ng-show="signIn.email.$error.required  && signIn.password.$error.required  && submitted">
-                 Please enter your email and password.
-              </p>
-              <p class="help-block colorgr" ng-show="signIn.email.$error.email && submitted">
-                 Please enter a valid email.
-              </p>
-               <p class="help-block colorgr" ng-show="signIn.password.$error.required && submitted && !signIn.email.$error.required">
-                 Oops!! It looks like you forgot to enter your password.
-              </p>
 
-              <p class="help-block colorgr">{{ errors.other }}</p>
             </div>
+            <div class="col-sm-12">
+              <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
 
-            <div>
+                <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submittedSignUp,
+                                                    'has-error': signUp.name.$invalid && submittedSignUp }" >
+                  <div class="form-group ">
+                    <input type="text" class="form-control " ng-model="user.name" placeholder="Name"   name="name" ng-minlength="3" required>
+                  </div>
+                  <p class="help-block colorgr" ng-show="signUp.name.$error.required  && submittedSignUp">
+                    A name is required 
+                  </p>
+                </div>
+               
+
+                <div class="form-group" ng-class="{ 'has-success': signUp.email.$valid && submittedSignUp,
+                                                    'has-error': signUp.email.$invalid && submittedSignUp }">
+                  <div class="form-group">
+                    <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail"   name="email" required>
+                  </div>
+                  <p class="help-block colorgr" ng-show=" submittedSignUp && validEmail">
+                    Doesn't look like a valid email.
+                  </p>
+                  <p class="help-block colorgr" ng-show="signUp.email.$error.required  && submittedSignUp">
+                    What's your email address?
+                  </p>
+                  <p class="help-block colorgr" ng-show="signUp.email.$error.mongoose">
+                    {{ errors.email }}
+                  </p>
+                </div>
+
+
+                
+
+                <div class="form-group" ng-class="{ 'has-success': signUp.password2.$valid && submittedSignUp,
+                                                    'has-error': signUp.password2.$invalid && submittedSignUp }">
+                 <div class="form-group">
+
+                    <input type="password" class="form-control " ng-model="user.passwordNew" minlength="2" placeholder="Password" required name="password">
+                 
+
+                         <div class="form-group has-error">
+                         <p class="help-block colorgr" ng-show="signUp.password.$invalid && submittedSignUp  ">
+                                       Password too  short</p>
+
+                         </div>
+                  </div> 
+                 
+
+                  
+                  <p class="help-block colorgr"
+                     ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required ) && submittedSignUp">
+                    Password must be at least 3 characters.
+                  </p>
+                  <p class="help-block colorgr" ng-show="signUp.password2.$error.mongoose">
+                    {{ errors.password }}
+                  </p>
+                </div>
+
+                <div style="width:40%">
+                  <button class="btn btn-inverse btn-lg btn-login w2g" type="submit" style="width:100%">
+                    Sign up
+                  </button>
+                  <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/login">
+                    Login
+                  </a> -->
+                </div>
+
               
-              <div style="width:40%">
-                <button class="btn btn-inverse btn-lg btn-login w2g col-md-12" type="submit">
-                  Login
-                </button>
-              </div>
-              <div style="padding:10px;width:60%;float:left"><a href="" class="colorgr" > Forgot Password?</a></div>
-              <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/signup">
-                Register
-              </a> -->
+              </form>
             </div>
-
-
-          </form>
+          </div>
+         
         </div>
-      </div>
-      <br/><br/><br/>
-
-
-
-          
-
         
-      <div class="row bgvd animated zoomIn " id="animate">
-        <div class="col-sm-12">
-          <h4 class="colorw">Sign up</h4>
-          
-
-        </div>
-        <div class="col-sm-12">
-          <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
-
-            <div class="form-group" ng-class="{ 'has-success': signUp.name.$valid && submittedSignUp,
-                                                'has-error': signUp.name.$invalid && submittedSignUp }" >
-              <div class="form-group ">
-                <input type="text" class="form-control " ng-model="user.name" placeholder="Name"   name="name" ng-minlength="3" required>
-              </div>
-              <p class="help-block colorgr" ng-show="signUp.name.$error.required  && submittedSignUp">
-                A name is required 
-              </p>
-            </div>
-           
-
-            <div class="form-group" ng-class="{ 'has-success': signUp.email.$valid && submittedSignUp,
-                                                'has-error': signUp.email.$invalid && submittedSignUp }">
-              <div class="form-group">
-                <input type="email" class="form-control " ng-model="user.emailNew" placeholder="Smail"   name="email" required>
-              </div>
-              <p class="help-block colorgr" ng-show=" submittedSignUp && validEmail">
-                Doesn't look like a valid email.
-              </p>
-              <p class="help-block colorgr" ng-show="signUp.email.$error.required  && submittedSignUp">
-                What's your email address?
-              </p>
-              <p class="help-block colorgr" ng-show="signUp.email.$error.mongoose">
-                {{ errors.email }}
-              </p>
-            </div>
-
-
-            
-
-            <div class="form-group" ng-class="{ 'has-success': signUp.password2.$valid && submittedSignUp,
-                                                'has-error': signUp.password2.$invalid && submittedSignUp }">
-             <div class="form-group">
-
-                <input type="password" class="form-control " ng-model="user.passwordNew" minlength="2" placeholder="Password" required name="password">
-             
-
-                     <div class="form-group has-error">
-                     <p class="help-block colorgr" ng-show="signUp.password.$invalid && submittedSignUp  ">
-                                   Password too  short</p>
-
-                     </div>
-              </div> 
-             
-
-              
-              <p class="help-block colorgr"
-                 ng-show="(signUp.password2.$error.minlength || signUp.password2.$error.required ) && submittedSignUp">
-                Password must be at least 3 characters.
-              </p>
-              <p class="help-block colorgr" ng-show="signUp.password2.$error.mongoose">
-                {{ errors.password }}
-              </p>
-            </div>
-
-            <div style="width:40%">
-              <button class="btn btn-inverse btn-lg btn-login w2g" type="submit" style="width:100%">
-                Sign up
-              </button>
-              <!-- <a class="btn btn-default btn-lg btn-register b2w" href="/login">
-                Login
-              </a> -->
-            </div>
-
-          
-          </form>
-        </div>
       </div>
-     
-    </div>
-    
-  </div>
+      <div class="col-md-1"></div>
   </div>
  <!--  <div ng-include="'components/footer/footer.html'"></div> -->
 </div>
