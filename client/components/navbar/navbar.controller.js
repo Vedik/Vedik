@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth,$http, $timeout, $mdSidenav, $log) {
+  .controller('NavbarCtrl', function ($scope,$state, $location, Auth,$http, $timeout, $mdSidenav, $log) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -240,6 +240,23 @@ angular.module('myAppApp')
   //       });
   //   };
   // })
+
+  $scope.settings=function(){
+    $state.go('settings');
+  }
+
+  $scope.blur=function(){
+    $timeout(function(){
+      $scope.search=true;
+    },100);
+  }
+  $scope.noblur=function(){
+    console.log('yo');
+    $timeout(function(){
+      $scope.search=false;
+    },100);
+  
+  }
   $scope.close = function () {
       $mdSidenav('left').close()
         .then(function () {

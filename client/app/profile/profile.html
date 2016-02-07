@@ -52,7 +52,7 @@
 		            		<div  class="col-md-6 valignOut" >					        
 					                
 					                	<p   id="pro_name">
-					                		{{user.name}}'s	
+					                		{{vedikName}}<span ng-hide='loggedInUser()._id==user._id'>'s</span>	
 					                	</p>
 					                	<!-- <div ng-show="edit.name && user.name==loggedInUser.name">
 					                		<form name="form" ng-submit="editProfile(form.name,1)" ng-model="form"> 
@@ -122,7 +122,7 @@
 
 				 	<div id="stages_list" class="box_shadow_up">
 	            		<ul class="nav nav-tabs">
-	            			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>  
+	            			<li class="active"><a data-toggle="tab" href="#feed">Feed</a></li>  
 						  	<li ng-repeat="stageList in stageList" ng-click="stageDiv(stageList.id)"><a data-toggle="tab" href="#{{stageList.id}}">{{stageList.name}}</a></li>
 						</ul>
 					</div>
@@ -194,23 +194,19 @@
 						
 					</div>
 					<div class="col-md-6 " style="padding:20px">
-						<div id="stages_list" class="box_shadow_up thumbs_wrap bgw" style="background:url('assets/images/blueDots.jpg')">
+						<div id="stages_list" class="box_shadow_up thumbs_wrap bgw" >
 		            		<ul class="nav nav-tabs">
 		            			<li ><a data-toggle="tab" href="#about_user">About</a></li> 
 		            			<li class="active"><a data-toggle="tab" href="#HOF"> Hall of Fame</a></li>  
-		            			<li ><a href="#HOF" data-toggle="modal" data-target="#editUser" ng-show="user.name==loggedInUser.name"><span class="glyphicon glyphicon-education"></span> Edit Profile</a></li> 
-		            			<li ><a data-toggle="tab" href="#HOF"> Settings</a></li> 
+		            			<li ><a href="#HOF" data-toggle="modal" data-target="#editUser" ng-show="user._id==loggedInUser()._id"><span class="glyphicon glyphicon-education"></span> Edit Profile</a></li> 
+		            			<li ><a  href="/settings"> Settings</a></li> 
 							</ul>
 							<div  class="tab-content colorw">
-				        		
-
 				        		<span id="about_user" class="tab-pane fade ">
-				        			
-				        			
-				        			
-									<span>
-					                	<span  >{{user.about}}</span>
-					                	<span ng-if="!user.about">{{user.name}} is yet to tell about himself to Vedik</span>
+				        			<span  class="colorg" style="font-size:15px">
+					                	<div style="padding:20px">{{user.about}}</div>
+					                	<span ng-if="!user.about && user._id!=loggedInUser()._id">{{user.name}} yet to tell about himself to Vedik</span>
+					                	<span ng-if="!user.about && user._id==loggedInUser()._id">You are yet to tell about yourself to Vedik</span>
 					                	<!-- <div ng-show="edit.about && user.name==loggedInUser.name">
 					                		<form name="form" ng-submit="editProfile(form.about,2)" ng-model="form" data-bind="if: edit.about==true"> 
 					                			<textarea class='autoExpand' rows='3' data-min-rows='3' value="{{userAbout}}" placeholder='About' id="textarea" style="width:100%" value="{{userAbout}}" ng-model="form.about" data-bind="hasfocus: true">
@@ -225,8 +221,7 @@
 					                </span>
 								</span>
 				        		<span id="HOF" class="tab-pane fade in active">
-				        			
-
+				        			<div class="colorg" ng-show='hof.length==0' style="font-size:15px">Your Hall is waiting to show your Fame. Upload your work (if you haven't yet) and add it to your 'Hall of Fame' :)</div>
 				        			<content-item ng-repeat="item in hof | orderBy:'-createdOn'" content="item" style="margin:5px 8.167%;" class="col-md-10">
 									<hr/>					
 									</content-item>

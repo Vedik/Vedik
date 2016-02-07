@@ -44,6 +44,18 @@ angular.module('myAppApp')
       $scope.form={};
        $scope.form.about=$scope.user.about;
        console.log($scope.form.about);  
+
+      console.log($scope.user);
+      $scope.isLoggedIn = Auth.isLoggedIn;
+      console.log($scope.isLoggedIn()+" is isLoggedIn");
+      $scope.loggedInUser= Auth.getCurrentUser;
+      console.log($scope.loggedInUser());
+      if($scope.loggedInUser()._id==$scope.user._id){
+        $scope.vedikName='Your';
+      }
+      else{
+        $scope.vedikName=$scope.user.name;
+      }
     })
       .catch( function(err){
         console.log(err);
@@ -54,11 +66,7 @@ angular.module('myAppApp')
 
 
 
-    console.log($scope.user);
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    console.log($scope.isLoggedIn()+" is isLoggedIn");
-    $scope.loggedInUser = User.get();
-    console.log(User.get());
+    
     $scope.tags=[];
   
     $http.get('/api/posts/user/'+id).success(function (response){

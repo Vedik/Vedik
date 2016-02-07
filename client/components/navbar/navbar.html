@@ -1,115 +1,136 @@
 <div ng-include="'components/jqscripts/jqscripts.html'"></div>
-<nav class = "navbar " role = "navigation" id="top_logo" ng-controller="NavbarCtrl">
-  <div >
+<nav class = "navbar  navbar-fixed-top" role = "navigation" id="top_logo" ng-controller="NavbarCtrl">
+  <div class="container-fluid">
 
     
 
-    <div id="logo" class = "navbar-header">
+    <div class = "navbar-header">
 
-        <a href="/" id="_logo"><span><img src="/assets/images/logo3.png" width="120px" alt="Vedik Logo"></span></a>
+        <a href="/"><span><img src="assets/essentials/logo.png" width="150px" alt="Vedik"></span></a>
     </div>
     
-    <div id="search" ng-show="isLoggedIn()">
-        <span class=" glyphicon glyphicon-search" style="position:absolute;top:26px;left:55px"></span>
-        <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()">
-        <div id="search_res">
-            <md-toolbar class="md-theme-light" ng-show="searchStage">
-              <h5 class="md-toolbar-tools">{{vedik}}</h5>
-            </md-toolbar>
-             <div ng-show="searchQuery" ng-repeat="obj in objsStage" id="search_res">
-              <div id="indiv_res">
-                  <a href="/stage/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
-              </div>
+    <ul class="nav navbar-nav">
+      <li >
+          <div class="dropdown" ng-if="isLoggedIn()" style="margin:18px 30px;padding:6px">
+            <span class="dropdown-toggle" >
+                <span id="caretid">                    
+                      
+                    <span class=" glyphicon glyphicon-th-large" ng-click="toggleRight()" ></span>                    
+                </span>
+            </span>
+            <a href="/profile/{{getCurrentUser()._id}}" id="_logo"  >{{getCurrentUser().name}}</a>       
+         </div> 
+      </li>
+      <li>
+            <div class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  ng-click="showNotif=!showNotif">
+              <span class="glyphicon glyphicon-bell" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
             </div>
+      </li>
+      <li>
+          <span>
+            <a href="/uploadPortal" style="color: white;">
+              <button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  >
+                <span style="font-size:12px;padding:2px">UPLOAD</span>
+              </button>
+            </a>
+          </span>
+      </li>
+      <!-- <li><a href="#">Page 3</a></li> -->
+    </ul>
 
-            <md-toolbar class="md-theme-light" ng-show="searchUser">
-              <h5 class="md-toolbar-tools">{{userList}}</h5>
-            </md-toolbar>
-            <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
-              <div id="indiv_res">
-                  <a href="/profile/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
-              </div>
-            </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+          <div id="search"  >
+            <span class=" glyphicon glyphicon-search" style="position:absolute;top:26px;left:55px"></span>
+            <input type="text" class="form-control" ng-model="searchQuery" ng-change="change()" ng-blur="blur()" ng-focus="search=false">
+            <div id="search_res" ng-show="!search" ng-click="noblur()">
+                <md-toolbar class="md-theme-light" ng-show="searchStage">
+                  <h5 class="md-toolbar-tools">{{vedik}}</h5>
+                </md-toolbar>
+                 <div ng-show="searchQuery" ng-repeat="obj in objsStage" id="search_res">
+                  <div id="indiv_res">
+                      <a href="/stage/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
+                  </div>
+                </div>
 
-            <md-toolbar class="md-theme-light" ng-show="searchClub">
-              <h5 class="md-toolbar-tools">{{club}}</h5>
-            </md-toolbar>
-             <div ng-show="searchQuery" ng-repeat="obj in objsClub" id="search_res">
-              <div id="indiv_res">
-                  <a href="/club/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
-              </div>
-            </div>
-             <div ng-show="noResult" id="search_res">
-                <div id="indiv_res">
-                    No result Found
+                <md-toolbar class="md-theme-light" ng-show="searchUser">
+                  <h5 class="md-toolbar-tools">{{userList}}</h5>
+                </md-toolbar>
+                <div ng-show="searchQuery" ng-repeat="obj in objs" id="search_res">
+                  <div id="indiv_res">
+                      <a href="/profile/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
+                  </div>
+                </div>
+
+                <md-toolbar class="md-theme-light" ng-show="searchClub">
+                  <h5 class="md-toolbar-tools">{{club}}</h5>
+                </md-toolbar>
+                 <div ng-show="searchQuery" ng-repeat="obj in objsClub" id="search_res">
+                  <div id="indiv_res">
+                      <a href="/club/{{obj._id}}" ><h6>{{obj.name}}</h6></a>
+                  </div>
+                </div>
+                 <div ng-show="noResult" id="search_res">
+                    <div id="indiv_res">
+                        No result Found
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+      </li>
+  
+    </ul>
+
+    
     
 
-         <div >
+      
 
-            <div style="position:relative;width:40%;margin:0px 0px 0px 50px">
-                <div class="dropdown" ng-if="isLoggedIn()" style="margin:18px 30px;padding:6px">
-                  <span class="dropdown-toggle" >
-                      <span id="caretid">                    
-                            
-                          <span class=" glyphicon glyphicon-th-large" ng-click="toggleRight()"></span>                    
-                      </span>
-                  </span>
-                  <a href="/profile/{{getCurrentUser()._id}}" id="_logo" ng-show="isLoggedIn()">{{getCurrentUser().name}}</a>       
-               </div> 
-                <button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  ng-click="showNotif=!showNotif">
-                  <span class="glyphicon glyphicon-bell" ><span style="font-size:10px;padding:2px">{{posts.length}}</span></span>
-                </button>
-                <a href="/uploadPortal" style="color: white;"><button class="btn btn-primary" type="button" style="margin:18px 30px;background:none;border:0px"  >
-                  <span style="font-size:12px;padding:2px">UPLOAD</span></button></a>
-                
+            <div style="position:relative;width:40%;margin:0px 0px 0px 50px">   
                 <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
-                    
-                        <ul class="nav nav-pills nav-stacked" id="notifMenu" >
-                            <li class="active"><a data-toggle="tab" href="#allNotifs" c>All</a></li>
-                         
-                            <li ><div class="colorb">Friends</div></li>
+                    <ul class="nav nav-pills nav-stacked" id="notifMenu" >
+                        <li class="active"><a data-toggle="tab" href="#allNotifs" c>All</a></li>
+                     
+                        <li ><div class="colorb">Friends</div></li>
 
-                            <li><a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName">
-                              <md-list-item style="padding:0px">
-                                <img alt="img" ng-src="{{friend.proPic }}" class="md-avatar" />
-                                <p>{{friend.name }}</p>
-                              </md-list-item>
-                            </a></li>
-                            
-                             <li ><div class="colorb">Clubs</div></li>
-                             <li  ><a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName">
-                              <md-list-item style="padding:0px"> 
-                                {{friend}}
-                              </md-list-item>
-                              </a>
-                              </li>
-                            
-                        </ul>
+                        <li><a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName">
+                          <md-list-item style="padding:0px">
+                            <img alt="img" ng-src="{{friend.proPic }}" class="md-avatar" />
+                            <p>{{friend.name }}</p>
+                          </md-list-item>
+                        </a>
+                        </li>
+                        
+                        <li ><div class="colorb">Clubs</div></li>
+                        <li  >
+                          <a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName">
+                            <md-list-item style="padding:0px"> 
+                            {{friend}}
+                            </md-list-item>
+                          </a>
+                        </li>                        
+                    </ul>
                     
                     
                     <div class="tab-content" id="notifs">
-                            <div id="allNotifs" class="tab-pane fade in active" ng-click="showNotif=false">
-                                <content-notif ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur" >    
-                                </content-notif style="padding:2px 0px">
-                            </div>
-                            <span ng-repeat="friendId in dummyId" id="{{friendId}}" class="tab-pane fade">
-                               <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploader.user._id) && (notif.type<14)">    
-                                </content-notif>
-                               
-                            </span>
-                            <span ng-repeat="friendId in clubId" id="{{friendId}}" class="tab-pane fade">
-                               <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploaderClub._id) && (notif.type>14)">    
-                                </content-notif>
-                               
-                            </span>
+                        <div id="allNotifs" class="tab-pane fade in active" ng-click="showNotif=false">
+                            <content-notif ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur" >    
+                            </content-notif style="padding:2px 0px">
                         </div>
+                        <span ng-repeat="friendId in dummyId" id="{{friendId}}" class="tab-pane fade">
+                           <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploader.user._id) && (notif.type<14)">    
+                            </content-notif>
+                           
+                        </span>
+                        <span ng-repeat="friendId in clubId" id="{{friendId}}" class="tab-pane fade">
+                           <content-notif ng-repeat="notif in posts | orderBy:'-createdOn'" content="notif" ng-style="for_blur" ng-if="(friendId==notif.uploaderClub._id) && (notif.type>14)">    
+                            </content-notif>
+                           
+                        </span>
                     </div>
+                </div>
             </div>
-          </div>
+         
   </div>
 </nav>
 
@@ -132,16 +153,16 @@
                   
                   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" style="position:fixed;top:65px;left:0px" id="xxxx">
                     <md-toolbar class="md-theme-light">
-                      <h1 class="md-toolbar-tools"><span class="glyphicon glyphicon-user"> </span> {{getCurrentUser().name}}</h1>
+                      <h1 class="md-toolbar-tools bgvd"><img src="{{getCurrentUser().proPic}}" width="auto" height="20px" id="dpsm"> {{getCurrentUser().name}}</h1>
                     </md-toolbar>
                     <md-content>
                       
-                        <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#"  ><h5><span class="glyphicon glyphicon-cog"> Settings</span></h5></a></div>
-                        <div id="indiv_res" ng-show="isLoggedIn()"><a role="menuitem" tabindex="-1" href="#" ng-click="logout()" ><h5><span class="glyphicon glyphicon-off"> Sign out</span></h5></a></div>
+                        <div id="indiv_res" ng-click="settings()" ><a role="menuitem" tabindex="-1" href="#"  ><h5><span class="glyphicon glyphicon-cog"> Settings</span></h5></a></div>
+                        <div id="indiv_res" ng-click="logout()"><a role="menuitem" tabindex="-1" href="#"  ><h5><span class="glyphicon glyphicon-off"> Sign out</span></h5></a></div>
                       
                         
                       <md-button ng-click="close()" class="md-primary">
-                        Close 
+                        <b>Close</b> 
                       </md-button>
                     </md-content>
                   </md-sidenav>

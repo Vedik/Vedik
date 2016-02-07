@@ -10,10 +10,46 @@
     <title update-title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="assets/images/174398ba.logo.png" />
+    <link rel="shortcut icon" href="assets/images/logo.png" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="app/ac8b033c.vendor.css"/>
-    <link rel="stylesheet" href="app/30aa70ac.app.css"/>
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+      <link rel="stylesheet" href="bower_components/ng-img-crop-full-extended/compile/minified/ng-img-crop.css" />
+      <!-- endbower -->
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+      <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Abel">
+      <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat">
+
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <link rel="stylesheet" href="app/account/login/login.css">
+      <link rel="stylesheet" href="app/admin/admin.css">
+      <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/club/club.css">
+      <link rel="stylesheet" href="app/competition/competition.css">
+      <link rel="stylesheet" href="app/dashboard/dashboard.css">
+      <link rel="stylesheet" href="app/event/event.css">
+      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/notFound/notFound.css">
+      <link rel="stylesheet" href="app/profile/profile.css">
+      <link rel="stylesheet" href="app/stage/stage.css">
+      <link rel="stylesheet" href="app/uploadPortal/uploadPortal.css">
+      <link rel="stylesheet" href="app/viewPage/viewPage.css">
+      <link rel="stylesheet" href="app/welcomeUser/welcomeUser.css">
+      <link rel="stylesheet" href="components/cssAdditional/animate.css">
+      <link rel="stylesheet" href="components/cssAdditional/fonts.css">
+      <link rel="stylesheet" href="components/cssAdditional/otherAnims.css">
+      <link rel="stylesheet" href="components/footer/footer.css">
+      <link rel="stylesheet" href="components/modal/modal.css">
+      <link rel="stylesheet" href="components/navbar/navbar.css">
+      <!-- endinjector -->
+    <!-- endbuild -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
      <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.1.0.js"></script>
@@ -107,9 +143,81 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <script src="app/e8f55b2a.vendor.js"></script>
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-socket-io/socket.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
+      <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+      <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
+      <script src="bower_components/ng-img-crop-full-extended/compile/minified/ng-img-crop.js"></script>
+      <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+      <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+      <!-- endbower -->
+      <script src="socket.io-client/socket.io.js"></script>
+    <!-- endbuild -->
 
-        <script src="app/ae2f2c92.app.js"></script>
+        <!-- build:js({.tmp,client}) app/app.js -->
+        <script src="app/app.js"></script>
+          <!-- injector:js -->
+          <script src="app/account/account.js"></script>
+          <script src="app/account/login/login.controller.js"></script>
+          <script src="app/account/settings/settings.controller.js"></script>
+          <script src="app/account/signup/signup.controller.js"></script>
+          <script src="app/admin/admin.controller.js"></script>
+          <script src="app/admin/admin.js"></script>
+          <script src="app/club/club.controller.js"></script>
+          <script src="app/club/club.js"></script>
+          <script src="app/club/clubService.service.js"></script>
+          <script src="app/competition/competition.controller.js"></script>
+          <script src="app/competition/competition.js"></script>
+          <script src="app/dashboard/dashboard.controller.js"></script>
+          <script src="app/dashboard/dashboard.js"></script>
+          <script src="app/dashboard/dashboardService.service.js"></script>
+          <script src="app/event/event.controller.js"></script>
+          <script src="app/event/event.js"></script>
+          <script src="app/main/main.controller.js"></script>
+          <script src="app/main/main.js"></script>
+          <script src="app/notFound/notFound.controller.js"></script>
+          <script src="app/notFound/notFound.js"></script>
+          <script src="app/profile/profile.controller.js"></script>
+          <script src="app/profile/profile.js"></script>
+          <script src="app/simple/simple.directive.js"></script>
+          <script src="app/stage/stage.controller.js"></script>
+          <script src="app/stage/stage.js"></script>
+          <script src="app/uploadPortal/uploadPortal.controller.js"></script>
+          <script src="app/uploadPortal/uploadPortal.js"></script>
+          <script src="app/uploadPortal/uploadPortalService.service.js"></script>
+          <script src="app/viewPage/viewPage.controller.js"></script>
+          <script src="app/viewPage/viewPage.js"></script>
+          <script src="app/viewPage/viewPageService.service.js"></script>
+          <script src="app/welcomeUser/welcomeUser.controller.js"></script>
+          <script src="app/welcomeUser/welcomeUser.js"></script>
+          <script src="components/auth/auth.service.js"></script>
+          <script src="components/auth/user.service.js"></script>
+          <script src="components/directives/notifs.js"></script>
+          <script src="components/directives/others.js"></script>
+          <script src="components/directives/posts.js"></script>
+          <script src="components/effects/angular-perfect-parallax.js"></script>
+          <script src="components/footer/footer.controller.js"></script>
+          <script src="components/modal/modal.controller.js"></script>
+          <script src="components/modal/modal.service.js"></script>
+          <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+          <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/socket/socket.service.js"></script>
+          <!-- endinjector -->
+        <!-- endbuild -->
         
 
 

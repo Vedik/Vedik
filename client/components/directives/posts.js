@@ -87,12 +87,10 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
                                             '<a href="">'  +
-                                                '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
+                                                '<span id="event_post_heading">{{content.articleId.articleName}}<span class="sizeten"> by<a href=""> {{content.uploader.user.name}}</a></span></span> '    +
                                             '</a>'  +
-                                            '</br>{{content.articleId.content}} <span ng-click="expand()" ng-show="seeLess">see more...</span></br></br>'  +
-                                            '<div>' +
-                                                '<span>by<a href=""> {{content.uploader.user.name}}</a></span>'  +                                            
-                                            '</div>'    +
+                                            '</br><div class="lh20">{{ofArticle}}</div> <span ng-click="expand()" class="colorg">{{seeDesc}}</span>'  +
+                                            
                                         '</div>'    +
                                         '<span id="post_time">'+
                                                 '<span id="respond_post">'+
@@ -203,12 +201,9 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
                                             '<a href="">'  +
-                                                '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
+                                                '<span id="event_post_heading">{{content.articleId.articleName}}<span class="sizeten"> by<a href=""> {{content.uploadedClub.name}}</a></span></span> '    +
                                             '</a>'  +
-                                            '</br>{{content.articleId.content}}</br></br>'  +
-                                            '<div>' +
-                                                '<span>by<a href=""> {{content.uploaderClub.name}}</a></span>'  +                                            
-                                            '</div>'    +
+                                            '</br><div class="lh20">{{ofArticle}}</div> <span ng-click="expand()" class="colorg">{{seeDesc}}</span>'  +
                                         '</div>'    +
                                         '<span id="post_time">'+
                                                 '<span id="respond_post">'+
@@ -319,12 +314,9 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                     '<div class="box_shadow_dwn   col-md-12">'+
                                         '<div class="text_type_post" id="article">' +
                                             '<a href="">'  +
-                                                '<span id="event_post_heading">{{content.articleId.articleName}}</span>'    +
+                                                '<span id="event_post_heading">{{content.articleId.articleName}}<span class="sizeten"> by<a href=""> {{content.team}}</a></span></span> '    +
                                             '</a>'  +
-                                            '</br>{{content.articleId.content}}</br></br>'  +
-                                            '<div>' +
-                                                '<span>by<a href=""> {{content.team}}</a></span>'  +                                            
-                                            '</div>'    +
+                                            '</br><div class="lh20">{{ofArticle}}</div> <span ng-click="expand()" class="colorg">{{seeDesc}}</span>'  +
                                         '</div>'    +
                                         '<span id="post_time">'+
                                                 '<span id="respond_post">'+
@@ -726,6 +718,25 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
               
             }
             
+            if(scope.content.type<114){
+                scope.ofArticle=scope.content.articleId.description;
+                var seeDesc=true;
+                scope.seeDesc="Click to read";
+            }
+
+            scope.expand=function () {
+                if(scope.seeDesc=="Click to read"){
+                    seeDesc=false;
+                    scope.seeDesc='Click to hide';
+                    scope.ofArticle=scope.content.articleId.content;
+                }
+                else{
+                    scope.ofArticle=scope.content.articleId.description;
+                    var seeDesc=true;
+                    scope.seeDesc="Click to read";
+                }
+                
+            }
                 
          
            

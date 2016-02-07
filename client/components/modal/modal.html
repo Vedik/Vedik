@@ -13,14 +13,34 @@
         <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw">
         	<p class="colorg">We want to design your profile as good as possible. Can you help us?</p>
         	<form name="form" ng-submit="editProfile(user)" ng-model="form" style="color:black">
-        		<div class="col-md-6" style="padding:20px">
+        		  <ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#editYou">About You</a></li>
+				    <li><a data-toggle="tab" href="#editProPic">Profile Picture</a></li>
+				    <li><a data-toggle="tab" href="#editGalPic">WallPaper</a></li>
+				  </ul>
+
+				  <div class="tab-content">
+				    <div id="editYou" class="tab-pane fade in active">
+				    	<br/>
+				     	<div class="form-group">
+		          			<input type="text" ng-model="user.name" placeholder="Name" class="form-control">
+		          		</div>
+			          	<div class="form-group">
+			          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='About' id="textarea" style="width:100%" ng-model="user.about" data-bind="hasfocus: true"></textarea>
+			          	</div>
+				    </div>
+				    <div id="editProPic" class="tab-pane fade">
+				      <h3>Menu 1</h3>
+				      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				    </div>
+				    <div id="editGalPic" class="tab-pane fade">
+				      <h3>Menu 2</h3>
+				      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+				    </div>				    
+				  </div>
+        		<!-- <div class="col-md-6" style="padding:20px">
 	        	
-	        		<div class="form-group">
-		          		<input type="text" ng-model="user.name" placeholder="Name" class="form-control">
-		          	</div>
-		          	<div class="form-group">
-		          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='About' id="textarea" style="width:100%" ng-model="user.about" data-bind="hasfocus: true"></textarea>
-		          	</div>
+	        		
 		          	<div class="form-group">
 		          		<input type="text" ng-model="user.proPic" placeholder="Profile Pic" class="form-control">
 		          		<img src="{{user.proPic}}" width="30%" height="auto" id="dp" style="margin:10px 35%">
@@ -35,7 +55,7 @@
 		          		<input type="text" ng-model="user.galleryPic" placeholder="Event Cover" class="form-control">
 		          	</div>
 		          	<img src="{{user.galleryPic}}" width="100%" height="auto" >
-			    </div>
+			    </div> -->
 	         	<button type="submit" class="b2w">Save</button>
 	        </form>
         </div>
