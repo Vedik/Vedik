@@ -13,9 +13,9 @@ router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
-router.get('/:id/addSubscriber',auth.isAuthenticated(),controller.addSubscriber);
-router.delete('/:id/deleteSubscriber',auth.isAuthenticated(),controller.deleteSubscriber);
-//router.get('/:id', auth.isAuthenticated(), controller.show);
+router.get('/addSubscriber/:id',auth.isAuthenticated(),controller.addSubscriber);
+router.delete('/deleteSubscriber/:id',auth.isAuthenticated(),controller.deleteSubscriber);
+router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.post('/addHOF/:postId',auth.isAuthenticated(), controller.addHOF);
 

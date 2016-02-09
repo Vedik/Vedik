@@ -6,7 +6,10 @@
 
 <div ng-controller="ProfileCtrl" id="for_blur" ng-show="test">
 	<div ng-include="'components/navbar/navbar.html'"></div>
-			<div class="valignOut " id="respectToast">{{user.name}}'s R-score: {{respect}}</div>
+			<div  id="respectToast">
+				<button  ng-click="follow()" class="w2g fullW">{{followStatus}}</button>
+				<div>{{user.name}}'s Respect: {{respect}}</div>
+			</div>
 	
 
             <div id="profile">

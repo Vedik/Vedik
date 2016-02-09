@@ -86,13 +86,15 @@
 
       
 
-            <div style="position:relative;width:40%;margin:0px 0px 0px 50px">   
-                <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif">
+            <div style="position:relative;width:40%;margin:0px 0px 0px 50px;">   
+                <div  id="notifDropDown" class="thumbs_wrap " ng-show="showNotif" style="height:80%">
                     <ul class="nav nav-pills nav-stacked" id="notifMenu" >
                         <li class="active"><a data-toggle="tab" href="#allNotifs" c>All</a></li>
                      
                         <li ><div class="colorb">Friends</div></li>
-
+                        <li ng-show="!dummyName.length" class="colorg sizeten" style="padding:10px">
+                          Follow your friends to see their activity here.
+                        </li>
                         <li><a data-toggle="tab" href="#{{dummyId[$index]}}" ng-repeat="friend in dummyName">
                           <md-list-item style="padding:0px">
                             <img alt="img" ng-src="{{friend.proPic }}" class="md-avatar" />
@@ -102,6 +104,9 @@
                         </li>
                         
                         <li ><div class="colorb">Clubs</div></li>
+                        <li ng-show="!clubName.length" class="colorg sizeten" style="padding:10px">
+                          Follow Clubs to see their updates here.
+                        </li>
                         <li  >
                           <a data-toggle="tab" href="#{{clubId[$index]}}" ng-repeat="friend in clubName">
                             <md-list-item style="padding:0px"> 
@@ -113,6 +118,9 @@
                     
                     
                     <div class="tab-content" id="notifs">
+                        <div class="colorg size15  valignOut">
+                          You have no new notifcations now!
+                        </div>
                         <div id="allNotifs" class="tab-pane fade in active" ng-click="showNotif=false">
                             <content-notif ng-repeat="item in posts | orderBy:'-createdOn'" content="item" ng-style="for_blur" >    
                             </content-notif style="padding:2px 0px">

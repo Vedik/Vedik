@@ -378,7 +378,7 @@
      	background-color: rgb(1,192,255);
      }
      .bglg{
-     	background-color: rgb(230,230,230);
+     	background-color: rgb(240,240,240);
      }
      .bgdb{
      	background-color: #3F51B5;
@@ -386,8 +386,10 @@
     
      /*font size*/
      .sizeten{
-     	font-size: 10px;
-     /*line height*/	
+     	font-size: 10px;   	
+     }
+     .size15{
+     	font-size: 15px;    	
      }
      .lh20{
      	line-height: 20px;

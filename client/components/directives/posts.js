@@ -72,7 +72,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
@@ -186,7 +186,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
@@ -299,7 +299,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
@@ -381,7 +381,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
@@ -525,7 +525,7 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
                                             '<button type="button" class="g2b float_right dropdown-toggle" id="post_edit" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>'+
                                             '<ul class="dropdown-menu box_shadow_dwn" role="menu" aria-labelledby="post_edit">'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Edit</a></li>'+
-                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b">Delete</a></li>'+
+                                                  '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="deletePost(content._id)">Delete</a></li>'+
                                                   '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="addHOF(content._id)">+HOF</a></li>'+
                                                           '<li role="presentation"><a role="menuitem" tabindex="-1" href="" class="w2b" ng-click="unbook(content._id,$index)" ng-show="booking">Unbook</a></li>'+
                                             '</ul>'+
@@ -718,14 +718,14 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
               
             }
             
-            if(scope.content.type<114){
+            if(scope.content.type<114 && scope.content.type>100){
                 scope.ofArticle=scope.content.articleId.description;
                 var seeDesc=true;
                 scope.seeDesc="Click to read";
             }
 
             scope.expand=function () {
-                if(scope.seeDesc=="Click to read"){
+                if(scope.seeDesc==="Click to read"){
                     seeDesc=false;
                     scope.seeDesc='Click to hide';
                     scope.ofArticle=scope.content.articleId.content;
@@ -868,8 +868,10 @@ angular.module('myAppApp').directive('contentItem', function ($compile, $http,$m
         }
 
         scope.deletePost = function(postId){
+            console.log('here');
             $http.delete('/api/posts/'+postId).success(function(response){
                 console.log(response);
+                scope.content=null;
             })
         }
 

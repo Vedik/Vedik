@@ -5,21 +5,25 @@ angular.module('myAppApp')
   .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval,$document) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.loggedInUser= Auth.getCurrentUser;
     var id = $location.url().split('/profile/')[1];
     console.log(id);
     $scope.abcd="1234";
     $http.get('/api/users/'+id).then(function (response){
-     
+    
       $scope.user = response.data.user;
-         $scope.isFollowing = response.isFollowing;
-         if($scope.isFollowing){
+         $scope.isFollowing = response.data.isFollowing;
+         if($scope.loggedInUser()._id===$scope.user._id){
+            $scope.followStatus=$scope.user.subscribed_users.length +' Followers';  
+         }
+         else if($scope.isFollowing){
             $scope.followStatus="Following";
          }
-         else
+         else if(!$scope.isFollowing)
          {
-             $scope.followStatus="Follow";
+            $scope.followStatus="Follow";
          }
-
+         
        if($scope.user.galleryPic)
         {
           $scope.user.galleryPic= $scope.user.galleryPic;
@@ -48,7 +52,7 @@ angular.module('myAppApp')
       console.log($scope.user);
       $scope.isLoggedIn = Auth.isLoggedIn;
       console.log($scope.isLoggedIn()+" is isLoggedIn");
-      $scope.loggedInUser= Auth.getCurrentUser;
+      
       console.log($scope.loggedInUser());
       if($scope.loggedInUser()._id==$scope.user._id){
         $scope.vedikName='Your';
@@ -171,24 +175,22 @@ angular.module('myAppApp')
 
     
     $scope.follow = function(){
+      console.log($scope.isFollowing);
       if($scope.isFollowing==false)
       {
-          $http.get('/api/users/'+id+'/addSubscriber').success(function (response){
-            console.log(response);
-            if(response.added==true){
+          $http.get('/api/users/addSubscriber/'+id).success(function (response){
+            console.log(response);            
                 $scope.isFollowing = true;
                 $scope.followStatus="Following";
-            }
         });
       }        
       else
       {
-          $http.delete('/api/users/'+id+'/deleteSubscriber').success(function (response){
+          $http.delete('/api/users/deleteSubscriber/'+id).success(function (response){
             console.log(response);
-            if(response.removed==true){
+            
                 $scope.isFollowing = false;
                 $scope.followStatus="Follow";
-            }
         });
       }
         
