@@ -169,7 +169,7 @@ exports.uploadProPic = function(req, res) {
   console.log(newPath);
   fs.writeFile(newPath, data, function (err) {
     if (err) {return res.send(500, err)};
-    res.redirect("back");
+    // res.redirect("back");
   });
   req.user.proPic='assets/proPic/'+req.user._id ;
   req.user.step=2;
@@ -192,16 +192,19 @@ exports.uploadGalPic = function(req, res) {
   console.log(req.files.file.path);
   fs.readFile(req.files.file.path, function (err, data) {
   console.log(data);
-  var newPath = 'client/assets/galleryPic/'+req.user._id ;
+  var date = new Date();
+  var fileName = date.getTime(); 
+  var newPath = 'client/assets/galleryPic/'+fileName ;
   console.log(newPath);
   fs.writeFile(newPath, data, function (err) {
-    res.redirect("back");
+    // res.redirect("back");
   });
-  req.user.galleryPic='assets/galleryPic/'+req.user._id ;
+  req.user.galleryPic='assets/galleryPic/'+fileName ;
   req.user.step=5;
   req.user.save( function(err){
     if (err) {return res.send(500, err)};
     console.log('saved');
+    return res.send(200, req.user.galleryPic);
   })
 });
   

@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "version": "0.0.0",
+  "name": "vedik",
+  "version": "0.1.0",
   "main": "server/app.js",
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^0.4.0",

@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval,$document) {
+  .controller('ProfileCtrl',function ($scope,$location,Auth, $state,User,$http,$interval,$document,Upload,$timeout) {
     $scope.message = 'Hello';
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.loggedInUser= Auth.getCurrentUser;
@@ -24,6 +24,7 @@ angular.module('myAppApp')
             $scope.followStatus="Follow";
          }
          
+         $scope.galleryPic=$scope.user.galleryPic;
        if($scope.user.galleryPic)
         {
           $scope.user.galleryPic= $scope.user.galleryPic;
@@ -402,7 +403,75 @@ angular.module('myAppApp')
    	
    };
 
-    
+  $scope.uploadProPic = function (dataUrl) {
+      console.log(dataUrl);
+      if(!dataUrl){
+        $window.alert('Oops!! You forgot to add your picture. Do you want to skip?');
+      }
+      else{
+        Upload.upload({
+            url: '/api/users/uploadProPic',
+            method: 'POST',
+            data: {
+                file: Upload.dataUrltoBlob(dataUrl)
+            },
+        }).then(function (response) {
+            $timeout(function () {
+                $scope.result = response.data;
+
+            });
+        }, function (response) {
+            if (response.status > 0) $scope.errorMsg = response.status 
+                + ': ' + response.data;
+        }, function (evt) {
+            console.log($scope.progress);
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+            if($scope.progress==100){
+              $scope.goNext=function(){
+                $timeout(function() {
+                  $stage.reload();
+                },2000);              
+              }
+              $scope.goNext();
+            }
+            
+
+        });
+      }
+    }
+
+    $scope.uploadGalPic = function (dataUrl) {
+        Upload.upload({
+            url: '/api/users/uploadGalPic',
+            method: 'POST',
+            data: {
+                file: Upload.dataUrltoBlob(dataUrl)
+            },
+        }).then(function (response) {
+              console.log(response);
+              console.log($scope.galleryPic);
+              $('#editUser').modal('hide');
+
+              $scope.galleryPic=angular.copy(response.data);
+               $scope.$digest();
+              console.log($scope.galleryPic);
+              // $state.go('profile',{'id':id});
+
+        }, function (response) {
+            if (response.status > 0) $scope.errorMsg2 = response.status 
+                + ': ' + response.data;
+        }, function (evt) {
+            $scope.progress2= parseInt(100.0 * evt.loaded / evt.total);
+            if($scope.progress2==100){
+              $scope.goNext=function(){
+                
+                             
+              }
+              $scope.goNext();
+            }
+        });
+    }
+
 
    
    $scope.test=true; 

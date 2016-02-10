@@ -12,7 +12,7 @@
         
         <div class="modal-body img_modal-body col-md-12 thumbs_wrap bgw">
         	<p class="colorg">We want to design your profile as good as possible. Can you help us?</p>
-        	<form name="form" ng-submit="editProfile(user)" ng-model="form" style="color:black">
+        	
         		  <ul class="nav nav-tabs">
 				    <li class="active"><a data-toggle="tab" href="#editYou">About You</a></li>
 				    <li><a data-toggle="tab" href="#editProPic">Profile Picture</a></li>
@@ -21,6 +21,7 @@
 
 				  <div class="tab-content">
 				    <div id="editYou" class="tab-pane fade in active">
+				    	<form name="form" ng-submit="editProfile(user)" ng-model="form" style="color:black">
 				    	<br/>
 				     	<div class="form-group">
 		          			<input type="text" ng-model="user.name" placeholder="Name" class="form-control">
@@ -28,14 +29,68 @@
 			          	<div class="form-group">
 			          		<textarea class='autoExpand' rows='3' data-min-rows='3' placeholder='About' id="textarea" style="width:100%" ng-model="user.about" data-bind="hasfocus: true"></textarea>
 			          	</div>
+			          	<button type="submit" class="w2g">Save</button>
+			          	</form>
 				    </div>
 				    <div id="editProPic" class="tab-pane fade">
-				      <h3>Menu 1</h3>
-				      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				      <div>
+						
+						<form name="form" ng-model="form" style="color:black" ng-submit="uploadProPic(croppedDataUrl)">
+						<br/>
+							<div class="form-group">
+				          		<button ngf-select ng-model="picFile" accept="image/*" class="w2g col-md-12">
+						            Upload Profile Picture</button>
+						        <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+						             class="cropArea">
+						             <img src="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg" style="margin:0px auto;display:inherit;height:100%" ng-if="!picFile">
+						            <img-crop image="picFile  | ngfDataUrl"                 
+						            result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+						            </img-crop>
+						        </div>
+						       <!--  <div>
+						            <img ng-src="{{croppedDataUrl}}" />
+						        </div> -->
+						        
+						        <button type="submit" class="w2g col-md-12" ng-disabled="!picFile">Save</button> 
+						            
+						        <span class="progress" ng-show="progress >= 0">
+						          <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+						        </span>
+						        <!-- <span ng-show="result">Upload Successful</span> -->
+						        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+				          		
+				          	</div>
+						</form>
+					</div>
 				    </div>
 				    <div id="editGalPic" class="tab-pane fade">
-				      <h3>Menu 2</h3>
-				      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+				      <div>
+						<form name="form" ng-model="form" style="color:black" ng-submit="uploadGalPic(croppedGalUrl)">
+						<br/>
+							<div class="form-group">
+				          		<button ngf-select ng-model="picFile2" accept="image/*" class="w2g col-md-12">
+						            Upload your Vedik's Gallery picture</button>
+						        <div ngf-drop ng-model="picFile2" ngf-pattern="image/*"
+						             class="cropArea">
+						             <img src="http://www.thedigitalcentre.com.au/wp-content/themes/EndingCredits/images/no-profile-image.jpg" style="margin:0px auto;display:inherit;height:100%" ng-if="!picFile2">
+						            <img-crop image="picFile2  | ngfDataUrl"                 
+						            result-image="croppedGalUrl" ng-init="croppedGalUrl=''" area-type="rectangle" aspect-ratio="1.7" result-image-size='{w: 2040,h: 1200}' >
+						            </img-crop>
+						        </div>
+						       <!--  <div>
+						            <img ng-src="{{croppedDataUrl}}" />
+						        </div> -->
+						        <button type="submit" class="w2g col-md-12">Save</button> 
+						            
+						        <span class="progress" ng-show="progress2 >= 0">
+						          <div style="width:{{progress2}}%" ng-bind="progress2 + '%'"></div>
+						        </span>
+						        <!-- <span ng-show="result">Upload Successful</span> -->
+						        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+				          		
+				          	</div>
+						</form>
+					</div>
 				    </div>				    
 				  </div>
         		<!-- <div class="col-md-6" style="padding:20px">
@@ -56,8 +111,8 @@
 		          	</div>
 		          	<img src="{{user.galleryPic}}" width="100%" height="auto" >
 			    </div> -->
-	         	<button type="submit" class="b2w">Save</button>
-	        </form>
+
+	        
         </div>
         
       </div>
